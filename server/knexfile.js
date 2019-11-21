@@ -1,15 +1,13 @@
 const path = require("path");
-
-// Update with your config settings.
 require("dotenv").config({ path: "../.env" });
 
 module.exports = {
-  client: "postgresql",
+  client: "pg",
   connection: {
     database: process.env.POSTGRES_DB,
     user: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
-    port: process.env.POSTGRES_CONTAINER_NAME,
+    port: process.env.POSTGRES_CONTAINER_PORT,
     host: process.env.POSTGRES_HOSTNAME
   },
   pool: {

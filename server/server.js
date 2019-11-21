@@ -12,12 +12,16 @@ app.use(express.static("./server/public"));
 //body-parsers and decorator
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(decorator);
+app.use(decorator);
+
+//routers
+
+//routers-end
 
 app.get("/smoke", (req, res) => {
   return res.json({ message: "hiyee" });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server started on PORT: ${PORT}`);
+  console.log(`PORT ${PORT} at your service.`);
 });
