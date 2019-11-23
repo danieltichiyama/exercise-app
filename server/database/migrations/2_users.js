@@ -20,7 +20,7 @@ exports.up = function (knex) {
       .inTable("activity_levels")
       .notNullable();
     table
-      .integer("tier_id")
+      .integer("user_tier_id")
       .references("id")
       .inTable("user_tiers")
       .notNullable();
