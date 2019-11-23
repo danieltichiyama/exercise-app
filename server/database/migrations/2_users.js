@@ -15,6 +15,10 @@ exports.up = function (knex) {
     table.integer("points");
     //foreign keys
     table
+      .integer("gender_id")
+      .references("id")
+      .inTable("genders");
+    table
       .integer("activity_level_id")
       .references("id")
       .inTable("activity_levels")
