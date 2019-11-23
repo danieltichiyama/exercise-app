@@ -2,7 +2,7 @@
 exports.up = function (knex) {
     return knex.schema.createTable("user_tiers", table => {
         table.increments();
-        table.string("tiers");
+        table.string("tier");
         table.timestamps(true, true);
     });
 };

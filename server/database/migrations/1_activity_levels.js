@@ -3,7 +3,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("activity_levels", table => {
         table.increments();
         table.string("activity_level");
-        table.integer("multiplier");
+        table.float("multiplier");
         table.timestamps(true, true);
     });
 };

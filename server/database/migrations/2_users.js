@@ -11,7 +11,7 @@ exports.up = function (knex) {
     table.string("gender");
     table.date("birth_date");
     table.integer("weight");
-    table.integer("height");
+    table.string("height");
     table.integer("points");
     //foreign keys
     table
