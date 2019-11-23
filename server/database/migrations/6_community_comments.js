@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("community_comments", table => {
     table.increments();
     table.text("comment_body");
@@ -10,7 +10,7 @@ exports.up = function(knex) {
       .notNullable();
     table
       .integer("community_post_id")
-      .reference("id")
+      .references("id")
       .inTable("community_posts")
       .notNullable();
 
@@ -18,6 +18,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.createTable("community_comments");
 };

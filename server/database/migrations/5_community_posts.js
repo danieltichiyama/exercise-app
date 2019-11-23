@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("community_posts", table => {
     table.increments();
     table.string("title");
@@ -11,7 +11,7 @@ exports.up = function(knex) {
       .notNullable();
     table
       .integer("user_video_id")
-      .referenes("id")
+      .references("id")
       .inTable("user_videos");
     table
       .integer("food_images_id")
@@ -19,11 +19,11 @@ exports.up = function(knex) {
       .inTable("food_images");
     table
       .integer("exercise_id")
-      .referenes("id")
-      .inTable("exerices");
+      .references("id")
+      .inTable("exercises");
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("community_posts");
 };
