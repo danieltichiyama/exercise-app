@@ -1,6 +1,6 @@
 
 exports.up = function (knex) {
-    return knex.schema.createTable("exercise_difficulty", table => {
+    return knex.schema.createTable("exercise_difficulties", table => {
         table.increments();
         table.string("exercise_difficulty");
         table.timestamps(true, true);
@@ -8,5 +8,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable("exercise_difficulty");
+    return knex.schema.dropTable("exercise_difficulties");
 };
