@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("users", table => {
     table.increments();
     table
@@ -22,18 +22,17 @@ exports.up = function(knex) {
     table
       .integer("tier_id")
       .references("id")
-      .inTable("tiers")
+      .inTable("user_tiers")
       .notNullable();
     table
       .integer("goal_id")
       .references("id")
       .inTable("goals")
       .notNullable();
-    //timestamps
     table.timestamps(true, true);
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("users");
 };

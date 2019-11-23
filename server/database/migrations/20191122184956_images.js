@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("food_images", table => {
     table.increments();
     table.string("url");
@@ -6,9 +6,11 @@ exports.up = function(knex) {
       .integer("foods_meals_users_id")
       .references("id")
       .inTable("foods_meals_users");
+    table.timestamps(true, true);
+
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("food_images");
 };

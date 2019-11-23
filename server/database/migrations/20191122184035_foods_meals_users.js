@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("foods_meals_users", table => {
     table.increments();
     table.date("date");
@@ -14,9 +14,10 @@ exports.up = function(knex) {
       .references("id")
       .inTable("users")
       .notNullable();
+    table.timestamps(true, true);
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("foods_meals_users");
 };
