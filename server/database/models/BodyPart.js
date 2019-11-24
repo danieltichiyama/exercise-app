@@ -10,10 +10,10 @@ class BodyPart extends bookshelf.Model {
     }
 
     exercises() {
-        return this.hasMany("Exercise");
+        return this.hasMany("Exercise", "primary_bodypart_id");
     }
 
-    muscleGroup() {
+    muscle_group_id() {
         return this.belongsTo("MuscleGroup");
     }
 }

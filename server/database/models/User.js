@@ -9,19 +9,19 @@ class User extends bookshelf.Model {
         return true;
     }
 
-    gender() {
+    gender_id() {
         return this.hasOne("Gender", "id", "gender_id");
     }
 
-    activityLevel() {
+    activity_level_id() {
         return this.hasOne("ActivityLevel", "id", "activity_level_id");
     }
 
-    userTier() {
+    user_tier_id() {
         return this.hasOne("UserTier", "id", "user_tier_id");
     }
 
-    goal() {
+    goal_id() {
         return this.hasOne("Goal", "id", "goal_id");
     }
 }
