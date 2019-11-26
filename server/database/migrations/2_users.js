@@ -11,7 +11,7 @@ exports.up = function(knex) {
     table.date("birth_date");
     table.integer("weight");
     table.string("height");
-    table.integer("points");
+    table.integer("points").defaultTo(0);
     //foreign keys
     table
       .integer("gender_id")
@@ -26,7 +26,8 @@ exports.up = function(knex) {
       .integer("user_tier_id")
       .references("id")
       .inTable("user_tiers")
-      .notNullable();
+      .notNullable()
+      .defaultTo(1);
     table
       .integer("goal_id")
       .references("id")
