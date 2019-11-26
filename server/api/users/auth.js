@@ -6,13 +6,14 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcryptjs");
+
+require("dotenv").config();
+
 const saltRounds = 12;
 const User = require("../../database/models/User");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const client = redis.createClient({ url: process.env.REDIS_URL });
-
-require("dotenv").config();
 
 router.use(
   session({
@@ -42,12 +43,9 @@ passport.use(
           } else {
             user = user.toJSON();
             bcrypt.compare(password, user.password).then(res => {
-              // Happy route: email exists, password matches
               if (res) {
                 return done(null, user); // this is the user that goes to serializeUser()
-              }
-              // Error Route: email exists, password does not match
-              else {
+              } else {
                 console.log("bad password");
                 return done(null, false, {
                   message: "bad username or password"
@@ -65,9 +63,8 @@ passport.use(
 );
 
 passport.serializeUser(function(user, done) {
-  console.log("serializing, user: ");
-  console.log(user);
-  return done(null, { id: user.id, email: user.email });
+  console.log("serializing, user: ", user);
+  return done(null, { id: user.id, email: user.email, name: user.name });
 });
 
 passport.deserializeUser(function(user, done) {
@@ -77,11 +74,7 @@ passport.deserializeUser(function(user, done) {
 });
 
 router.use("/login", passport.authenticate("local"), (req, res) => {
-  return res.json({ session: req.user });
-});
-
-router.get("/smoke", (req, res) => {
-  return res.json({ message: "I see smoke in auth." });
+  return res.json({ session: req.user, message: `Welcome ${req.user.name}` });
 });
 
 router.post("/register", (req, res) => {
@@ -93,29 +86,29 @@ router.post("/register", (req, res) => {
       if (err) {
         console.log(err);
       } // return 500
-      return new User({
-        email: req.body.email,
-        password: hash,
-        user_status_id: 1
-      })
+      return new User(Object.assign({ ...req.body }, { password: hash }))
         .save()
         .then(user => {
-          console.log(user);
-          return res.status(200);
+          console.log("user created and looks like this -->", user);
+          return res.status(200).json({ message: "You're all set!" });
         })
         .catch(err => {
           console.log(err);
-          return res.send("Error creating account");
+          return res
+            .status(409) //"Conflict error code"
+            .json({ message: "That email is already being used by someone." });
         });
     });
   });
 });
 
 router.get("/logout", (req, res) => {
-  console.log("router GET /logout");
   req.logout();
-  console.log("logout complete, sending response to front");
-  return res.json({ session: {} });
+  return res.json({ session: {}, message: "See you again soon!" });
+});
+
+router.get("/smoke", (req, res) => {
+  return res.json({ message: "I see smoke in auth." });
 });
 
 module.exports = router;
