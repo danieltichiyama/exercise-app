@@ -18,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
         <button onClick={this.handleHidePlayground}>Hide Playground</button>
         {this.state.playground ? (
           <div className="component_playground">
