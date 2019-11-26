@@ -11,11 +11,12 @@ app.use(express.static("./server/public"));
 
 //body-parsers and decorator
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({extended: true}));
+app.use(bodyParser.json({ extended: true }));
 app.use(decorator);
 
 //routers
-app.use('/api/activity_levels', api.activity_levels);
+app.use("/api/activity_levels", api.activity_levels);
+app.use("/api/auth", api.authentication);
 //routers-end
 
 app.get("/smoke", (req, res) => {
