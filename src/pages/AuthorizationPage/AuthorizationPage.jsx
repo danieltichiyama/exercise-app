@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import styles from "./AuthorizationPage.module.scss";
 
 class AuthorizationPage extends Component {
   constructor(props) {
@@ -7,7 +7,7 @@ class AuthorizationPage extends Component {
     this.state = {};
   }
   render() {
-    return <div className={styles.AuthorizationPage}></div>;
+    return <div className={styles.authorizationPage}>Hello World!</div>;
   }
 }
 

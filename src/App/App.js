@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import SmokeButton from "../components/SmokeButton";
+import AuthorizationPage from "../pages/AuthorizationPage";
 
 class App extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends Component {
         {this.state.playground ? (
           <div className="component_playground">
             <SmokeButton></SmokeButton>
+            <AuthorizationPage></AuthorizationPage>
           </div>
         ) : null}
       </div>
