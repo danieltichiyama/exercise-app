@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./AuthorizationPage.module.scss";
+import LoginComponent from "../../components/LoginComponent";
 
 class AuthorizationPage extends Component {
   constructor(props) {
@@ -7,7 +8,11 @@ class AuthorizationPage extends Component {
     this.state = {};
   }
   render() {
-    return <div className={styles.authorizationPage}>Hello World!</div>;
+    return (
+      <div className={styles.authorizationPage}>
+        <LoginComponent></LoginComponent>
+      </div>
+    );
   }
 }
 

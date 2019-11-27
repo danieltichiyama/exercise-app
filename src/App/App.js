@@ -20,7 +20,9 @@ class App extends Component {
     return (
       <div>
         {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
-        <button onClick={this.handleHidePlayground}>Hide Playground</button>
+        <button onClick={this.handleHidePlayground}>
+          {this.state.playground ? "Hide Playground" : "Show Playground"}
+        </button>
         {this.state.playground ? (
           <div className="component_playground">
             <SmokeButton></SmokeButton>
