@@ -9,7 +9,7 @@ class AuthorizationPage extends Component {
   }
   render() {
     return (
-      <div className={styles.authorizationPage}>
+      <div className={styles.AuthorizationPage}>
         <LoginComponent></LoginComponent>
       </div>
     );

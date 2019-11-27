@@ -1,27 +1,39 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./LoginComponent.module.scss";
+import { actionsLoginSubmit } from "../../actions";
 
 class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      error: false
     };
   }
 
   handleInput = event => {
     const { value, name } = event.target;
     const state = { ...this.state };
-    state.mappedFields[name] = value;
+    state[name] = value;
     this.setState(state);
   };
 
   handleLoginSubmit = e => {
     e.preventDefault();
-    this.props.dispatchLoginSubmit(this.state);
-    return this.props.dispatchGoBack();
+
+    let { email } = this.state;
+
+    if (!email) {
+      return this.setState({ error: true });
+    } else if (email.length < 3) {
+      return this.setState({ error: true });
+    } else if (!email.includes("@")) {
+      return this.setState({ error: true });
+    } else {
+      return this.props.dispatchLoginSubmit(this.state);
+    }
   };
 
   handleRegisterClick = () => {
@@ -45,11 +57,14 @@ class LoginComponent extends Component {
                 type="text"
                 name="email"
                 value={this.state.email}
-                onChange={this.handleEmailInput}
+                onChange={this.handleInput}
                 placeholder="Your email"
                 className={styles.form_input}
               />
             </li>
+            {this.state.error ? (
+              <li className={styles.error}>* user not found</li>
+            ) : null}
             <li className={styles.form_li}>
               <div className={styles.imgContainer}>
                 <img
@@ -62,7 +77,7 @@ class LoginComponent extends Component {
                 type="password"
                 name="password"
                 value={this.state.password}
-                onChange={this.handlePasswordInput}
+                onChange={this.handleInput}
                 placeholder="Your password"
                 className={styles.form_input}
               />
@@ -74,14 +89,9 @@ class LoginComponent extends Component {
             className={styles.login_button}
           >
             Login{" "}
-            <img
-              src="https://image.flaticon.com/icons/svg/149/149408.svg"
-              alt="login icon"
-              className={styles.loginImg}
-            />
           </button>
         </form>
-        {/* end of form */}
+
         <div className={styles.options}>
           <div className={styles.additionalOptions}>
             <div className={styles.notAMember}>
@@ -112,5 +122,20 @@ class LoginComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchLoginSubmit: data => {
+      console.log("dispatchLoginSubmit");
+      return dispatch(actionsLoginSubmit(data));
+    }
+  };
+};
+
+LoginComponent = connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
 
 export default LoginComponent;

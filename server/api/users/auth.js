@@ -73,7 +73,7 @@ passport.deserializeUser(function(user, done) {
   return done(null, user);
 });
 
-router.use("/login", passport.authenticate("local"), (req, res) => {
+router.post("/login", passport.authenticate("local"), (req, res) => {
   return res.json({ session: req.user, message: `Welcome ${req.user.name}` });
 });
 
