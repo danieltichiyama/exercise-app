@@ -11,6 +11,7 @@ const bodyparts = require("./bodyparts");
 const exercises = require("./exercises");
 const users = require("./users");
 const workouts = require("./workouts");
+const food_images = require("./food_images");
 
 module.exports = {
   activity_levels,
@@ -25,5 +26,6 @@ module.exports = {
   bodyparts,
   exercises,
   users,
-  workouts
+  workouts,
+  food_images
 };

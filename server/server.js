@@ -28,6 +28,7 @@ app.use("/api/bodyparts", api.bodyparts);
 app.use("/api/exercises", api.exercises);
 app.use("/api/users", api.users);
 app.use("/api/workouts", api.workouts);
+app.use("/api/food_images", api.food_images);
 
 //routers-end
 
