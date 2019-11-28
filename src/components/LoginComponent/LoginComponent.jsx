@@ -37,8 +37,14 @@ class LoginComponent extends Component {
   };
 
   handleRegisterClick = () => {
-    return this.props.dispatchRegister();
+    return this.props.isRegistered();
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.registeredUserEmail !== this.props.registeredUserEmail) {
+      return this.setState({ email: this.props.registeredUserEmail });
+    }
+  }
 
   render() {
     return (
@@ -124,13 +130,14 @@ class LoginComponent extends Component {
 }
 
 const mapStateToProps = store => {
-  return {};
+  return {
+    registeredUserEmail: store.registeredUserEmail
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchLoginSubmit: data => {
-      console.log("dispatchLoginSubmit");
       return dispatch(actionsLoginSubmit(data));
     }
   };

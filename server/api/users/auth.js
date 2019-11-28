@@ -89,8 +89,11 @@ router.post("/register", (req, res) => {
       return new User(Object.assign({ ...req.body }, { password: hash }))
         .save()
         .then(user => {
-          console.log("user created and looks like this -->", user);
-          return res.status(200).json({ message: "You're all set!" });
+          return user.toJSON();
+        })
+        .then(results => {
+          let formInfo = Object.assign({}, { email: results.email });
+          return res.status(200).json({ message: "You're all set!", formInfo });
         })
         .catch(err => {
           console.log(err);
