@@ -9,19 +9,19 @@ class Exercise extends bookshelf.Model {
         return true;
     }
 
-    bodyParts() {
-        return this.hasMany("BodyPart");
+    primary_bodypart_id() {
+        return this.hasOne("BodyPart", "id", "primary_bodypart_id");
     }
 
-    exerciseType() {
+    exercise_type_id() {
         return this.hasOne("ExerciseType", "id", "exercise_type_id");
     }
 
-    exerciseDifficulties() {
-        return this.hasOne("ExerciseDifficulty", "id", "exercise_difficulties_id");
+    exercise_difficulty_id() {
+        return this.hasOne("ExerciseDifficulty", "id", "exercise_difficulty_id");
     }
 
-    exerciseEquipment() {
+    exercise_equipment_id() {
         return this.hasOne("ExerciseEquipment", "id", "exercise_equipment_id");
     }
 }
