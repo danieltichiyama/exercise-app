@@ -2,15 +2,19 @@ const bookshelf = require("../bookshelf");
 
 class FoodImage extends bookshelf.Model {
   get tableName() {
-    return "food";
+    return "food_images";
   }
 
   get hasTimestamps() {
     return true;
   }
 
-  foods_meals_users_id() {
-    return this.belongsTo("FoodMealUser");
+  users_id() {
+    return this.hasOne("User", "id", "users_id");
+  }
+
+  meal_type_id() {
+    return this.hasOne("MealType", "id", "meal_type_id")
   }
 }
 
