@@ -7,9 +7,9 @@ exports.up = function (knex) {
       .references("id")
       .inTable("users");
     table
-      .integer("meal_type_id")
+      .integer("foods_meals_users_id")
       .references("id")
-      .inTable("meal_types");
+      .inTable("foods_meals_users");
     table.timestamps(true, true);
   });
 };

@@ -13,8 +13,8 @@ class FoodImage extends bookshelf.Model {
     return this.hasOne("User", "id", "users_id");
   }
 
-  meal_type_id() {
-    return this.hasOne("MealType", "id", "meal_type_id")
+  foods_meals_users_id() {
+    return this.hasOne("FoodMealUser", "id", "foods_meals_users_id")
   }
 }
 
