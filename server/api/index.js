@@ -1,4 +1,9 @@
 const activity_levels = require("./activity_levels");
+const authentication = require("./users/auth");
+
+module.exports = {
+  activity_levels,
+  authentication
 const exercise_difficulties = require("./exercise_difficulties");
 const exercise_equipment = require("./exercise_equipment");
 const exercise_types = require("./exercise_types");

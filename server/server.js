@@ -16,6 +16,7 @@ app.use(decorator);
 
 //routers
 app.use("/api/activity_levels", api.activity_levels);
+app.use("/api/auth", api.authentication);
 app.use("/api/exercise_difficulties", api.exercise_difficulties);
 app.use("/api/exercise_equipment", api.exercise_equipment);
 app.use("/api/exercise_types", api.exercise_types);
