@@ -1,4 +1,4 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, TOGGLE } from "../actions";
 
 const initialStore = {
   activity_levels: [],
@@ -29,6 +29,9 @@ let reducer = (store = initialStore, action) => {
     case LOGOUT:
       localStorage.removeItem("session");
       return Object.assign({}, store, { isLoggedIn: false });
+
+    case TOGGLE:
+      return Object.assign({}, state, { display: action.payload });
 
     default:
       return store;
