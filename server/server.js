@@ -38,7 +38,6 @@ app.use("/api/community_comments", api.community_comments);
 app.use("/api/exercise_bodyparts", api.exercise_bodyparts);
 app.use("/api/foods_meals_users", api.foods_meals_users)
 app.use("/api/nutrition", api.nutrition);
-
 //routers-end
 
 app.get("/smoke", (req, res) => {

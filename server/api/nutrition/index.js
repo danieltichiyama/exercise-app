@@ -17,9 +17,9 @@ nutritionRouter.route("/")
             data: {
                 "generalSearchInput": formData
             }
-            }).then((response) => {
-                return res.json(response.data);
-            })
+        }).then((response) => {
+            return res.json(response.data);
         })
+    })
 
 module.exports = nutritionRouter
