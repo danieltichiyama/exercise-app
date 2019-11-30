@@ -2,18 +2,18 @@ const bookshelf = require('../bookshelf');
 
 class CommunityComment extends bookshelf.Model {
     get tableName() {
-        return 'activity_levels';
+        return 'community_comments';
     }
 
     get hasTimestamps() {
         return true;
     }
 
-    user() {
+    user_id() {
         return this.belongsTo("User");
     }
     
-    communityPost() {
+    community_post_id() {
         return this.belongsTo("CommunityPost");
     }
 }

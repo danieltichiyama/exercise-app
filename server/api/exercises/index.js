@@ -8,7 +8,9 @@ exercisesRouter.route("/")
                 "primary_bodypart_id",
                 "exercise_type_id",
                 "exercise_difficulty_id",
-                "exercise_equipment_id"
+                "exercise_equipment_id",
+                "bodyparts",
+                "workouts"
             ]
         })
         .then(response => {

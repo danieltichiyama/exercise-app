@@ -1,6 +1,6 @@
 const bookshelf = require('../bookshelf');
 
-class BodyPart extends bookshelf.Model {
+class Bodypart extends bookshelf.Model {
     get tableName() {
         return "bodyparts";
     }
@@ -10,7 +10,7 @@ class BodyPart extends bookshelf.Model {
     }
 
     exercises() {
-        return this.hasMany("Exercise", "primary_bodypart_id");
+        return this.belongsToMany("Exercise", "exercises_bodyparts");
     }
 
     muscle_group_id() {
@@ -18,4 +18,4 @@ class BodyPart extends bookshelf.Model {
     }
 }
 
-module.exports = bookshelf.model("BodyPart", BodyPart);
+module.exports = bookshelf.model("Bodypart", Bodypart);

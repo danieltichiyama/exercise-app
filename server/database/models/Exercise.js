@@ -10,7 +10,7 @@ class Exercise extends bookshelf.Model {
     }
 
     primary_bodypart_id() {
-        return this.hasOne("BodyPart", "id", "primary_bodypart_id");
+        return this.hasOne("Bodypart", "id", "primary_bodypart_id");
     }
 
     exercise_type_id() {
@@ -23,6 +23,14 @@ class Exercise extends bookshelf.Model {
 
     exercise_equipment_id() {
         return this.hasOne("ExerciseEquipment", "id", "exercise_equipment_id");
+    }
+
+    bodyparts() {
+        return this.belongsToMany("Bodypart", "exercises_bodyparts");
+    }
+
+    workouts() {
+        return this.belongsToMany("Workout", "workouts_exercises");
     }
 }
 

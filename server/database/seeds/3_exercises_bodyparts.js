@@ -11,7 +11,7 @@ exports.seed = function(knex) {
         },
         {
           exercise_id: 2,
-          bodypart_id: 2
+          bodypart_id: 1
         },
         {
           exercise_id: 3,

@@ -9,10 +9,10 @@ class UserVideo extends bookshelf.Model {
         return true;
     }
 
-    user() {
+    user_id() {
         return this.belongsTo('User');
     }
-    exercise() {
+    exercise_id() {
         return this.belongsTo("Exercise");
     }
 }

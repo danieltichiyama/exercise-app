@@ -12,6 +12,10 @@ class Workout extends bookshelf.Model {
   user_id() {
     return this.belongsTo("User");
   }
+
+  exercises(){
+    return this.belongsToMany("Exercise", "workouts_exercises");
+  }
 }
 
 module.exports = bookshelf.model("Workout", Workout);

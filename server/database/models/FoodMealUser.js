@@ -9,12 +9,16 @@ class FoodMealUser extends bookshelf.Model {
         return true;
     }
 
-    mealType() {
+    meal_type_id() {
         return this.hasOne("MealType", "id", "meal_type_id");
     }
 
-    user() {
+    user_id() {
         return this.belongsTo("User");
+    }
+
+    foodImage(){
+        return this.hasMany("FoodImage");
     }
 }
 
