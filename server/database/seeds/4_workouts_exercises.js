@@ -10,11 +10,11 @@ exports.seed = function(knex) {
           exercise_id: 1
         },
         {
-          workout_id: 2,
+          workout_id: 1,
           exercise_id: 2
         },
         {
-          workout_id: 3,
+          workout_id: 1,
           exercise_id: 3
         },
         {

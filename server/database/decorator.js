@@ -1,32 +1,35 @@
-const ActivityLevel = require("./models/ActivityLevel")
-const BodyPart = require("./models/BodyPart")
-const CommunityComment = require("./models/CommunityComment")
-const CommunityPost = require("./models/CommunityPost")
-const Exercise = require("./models/Exercise")
-const ExerciseDifficulty = require("./models/ExerciseDifficulty")
-const ExerciseEquipment = require("./models/ExerciseEquipment")
-const ExerciseType = require("./models/ExerciseType")
-const FoodImage = require("./models/FoodImage")
-const FoodMealUser = require("./models/FoodMealUser")
-const Gender = require("./models/Gender")
-const Goal = require("./models/Goal")
-const MealType = require("./models/MealType")
-const MuscleGroup = require("./models/MuscleGroup")
-const TutorialVideo = require("./models/TutorialVideo")
-const User = require("./models/User")
-const UserTier = require("./models/UserTier")
-const UserVideo = require("./models/UserVideo")
-const Workout = require("./models/Workout")
+const ActivityLevel = require("./models/ActivityLevel");
+const Bodypart = require("./models/Bodypart");
+const CommunityComment = require("./models/CommunityComment");
+const CommunityPost = require("./models/CommunityPost");
+const Exercise = require("./models/Exercise");
+const ExerciseBodypart = require("./models/ExerciseBodypart");
+const ExerciseDifficulty = require("./models/ExerciseDifficulty");
+const ExerciseEquipment = require("./models/ExerciseEquipment");
+const ExerciseType = require("./models/ExerciseType");
+const FoodImage = require("./models/FoodImage");
+const FoodMealUser = require("./models/FoodMealUser");
+const Gender = require("./models/Gender");
+const Goal = require("./models/Goal");
+const MealType = require("./models/MealType");
+const MuscleGroup = require("./models/MuscleGroup");
+const TutorialVideo = require("./models/TutorialVideo");
+const User = require("./models/User");
+const UserTier = require("./models/UserTier");
+const UserVideo = require("./models/UserVideo");
+const Workout = require("./models/Workout");
+const WorkoutExercise = require("./models/WorkoutExercise");
 
 
 
 module.exports = function(req, res, next) {
   req.db = {
     ActivityLevel,
-    BodyPart,
+    Bodypart,
     CommunityComment,
     CommunityPost,
     Exercise,
+    ExerciseBodypart,
     ExerciseDifficulty,
     ExerciseEquipment,
     ExerciseType,
@@ -40,7 +43,8 @@ module.exports = function(req, res, next) {
     User,
     UserTier,
     UserVideo,
-    Workout
+    Workout,
+    WorkoutExercise
   };
   next();
 };

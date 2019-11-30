@@ -9,16 +9,16 @@ class CommunityPost extends bookshelf.Model {
         return true;
     }
 
-    user() {
+    user_id() {
         return this.belongsTo("User");
     }
-    userVideo() {
+    user_video_id() {
         return this.hasOne("UserVideo", "id", "user_video_id");
     }
-    foodImages() {
+    food_images_id() {
         return this.hasOne("FoodImage", "id", "food_image_id");
     }
-    exercise() {
+    exercise_id() {
         return this.hasOne("Exercise", "id", "exercise_id");
     }
 }
