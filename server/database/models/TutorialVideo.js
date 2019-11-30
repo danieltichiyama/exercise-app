@@ -2,14 +2,14 @@ const bookshelf = require('../bookshelf');
 
 class TutorialVideo extends bookshelf.Model {
     get tableName() {
-        return 'tutorial_video';
+        return 'tutorial_videos';
     }
 
     get hasTimestamps() {
         return true;
     }
 
-    exercise() {
+    exercise_id() {
         return this.belongsTo("Exercise");
     }
 }

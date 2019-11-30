@@ -8,7 +8,6 @@ exports.up = function (knex) {
     table.string("name").notNullable();
     table.string("password").notNullable();
     //optional data
-    table.string("gender");
     table.date("birth_date");
     table.integer("weight");
     table.string("height");
