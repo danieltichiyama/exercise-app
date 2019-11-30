@@ -31,7 +31,7 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { isLoggedIn: false });
 
     case TOGGLE:
-      return Object.assign({}, state, { display: action.payload });
+      return Object.assign({}, store, { display: action.payload });
 
     default:
       return store;
