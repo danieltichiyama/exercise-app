@@ -10,7 +10,7 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const saltRounds = 12;
-const User = require("../../database/models/User");
+const User = require("../../../database/models/User");
 const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const client = redis.createClient({ url: process.env.REDIS_URL });
