@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from './CommunityPostComponent.module.scss';
 
 const CommunityPostComponent = function (props) {
     console.log("Props from CommunnityPost: ", props)
     return (
-        < div >
+        < div className={styles.post}>
             <h3>Title: {props.title}</h3>
             <h4>Body: {props.body}</h4>
             <h4>Exercise: {props.exercise_id.name}</h4>
