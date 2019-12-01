@@ -76,6 +76,22 @@ class NavigationComponent extends Component {
           alt="profile button"
           onClick={this.handleProfileClick}
         />
+
+        {/* register */}
+        <img
+          className={styles.navButton}
+          src="https://image.flaticon.com/icons/svg/983/983886.svg"
+          alt="register button"
+          onClick={this.handleRegisterClick}
+        />
+
+        {/* login */}
+        <img
+          className={styles.navButton}
+          src="https://image.flaticon.com/icons/svg/1828/1828391.svg"
+          alt="login button"
+          onClick={this.handleRegisterClick}
+        />
       </nav>
     );
   }
