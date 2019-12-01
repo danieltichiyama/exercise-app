@@ -4,17 +4,18 @@ export const LOAD_ACTIVITIES = "LOAD_ACTIVITIES";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
+export const LOAD_POSTS = "LOAD_POSTS"
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
     .then(response => {
       return dispatch({
         type: LOAD_ACTIVITIES,
-        payload: response
+        payload: response.data
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionsLoadActivity: ", err);
     });
 };
 
@@ -27,7 +28,7 @@ export const actionsLoginSubmit = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionsLoginsubmit: ", err);
     });
 };
 
@@ -40,7 +41,7 @@ export const actionsRegister = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionsRegister: ", err);
     });
 };
 
@@ -53,6 +54,19 @@ export const actionsLogout = () => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionsLogout: ", err);
+    });
+};
+
+export const actionsLoadPosts = () => async dispatch => {
+  await Axios.get("/api/community_posts")
+    .then(response => {
+      return dispatch({
+        type: LOAD_POSTS,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionLoadPosts: ", err);
     });
 };
