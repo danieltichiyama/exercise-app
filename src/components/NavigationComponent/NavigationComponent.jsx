@@ -14,7 +14,7 @@ class NavigationComponent extends Component {
     return (
       <nav className={styles.navigation}>
         {/* home */}
-        <Link to="/" className={styles.navButton}>
+        <Link to="/home" className={styles.navButton}>
           <img
             src="https://image.flaticon.com/icons/svg/846/846449.svg"
             alt="home button"

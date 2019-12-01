@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import ExercisePage from "../pages/ExercisePage";
+import NutritionPage from "../pages/NutritionPage";
+import CommunityPage from "../pages/CommunityPage";
+import UserPage from "../pages/UserPage";
+import AuthorizationPage from "../pages/AuthorizationPage";
+import SmokeButton from "../components/SmokeButton";
+import NavigationComponent from "../components/NavigationComponent";
 
 import { actionsLogout } from "../actions";
-
-import SmokeButton from "../components/SmokeButton";
-import AuthorizationPage from "../pages/AuthorizationPage";
-import NavigationComponent from "../components/NavigationComponent";
 
 class App extends Component {
   constructor(props) {
@@ -27,23 +32,33 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.isLoggedIn ? (
-          <button onClick={this.handleLogout}>Log out</button>
-        ) : null}
-        <AuthorizationPage></AuthorizationPage>
+      <Router>
+        <Switch>
+          <Route exact path="/home" component={HomePage} />
+          <Route path="/exercise" component={ExercisePage} />
+          <Route path="/nutrition" component={NutritionPage} />
+          <Route path="/community" component={CommunityPage} />
+          <Route path="/user" component={UserPage} />
+          <Route path="/authorization" component={AuthorizationPage} />
+        </Switch>
+        <div>
+          {this.props.isLoggedIn ? (
+            <button onClick={this.handleLogout}>Log out</button>
+          ) : null}
+          <AuthorizationPage></AuthorizationPage>
 
-        {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
-        <button onClick={this.handleHidePlayground}>
-          {this.state.playground ? "Hide Playground" : "Show Playground"}
-        </button>
-        {this.state.playground ? (
-          <div className="component_playground">
-            <SmokeButton></SmokeButton>
-            <NavigationComponent></NavigationComponent>
-          </div>
-        ) : null}
-      </div>
+          {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
+          <button onClick={this.handleHidePlayground}>
+            {this.state.playground ? "Hide Playground" : "Show Playground"}
+          </button>
+          {this.state.playground ? (
+            <div className="component_playground">
+              <SmokeButton></SmokeButton>
+              <NavigationComponent></NavigationComponent>
+            </div>
+          ) : null}
+        </div>
+      </Router>
     );
   }
 }
