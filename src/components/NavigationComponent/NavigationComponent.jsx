@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { actionsToggle } from "../../actions";
-import styles from "../NavigationComponent/NavigationComponent.module.css";
+import styles from "../NavigationComponent/NavigationComponent.module.scss";
 
 class NavigationComponent extends Component {
   constructor(props) {
@@ -9,89 +10,64 @@ class NavigationComponent extends Component {
     this.state = {};
   }
 
-  // Home
-  handleHomeClick = () => {
-    this.props.toggle("home");
-  };
-
-  // Food
-  handleFoodClick = () => {
-    this.props.toggle("food");
-  };
-
-  // Fitness
-  handleFitnessClick = () => {
-    this.props.toggle("fitness");
-  };
-
-  // Community
-  handleCommunityClick = () => {
-    this.props.toggle("community");
-  };
-
-  // Profile
-  handleProfileClick = () => {
-    this.props.toggle("profile");
-  };
-
   render() {
     return (
       <nav className={styles.navigation}>
         {/* home */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/846/846449.svg"
-          alt="home button"
-          onClick={this.handleHomeClick}
-        />
+        <Link to="/" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/846/846449.svg"
+            alt="home button"
+          />
+        </Link>
 
-        {/* food */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/1536/1536211.svg"
-          alt="food button"
-          onClick={this.handleFoodClick}
-        />
+        {/* nutrition */}
+        <Link to="/nutrition" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/1536/1536211.svg"
+            alt="nutrition button"
+          />
+        </Link>
 
-        {/* fitness */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/1025/1025929.svg"
-          alt="fitness button"
-          onClick={this.handleFitnessClick}
-        />
+        {/* exercise */}
+        <Link to="/exercise" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/1025/1025929.svg"
+            alt="exercise button"
+          />
+        </Link>
 
         {/* community */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/1159/1159603.svg"
-          alt="community button"
-          onClick={this.handleCommunityClick}
-        />
+        <Link to="/community" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/1159/1159603.svg"
+            alt="community button"
+          />
+        </Link>
 
-        {/* profile */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/222/222299.svg"
-          alt="profile button"
-          onClick={this.handleProfileClick}
-        />
+        {/* user profile */}
+        <Link to="/user" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/222/222299.svg"
+            alt="user profile button"
+          />
+        </Link>
 
         {/* register */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/983/983886.svg"
-          alt="register button"
-          onClick={this.handleRegisterClick}
-        />
+        <Link to="/register" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/983/983886.svg"
+            alt="register button"
+          />
+        </Link>
 
         {/* login */}
-        <img
-          className={styles.navButton}
-          src="https://image.flaticon.com/icons/svg/1828/1828391.svg"
-          alt="login button"
-          onClick={this.handleRegisterClick}
-        />
+        <Link to="/login" className={styles.navButton}>
+          <img
+            src="https://image.flaticon.com/icons/svg/1828/1828391.svg"
+            alt="login button"
+          />
+        </Link>
       </nav>
     );
   }
