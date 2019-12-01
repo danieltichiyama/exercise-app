@@ -53,19 +53,11 @@ class NavigationComponent extends Component {
           />
         </Link>
 
-        {/* register */}
-        <Link to="/register" className={styles.navButton}>
+        {/* authorization */}
+        <Link to="/authorization" className={styles.navButton}>
           <img
             src="https://image.flaticon.com/icons/svg/983/983886.svg"
-            alt="register button"
-          />
-        </Link>
-
-        {/* login */}
-        <Link to="/login" className={styles.navButton}>
-          <img
-            src="https://image.flaticon.com/icons/svg/1828/1828391.svg"
-            alt="login button"
+            alt="register / login button"
           />
         </Link>
       </nav>
