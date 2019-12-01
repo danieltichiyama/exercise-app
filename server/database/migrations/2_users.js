@@ -9,9 +9,10 @@ exports.up = function(knex) {
     table.string("password").notNullable();
     //optional data
     table.date("birth_date");
-    table.integer("weight");
-    table.string("height");
+    table.decimal("weight");
+    table.decimal("height");
     table.integer("points").defaultTo(0);
+    table.integer("recommended_calories");
     //foreign keys
     table
       .integer("gender_id")

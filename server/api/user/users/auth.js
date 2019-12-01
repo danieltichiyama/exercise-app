@@ -15,6 +15,9 @@ const redis = require("redis");
 const RedisStore = require("connect-redis")(session);
 const client = redis.createClient({ url: process.env.REDIS_URL });
 
+//calculatorModule
+const calculator = require("../../../util/calculators");
+
 router.use(
   session({
     store: new RedisStore({ client }),
@@ -92,14 +95,44 @@ router.post("/register", (req, res) => {
           return user.toJSON();
         })
         .then(results => {
-          let formInfo = Object.assign({}, { email: results.email });
-          return res.status(200).json({ message: "You're all set!", formInfo });
-        })
-        .catch(err => {
-          console.log(err);
-          return res
-            .status(409) //"Conflict error code"
-            .json({ message: "That email is already being used by someone." });
+          return new User()
+            .where({ id: results.id })
+            .fetch({
+              withRelated: ["gender_id", "activity_level_id", "goal_id"]
+            })
+            .then(user => {
+              return user.toJSON();
+            })
+            .then(results => {
+              let recommended_calories = calculator.recommendedCalories(
+                results
+              );
+              console.log("recommended_calories", recommended_calories);
+
+              return new User()
+                .where({ id: results.id })
+                .save(
+                  { recommended_calories },
+                  { method: "update", patch: true }
+                )
+                .then(user => {
+                  return user.toJSON();
+                })
+                .then(results => {
+                  let formInfo = Object.assign({}, { email: results.email });
+                  return res
+                    .status(200)
+                    .json({ message: "You're all set!", formInfo });
+                })
+                .catch(err => {
+                  console.log(err);
+                  return res
+                    .status(409) //"Conflict error code"
+                    .json({
+                      message: "That email is already being used by someone."
+                    });
+                });
+            });
         });
     });
   });
