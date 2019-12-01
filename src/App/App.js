@@ -6,6 +6,7 @@ import { actionsLogout } from "../actions";
 
 import SmokeButton from "../components/SmokeButton";
 import AuthorizationPage from "../pages/AuthorizationPage";
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
         {this.state.playground ? (
           <div className="component_playground">
             <SmokeButton></SmokeButton>
+            <NewsFeedComponent />
           </div>
         ) : null}
       </div>
