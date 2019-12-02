@@ -1,13 +1,14 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, FOOD_SEARCH } from "../actions";
 
 const initialStore = {
+  foods: [],
   activity_levels: [],
   community_posts: [],
   isLoggedIn: false
 };
 
 let reducer = (store = initialStore, action) => {
-  console.log("Reducer: ", action.payload);
+  // console.log(action.payload);
 
   switch (action.type) {
     case LOAD_ACTIVITIES:
@@ -34,6 +35,9 @@ let reducer = (store = initialStore, action) => {
     case LOAD_POSTS:
       return Object.assign({}, store, { community_posts: action.payload })
 
+    case FOOD_SEARCH:
+        console.log(action.payload.foods);
+      return Object.assign({}, store, { foods: action.payload.foods })
     default:
       return store;
   }

@@ -4,9 +4,10 @@ import "./App.css";
 
 import { actionsLogout } from "../actions";
 
-import SmokeButton from "../components/SmokeButton";
+// import SmokeButton from "../components/SmokeButton";
 import AuthorizationPage from "../pages/AuthorizationPage";
 import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 class App extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class App extends Component {
           <div className="component_playground">
             <SmokeButton></SmokeButton>
             <NewsFeedComponent />
+            <FoodSearchComponent></FoodSearchComponent>
           </div>
         ) : null}
       </div>

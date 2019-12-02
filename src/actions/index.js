@@ -5,6 +5,7 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS"
+export const FOOD_SEARCH = "FOOD_SEARCH";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -70,3 +71,22 @@ export const actionsLoadPosts = () => async dispatch => {
       console.log("Error in actionLoadPosts: ", err);
     });
 };
+export const actionFoodSearch = data => async dispatch => {
+  await Axios({
+    method: 'post',
+    url: "/api/nutrition",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data
+  })
+  .then(response => {
+    return dispatch({
+      type: FOOD_SEARCH,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
