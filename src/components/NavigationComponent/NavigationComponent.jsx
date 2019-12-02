@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { actionsToggle } from "../../actions";
 import styles from "../NavigationComponent/NavigationComponent.module.scss";
 
 class NavigationComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
       <nav className={styles.navigation}>
@@ -64,22 +57,5 @@ class NavigationComponent extends Component {
     );
   }
 }
-
-const mapStateToProps = stores => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggle: link => {
-      return dispatch(actionsToggle(link));
-    }
-  };
-};
-
-NavigationComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NavigationComponent);
 
 export default NavigationComponent;

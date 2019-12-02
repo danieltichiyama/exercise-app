@@ -45,7 +45,7 @@ class App extends Component {
           {this.props.isLoggedIn ? (
             <button onClick={this.handleLogout}>Log out</button>
           ) : null}
-          <AuthorizationPage></AuthorizationPage>
+          <NavigationComponent></NavigationComponent>
 
           {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
           <button onClick={this.handleHidePlayground}>
@@ -54,7 +54,6 @@ class App extends Component {
           {this.state.playground ? (
             <div className="component_playground">
               <SmokeButton></SmokeButton>
-              <NavigationComponent></NavigationComponent>
             </div>
           ) : null}
         </div>
