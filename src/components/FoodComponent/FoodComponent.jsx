@@ -1,24 +1,46 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { actionClear, actionFoodNutrients } from "../../actions"
+import { connect } from "react-redux";
 // import styles from "./Food.module.scss";
-import { Link } from "react-router-dom";
-import { parseConfigFileTextToJson } from "typescript";
+// import { Link } from "react-router-dom";
 
-class Class extends Component {
+
+class FoodComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {  };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.props.dispatchClear();
+    this.props.dispatchFoodNutrients(this.props.fdcId);
   }
 
   render() { 
     return (
-      <Link to ="/view" id={parseConfigFileTextToJson.props.id}>
-        <div onClick={this.handleClick}>
-          <h3>{this.props}</h3>
-        </div>
-      </Link>
+      <button onClick={this.handleClick}>
+        <h3>{this.props.description}</h3>
+        <p>fdcID: {this.props.fdcId}</p>
+      </button>
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchClear: () => {
+      return dispatch(actionClear());
+    },
+    dispatchFoodNutrients: fdcId => {
+      return dispatch(actionFoodNutrients(fdcId))
+    }
+  };
+};
+
+FoodComponent = connect(
+  null,
+  mapDispatchToProps
+)(FoodComponent);
  
-export default Class;
+export default FoodComponent;

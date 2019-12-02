@@ -1,4 +1,4 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, FOOD_SEARCH } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, FOOD_SEARCH, FOOD_NUTRIENT_SEARCH, CLEAR } from "../actions";
 
 const initialStore = {
   foods: [],
@@ -36,8 +36,14 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload })
 
     case FOOD_SEARCH:
-        console.log(action.payload.foods);
-      return Object.assign({}, store, { foods: action.payload.foods })
+      return Object.assign({}, store, { foods: action.payload.foods });
+    
+    case FOOD_NUTRIENT_SEARCH:
+      console.log(action.payload)
+      return Object.assign({}, store, { food_nutrients: action.payload });
+      
+    case CLEAR:
+      return Object.assign({}, store, { foods: action.payload } );
     default:
       return store;
   }

@@ -4,9 +4,9 @@ import "./App.css";
 
 import { actionsLogout } from "../actions";
 
-// import SmokeButton from "../components/SmokeButton";
+import SmokeButton from "../components/SmokeButton";
 import AuthorizationPage from "../pages/AuthorizationPage";
-import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+// import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 class App extends Component {
@@ -41,7 +41,7 @@ class App extends Component {
         {this.state.playground ? (
           <div className="component_playground">
             <SmokeButton></SmokeButton>
-            <NewsFeedComponent />
+            {/* <NewsFeedComponent /> */}
             <FoodSearchComponent></FoodSearchComponent>
           </div>
         ) : null}

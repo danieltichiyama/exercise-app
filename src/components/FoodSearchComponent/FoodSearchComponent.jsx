@@ -8,50 +8,65 @@ class FoodSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleClick = this.handleClick.bind(this);
+    this.searchDataOnClick = this.searchDataOnClick.bind(this);
     this.searchKeyword = this.searchKeyword.bind(this);
   }
 
-  handleClick(e) {
+  searchDataOnClick(e) {
     e.preventDefault();
-    this.props.dispatchFoodSearch(this.state)
+    this.props.dispatchFoodSearch(this.state);
   }
 
   searchKeyword(e){
-    this.setState({ data: e.target.value })
+    this.setState({ data: e.target.value });
+    // UNCOMMENT FOR LIVE SEARCHBAR
+    // this.props.dispatchFoodSearch(this.state);
   }
 
   mapFoods = data => {
-    console.log("DATA", data);
-    return data.map(food => {
-      return (
-        <FoodComponent
-          id={food.id}
-          key={food.id}
+    if (data.length < 1){
+      console.log('11111111');
+      console.log(this.props.searchData.foods)
+      return '';
+    } else {
+      console.log("22222222222");
+      console.log(this.props.searchData.foods)
+      return data.map(food => {
+        return (
+          <FoodComponent
+          // onClick={console.log('LOOOOLLL')}
+          fdcId={food.fdcId}
+          key={food.fdcId}
           description={food.description}
-          
-        />
-      )
-    })
+          />
+        )
+      })
+    }
   }
     
   render(){
     return (
-      <>
-        <form
-          autoComplete="off"
-          onSubmit={this.handleClick}
-        >
-        <input
-          onChange={this.searchKeyword}
-          type="text"
-          name="name"
-          placeholder="search"
-        />
-        <button>
-          Submit
-        </button>
-        </form>
+      <>  
+        <div>
+          <form
+            autoComplete="off"
+            onSubmit={this.searchDataOnClick}
+            >
+          <input
+            onChange={this.searchKeyword}
+            type="text"
+            name="name"
+            placeholder="search"
+            />
+          <button>
+            Submit
+          </button>
+          </form>
+        </div>
+
+        {Object.keys((this.props.searchData.foods) && (this.props.searchData.foods.length > 1)) ? (
+          <div>{this.mapFoods(this.props.searchData.foods)}</div>
+        ) : ( "" )}
       </>
     )
   }
