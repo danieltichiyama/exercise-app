@@ -12,6 +12,9 @@ import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
 
 import { actionsLogout } from "../actions";
+import SmokeButton from "../components/SmokeButton";
+import AuthorizationPage from "../pages/AuthorizationPage";
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 class App extends Component {
   constructor(props) {
@@ -46,7 +49,6 @@ class App extends Component {
             <button onClick={this.handleLogout}>Log out</button>
           ) : null}
           <NavigationComponent></NavigationComponent>
-
           {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
           <button onClick={this.handleHidePlayground}>
             {this.state.playground ? "Hide Playground" : "Show Playground"}

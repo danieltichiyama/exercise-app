@@ -1,16 +1,17 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS } from "../actions";
 
 const initialStore = {
   activity_levels: [],
+  community_posts: [],
   isLoggedIn: false
 };
 
 let reducer = (store = initialStore, action) => {
-  console.log(action.payload);
+  console.log("Reducer: ", action.payload);
 
   switch (action.type) {
     case LOAD_ACTIVITIES:
-      return Object.assign({}, store, { activity_levels: action.payload.data });
+      return Object.assign({}, store, { activity_levels: action.payload });
 
     case REGISTER:
       return Object.assign({}, store, {
@@ -29,6 +30,9 @@ let reducer = (store = initialStore, action) => {
     case LOGOUT:
       localStorage.removeItem("session");
       return Object.assign({}, store, { isLoggedIn: false });
+
+    case LOAD_POSTS:
+      return Object.assign({}, store, { community_posts: action.payload })
 
     default:
       return store;
