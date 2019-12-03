@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionFoodSearch } from "../../actions";
 import FoodComponent from "../FoodComponent"
+import FoodNutrientComponent from "../FoodNutrientsComponent";
 // import styles from "./FoodSearchComponent.module.scss";
 
 class FoodSearchComponent extends Component {
@@ -24,23 +25,32 @@ class FoodSearchComponent extends Component {
   }
 
   mapFoods = data => {
-    if (data.length < 1){
-      console.log('11111111');
-      console.log(this.props.searchData.foods)
-      return '';
-    } else {
-      console.log("22222222222");
-      console.log(this.props.searchData.foods)
+    if (data[0]){
       return data.map(food => {
         return (
           <FoodComponent
-          // onClick={console.log('LOOOOLLL')}
-          fdcId={food.fdcId}
-          key={food.fdcId}
-          description={food.description}
+            fdcId={food.fdcId}
+            key={food.fdcId}
+            description={food.description}
           />
         )
       })
+    } else if(data.foodNutrients){
+      return (
+        <FoodNutrientComponent
+          key={data.description}
+          description={data.description}
+          calories={`${data.foodNutrients[3].amount} ${data.foodNutrients[3].nutrient.unitName}`}
+          protien={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
+          carbohydrates={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+          sugars={`${data.foodNutrients[8].amount} ${data.foodNutrients[8].nutrient.unitName}`}
+          fiber={`${data.foodNutrients[9].amount} ${data.foodNutrients[9].nutrient.unitName}`}
+          calcium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
+          iron={`${data.foodNutrients[11].amount} ${data.foodNutrients[11].nutrient.unitName}`}
+          sodium={`${data.foodNutrients[15].amount} ${data.foodNutrients[15].nutrient.unitName}`}
+          zinc={`${data.foodNutrients[16].amount} ${data.foodNutrients[16].nutrient.unitName}`}
+        />
+      )
     }
   }
     
@@ -63,10 +73,7 @@ class FoodSearchComponent extends Component {
           </button>
           </form>
         </div>
-
-        {Object.keys((this.props.searchData.foods) && (this.props.searchData.foods.length > 1)) ? (
           <div>{this.mapFoods(this.props.searchData.foods)}</div>
-        ) : ( "" )}
       </>
     )
   }

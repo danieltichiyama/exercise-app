@@ -36,11 +36,12 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload })
 
     case FOOD_SEARCH:
+      console.log(action.payload)
       return Object.assign({}, store, { foods: action.payload.foods });
     
     case FOOD_NUTRIENT_SEARCH:
       console.log(action.payload)
-      return Object.assign({}, store, { food_nutrients: action.payload });
+      return Object.assign({}, store, { foods: action.payload });
       
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload } );

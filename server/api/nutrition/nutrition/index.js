@@ -3,17 +3,11 @@ const axios = require("axios");
 const nutritionRouter = express.Router();
 let fcdId;
 const foodSearchEndpoint = `https://api.nal.usda.gov/fdc/v1/search?api_key=${process.env.API_KEY}`;
-const foodDetailsEndpoint = `https://api.nal.usda.gov/fdc/v1/${fcdId}?api_key=${process.env.API_KEY}`
 
 
 nutritionRouter.route("/")
   .get((req, res) => {
     return axios({
-      // method: 'get',
-      // url: foodDetailsEndpoint,
-      // headers: { 
-      //   "Content-Type": "application/json"
-      // }
       method: 'post',
       url: foodSearchEndpoint,
       headers: {
