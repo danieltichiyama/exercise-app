@@ -21,6 +21,8 @@ nutritionRouter.route("/")
       }
     }).then((response) => {
       return res.json(response.data)
+    }).catch(err => {
+      console.log(err);
     })
   })
   .post((req, res) => {
@@ -38,6 +40,8 @@ nutritionRouter.route("/")
       }
     }).then((response) => {
       return res.json(response.data);
+    }).catch(err => {
+      console.log(err);
     })
   });
 
@@ -51,6 +55,8 @@ nutritionRouter.route("/:id")
       }
     }).then((response) => {
       return res.json(response.data)
+    }).catch(err => {
+      console.log(err);
     })
   })
 
