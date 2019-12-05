@@ -94,7 +94,7 @@ class LoginComponent extends Component {
             onClick={this.handleLoginSubmit}
             className={styles.login_button}
           >
-            Login{" "}
+            Login
           </button>
         </form>
 
