@@ -10,11 +10,10 @@ import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
 import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 import { actionsLogout } from "../actions";
-import SmokeButton from "../components/SmokeButton";
-import AuthorizationPage from "../pages/AuthorizationPage";
-import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+// import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +55,7 @@ class App extends Component {
           {this.state.playground ? (
             <div className="component_playground">
               <SmokeButton></SmokeButton>
+              <FoodSearchComponent></FoodSearchComponent>
             </div>
           ) : null}
         </div>

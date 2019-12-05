@@ -5,6 +5,9 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS"
+export const FOOD_SEARCH = "FOOD_SEARCH";
+export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH"
+export const CLEAR = "CLEAR";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -70,3 +73,43 @@ export const actionsLoadPosts = () => async dispatch => {
       console.log("Error in actionLoadPosts: ", err);
     });
 };
+
+export const actionFoodSearch = data => async dispatch => {
+  await Axios({
+    method: 'post',
+    url: "/api/nutrition",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data
+  })
+  .then(response => {
+    return dispatch({
+      type: FOOD_SEARCH,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+export const actionClear = () => dispatch => {
+  dispatch({
+    type: CLEAR,
+    payload: []
+  });
+};
+
+export const actionFoodNutrients = fdcId => async dispatch => {
+  await Axios.get(`/api/nutrition/${fdcId}`)
+    .then(response => {
+      return dispatch({
+        type: FOOD_NUTRIENT_SEARCH,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+}
