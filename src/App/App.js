@@ -13,12 +13,8 @@ import NavigationComponent from "../components/NavigationComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 import { actionsLogout } from "../actions";
-<<<<<<< HEAD
 
 import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
-=======
-// import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
->>>>>>> b6cb76668f6a8605d2dc5b14ba71dcf5cd97757d
 
 class App extends Component {
   constructor(props) {
