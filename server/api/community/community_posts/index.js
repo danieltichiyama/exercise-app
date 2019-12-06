@@ -8,12 +8,14 @@ communityPostsRouter.route("/")
                 "user_id",
                 "user_video_id",
                 "food_images_id",
-                "exercise_id"
+                "exercise_id",
+                "community_comment_id.user_id.goal_id",
+                //references community_comment_id from the CommunityPost Model, then references user_id from CommunityComment Model. (chainable)
             ]
         })
-        .then(response => {
-            return res.json(response);
-        })
+            .then(response => {
+                return res.json(response);
+            })
     })
 
 module.exports = communityPostsRouter;

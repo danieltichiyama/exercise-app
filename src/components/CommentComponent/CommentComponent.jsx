@@ -2,11 +2,9 @@ import React from "react";
 import styles from "./CommentComponent.module.scss";
 
 const CommentComponent = function (props) {
-    console.log("props in comment component: ", props)
     return (
         < div className={styles.comments}>
-            {/* {props.body} */}
-            Comment access by using props.body by: {props.user}
+            {props.body} || By: {props.user} || User's goal: {props.user_goal}
         </div >
     )
 }

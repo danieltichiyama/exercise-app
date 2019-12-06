@@ -12,18 +12,13 @@ class NewsFeedComponent extends Component {
         this.props.dispatchLoadPosts();
     }
     render() {
-
         return (
             <ul>
                 {this.props.community_posts.map(post => {
                     return (
                         <CommunityPostComponent
                             key={post.id}
-                            id={post.id}
-                            title={post.title}
-                            body={post.body}
-                            exercise_id={post.exercise_id}
-                            user_id={post.user_id}
+                            post={post}
                         />
                     )
                 })}

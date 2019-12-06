@@ -5,7 +5,6 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
-export const LOAD_COMMENTS = "LOAD_COMMENTS"
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -71,16 +70,3 @@ export const actionsLoadPosts = () => async dispatch => {
       console.log("Error in actionLoadPosts: ", err);
     });
 };
-
-export const actionsLoadComments = (data) => async dispatch => {
-  await Axios.get(`/api/community_comments/${data}`)
-    .then(response => {
-      return dispatch({
-        type: LOAD_COMMENTS,
-        payload: response.data
-      });
-    })
-    .catch(err => {
-      console.log("Error in actionLoadComments: ", err);
-    })
-}
