@@ -13,6 +13,7 @@ import NavigationComponent from "../components/NavigationComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 import { actionsLogout } from "../actions";
+
 import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 
