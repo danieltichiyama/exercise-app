@@ -14,6 +14,9 @@ import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchCom
 
 import { actionsLogout } from "../actions";
 
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+
+
 class App extends Component {
   constructor(props) {
     super(props);

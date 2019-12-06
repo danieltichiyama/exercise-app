@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionFoodSearch } from "../../actions";
-import FoodComponent from "../FoodComponent"
+import FoodComponent from "../FoodComponent";
 import FoodNutrientComponent from "../FoodNutrientsComponent";
 // import styles from "./FoodSearchComponent.module.scss";
 
@@ -18,14 +18,14 @@ class FoodSearchComponent extends Component {
     this.props.dispatchFoodSearch(this.state);
   }
 
-  searchKeyword(e){
+  searchKeyword(e) {
     this.setState({ data: e.target.value });
     // UNCOMMENT FOR LIVE SEARCHBAR
     // this.props.dispatchFoodSearch(this.state);
   }
 
   mapFoods = data => {
-    if (data[0]){
+    if (data[0]) {
       return data.map(food => {
         return (
           <FoodComponent
@@ -33,9 +33,9 @@ class FoodSearchComponent extends Component {
             key={food.fdcId}
             description={food.description}
           />
-        )
-      })
-    } else if(data.foodNutrients){
+        );
+      });
+    } else if (data.foodNutrients) {
       return (
         <FoodNutrientComponent
           key={data.description}
@@ -50,49 +50,47 @@ class FoodSearchComponent extends Component {
           sodium={`${data.foodNutrients[15].amount} ${data.foodNutrients[15].nutrient.unitName}`}
           zinc={`${data.foodNutrients[16].amount} ${data.foodNutrients[16].nutrient.unitName}`}
         />
-      )
+      );
     }
-  }
-    
-  render(){
+  };
+
+  render() {
     return (
-      <>  
+      <>
         <div>
-          <form
-            autoComplete="off"
-            onSubmit={this.searchDataOnClick}
-            >
-          <input
-            onChange={this.searchKeyword}
-            type="text"
-            name="name"
-            placeholder="search"
+          <form autoComplete="off" onSubmit={this.searchDataOnClick}>
+            <input
+              onChange={this.searchKeyword}
+              type="text"
+              name="name"
+              placeholder="search"
             />
-          <button>
-            Submit
-          </button>
+            <button>Submit</button>
           </form>
         </div>
-          <div>{this.mapFoods(this.props.searchData.foods)}</div>
+        <div>{this.mapFoods(this.props.searchData.foods)}</div>
       </>
-    )
+    );
   }
 }
 
 const mapStateToProps = store => {
   return {
     searchData: store
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFoodSearch: data => {
-      return dispatch(actionFoodSearch(data))
+      return dispatch(actionFoodSearch(data));
     }
-  }
-}
+  };
+};
 
-FoodSearchComponent = connect(mapStateToProps, mapDispatchToProps)(FoodSearchComponent);
+FoodSearchComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FoodSearchComponent);
 
 export default FoodSearchComponent;
