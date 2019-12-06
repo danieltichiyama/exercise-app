@@ -12,7 +12,6 @@ class NewsFeedComponent extends Component {
         this.props.dispatchLoadPosts();
     }
     render() {
-        console.log('Props in NewsFeedComponent: ', this.props)
 
         return (
             <ul>
@@ -20,6 +19,7 @@ class NewsFeedComponent extends Component {
                     return (
                         <CommunityPostComponent
                             key={post.id}
+                            id={post.id}
                             title={post.title}
                             body={post.body}
                             exercise_id={post.exercise_id}
@@ -30,7 +30,7 @@ class NewsFeedComponent extends Component {
             </ul>
         )
     }
-}
+};
 
 const mapStateToProps = store => {
     return {

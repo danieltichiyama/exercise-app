@@ -12,9 +12,6 @@ import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
 
 import { actionsLogout } from "../actions";
-import SmokeButton from "../components/SmokeButton";
-import AuthorizationPage from "../pages/AuthorizationPage";
-import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 class App extends Component {
   constructor(props) {

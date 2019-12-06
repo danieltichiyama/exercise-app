@@ -1,8 +1,9 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, LOAD_COMMENTS } from "../actions";
 
 const initialStore = {
   activity_levels: [],
   community_posts: [],
+  community_comments: [],
   isLoggedIn: false
 };
 
@@ -32,7 +33,10 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { isLoggedIn: false });
 
     case LOAD_POSTS:
-      return Object.assign({}, store, { community_posts: action.payload })
+      return Object.assign({}, store, { community_posts: action.payload });
+
+    case LOAD_COMMENTS:
+      return Object.assign({}, store, { community_comments: action.payload });
 
     default:
       return store;
