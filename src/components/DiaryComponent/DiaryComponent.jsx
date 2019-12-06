@@ -27,12 +27,12 @@ class DiaryComponent extends Component {
     return this.handleNewDate();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.diaryData !== prevProps.diaryData) {
-      console.log("componentDidUpdate");
-      return this.handleNewDate();
-    }
-  };
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   if (this.props.diaryData !== prevProps.diaryData) {
+  //     console.log("componentDidUpdate");
+  //     return this.handleNewDate();
+  //   }
+  // };
 
   getPreviousDate = () => {
     let previousDate = this.state.currentDate.subtract(1, "days");
