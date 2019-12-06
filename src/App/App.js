@@ -13,6 +13,8 @@ import NavigationComponent from "../components/NavigationComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 import { actionsLogout } from "../actions";
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +44,7 @@ class App extends Component {
           <Route path="/user" component={UserPage} />
           <Route path="/authorization" component={AuthorizationPage} />
         </Switch>
+
         <div>
           {this.props.isLoggedIn ? (
             <button onClick={this.handleLogout}>Log out</button>
