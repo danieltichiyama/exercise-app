@@ -5,7 +5,7 @@ import styles from "../NutritionPage/NutritionPage.module.scss";
 // import FoodSearchComponent from "../../components/FoodSearchComponent";
 import { Link } from "react-router-dom";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Routes from "../../Routes";
+// import Routes from "../../Routes";
 
 class NutritionPage extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class NutritionPage extends Component {
   render() {
     return (
       <div className={styles.mealNavigation}>
-        <Routes></Routes>
+        {/* <Routes></Routes> */}
         <div>
           <button
             className={styles.mealButton}

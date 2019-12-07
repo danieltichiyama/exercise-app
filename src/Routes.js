@@ -25,7 +25,7 @@ export const routes = [
     component: NutritionPage
   },
   {
-    path: "nutrition/add_food",
+    path: "/nutrition/add_food",
     exact: true,
     component: AddFoodPage
   },

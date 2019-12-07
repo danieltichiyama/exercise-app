@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styles from "../NavigationComponent/NavigationComponent.module.scss";
-import Routes from "../../Routes";
+// import Routes from "../../Routes";
 
 class NavigationComponent extends Component {
   render() {
     return (
       <nav className={styles.navigation}>
-        <Routes></Routes>
         {/* home */}
         <Link to="/home" className={styles.navButton}>
           <img
