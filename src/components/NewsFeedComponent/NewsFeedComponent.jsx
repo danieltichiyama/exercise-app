@@ -36,7 +36,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
     return {
         dispatchLoadPosts: () => {
-            return dispatch(actionsLoadPosts())
+            return dispatch(actionsLoadPosts());
         }
     };
 };

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import CommentComponent from "../CommentComponent/CommentComponent";
+import AddCommentComponent from "../AddCommentComponent/AddCommentComponent";
 import styles from './CommunityPostComponent.module.scss';
 
 class CommunityPostComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonValue: "Show Comments",
+            buttonValue: "<3",
             showComments: false,
         }
     }
 
     handleLoadComments = () => {
         if (this.state.showComments === false) {
-            return this.setState({ buttonValue: "Hide Comments", showComments: true });
+            return this.setState({ buttonValue: "< / 3", showComments: true });
         } else {
-            return this.setState({ buttonValue: "Show Comments", showComments: false });
+            return this.setState({ buttonValue: "<3", showComments: false });
         }
     };
 
@@ -28,6 +29,7 @@ class CommunityPostComponent extends Component {
                 <h4>Exercise: {exercise_id.name}</h4>
                 <h4>Posted by: {user_id.name}</h4>￼
                 <button onClick={this.handleLoadComments}>{this.state.buttonValue}</button>
+                <AddCommentComponent />
 
                 {this.state.showComments ?
                     <ul>
