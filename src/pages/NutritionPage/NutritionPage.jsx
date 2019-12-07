@@ -8,7 +8,11 @@ class NutritionPage extends Component {
   }
 
   render() {
-    return <div>{/* <AddMealButtonComponent /> */}</div>;
+    return (
+      <div>
+        <AddMealButtonComponent />
+      </div>
+    );
   }
 }
 
