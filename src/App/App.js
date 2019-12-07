@@ -14,6 +14,7 @@ import { withRouter } from "react-router";
 import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
+import AddMealButtonComponent from "../components/AddMealButtonComponent";
 // import NutritionPage from "../pages/NutritionPage";
 // import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
@@ -56,7 +57,7 @@ class App extends Component {
         {this.state.playground ? (
           <div className="component_playground">
             <SmokeButton></SmokeButton>
-
+            <AddMealButtonComponent></AddMealButtonComponent>
             {/* <FoodSearchComponent></FoodSearchComponent> */}
           </div>
         ) : null}

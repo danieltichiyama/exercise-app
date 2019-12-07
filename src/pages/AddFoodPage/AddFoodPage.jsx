@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import FoodSearchComponent from "../../components/FoodSearchComponent";
+import { actionFoodSearch } from "../../actions";
+import FoodSearchComponent from "../../components/FoodSearchComponent";
+// import FoodComponent from "../../components/FoodComponent";
+// import FoodNutrientsComponent from "../../components/FoodNutrientsComponent";
 
 class AddFoodPage extends Component {
   constructor(props) {
@@ -11,7 +14,8 @@ class AddFoodPage extends Component {
   render() {
     return (
       <div>
-        <h1>hiyee</h1>
+        <h1></h1>
+        <FoodSearchComponent />
       </div>
     );
   }
