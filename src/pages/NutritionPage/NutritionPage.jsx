@@ -47,11 +47,7 @@ class NutritionPage extends Component {
         </div>
         <div>
           <Link to="/nutrition/add_food">
-            <button
-              className={styles.mealButton}
-              value="snack"
-              onClick={this.handleMealClick}
-            >
+            <button className={styles.mealButton} value="snack">
               <img
                 src="https://image.flaticon.com/icons/svg/601/601933.svg"
                 alt="snack"
