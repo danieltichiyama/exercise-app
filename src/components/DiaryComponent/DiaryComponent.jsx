@@ -48,6 +48,12 @@ class DiaryComponent extends Component {
     });
   };
 
+  filterFoodsIntoMeals = (arr, str) => {
+    return arr.filter(data => {
+      return data.meal_type_id.meal_type === str;
+    });
+  };
+
   render() {
     return (
       <div className={styles.DiaryComponent}>
@@ -59,7 +65,13 @@ class DiaryComponent extends Component {
 
         <ul>
           {this.state.meals.map(meal => {
-            return <MealComponent key={meal} meal={meal}></MealComponent>;
+            return (
+              <MealComponent
+                key={meal}
+                meal={meal}
+                foods={this.filterFoodsIntoMeals(this.props.diaryData, meal)}
+              ></MealComponent>
+            );
           })}
         </ul>
       </div>

@@ -18,9 +18,6 @@ foodMealUserRouter
     let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
     let nextDay = moment(date).add(1, "day");
 
-    console.log("req.body", req.body);
-    console.log("typeof", typeof req.body.session);
-
     return req.db.FoodMealUser.query(qb => {
       return qb
         .select()

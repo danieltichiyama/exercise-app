@@ -11,6 +11,7 @@ import AuthorizationPage from "../pages/AuthorizationPage";
 import NavigationComponent from "../components/NavigationComponent";
 import DiaryComponent from "../components/DiaryComponent";
 import { actionsLogout } from "../actions";
+import FoodSearchComponent from "../components/FoodSearchComponent";
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +53,8 @@ class App extends Component {
           </button>
           {this.state.playground ? (
             <div className="component_playground">
+              <FoodSearchComponent></FoodSearchComponent>
+
               <DiaryComponent></DiaryComponent>
             </div>
           ) : null}
