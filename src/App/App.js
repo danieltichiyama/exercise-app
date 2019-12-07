@@ -10,8 +10,10 @@ import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
 import NavigationComponent from "../components/NavigationComponent";
 import DiaryComponent from "../components/DiaryComponent";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
+
 import { actionsLogout } from "../actions";
-import FoodSearchComponent from "../components/FoodSearchComponent";
 
 class App extends Component {
   constructor(props) {

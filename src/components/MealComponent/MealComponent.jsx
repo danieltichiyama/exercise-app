@@ -7,7 +7,7 @@ const MealComponent = props => {
   return (
     <div className={styles.MealComponent}>
       <h1>Meal Component</h1>
-      <h2>{props.meal.meal_type}</h2>
+      <h2>{props.foods}</h2>
     </div>
   );
 };

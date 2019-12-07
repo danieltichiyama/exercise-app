@@ -8,14 +8,18 @@ import {
   FOOD_NUTRIENT_SEARCH,
   CLEAR,
   GET_DIARY_DATA
+  LOAD_USER,
+  LOAD_FOOD_MEAL_USER
 } from "../actions";
 
 const initialStore = {
   foods: [],
   activity_levels: [],
   community_posts: [],
-  isLoggedIn: false,
-  diaryData: []
+  diaryData: [],
+  users: [],
+  foods_meals_users: [],
+  isLoggedIn: false
 };
 
 let reducer = (store = initialStore, action) => {
@@ -31,10 +35,10 @@ let reducer = (store = initialStore, action) => {
       });
 
     case LOGIN:
-      let { email, id, user_status_id } = action.payload.session;
+      let { id, user_status_id } = action.payload.session;
       let session = Object.assign(
         {},
-        { email: email, id: id, user_status_id: user_status_id }
+        { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
       return Object.assign({}, store, { isLoggedIn: true });
@@ -54,12 +58,17 @@ let reducer = (store = initialStore, action) => {
       console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload });
 
-    case CLEAR:
-      return Object.assign({}, store, { foods: action.payload });
-
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
 
+    case LOAD_USER:
+      return Object.assign({}, store, { users: action.payload });
+
+    case LOAD_FOOD_MEAL_USER:
+      return Object.assign({}, store, { foods_meals_users: action.payload });
+
+    case CLEAR:
+      return Object.assign({}, store, { foods: action.payload });
     default:
       return store;
   }
