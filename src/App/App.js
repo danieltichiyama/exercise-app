@@ -8,9 +8,10 @@ import NutritionPage from "../pages/NutritionPage";
 import CommunityPage from "../pages/CommunityPage";
 import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
-import SmokeButton from "../components/SmokeButton";
+// import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
-import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+// import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+import ImageUploadComponent from "../components/ImageUploadComponent";
 
 import { actionsLogout } from "../actions";
 // import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
@@ -54,8 +55,9 @@ class App extends Component {
           </button>
           {this.state.playground ? (
             <div className="component_playground">
-              <SmokeButton></SmokeButton>
-              <FoodSearchComponent></FoodSearchComponent>
+              {/* <SmokeButton></SmokeButton> */}
+              {/* <FoodSearchComponent></FoodSearchComponent> */}
+              <ImageUploadComponent></ImageUploadComponent>
             </div>
           ) : null}
         </div>

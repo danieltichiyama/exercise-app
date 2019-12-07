@@ -8,6 +8,7 @@ export const LOAD_POSTS = "LOAD_POSTS"
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH"
 export const CLEAR = "CLEAR";
+export const FOOD_VISION = "FOOD_VISION";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -100,6 +101,17 @@ export const actionClear = () => dispatch => {
     payload: []
   });
 };
+
+export const actionFoodVision = data => async dispatch => {
+  console.log('DATA: ', data)
+  await Axios.post('/api/vision', data)
+  .then(response => {
+    return dispatch({
+      type: FOOD_VISION,
+      payload: response.data
+    })
+  })
+}
 
 export const actionFoodNutrients = fdcId => async dispatch => {
   await Axios.get(`/api/nutrition/${fdcId}`)
