@@ -4,10 +4,12 @@ export const LOAD_ACTIVITIES = "LOAD_ACTIVITIES";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
-export const LOAD_POSTS = "LOAD_POSTS"
+export const LOAD_POSTS = "LOAD_POSTS";
 export const FOOD_SEARCH = "FOOD_SEARCH";
-export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH"
+export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -76,23 +78,23 @@ export const actionsLoadPosts = () => async dispatch => {
 
 export const actionFoodSearch = data => async dispatch => {
   await Axios({
-    method: 'post',
+    method: "post",
     url: "/api/nutrition",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     data
   })
-  .then(response => {
-    return dispatch({
-      type: FOOD_SEARCH,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: FOOD_SEARCH,
+        payload: response.data
+      });
     })
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 export const actionClear = () => dispatch => {
   dispatch({
@@ -107,9 +109,35 @@ export const actionFoodNutrients = fdcId => async dispatch => {
       return dispatch({
         type: FOOD_NUTRIENT_SEARCH,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log(err);
+    });
+};
+
+export const actionsLoadUser = id => async dispatch => {
+  await Axios.get(`/api/users/${id}`)
+    .then(response => {
+      return dispatch({
+        type: LOAD_USER,
+        payload: response.data
+      });
     })
-}
+    .catch(err => {
+      console.log("Error in actionLoadUsers: ", err);
+    });
+};
+
+export const actionLoadFoodMealUser = id => async dispatch => {
+  await Axios.get(`/api/foods_meals_users/${id}`)
+    .then(response => {
+      return dispatch({
+        type: LOAD_FOOD_MEAL_USER,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionLoadFoodMealUser", err);
+    });
+};

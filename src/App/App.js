@@ -11,11 +11,9 @@ import AuthorizationPage from "../pages/AuthorizationPage";
 import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
-
-import { actionsLogout } from "../actions";
-
 import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
+import { actionsLogout } from "../actions";
 
 class App extends Component {
   constructor(props) {
