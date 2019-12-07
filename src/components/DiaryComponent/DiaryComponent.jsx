@@ -14,7 +14,7 @@ class DiaryComponent extends Component {
   }
 
   handleNewDate = () => {
-    let date = moment
+    let date = this.state.currentDate
       .parseZone(this.state.currentDate.format())
       .utc()
       .format();
@@ -27,21 +27,23 @@ class DiaryComponent extends Component {
     return this.handleNewDate();
   };
 
-  // componentDidUpdate = (prevProps, prevState) => {
-  //   if (this.props.diaryData !== prevProps.diaryData) {
-  //     console.log("componentDidUpdate");
-  //     return this.handleNewDate();
-  //   }
-  // };
-
   getPreviousDate = () => {
     let previousDate = this.state.currentDate.subtract(1, "days");
-    return this.setState({ currentDate: previousDate });
+    return this.setState(
+      {
+        currentDate: previousDate
+      },
+      () => {
+        return this.handleNewDate();
+      }
+    );
   };
 
   getNextDate = () => {
     let nextDate = this.state.currentDate.add(1, "days");
-    return this.setState({ currentDate: nextDate });
+    return this.setState({ currentDate: nextDate }, () => {
+      return this.handleNewDate();
+    });
   };
 
   render() {
