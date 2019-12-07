@@ -9,15 +9,16 @@ class CommunityPostComponent extends Component {
         this.state = {
             buttonValue: "<3",
             showComments: false,
-        }
-    }
+        };
+    };
 
-    handleLoadComments = () => {
+    handleLoadComments = (e) => {
+        e.preventDefault();
         if (this.state.showComments === false) {
             return this.setState({ buttonValue: "< / 3", showComments: true });
         } else {
             return this.setState({ buttonValue: "<3", showComments: false });
-        }
+        };
     };
 
     render() {

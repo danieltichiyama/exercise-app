@@ -8,9 +8,15 @@ class NewsFeedComponent extends Component {
         super(props);
         this.state = {}
     }
+
     componentDidMount() {
         this.props.dispatchLoadPosts();
     }
+
+    localLoadPosts = () => {
+        return this.props.dispatchLoadPosts();
+    }
+
     render() {
         return (
             <ul>
@@ -24,7 +30,7 @@ class NewsFeedComponent extends Component {
                 })}
             </ul>
         )
-    }
+    };
 };
 
 const mapStateToProps = store => {

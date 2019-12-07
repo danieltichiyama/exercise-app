@@ -13,21 +13,16 @@ communityCommentsRouter.route("/")
     })
     .post((req, res) => {
         let newComment = req.body;
-        if (newComment.comment_body !== "") {
-            return req.db.CommunityComment.forge(newComment)
-                .save()
-                .then(response => {
-                    console.log("OK")
-                    res.json(response);
-                })
-                .catch(err => {
-                    console.log("Error in communityCommentRoute: ", err);
-                    res.status(500).send({ message: "Invalid Comment" })
-                })
-        } else {
-            res.send({ message: "Invalid Comment" })
-        }
+        return req.db.CommunityComment.forge(newComment)
+            .save()
+            .then(response => {
+                console.log("OK")
+                return res.json(response);
+            })
+            .catch(err => {
+                console.log("Error in communityCommentRoute: ", err);
+                return res.status(500).send({ message: "Error adding comment." });
+            })
     })
-
 
 module.exports = communityCommentsRouter;

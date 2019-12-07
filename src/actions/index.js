@@ -6,6 +6,7 @@ export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const LOAD_COMMENT = "LOAD_COMMENT";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
