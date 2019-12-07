@@ -8,7 +8,8 @@ export const LOAD_POSTS = "LOAD_POSTS";
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
-export const TOGGLE = "TOGGLE";
+// export const TOGGLE = "TOGGLE";
+// export const LOAD_FOOD_SEARCH = "LOAD_FOOD_SEARCH";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -115,9 +116,9 @@ export const actionFoodNutrients = fdcId => async dispatch => {
     });
 };
 
-export const actionsToggle = link => dispatch => {
-  return dispatch({
-    type: TOGGLE,
-    payload: link
-  });
-};
+// export const actionsToggle = link => dispatch => {
+//   return dispatch({
+//     type: TOGGLE,
+//     payload: link
+//   });
+// };
