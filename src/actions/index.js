@@ -116,7 +116,8 @@ export const actionFoodNutrients = fdcId => async dispatch => {
 };
 
 export const actionsGetDiaryData = date => async dispatch => {
-  await Axios.post("api/foods_meals_users", { date: date })
+  let session = JSON.parse(localStorage.getItem("session"));
+  await Axios.post("api/foods_meals_users", { date, session })
     .then(response => {
       console.log("gotResponse", response);
       return dispatch({

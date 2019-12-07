@@ -18,10 +18,16 @@ foodMealUserRouter
     let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
     let nextDay = moment(date).add(1, "day");
 
+    console.log("req.body", req.body);
+    console.log("typeof", typeof req.body.session);
+
     return req.db.FoodMealUser.query(qb => {
-      return qb.whereBetween("created_at", [date, nextDay]);
+      return qb
+        .select()
+        .where("user_id", req.body.session.id)
+        .whereBetween("created_at", [date, nextDay]);
     })
-      .fetchAll()
+      .fetchAll({ withRelated: ["meal_type_id"] })
       .then(response => {
         if (response) {
           return res.json(response);

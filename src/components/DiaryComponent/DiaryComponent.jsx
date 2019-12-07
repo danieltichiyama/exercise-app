@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./DiaryComponent.module.scss";
 import { actionsGetDiaryData } from "../../actions";
+import MealComponent from "../MealComponent";
 
 let moment = require("moment");
 
@@ -9,7 +10,8 @@ class DiaryComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentDate: moment()
+      currentDate: moment(),
+      meals: ["Breakfast", "Lunch", "Dinner", "Snack"]
     };
   }
 
@@ -54,6 +56,12 @@ class DiaryComponent extends Component {
         <h3>{this.state.currentDate.format("MMMM D")}</h3>
         <button onClick={this.getNextDate}>Tomorrow</button>
         <div>{this.state.currentDate.format("YYYY-MM-DD")}</div>
+
+        <ul>
+          {this.state.meals.map(meal => {
+            return <MealComponent key={meal} meal={meal}></MealComponent>;
+          })}
+        </ul>
       </div>
     );
   }
