@@ -6,8 +6,8 @@ import {
   LOAD_POSTS,
   FOOD_SEARCH,
   FOOD_NUTRIENT_SEARCH,
-  CLEAR
-  // TOGGLE
+  CLEAR,
+  LOAD_USER
 } from "../actions";
 
 const initialStore = {
@@ -15,7 +15,8 @@ const initialStore = {
   activity_levels: [],
   community_posts: [],
   isLoggedIn: false,
-  display: "meal"
+  display: "meal",
+  users: [],
 };
 
 let reducer = (store = initialStore, action) => {
@@ -31,10 +32,10 @@ let reducer = (store = initialStore, action) => {
       });
 
     case LOGIN:
-      let { email, id, user_status_id } = action.payload.session;
+      let { id, user_status_id } = action.payload.session;
       let session = Object.assign(
         {},
-        { email: email, id: id, user_status_id: user_status_id }
+        { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
       return Object.assign({}, store, { isLoggedIn: true });
@@ -53,6 +54,9 @@ let reducer = (store = initialStore, action) => {
     case FOOD_NUTRIENT_SEARCH:
       console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload });
+
+    case LOAD_USER:
+      return Object.assign({}, store, { users: action.payload });
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });

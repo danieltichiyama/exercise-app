@@ -1,0 +1,20 @@
+.dashboard {
+  width: 100%;
+  box-shadow: 0px 2px 10px lightgray;
+
+  .remainingCaloriesNumbers {
+    color: #fc4a1a;
+    font-size: 20px;
+  }
+  .remainingCaloriesText {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 15px;
+  }
+  .caloriesConsumedText {
+    display: flex;
+    color: grey;
+    font-size: 15px;
+    justify-content: center;
+  }
+}
