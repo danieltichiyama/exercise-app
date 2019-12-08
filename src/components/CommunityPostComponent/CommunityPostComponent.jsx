@@ -38,6 +38,7 @@ class CommunityPostComponent extends Component {
                             return (
                                 <CommentComponent
                                     key={comment.id}
+                                    id={comment.id}
                                     user={comment.user_id.name}
                                     body={comment.comment_body}
                                     user_goal={comment.user_id.goal_id.goal}
