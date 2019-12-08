@@ -126,7 +126,7 @@ export const actionsLoadUser = id => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadUsers: ", err);
+      console.log("Error in actionLoadUser: ", err);
     });
 };
 

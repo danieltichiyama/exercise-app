@@ -11,7 +11,6 @@ import AuthorizationPage from "../pages/AuthorizationPage";
 import NavigationComponent from "../components/NavigationComponent";
 import DiaryComponent from "../components/DiaryComponent";
 import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
-import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 import { actionsLogout } from "../actions";
 
@@ -45,6 +44,7 @@ class App extends Component {
         </Switch>
 
         <div>
+          <FoodSearchComponent></FoodSearchComponent>
           {this.props.isLoggedIn ? (
             <button onClick={this.handleLogout}>Log out</button>
           ) : null}
@@ -55,8 +55,6 @@ class App extends Component {
           </button>
           {this.state.playground ? (
             <div className="component_playground">
-              <FoodSearchComponent></FoodSearchComponent>
-
               <DiaryComponent></DiaryComponent>
             </div>
           ) : null}

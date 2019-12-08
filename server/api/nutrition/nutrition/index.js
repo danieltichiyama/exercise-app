@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const nutritionRouter = express.Router();
 let fcdId;
-const foodSearchEndpoint = `https://api.nal.usda.gov/fdc/v1/search?api_key=${process.env.API_KEY}`;
+const foodSearchEndpoint = `https://api.nal.usda.gov/fdc/v1/search?api_key=${process.env.NUTRITION_API_KEY}`;
 
 nutritionRouter
   .route("/")
