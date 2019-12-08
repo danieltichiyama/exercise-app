@@ -11,7 +11,7 @@ export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
 export const LOAD_USER = "LOAD_USER";
-export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
+export const GET_DIARY_DATA = "GET_DIARY_DATA";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -131,7 +131,7 @@ export const actionFoodNutrients = fdcId => async dispatch => {
     });
 };
 
-export const actionsLoadUser = id => async dispatch => {
+export const actionLoadUser = id => async dispatch => {
   await Axios.get(`/api/users/${id}`)
     .then(response => {
       return dispatch({
@@ -144,15 +144,17 @@ export const actionsLoadUser = id => async dispatch => {
     });
 };
 
-export const actionLoadFoodMealUser = id => async dispatch => {
-  await Axios.get(`/api/foods_meals_users/${id}`)
+export const actionsGetDiaryData = date => async dispatch => {
+  let session = JSON.parse(localStorage.getItem("session"));
+  await Axios.post("api/foods_meals_users", { date, session })
     .then(response => {
+      console.log("gotResponse", response);
       return dispatch({
-        type: LOAD_FOOD_MEAL_USER,
+        type: GET_DIARY_DATA,
         payload: response.data
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadFoodMealUser", err);
+      console.log("Error in actionsGetDiaryData: ", err);
     });
 };

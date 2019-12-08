@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionsLoadUser } from "../../actions";
+import { actionLoadUser } from "../../actions";
+import { actionsGetDiaryData } from "../../actions";
 import styles from "./DashboardComponent.module.scss";
 
 class DashboardComponent extends Component {
@@ -9,36 +10,62 @@ class DashboardComponent extends Component {
 
     const getId = localStorage.getItem("session");
     const id = JSON.parse(getId);
+    let date = new Date();
 
     this.state = {
-      id
+      id,
+      date
     };
   }
   componentDidMount() {
     this.props.dispatchLoadUser(this.state.id.id);
+    this.props.dispatchGetDiaryData(this.state.date);
   }
 
   render() {
-    const goal = this.props.users && this.props.users.recommended_calories;
+    let goal = this.props.users && this.props.users.recommended_calories;
+    let food =
+      this.props.diaryData &&
+      this.props.diaryData.reduce((total, data) => {
+        return total + data.calories;
+      }, 0);
+    let remaining = JSON.stringify(goal - food);
+
     return (
       <>
         <div className={styles.dashboard}>
-          <div className={styles.remainingCaloriesNumbers}>
-            <p>{goal}</p>
-          </div>
+          <div className={styles.remainingCalories}>
+            <div className={styles.column}>
+              <h2>{goal}</h2>
+              <p>Goal</p>
+            </div>
 
-          <div className={styles.remainingCaloriesText}>
-            <p>Goal</p>
             <p>-</p>
-            <p>Food</p>
+
+            <div className={styles.column}>
+              <h2>{food}</h2>
+              <p>Food</p>
+            </div>
+
             <p>+</p>
-            <p>Exercise</p>
+
+            <div className={styles.column}>
+              <h2>0</h2>
+              <p>Exercise</p>
+            </div>
+
+            <p></p>
             <p>=</p>
-            <p>Remaining</p>
+
+            <div className={styles.column}>
+              <h2>{remaining}</h2>
+              <p>Remaining</p>
+            </div>
           </div>
 
           <div className={styles.caloriesConsumedText}>
             <p>Calories consumed:</p>
+            <p className={styles.remainingP}>{remaining}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>
@@ -49,14 +76,18 @@ class DashboardComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    users: store.users
+    users: store.users,
+    diaryData: store.diaryData
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchLoadUser: id => {
-      return dispatch(actionsLoadUser(id));
+      return dispatch(actionLoadUser(id));
+    },
+    dispatchGetDiaryData: date => {
+      return dispatch(actionsGetDiaryData(date));
     }
   };
 };

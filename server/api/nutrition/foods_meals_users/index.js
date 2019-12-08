@@ -1,24 +1,38 @@
 const express = require("express");
 const foodMealUserRouter = express.Router();
+const moment = require("moment");
 
-foodMealUserRouter.route("/:id").get((req, res) => {
-  return req.db.FoodMealUser.where({ id: req.params.id })
-    .fetch({ withRelated: ["food_image_id", "meal_type_id", "user_id"] })
-    .then(response => {
-      return res.json(response);
+foodMealUserRouter
+  .route("/")
+  .get((req, res) => {
+    console.log("foodMealUserRouter");
+    return req.db.FoodMealUser.fetchAll()
+      .then(response => {
+        return res.json(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  })
+  .post((req, res) => {
+    let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
+    let nextDay = moment(date).add(1, "day");
+    return req.db.FoodMealUser.query(qb => {
+      return qb
+        .select()
+        .where("user_id", req.body.session.id)
+        .whereBetween("created_at", [date, nextDay]);
     })
-    .catch(error => {
-      console.log("Error:", error);
-      res.status(404).send({ message: "Data not found." });
-    });
-});
-
-foodMealUserRouter.route("/").get((req, res) => {
-  return req.db.FoodMealUser.fetchAll({
-    withRelated: ["food_image_id", "meal_type_id", "user_id"]
-  }).then(response => {
-    return res.json(response);
+      .fetchAll({ withRelated: ["meal_type_id"] })
+      .then(response => {
+        if (response) {
+          return res.json(response);
+        } else {
+          return res.json([]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
-});
-
 module.exports = foodMealUserRouter;

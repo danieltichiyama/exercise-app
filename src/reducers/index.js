@@ -8,15 +8,15 @@ import {
   FOOD_NUTRIENT_SEARCH,
   CLEAR,
   LOAD_USER,
-  LOAD_FOOD_MEAL_USER
+  GET_DIARY_DATA
 } from "../actions";
 
 const initialStore = {
   foods: [],
   activity_levels: [],
   community_posts: [],
+  diaryData: [],
   users: [],
-  foods_meals_users: [],
   isLoggedIn: false
 };
 
@@ -59,8 +59,8 @@ let reducer = (store = initialStore, action) => {
     case LOAD_USER:
       return Object.assign({}, store, { users: action.payload });
 
-    case LOAD_FOOD_MEAL_USER:
-      return Object.assign({}, store, { foods_meals_users: action.payload });
+    case GET_DIARY_DATA:
+      return Object.assign({}, store, { diaryData: action.payload });
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });
