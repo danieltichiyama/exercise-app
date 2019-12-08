@@ -15,11 +15,6 @@ class App extends Component {
     };
   }
 
-  handleHidePlayground = () => {
-    let toggle = this.state.playground;
-    return this.setState({ playground: !toggle });
-  };
-
   handleLogout = () => {
     return this.props.dispatchLogout();
   };
