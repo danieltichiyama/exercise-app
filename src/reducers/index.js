@@ -7,7 +7,8 @@ import {
   FOOD_SEARCH,
   FOOD_NUTRIENT_SEARCH,
   CLEAR,
-  LOAD_USER
+  LOAD_USER,
+  GET_DIARY_DATA
 } from "../actions";
 
 const initialStore = {
@@ -16,7 +17,9 @@ const initialStore = {
   community_posts: [],
   isLoggedIn: false,
   display: "meal",
+  diaryData: [],
   users: [],
+  isLoggedIn: false
 };
 
 let reducer = (store = initialStore, action) => {
@@ -57,6 +60,9 @@ let reducer = (store = initialStore, action) => {
 
     case LOAD_USER:
       return Object.assign({}, store, { users: action.payload });
+
+    case GET_DIARY_DATA:
+      return Object.assign({}, store, { diaryData: action.payload });
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });
