@@ -3,26 +3,21 @@ const vision = require('@google-cloud/vision');
 const multer = require("multer");
 const path = require('path');
 const visionRouter = express.Router();
-const keyFilename = './server/api/nutrition/vision/fitworks.json'
+const keyFilename = './fitworks.json'
+const upload = multer({ storage: multer.memoryStorage() });
 
-visionRouter.route("/")
-  .post((req, res) => {
-    async function quickstart(){
-      console.log(req.body.image);
-      // Imports the Google Cloud client library
-      // Creates a client
-      const client = new vision.ImageAnnotatorClient({ keyFilename });
-      console.log('1');
-      // Performs label detection on the image file
-      const [result] = await client.labelDetection(req.body.image);
-      const labels = result.labelAnnotations;
-      // console.log(result);
-      console.log('Labels:');
-      labels.forEach(label => console.log(label.description));
-    }
-    quickstart();
-  })
-
-// quickstart();
+visionRouter.post("/", upload.single("foodImage"), (req, res) => {
+  async function quickstart(){
+    // Imports the Google Cloud client library
+    // Creates a client
+    const client = new vision.ImageAnnotatorClient({ keyFilename });
+    // Performs label detection on the image file
+    const [result] = await client.labelDetection(req.file.buffer);
+    const labels = result.labelAnnotations;
+    console.log('Labels:');
+    labels.forEach(label => console.log(label.description));
+  }
+  quickstart();
+})
 
 module.exports = visionRouter;

@@ -10,7 +10,7 @@ import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
 // import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
-// import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 import ImageUploadComponent from "../components/ImageUploadComponent";
 
 import { actionsLogout } from "../actions";
@@ -56,7 +56,7 @@ class App extends Component {
           {this.state.playground ? (
             <div className="component_playground">
               {/* <SmokeButton></SmokeButton> */}
-              {/* <FoodSearchComponent></FoodSearchComponent> */}
+              <FoodSearchComponent></FoodSearchComponent>
               <ImageUploadComponent></ImageUploadComponent>
             </div>
           ) : null}
