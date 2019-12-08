@@ -1,16 +1,17 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('exercise_equipment').del()
-    .then(function () {
+  return knex("exercise_equipment")
+    .del()
+    .then(function() {
       // Inserts seed entries
-      return knex('exercise_equipment').insert([
-        {exercise_equipment: 'cables'},
-        {exercise_equipment: 'freeweights'},
-        {exercise_equipment: 'barbell'},
-        {exercise_equipment: 'swissball'},
-        {exercise_equipment: 'bodyweight'},
-        {exercise_equipment: 'machine'},
+      return knex("exercise_equipment").insert([
+        { exercise_equipment: "Cables" },
+        { exercise_equipment: "Freeweights" },
+        { exercise_equipment: "Barbell" },
+        { exercise_equipment: "Swissball" },
+        { exercise_equipment: "Bodyweight" },
+        { exercise_equipment: "Machine" },
+        { exercise_equipment: "Other" }
       ]);
     });
 };
