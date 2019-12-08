@@ -78,7 +78,7 @@ export const actionsLoadPosts = () => async dispatch => {
     });
 };
 
-export const actionsAddComment = (data) => async dispatch => {
+export const actionsAddComment = data => async dispatch => {
   await Axios.post("/api/community_comments", data)
     .then(response => {
       return dispatch({
@@ -88,9 +88,9 @@ export const actionsAddComment = (data) => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsAddComment: ", err);
-    }
+    });
 };
-           
+
 export const actionFoodSearch = data => async dispatch => {
   await Axios({
     method: "post",
@@ -107,7 +107,7 @@ export const actionFoodSearch = data => async dispatch => {
       });
     })
     .catch(err => {
-     console.log(err);
+      console.log(err);
     });
 };
 
