@@ -10,6 +10,8 @@ import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
 import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+import NewsFeedComponent from "../components/NewsFeedComponent/NewsFeedComponent";
 
 import { actionsLogout } from "../actions";
 
@@ -41,6 +43,7 @@ class App extends Component {
           <Route path="/user" component={UserPage} />
           <Route path="/authorization" component={AuthorizationPage} />
         </Switch>
+
         <div>
           {this.props.isLoggedIn ? (
             <button onClick={this.handleLogout}>Log out</button>
@@ -53,6 +56,7 @@ class App extends Component {
           {this.state.playground ? (
             <div className="component_playground">
               <SmokeButton></SmokeButton>
+              <FoodSearchComponent></FoodSearchComponent>
             </div>
           ) : null}
         </div>

@@ -1,13 +1,29 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, ADD_COMMENT, DELETE_COMMENT } from "../actions";
+import {
+  LOAD_ACTIVITIES,
+  REGISTER,
+  LOGIN,
+  LOGOUT,
+  LOAD_POSTS,
+  FOOD_SEARCH,
+  FOOD_NUTRIENT_SEARCH,
+  CLEAR,
+  LOAD_USER,
+  GET_DIARY_DATA,
+  DELETE_COMMENT,
+  ADD_COMMENT
+} from "../actions";
 
 const initialStore = {
+  foods: [],
   activity_levels: [],
   community_posts: [],
+  diaryData: [],
+  users: [],
   isLoggedIn: false
 };
 
 let reducer = (store = initialStore, action) => {
-  console.log("Reducer: ", action.payload);
+  // console.log(action.payload);
 
   switch (action.type) {
     case LOAD_ACTIVITIES:
@@ -19,10 +35,10 @@ let reducer = (store = initialStore, action) => {
       });
 
     case LOGIN:
-      let { email, id, user_status_id } = action.payload.session;
+      let { id, user_status_id } = action.payload.session;
       let session = Object.assign(
         {},
-        { email: email, id: id, user_status_id: user_status_id }
+        { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
       return Object.assign({}, store, { isLoggedIn: true });
@@ -34,12 +50,29 @@ let reducer = (store = initialStore, action) => {
     case LOAD_POSTS:
       return Object.assign({}, store, { community_posts: action.payload });
 
+    case FOOD_SEARCH:
+      console.log(action.payload);
+      return Object.assign({}, store, { foods: action.payload.foods });
+
+    case FOOD_NUTRIENT_SEARCH:
+      console.log(action.payload);
+      return Object.assign({}, store, { foods: action.payload });
+
+    case LOAD_USER:
+      return Object.assign({}, store, { users: action.payload });
+
+    case GET_DIARY_DATA:
+      return Object.assign({}, store, { diaryData: action.payload });
+      
     case ADD_COMMENT:
       return store;
 
     case DELETE_COMMENT:
       return store;
 
+    case CLEAR:
+      return Object.assign({}, store, { foods: action.payload });
+      
     default:
       return store;
   }
