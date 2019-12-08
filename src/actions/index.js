@@ -13,6 +13,7 @@ export const CLEAR = "CLEAR";
 export const LOAD_USER = "LOAD_USER";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
 
+
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
     .then(response => {

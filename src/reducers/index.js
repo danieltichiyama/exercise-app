@@ -15,6 +15,8 @@ const initialStore = {
   foods: [],
   activity_levels: [],
   community_posts: [],
+  isLoggedIn: false,
+  display: "meal",
   diaryData: [],
   users: [],
   isLoggedIn: false
@@ -66,6 +68,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
     default:
       return store;
+
+    //   case TOGGLE:
+    //     return Object.assign({}, store, { display: action.payload });
   }
 };
 
