@@ -6,7 +6,10 @@ import NutritionPage from "./pages/NutritionPage";
 import CommunityPage from "./pages/CommunityPage";
 import UserPage from "./pages/UserPage";
 import AuthorizationPage from "./pages/AuthorizationPage";
-import AddFoodPage from "./pages/AddFoodPage";
+import AddBreakfastPage from "./pages/AddBreakfastPage";
+import AddLunchPage from "./pages/AddLunchPage";
+import AddDinnerPage from "./pages/AddDinnerPage";
+import AddSnackPage from "./pages/AddSnackPage";
 
 export const routes = [
   {
@@ -25,9 +28,24 @@ export const routes = [
     component: NutritionPage
   },
   {
-    path: "/nutrition/add_food",
+    path: "/nutrition/add_breakfast",
     exact: true,
-    component: AddFoodPage
+    component: AddBreakfastPage
+  },
+  {
+    path: "/nutrition/add_lunch",
+    exact: true,
+    component: AddLunchPage
+  },
+  {
+    path: "/nutrition/add_dinner",
+    exact: true,
+    component: AddDinnerPage
+  },
+  {
+    path: "/nutrition/add_snack",
+    exact: true,
+    component: AddSnackPage
   },
   {
     path: "/community",

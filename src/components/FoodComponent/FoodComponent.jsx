@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { actionClear, actionFoodNutrients } from "../../actions"
+import { actionClear, actionFoodNutrients } from "../../actions";
 import { connect } from "react-redux";
 // import styles from "./Food.module.scss";
 // import { Link } from "react-router-dom";
 
-
 class FoodComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = {};
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -17,7 +16,7 @@ class FoodComponent extends Component {
     this.props.dispatchFoodNutrients(this.props.fdcId);
   }
 
-  render() { 
+  render() {
     return (
       <button onClick={this.handleClick}>
         <h3>{this.props.description}</h3>
@@ -33,14 +32,11 @@ const mapDispatchToProps = dispatch => {
       return dispatch(actionClear());
     },
     dispatchFoodNutrients: fdcId => {
-      return dispatch(actionFoodNutrients(fdcId))
+      return dispatch(actionFoodNutrients(fdcId));
     }
   };
 };
 
-FoodComponent = connect(
-  null,
-  mapDispatchToProps
-)(FoodComponent);
- 
+FoodComponent = connect(null, mapDispatchToProps)(FoodComponent);
+
 export default FoodComponent;

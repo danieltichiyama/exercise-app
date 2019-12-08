@@ -7,7 +7,7 @@ class AddMealButtonComponent extends Component {
     return (
       <div className={styles.mealNavigation}>
         <div>
-          <Link to="/nutrition/add_food">
+          <Link to="/nutrition/add_breakfast">
             <button className={styles.mealButton} value="breakfast">
               <img
                 src="https://image.flaticon.com/icons/svg/926/926292.svg"

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import FoodSearchComponent from "../../components/FoodSearchComponent";
 
-class AddFoodPage extends Component {
+class AddLunchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -11,7 +11,7 @@ class AddFoodPage extends Component {
   render() {
     return (
       <div>
-        <h1></h1>
+        <h1>Lunch</h1>
         <FoodSearchComponent />
       </div>
     );
@@ -26,6 +26,6 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-AddFoodPage = connect(mapStateToProps, mapDispatchToProps)(AddFoodPage);
+AddLunchPage = connect(mapStateToProps, mapDispatchToProps)(AddLunchPage);
 
-export default AddFoodPage;
+export default AddLunchPage;
