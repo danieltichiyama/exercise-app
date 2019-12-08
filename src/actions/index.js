@@ -14,7 +14,6 @@ export const CLEAR = "CLEAR";
 export const LOAD_USER = "LOAD_USER";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
 
-
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
     .then(response => {
@@ -80,7 +79,7 @@ export const actionsLoadPosts = () => async dispatch => {
     });
 };
 
-export const actionsAddComment = (data) => async dispatch => {
+export const actionsAddComment = data => async dispatch => {
   await Axios.post("/api/community_comments", data)
     .then(response => {
       return dispatch({
@@ -90,9 +89,9 @@ export const actionsAddComment = (data) => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsAddComment: ", err);
-    }
+    });
 };
-           
+
 export const actionFoodSearch = data => async dispatch => {
   await Axios({
     method: "post",
@@ -109,7 +108,7 @@ export const actionFoodSearch = data => async dispatch => {
       });
     })
     .catch(err => {
-     console.log(err);
+      console.log(err);
     });
 };
 
@@ -161,14 +160,14 @@ export const actionsGetDiaryData = date => async dispatch => {
     });
 };
 
-export const actionsDeleteComment = (data) => async dispatch => {
+export const actionsDeleteComment = data => async dispatch => {
   await Axios.delete("/api/community_comments", { data: { data } })
     .then(response => {
-      console.log("RESPONSE IN actionsDeleteComment: ", response)
+      console.log("RESPONSE IN actionsDeleteComment: ", response);
       return dispatch({
         type: DELETE_COMMENT,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsDeleteComment: ", err);
