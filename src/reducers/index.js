@@ -1,4 +1,4 @@
-import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, ADD_COMMENT } from "../actions";
+import { LOAD_ACTIVITIES, REGISTER, LOGIN, LOGOUT, LOAD_POSTS, ADD_COMMENT, DELETE_COMMENT } from "../actions";
 
 const initialStore = {
   activity_levels: [],
@@ -35,6 +35,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case ADD_COMMENT:
+      return store;
+
+    case DELETE_COMMENT:
       return store;
 
     default:

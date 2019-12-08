@@ -6,7 +6,7 @@ export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const ADD_COMMENT = "ADD_COMMENT";
-export const LOAD_COMMENT = "LOAD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -83,5 +83,19 @@ export const actionsAddComment = (data) => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsAddComment: ", err);
+    });
+};
+
+export const actionsDeleteComment = (data) => async dispatch => {
+  await Axios.delete("/api/community_comments", { data: { data } })
+    .then(response => {
+      console.log("RESPONSE IN actionsDeleteComment: ", response)
+      return dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsDeleteComment: ", err);
     });
 };

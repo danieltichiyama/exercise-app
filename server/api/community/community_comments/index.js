@@ -8,7 +8,7 @@ communityCommentsRouter.route("/")
                 return res.json(response);
             })
             .catch(err => {
-                console.log("Error in communityCommentsRouter: ", err);
+                console.log("Error in communityCommentsRouter GET: ", err);
             })
     })
     .post((req, res) => {
@@ -16,12 +16,23 @@ communityCommentsRouter.route("/")
         return req.db.CommunityComment.forge(newComment)
             .save()
             .then(response => {
-                console.log("OK")
                 return res.json(response);
             })
             .catch(err => {
-                console.log("Error in communityCommentRoute: ", err);
+                console.log("Error in communityCommentRouter POST: ", err);
                 return res.status(500).send({ message: "Error adding comment." });
+            })
+    })
+    .delete((req, res) => {
+        let commentID = req.body.data;
+        return req.db.CommunityComment
+            .forge({ id: commentID })
+            .destroy()
+            .then(() => {
+                res.send({ message: `Deletion of comment with ID: ${commentID} successful` });
+            })
+            .catch(err => {
+                console.log("Error in communityCommentRouter DELETE: ", err);
             })
     })
 

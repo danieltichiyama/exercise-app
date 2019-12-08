@@ -19,7 +19,10 @@ class AddCommentComponent extends Component {
 
     handleSubmitComment = (e) => {
         e.preventDefault();
+        //form validation as long as the comment is not an empty string it is successful
         if (this.state.comment_field !== "") {
+            //add comment needs user authentication so only a logged in user can post a comment
+            //right now user with an id of 1 is posting all comments
             this.props.dispatchAddComment({
                 comment_body: this.state.comment_field,
                 user_id: 1,
