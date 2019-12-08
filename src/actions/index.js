@@ -124,22 +124,6 @@ export const actionsLoadUser = id => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in action
-                  
-                  
-                  s: ", err);
-    });
-};
-
-export const actionLoadFoodMealUser = id => async dispatch => {
-  await Axios.get(`/api/foods_meals_users/${id}`)
-    .then(response => {
-      return dispatch({
-        type: LOAD_FOOD_MEAL_USER,
-        payload: response.data
-      });
-    })
-    .catch(err => {
-      console.log("Error in actionLoadFoodMealUser", err);
+      console.log("Error in actions: ", err);
     });
 };
