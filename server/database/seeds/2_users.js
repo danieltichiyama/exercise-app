@@ -1,3 +1,7 @@
+const bcrypt = require("bcryptjs");
+
+let password = bcrypt.hashSync("password", 12);
+
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex("users")
@@ -6,9 +10,9 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex("users").insert([
         {
-          email: "calvin@calvin.com",
+          email: "calmoon808@gmail.com",
           name: "Calvin Moon",
-          password: "oHwruuZTop",
+          password: password,
           gender_id: 1,
           birth_date: "1986-08-16",
           activity_level_id: 3,
@@ -20,9 +24,9 @@ exports.seed = function(knex) {
           recommended_calories: 2000
         },
         {
-          email: "janelle@janelle.com",
+          email: "janellehirano@gmail.com",
           name: "Janelle Hirano",
-          password: "TUHCWQ1fRh5G",
+          password: password,
           gender_id: 2,
           birth_date: "2018-08-05",
           activity_level_id: 3,
@@ -34,9 +38,9 @@ exports.seed = function(knex) {
           recommended_calories: 2000
         },
         {
-          email: "daniel@daniel.com",
+          email: "daniel.ichiyama@gmail.com",
           name: "Daniel Ichiyama",
-          password: "CwrAWMWHjZD",
+          password: password,
           gender_id: 1,
           birth_date: "2007-06-08",
           activity_level_id: 2,
@@ -48,9 +52,9 @@ exports.seed = function(knex) {
           recommended_calories: 2000
         },
         {
-          email: "brian@brian.com",
+          email: "brianwkhuffman@gmail.com",
           name: "Brian Huffman",
-          password: "7TovWx",
+          password: password,
           gender_id: 1,
           birth_date: "2015-12-21",
           activity_level_id: 4,
@@ -64,7 +68,7 @@ exports.seed = function(knex) {
         {
           email: "rina@rina.com",
           name: "Rina Toyoshiba",
-          password: "0kXEd5s6",
+          password: password,
           gender_id: 2,
           birth_date: "2019-01-25",
           activity_level_id: 4,
