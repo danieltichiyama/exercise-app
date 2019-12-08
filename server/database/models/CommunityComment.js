@@ -12,10 +12,11 @@ class CommunityComment extends bookshelf.Model {
     user_id() {
         return this.belongsTo("User");
     }
-    
+
     community_post_id() {
-        return this.belongsTo("CommunityPost");
+        return this.belongsTo("CommunityPost", "community_post_id", "id");
     }
+
 }
 
 module.exports = bookshelf.model("CommunityComment", CommunityComment);

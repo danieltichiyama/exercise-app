@@ -6,74 +6,60 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex("foods_meals_users").insert([
         {
-          calories: 70,
-          api_id: 209592,
+          api_id: 340635,
           meal_type_id: 1,
           user_id: 1,
-          date: "2019-10-15"
+          calories: 150,
+          serving_size: 1
+          //cereal
         },
         {
-          calories: 320,
-          api_id: 683503,
+          api_id: 336070,
+          meal_type_id: 1,
+          user_id: 1,
+          calories: 100,
+          serving_size: 1
+          //milk
+        },
+        {
+          api_id: 341455,
+          meal_type_id: 1,
+          user_id: 1,
+          calories: 100,
+          serving_size: 1
+          //orange juice
+        },
+        {
+          api_id: 338684,
           meal_type_id: 2,
           user_id: 1,
-          date: "2019-10-15"
+          calories: 500,
+          serving_size: 1
+          //Burger King Broiled Chicken Sandwich
         },
         {
-          calories: 860,
-          api_id: 817528,
+          api_id: 170327,
+          meal_type_id: 2,
+          user_id: 1,
+          calories: 250,
+          serving_size: 1
+          //Burger King French Fries
+        },
+        {
+          api_id: 344475,
+          meal_type_id: 2,
+          user_id: 1,
+          calories: 500,
+          serving_size: 1
+          //rum and coke
+        },
+        {
+          api_id: 338406,
           meal_type_id: 3,
           user_id: 1,
-          date: "2019-10-15"
-        },
-        {
-          calories: 200,
-          api_id: 311877,
-          meal_type_id: 4,
-          user_id: 1,
-          date: "2019-10-15"
-        },
-        {
-          calories: 70,
-          api_id: 698889,
-          meal_type_id: 1,
-          user_id: 2,
-          date: "2019-12-21"
-        },
-        {
-          calories: 70,
-          api_id: 131312,
-          meal_type_id: 1,
-          user_id: 2,
-          date: "2019-12-21"
-        },
-        {
-          calories: 200,
-          api_id: 951821,
-          meal_type_id: 4,
-          user_id: 3,
-          date: "2019-04-20"
-        },
-        {
-          calories: 200,
-          api_id: 306276,
-          meal_type_id: 4,
-          user_id: 3,
-          date: "2019-04-20"
-        },
-        {
-          calories: 70,
-          api_id: 467763,
-          meal_type_id: 1,
-          user_id: 5,
-          date: "2019-06-29"
-        },
-        {
-          calories: 320,
-          api_id: 178699,
-          meal_type_id: 2,
-          user_id: 8,
-          date: "2019-04-17"
+          calories: 300,
+          serving_size: 1
+          //steak
         }
       ]);
     });
