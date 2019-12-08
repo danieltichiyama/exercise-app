@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-// import { actionsLoadComments } from "../../actions";
 import styles from "./CommentComponent.module.scss";
 
 class CommentComponent extends Component {
@@ -17,13 +15,5 @@ class CommentComponent extends Component {
         );
     };
 };
-
-const mapStateToProps = store => {
-    return {
-        community_comments: store.community_comments
-    };
-};
-
-CommentComponent = connect(mapStateToProps, null)(CommentComponent);
 
 export default CommentComponent;
