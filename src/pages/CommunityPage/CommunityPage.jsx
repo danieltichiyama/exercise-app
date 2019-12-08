@@ -1,8 +1,13 @@
 import React, { Component } from "react";
+import NewsFeedComponent from "../../components/NewsFeedComponent/NewsFeedComponent";
 
 class CommunityPage extends Component {
   render() {
-    return <div>Community Page</div>;
+    return (
+      <div>Community Page
+        <NewsFeedComponent />
+      </div>
+    )
   }
 }
 

@@ -5,6 +5,8 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const LOAD_COMMENT = "LOAD_COMMENT";
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
@@ -72,10 +74,23 @@ export const actionsLoadPosts = () => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadPosts: ", err);
+      console.log("Error in actionsLoadPosts: ", err);
     });
 };
 
+export const actionsAddComment = (data) => async dispatch => {
+  await Axios.post("/api/community_comments", data)
+    .then(response => {
+      return dispatch({
+        type: ADD_COMMENT,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsAddComment: ", err);
+    }
+};
+           
 export const actionFoodSearch = data => async dispatch => {
   await Axios({
     method: "post",
@@ -92,7 +107,7 @@ export const actionFoodSearch = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+     console.log(err);
     });
 };
 
