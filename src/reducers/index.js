@@ -17,7 +17,6 @@ const initialStore = {
   foods: [],
   activity_levels: [],
   community_posts: [],
-  isLoggedIn: false,
   display: "meal",
   diaryData: [],
   users: [],
@@ -65,7 +64,7 @@ let reducer = (store = initialStore, action) => {
 
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
-      
+
     case ADD_COMMENT:
       return store;
 
@@ -74,7 +73,7 @@ let reducer = (store = initialStore, action) => {
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });
-      
+
     default:
       return store;
 

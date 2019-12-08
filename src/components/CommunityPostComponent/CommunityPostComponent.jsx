@@ -22,7 +22,9 @@ class CommunityPostComponent extends Component {
   };
 
   render() {
-    let { title, body, exercise_id, user_id } = this.props.post;
+    console.log("community post component:", this.props);
+    let { title, body, exercise_id, user_id } = this.props;
+
     return (
       <div className={styles.post}>
         <h3>Title: {title}</h3>
@@ -33,9 +35,10 @@ class CommunityPostComponent extends Component {
           {this.state.buttonValue}
         </button>
         <AddCommentComponent />
+        {console.log(this.props)}
         {this.state.showComments ? (
           <ul>
-            {this.props.post.community_comment_id.map(comment => {
+            {this.props.community_comment_id.map(comment => {
               return (
                 <CommentComponent
                   key={comment.id}
