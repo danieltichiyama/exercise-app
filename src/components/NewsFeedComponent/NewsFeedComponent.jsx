@@ -12,7 +12,7 @@ class NewsFeedComponent extends Component {
     this.props.dispatchLoadPosts();
   }
   render() {
-    console.log("Props in NewsFeedComponent: ", this.props);
+    // console.log("Props in NewsFeedComponent: ", this.props);
 
     return (
       <ul>
