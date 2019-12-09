@@ -16,14 +16,13 @@ class DateComponent extends Component {
   getPreviousDate = () => {
     //this needs to change a value in the global store
     //works but then doesn't work the second time you click it, why?
-    console.log("getPRreviousDate running");
+    console.log("getPreviousDate running");
     let previousDate = this.state.date.subtract(1, "days");
     return this.setState(
       {
         date: previousDate
       },
       () => {
-        console.log("state set, now running dispatch");
         return this.props.dispatchChangeDate(this.state.date);
       }
     );
@@ -37,7 +36,6 @@ class DateComponent extends Component {
         date: nextDate
       },
       () => {
-        console.log("state set, now running dispatch");
         return this.props.dispatchChangeDate(this.state.date);
       }
     );
@@ -53,16 +51,11 @@ class DateComponent extends Component {
         <button onClick={this.getPreviousDate}>Yesterday</button>
         <h3>{this.state.date.format("MMMM D")}</h3>
         <button onClick={this.getNextDate}>Tomorrow</button>
+        <div>{this.state.date.format("YYYY-MM-DD")}</div>
       </div>
     );
   }
 }
-
-const mapStateToProps = store => {
-  return {
-    diaryDate: store.diaryDate
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -72,6 +65,6 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-DateComponent = connect(mapStateToProps, mapDispatchToProps)(DateComponent);
+DateComponent = connect(null, mapDispatchToProps)(DateComponent);
 
 export default DateComponent;

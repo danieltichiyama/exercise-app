@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import styles from "./DiaryComponent.module.scss";
 import { actionsGetDiaryData } from "../../actions";
 import MealComponent from "../MealComponent";
+// import moment from "moment";
 
 class DiaryComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // currentDate: moment(),
       meals: ["Breakfast", "Lunch", "Dinner", "Snack"]
     };
   }
@@ -15,11 +17,7 @@ class DiaryComponent extends Component {
   handleNewDate = () => {
     //this can stay here but needs to use the data saved in the store
     //this function needs to be put into a componentDidUpdate instead, based on whether or not the date value in the store is changed, it will activate
-    let date = this.props.diaryDate
-      .parseZone(this.props.diaryDate.format())
-      .utc()
-      .format();
-    return this.props.dispatchGetDiaryData(date);
+    return this.props.dispatchGetDiaryData(this.props.diaryDate);
   };
 
   componentDidMount = () => {
@@ -66,8 +64,8 @@ class DiaryComponent extends Component {
   render() {
     return (
       <div className={styles.DiaryComponent}>
-        <h1>Diary Component</h1>
-        {/* <button onClick={this.getPreviousDate}>Yesterday</button>
+        {/* <h1>Diary Component</h1>
+        <button onClick={this.getPreviousDate}>Yesterday</button>
         <h3>{this.state.currentDate.format("MMMM D")}</h3>
         <button onClick={this.getNextDate}>Tomorrow</button>
         <div>{this.state.currentDate.format("YYYY-MM-DD")}</div> */}
