@@ -68,8 +68,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case CHANGE_DATE:
+      let newMoment = moment(action.payload);
       //the date stored here is in UTC and will appear to be ahead of our actual time
-      return Object.assign({}, store, { diaryDate: action.payload });
+      return Object.assign({}, store, { diaryDate: newMoment });
 
     default:
       return store;

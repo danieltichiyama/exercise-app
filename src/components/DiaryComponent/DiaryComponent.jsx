@@ -17,7 +17,12 @@ class DiaryComponent extends Component {
   handleNewDate = () => {
     //this can stay here but needs to use the data saved in the store
     //this function needs to be put into a componentDidUpdate instead, based on whether or not the date value in the store is changed, it will activate
-    return this.props.dispatchGetDiaryData(this.props.diaryDate);
+
+    let UTCdate = this.props.diaryDate
+      .parseZone(this.props.diaryDate.format())
+      .utc()
+      .format();
+    return this.props.dispatchGetDiaryData(UTCdate);
   };
 
   componentDidMount = () => {
