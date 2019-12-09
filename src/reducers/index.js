@@ -8,8 +8,10 @@ import {
   FOOD_NUTRIENT_SEARCH,
   CLEAR,
   GET_DIARY_DATA,
-  LOAD_USER
+  LOAD_USER,
+  CHANGE_DATE
 } from "../actions";
+import moment from "moment";
 
 const initialStore = {
   foods: [],
@@ -18,7 +20,8 @@ const initialStore = {
   diaryData: [],
   users: [],
   foods_meals_users: [],
-  isLoggedIn: false
+  isLoggedIn: false,
+  diaryDate: moment()
 };
 
 let reducer = (store = initialStore, action) => {
@@ -50,11 +53,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case FOOD_SEARCH:
-      console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload.foods });
 
     case FOOD_NUTRIENT_SEARCH:
-      console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload });
 
     case GET_DIARY_DATA:
@@ -65,6 +66,9 @@ let reducer = (store = initialStore, action) => {
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });
+
+    case CHANGE_DATE:
+      return Object.assign({}, store, { diaryDate: action.payload });
 
     default:
       return store;

@@ -11,7 +11,7 @@ const MealComponent = props => {
       <ul>
         {props.foods.map(food => {
           return (
-            <li>
+            <li key={food.description}>
               {food.description} Calories: {food.calories} Fat: {food.fat}{" "}
               Carbs: {food.carbs} Protein: {food.protein}
             </li>

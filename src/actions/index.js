@@ -11,6 +11,7 @@ export const CLEAR = "CLEAR";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
+export const CHANGE_DATE = "CHANGE_DATE";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -147,7 +148,6 @@ export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
   await Axios.post("api/foods_meals_users", { date, session })
     .then(response => {
-      console.log("gotResponse", response);
       return dispatch({
         type: GET_DIARY_DATA,
         payload: response.data
@@ -156,4 +156,11 @@ export const actionsGetDiaryData = date => async dispatch => {
     .catch(err => {
       console.log("Error in actionsGetDiaryData: ", err);
     });
+};
+
+export const actionsChangeDate = date => async dispatch => {
+  return dispatch({
+    type: CHANGE_DATE,
+    payload: date
+  });
 };

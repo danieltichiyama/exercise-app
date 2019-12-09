@@ -9,8 +9,6 @@ import CommunityPage from "../pages/CommunityPage";
 import UserPage from "../pages/UserPage";
 import AuthorizationPage from "../pages/AuthorizationPage";
 import NavigationComponent from "../components/NavigationComponent";
-import DiaryComponent from "../components/DiaryComponent";
-import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
 
 import { actionsLogout } from "../actions";
 
@@ -44,20 +42,10 @@ class App extends Component {
         </Switch>
 
         <div>
-          <FoodSearchComponent></FoodSearchComponent>
           {this.props.isLoggedIn ? (
             <button onClick={this.handleLogout}>Log out</button>
           ) : null}
           <NavigationComponent></NavigationComponent>
-          {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
-          <button onClick={this.handleHidePlayground}>
-            {this.state.playground ? "Hide Playground" : "Show Playground"}
-          </button>
-          {this.state.playground ? (
-            <div className="component_playground">
-              <DiaryComponent></DiaryComponent>
-            </div>
-          ) : null}
         </div>
       </Router>
     );
