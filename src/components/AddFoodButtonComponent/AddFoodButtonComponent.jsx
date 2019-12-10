@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "../AddFoodButtonComponent/AddFoodButtonComponent.module.scss";
-import { ADD_FOOD } from "../../actions";
+import { actionsAddProduct } from "../../actions";
 
 class AddFoodButtonComponent extends Component {
   constructor(props) {
@@ -34,6 +34,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    // NEED TO COME BACK TO THIS
     // let data = Object.assign({}, state.???)
 
     addFood: state => {
