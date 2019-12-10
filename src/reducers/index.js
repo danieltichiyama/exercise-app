@@ -21,7 +21,9 @@ const initialStore = {
   users: [],
   foods_meals_users: [],
   isLoggedIn: false,
-  diaryDate: moment() //the date stored here is in UTC and will appear to be ahead of our actual time
+  diaryDate: moment()
+    .utc()
+    .format("YYYY-MM-D")
 };
 
 let reducer = (store = initialStore, action) => {
@@ -68,9 +70,10 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case CHANGE_DATE:
-      let newMoment = moment(action.payload);
-      //the date stored here is in UTC and will appear to be ahead of our actual time
-      return Object.assign({}, store, { diaryDate: newMoment });
+      let newMoment = moment.utc(action.payload);
+      return Object.assign({}, store, {
+        diaryDate: newMoment.format("YYYY-MM-D")
+      });
 
     default:
       return store;

@@ -159,7 +159,6 @@ export const actionsGetDiaryData = date => async dispatch => {
 };
 
 export const actionsChangeDate = date => async dispatch => {
-  console.log("actionsChangeDate is running");
   return dispatch({
     type: CHANGE_DATE,
     payload: date
