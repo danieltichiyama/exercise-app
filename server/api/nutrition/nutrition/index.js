@@ -52,7 +52,7 @@ nutritionRouter
 nutritionRouter.route("/:id").get((req, res) => {
   return axios({
     method: "get",
-    url: `https://api.nal.usda.gov/fdc/v1/${req.params.id}?api_key=${process.env.API_KEY}`,
+    url: `https://api.nal.usda.gov/fdc/v1/${req.params.id}?api_key=${process.env.NUTRITION_API_KEY}`,
     headers: {
       "Content-Type": "application/json"
     }

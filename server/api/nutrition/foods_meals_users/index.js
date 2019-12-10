@@ -31,7 +31,9 @@ foodMealUserRouter
         } else {
           return res.json([]);
         }
+      })
+      .catch(err => {
+        console.log(err);
       });
   });
-
 module.exports = foodMealUserRouter;

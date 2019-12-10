@@ -5,6 +5,9 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+export const LOAD_COMMENT = "LOAD_COMMENT";
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
@@ -12,6 +15,7 @@ export const GET_DIARY_DATA = "GET_DIARY_DATA";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
+export const FOOD_VISION = "FOOD_VISION";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -74,7 +78,20 @@ export const actionsLoadPosts = () => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadPosts: ", err);
+      console.log("Error in actionsLoadPosts: ", err);
+    });
+};
+
+export const actionsAddComment = data => async dispatch => {
+  await Axios.post("/api/community_comments", data)
+    .then(response => {
+      return dispatch({
+        type: ADD_COMMENT,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsAddComment: ", err);
     });
 };
 
@@ -105,6 +122,16 @@ export const actionClear = () => dispatch => {
   });
 };
 
+export const actionFoodVision = data => async dispatch => {
+  console.log("DATA: ", data);
+  await Axios.post("/api/vision", data).then(response => {
+    return dispatch({
+      type: FOOD_VISION,
+      payload: response.data
+    });
+  });
+};
+
 export const actionFoodNutrients = fdcId => async dispatch => {
   await Axios.get(`/api/nutrition/${fdcId}`)
     .then(response => {
@@ -118,7 +145,7 @@ export const actionFoodNutrients = fdcId => async dispatch => {
     });
 };
 
-export const actionsLoadUser = id => async dispatch => {
+export const actionLoadUser = id => async dispatch => {
   await Axios.get(`/api/users/${id}`)
     .then(response => {
       return dispatch({
@@ -128,19 +155,6 @@ export const actionsLoadUser = id => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionLoadUser: ", err);
-    });
-};
-
-export const actionLoadFoodMealUser = id => async dispatch => {
-  await Axios.get(`/api/foods_meals_users/${id}`)
-    .then(response => {
-      return dispatch({
-        type: LOAD_FOOD_MEAL_USER,
-        payload: response.data
-      });
-    })
-    .catch(err => {
-      console.log("Error in actionLoadFoodMealUser", err);
     });
 };
 
@@ -155,6 +169,19 @@ export const actionsGetDiaryData = date => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsGetDiaryData: ", err);
+    });
+};
+
+export const actionsDeleteComment = data => async dispatch => {
+  await Axios.delete("/api/community_comments", { data: { data } })
+    .then(response => {
+      return dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsDeleteComment: ", err);
     });
 };
 

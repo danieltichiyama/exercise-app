@@ -9,7 +9,9 @@ import {
   CLEAR,
   GET_DIARY_DATA,
   LOAD_USER,
-  CHANGE_DATE
+  CHANGE_DATE,
+  DELETE_COMMENT,
+  ADD_COMMENT
 } from "../actions";
 import moment from "moment";
 
@@ -23,7 +25,8 @@ const initialStore = {
   isLoggedIn: false,
   diaryDate: moment()
     .utc()
-    .format("YYYY-MM-D")
+    .format("YYYY-MM-D"),
+  display: "meal"
 };
 
 let reducer = (store = initialStore, action) => {
@@ -75,8 +78,17 @@ let reducer = (store = initialStore, action) => {
         diaryDate: newMoment.format("YYYY-MM-D")
       });
 
+    case ADD_COMMENT:
+      return store;
+
+    case DELETE_COMMENT:
+      return store;
+
     default:
       return store;
+
+    //   case TOGGLE:
+    //     return Object.assign({}, store, { display: action.payload });
   }
 };
 

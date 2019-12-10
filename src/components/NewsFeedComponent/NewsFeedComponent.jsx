@@ -12,8 +12,6 @@ class NewsFeedComponent extends Component {
     this.props.dispatchLoadPosts();
   }
   render() {
-    console.log("Props in NewsFeedComponent: ", this.props);
-
     return (
       <ul>
         {this.props.community_posts.map(post => {
@@ -22,6 +20,7 @@ class NewsFeedComponent extends Component {
               key={post.id}
               title={post.title}
               body={post.body}
+              community_comment_id={post.community_comment_id}
               exercise_id={post.exercise_id}
               user_id={post.user_id}
             />

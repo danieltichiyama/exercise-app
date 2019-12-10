@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 8080;
 app.use(express.static("./server/public"));
 
 //body-parsers and decorator
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
+app.use(bodyParser.json({ extended: true, limit:"50mb" }));
 app.use(decorator);
 
 //routers
@@ -36,8 +36,9 @@ app.use("/api/workouts_exercises", api.workouts_exercises);
 app.use("/api/community_posts", api.community_posts);
 app.use("/api/community_comments", api.community_comments);
 app.use("/api/exercise_bodyparts", api.exercise_bodyparts);
-app.use("/api/foods_meals_users", api.foods_meals_users)
+app.use("/api/foods_meals_users", api.foods_meals_users);
 app.use("/api/nutrition", api.nutrition);
+app.use("/api/vision", api.vision);
 //routers-end
 
 app.get("/smoke", (req, res) => {
