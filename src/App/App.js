@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import ExercisePage from "../pages/ExercisePage";
+import NutritionPage from "../pages/NutritionPage";
+import CommunityPage from "../pages/CommunityPage";
+import UserPage from "../pages/UserPage";
+import AuthorizationPage from "../pages/AuthorizationPage";
+import FoodSearchComponent from "../components/FoodSearchComponent/FoodSearchComponent";
+import ImageUploadComponent from "../components/ImageUploadComponent";
 import { withRouter } from "react-router";
 import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";

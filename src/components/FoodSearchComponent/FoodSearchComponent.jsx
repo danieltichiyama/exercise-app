@@ -18,8 +18,8 @@ class FoodSearchComponent extends Component {
     this.props.dispatchFoodSearch(this.state);
   }
 
-  searchKeyword(e) {
-    this.setState({ data: e.target.value });
+  async searchKeyword(e){
+    await this.setState({ data: e.target.value });
     // UNCOMMENT FOR LIVE SEARCHBAR
     // this.props.dispatchFoodSearch(this.state);
   }
