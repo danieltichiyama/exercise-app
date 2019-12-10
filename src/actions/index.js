@@ -149,7 +149,6 @@ export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
   await Axios.post("api/foods_meals_users", { date, session })
     .then(response => {
-      console.log("gotResponse", response);
       return dispatch({
         type: GET_DIARY_DATA,
         payload: response.data
@@ -163,7 +162,6 @@ export const actionsGetDiaryData = date => async dispatch => {
 export const actionsDeleteComment = data => async dispatch => {
   await Axios.delete("/api/community_comments", { data: { data } })
     .then(response => {
-      console.log("RESPONSE IN actionsDeleteComment: ", response);
       return dispatch({
         type: DELETE_COMMENT,
         payload: response.data
