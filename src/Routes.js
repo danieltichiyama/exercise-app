@@ -10,6 +10,7 @@ import AddBreakfastPage from "./pages/AddBreakfastPage";
 import AddLunchPage from "./pages/AddLunchPage";
 import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
+import Playground from "./pages/Playground";
 
 export const routes = [
   {
@@ -61,6 +62,11 @@ export const routes = [
     path: "/authorization",
     exact: true,
     component: AuthorizationPage
+  },
+  {
+    path: "/playground",
+    exact: true,
+    component: Playground
   }
 ];
 
