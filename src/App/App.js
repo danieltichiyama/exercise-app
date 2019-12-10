@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import { withRouter } from "react-router";
-import SmokeButton from "../components/SmokeButton";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
 import { actionsLogout } from "../actions";
