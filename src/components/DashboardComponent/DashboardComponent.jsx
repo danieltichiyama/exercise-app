@@ -54,7 +54,6 @@ class DashboardComponent extends Component {
               <p>Exercise</p>
             </div>
 
-            <p></p>
             <p>=</p>
 
             <div className={styles.column}>
