@@ -1,30 +1,30 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('muscle_groups').del()
-    .then(function () {
+  return knex("muscle_groups")
+    .del()
+    .then(function() {
       // Inserts seed entries
-      return knex('muscle_groups').insert([
+      return knex("muscle_groups").insert([
         {
-          muscle_group: 'full body',
+          muscle_group: "Full body"
         },
         {
-          muscle_group: 'arms',
+          muscle_group: "Arms"
         },
         {
-          muscle_group: 'legs',
+          muscle_group: "Legs"
         },
         {
-          muscle_group: 'chest',
+          muscle_group: "Chest"
         },
         {
-          muscle_group: 'shoulders',
+          muscle_group: "Shoulders"
         },
         {
-          muscle_group: 'back',
+          muscle_group: "Back"
         },
         {
-          muscle_group: 'core',
+          muscle_group: "Core"
         }
       ]);
     });

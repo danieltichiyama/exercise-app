@@ -1,0 +1,37 @@
+.dashboard {
+  width: 100%;
+  box-shadow: 0px 2px 10px lightgray;
+  .remainingCalories {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  h2 {
+    color: #fc4a1a;
+  }
+
+  .column {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  .remainingCaloriesText {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 15px;
+    p {
+      margin: 0px 10px 0px 0px;
+    }
+  }
+  .caloriesConsumedText {
+    display: flex;
+    color: grey;
+    font-size: 15px;
+    justify-content: center;
+    .remainingP {
+      color: #fc4a1a;
+    }
+  }
+}

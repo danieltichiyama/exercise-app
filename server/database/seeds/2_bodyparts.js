@@ -1,49 +1,69 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('bodyparts').del()
-    .then(function () {
+  return knex("bodyparts")
+    .del()
+    .then(function() {
       // Inserts seed entries
-      return knex('bodyparts').insert([
+      return knex("bodyparts").insert([
         {
-          bodypart: 'glutes',
-          muscle_group_id: 1
-        },
-        {
-          bodypart: 'biceps',
-          muscle_group_id: 2
-        },
-        {
-          bodypart: 'triceps',
+          bodypart: "Glutes",
           muscle_group_id: 3
         },
         {
-          bodypart: 'lats',
-          muscle_group_id: 4
+          bodypart: "Biceps",
+          muscle_group_id: 2
         },
         {
-          bodypart: 'traps',
+          bodypart: "Triceps",
+          muscle_group_id: 2
+        },
+        {
+          bodypart: "Lats",
+          muscle_group_id: 6
+        },
+        {
+          bodypart: "Traps",
           muscle_group_id: 5
         },
         {
-          bodypart: 'shoulders',
+          bodypart: "Shoulders",
+          muscle_group_id: 5
+        },
+        {
+          bodypart: "Hamstrings",
+          muscle_group_id: 3
+        },
+        {
+          bodypart: "Calves",
+          muscle_group_id: 3
+        },
+        {
+          bodypart: "Abs",
+          muscle_group_id: 7
+        },
+        {
+          bodypart: "Chest",
+          muscle_group_id: 7
+        },
+        {
+          bodypart: "Lower back",
           muscle_group_id: 6
         },
         {
-          bodypart: 'hamstrings',
+          bodypart: "Forearms",
+          muscle_group_id: 2
+        },
+        {
+          bodypart: "Mid back",
           muscle_group_id: 6
         },
         {
-          bodypart: 'calves',
-          muscle_group_id: 7
+          bodypart: "Quads",
+          muscle_group_id: 3
         },
         {
-          bodypart: 'abs',
-          muscle_group_id: 7
-        },
-        {
-          bodypart: 'chest',
-          muscle_group_id: 7
+          bodypart: "Deltoids",
+          muscle_group_id: 5
         }
       ]);
     });

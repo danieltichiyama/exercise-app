@@ -21,6 +21,9 @@ class CommunityPost extends bookshelf.Model {
     exercise_id() {
         return this.hasOne("Exercise", "id", "exercise_id");
     }
+    community_comment_id() {
+        return this.hasMany("CommunityComment", "community_post_id", "id");
+    }
 }
 
 module.exports = bookshelf.model("CommunityPost", CommunityPost);
