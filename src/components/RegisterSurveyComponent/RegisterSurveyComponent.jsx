@@ -21,7 +21,7 @@ class RegisterSurveyComponent extends Component {
     }
   }
 
-  handleKeyPressHeight = (e) => {
+  handleKeyUpHeight = (e) => {
     if (e.target.value.length === 1 && e.keyCode === 8){
       e.target.value = '';
     } else if (e.target.value.length === 4 && e.keyCode === 8){ 
@@ -35,6 +35,16 @@ class RegisterSurveyComponent extends Component {
     }
   }
 
+  handleOnChangeWeight = (e) => {
+    const reg = /^[0-9\b]+$/;
+
+    // if value is not blank, then test the regex
+
+    if (e.target.value === '' || reg.test(e.target.value)) {
+       this.setState({value: e.target.value})
+    }
+  }
+
   render() { 
     return ( 
       <form>
@@ -43,7 +53,7 @@ class RegisterSurveyComponent extends Component {
             <input     
               type="text"
               name="height"
-              onKeyUp={this.handleKeyPressHeight}
+              onKeyUp={this.handleKeyUpHeight}
               placeholder="Your Height"
             /> 
           </li>
@@ -51,6 +61,7 @@ class RegisterSurveyComponent extends Component {
             <input 
               type="text"
               name="weight"
+              onChange={this.handleOnChangeWeight}
               placeholder="Your Weight"
             />
           </li>
