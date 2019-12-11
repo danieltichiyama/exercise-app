@@ -10,24 +10,24 @@ class RegisterComponent extends Component {
       name: "",
       email: "",
       password: "",
-      "confirm password": "",
-      height: 200,
-      weight: 75,
-      activity_level_id: 1,
-      birth_date: "1999-01-01",
-      gender_id: 1,
-      user_tier_id: 1,
-      goal_id: 1,
-      formErrors: {
-        name: "",
-        email: "",
-        password: "",
-        "confirm password": "",
-        height: "",
-        weight: "",
-        activity_level: "",
-        birth_date: ""
-      }
+      confirm_password: "",
+      // height: 200,
+      // weight: 75,
+      // activity_level_id: 1,
+      // birth_date: "1999-01-01",
+      // gender_id: 1,
+      // user_tier_id: 1,
+      // goal_id: 1,
+      // formErrors: {
+        // name: "",
+        // email: "",
+        // password: "",
+        // "confirm password": "",
+        // height: "",
+        // weight: "",
+        // activity_level: "",
+        // birth_date: ""
+      // }
     };
   }
 
@@ -40,10 +40,11 @@ class RegisterComponent extends Component {
 
   handleRegister = e => {
     e.preventDefault();
-
     let formData = { ...this.state };
+    console.log('BEFORE: ', formData);
     delete formData.formErrors;
     delete formData["confirm password"];
+    console.log('AFTER', formData);
     this.props.dispatchRegister(formData);
     return this.props.isRegistered();
   };
@@ -51,6 +52,10 @@ class RegisterComponent extends Component {
   handleLoginClick = () => {
     return this.props.isRegistered();
   };
+
+  handleContinueClick = (data) => {
+    return this.props.takingSurvey(data);
+  }
 
   render() {
     return (
@@ -122,7 +127,7 @@ class RegisterComponent extends Component {
               </div>
               <input
                 type="password"
-                name="confirm password"
+                name="confirm_password"
                 value={this.state["confirm password"]}
                 onChange={this.handleInput}
                 placeholder="Confirm your password"
@@ -131,8 +136,8 @@ class RegisterComponent extends Component {
             </li>
           </ul>
 
-          <button onClick={this.handleRegister} className={styles.login_button}>
-            Register
+          <button onClick={() => this.handleContinueClick(this.state)} className={styles.login_button}>
+            Continue
           </button>
         </form>
 
