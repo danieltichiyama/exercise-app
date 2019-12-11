@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { connect } from "react-redux";
 import { actionsRegister } from "../../actions";
+import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 
 class RegisterSurveyComponent extends Component {
   constructor(props) {
@@ -12,11 +13,11 @@ class RegisterSurveyComponent extends Component {
       password: this.props.obj.password,
       confirm_password: this.props.obj.confirm_password,
       height: "",
-      weight: "",
+      weight: 0,
       activity_level_id: 0,
-      birth_date: "",
+      birth_date:[],
       gender_id: 0,
-      user_tier_id: 0,
+      user_tier_id: 1,
       goal_id: 0,
     }
   }
@@ -37,11 +38,9 @@ class RegisterSurveyComponent extends Component {
 
   handleOnChangeWeight = (e) => {
     const reg = /^[0-9\b]+$/;
-
     // if value is not blank, then test the regex
-
-    if (e.target.value === '' || reg.test(e.target.value)) {
-       this.setState({value: e.target.value})
+    if (!reg.test(e.target.value)) {
+      e.target.value = e.target.value.slice(0, -1);
     }
   }
 
@@ -64,22 +63,111 @@ class RegisterSurveyComponent extends Component {
               onChange={this.handleOnChangeWeight}
               placeholder="Your Weight"
             />
+            lbs
           </li>
         </ul>
         <li>
-          <input type="text"/>
+          Birthday
+          <YearPicker
+            defaultValue={'Select Year'}
+            start={1900}
+            end={2020}
+            reverse
+            required={true}
+            value={this.state.year}
+            // mandatory
+            onChange={async (year) => {
+                await this.setState({ birth_date: [year]});
+                console.log(year);
+                console.log(this.state);
+            }}
+            id={'year'}
+            name={'year'}
+            classes={'classes'}
+            optionClasses={'option classes'}
+          />
+          <MonthPicker
+            defaultValue={'select month'}
+            // to get months as numbers
+            numeric
+            // default is full name
+            short
+            // default is Titlecase
+            caps
+            // mandatory if end={} is given in YearPicker
+            endYearGiven
+            // mandatory
+            year={this.state.year}
+            // default is false
+            required={true}
+            // mandatory
+            value={this.state.month}
+            // mandatory
+            onChange={(month) => {
+                this.setState({ month });
+                console.log(month);
+            }}
+            id={'month'}
+            name={'month'}
+            classes={'classes'}
+            optionClasses={'option classes'}
+          />
+          <DayPicker
+            defaultValue={'select day'}
+            // mandatory
+            year={this.state.year}
+            // mandatory
+            month={this.state.month}
+            // mandatory if end={} is given in YearPicker
+            endYearGiven
+            // default is false
+            required={true}
+            // mandatory
+            value={this.state.day}
+            // mandatory
+            onChange={(day) => {
+                this.setState({ day });
+                console.log(day);
+            }}
+            id={'day'}
+            name={'day'}
+            classes={'classes'}
+            optionClasses={'option classes'}
+          />
         </li>
         <li>
-          <input type="text"/>
+          <select 
+            name="gender"
+            // onChange={ DO SOMETHING }
+          >
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="3">Other</option>
+          </select>
         </li>
         <li>
-          <input type="text"/>
+          <select
+            name="activity_level"
+            // onChange={ DO SOMETHING }
+          >
+            <option value="1">Sedentary</option>
+            <option value="2">Light</option>
+            <option value="3">Active</option>
+            <option value="4">Very Active</option>
+          </select>
         </li>
         <li>
-          <input type="text"/>
-        </li>
-        <li>
-          <input type="text"/>
+            <select 
+              name= "goals"
+              // onChange={DO SOMETHING}
+            >
+              <option value="1">mild weight loss</option>
+              <option value="2">moderate weight loss</option>
+              <option value="3">extreme weight loss</option>
+              <option value="4">maintain weight</option>
+              <option value="5">muscle gain</option>
+              <option value="6">no goal</option>
+            </select>
         </li>
       </form>
      );
