@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DateComponent from "../../components/DateComponent";
+import DiaryComponent from "../../components/DiaryComponent";
 import AddMealButtonComponent from "../../components/AddMealButtonComponent";
 
 class NutritionPage extends Component {
@@ -10,6 +12,9 @@ class NutritionPage extends Component {
   render() {
     return (
       <div>
+        Nutrition Page
+        <DateComponent></DateComponent>
+        <DiaryComponent></DiaryComponent>
         <AddMealButtonComponent />
       </div>
     );

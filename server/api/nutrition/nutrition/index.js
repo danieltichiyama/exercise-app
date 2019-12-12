@@ -49,21 +49,20 @@ nutritionRouter
       });
   });
 
-nutritionRouter.route("/:id")
-  .get((req, res) => {
-    return axios({
-      method: 'get',
-      url: `https://api.nal.usda.gov/fdc/v1/${req.params.id}?api_key=${process.env.NUTRITION_API_KEY}`,
-      headers: {
-        "Content-Type": "application/json",
-      }
+nutritionRouter.route("/:id").get((req, res) => {
+  return axios({
+    method: "get",
+    url: `https://api.nal.usda.gov/fdc/v1/${req.params.id}?api_key=${process.env.NUTRITION_API_KEY}`,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(response => {
+      return res.json(response.data);
     })
-    .then((response) => {
-      return res.json(response.data)
-    })
-      .catch(err => {
+    .catch(err => {
       console.log(err);
-    })
-  });
+    });
+});
 
 module.exports = nutritionRouter;
