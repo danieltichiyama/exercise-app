@@ -1,0 +1,12 @@
+{
+    "type": "service_account",
+    "project_id": "fitwork-261206",
+    "private_key_id": "3a6a6313bb72d54d63b3cf245ecf2cafca707723",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDzAU2ylq/T4wCi\nmd9yq4e2Xe2MOrDt8otABBapWAha1onKaR2yCnC4qHW8/dw8Bd1QuEIgVKE1fEAk\nZzqFjP0fP5wBMGc16Oa23FdIa/zE/QPpBQt9Vg+3enQ/+I/Q8T9a88zFTciYPeL/\nttiJno577/RthZ0zUEQxjbjvg618830i0C/isckkg53FtoTXL2b4z1ZGNWnfz9EJ\npxTkKHRhndnjLObvpu1hOMmRgD6tmu1VNZMQ/6rs9DTsO2MJk7NxJWJa7foCI37q\npiwmIA2aMywWgIrK8s3LZHHZd41CxH61A8qApsXqlPeXnyNse7gKwChz1JynssUN\n5t0xqcHzAgMBAAECggEAFmcN3IN+Koi4bm/ExPkMS2M7EEekN7jkXolMn4hhSM0+\nKb4UF0MAI6igJhq55YIIO7X+SVBpW5lx/l59QNeqdD7fKSWRtktw4vXK9CnEb/1V\nZsjox2waNH43s7gSEMn/ib6FJ8FlLKfemALUJqfKl0wcBXF2eHG+FQVtlw3VfiR0\naiEiDhkwNWrStXQldnTux5b0KnZjf8Ljj1gIwO0HqY2T/27U/+0AObqPs2+yOwNm\nfb/zxqBuBMwA5JDCGteKgjhirdTO0AOJROhof6zwYOBmf35eYzwAVI609wPX0NXV\ngMQqDt6oPOOgQRm4zkSH7kpdzYoOpZEnv6srPPG2cQKBgQD/Wv0s9fL6LdVdYZJx\n7dDNG7Pa1HXDS92s495BMKIgNeIt3VwZpjMbjm67yOdRUtlVt/uHEeouGXDrJZJW\nJkieOUdISdSAXHupY6OHbBmG99MTvaf2brNDdW86vyf9Dq32kjDcGMj1cVFJ6Me6\nuHHCsRWDdjyP3bVssRoPGvgMIwKBgQDznlVvuW42X4qFKX+JJrhwceJTog59t/dW\n2VtdIIURayGoSygE1r1DhiJ1FbQJpk5AHkVRB6tl4TDVMEkUTj8Kqe2ro12YUTrx\nLx4nRqa3Fig4RW53PWgZ3aoRox8ec0dD/BUdk93v2P5scy06lvU8zYSlzLXkgogn\nc83VPM8n8QKBgFru4f2i0BX7QGHynx3nHFYOKWwiAJW9bIFm2/zG/tUNmy/OBkA0\nCTsk65X/ozA4mqCF1hJxdL1Z3fY++O+ozm9Z4mKBuCTFylu12cQd4LFJi2caQLfn\nD/tT1HpNHEZndde6k5+tS9LruZDiTk3V5Nz6Brk737EzuKmuH6OFbROVAoGBAM4H\njNfE6amAWYTOmLZkEb2/ApqaRkkaSUqg3fy/YOpfQQK0NO8KsNunWALPTQiQJkNh\nllu18cVikkrp4BQVLImXNpJewevsXr3UjFrJDHtweKlGRur++shNR+RMoSe+dHnR\negYepKaQTHNpYMnZGyPF57XUj8vmfMFo1Z3OJJ/xAoGBAO+9UDEg7PZUzQDcgqkb\nNhYZlPBHNdpzQmLCYPZz7DIHDuLt8eCVULFlPVKommA4B2zxNZ1/Q/3VzEhv0mB1\nmF/TSTTf/5L1G4iFSZg41lBuhiglqsxii8+tZ7CNa+f+36BzlYOG55OydOEGjf2b\nHEDW2toYWKD+oNQrVRSzSl5Y\n-----END PRIVATE KEY-----\n",
+    "client_email": "cloud-vision@fitwork-261206.iam.gserviceaccount.com",
+    "client_id": "113090301601462124220",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-vision%40fitwork-261206.iam.gserviceaccount.com"
+}
