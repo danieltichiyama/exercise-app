@@ -14,7 +14,7 @@ import Playground from "./pages/Playground";
 
 export const routes = [
   {
-    path: "/home",
+    path: "/",
     exact: true,
     component: HomePage
   },

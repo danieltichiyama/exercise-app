@@ -49,7 +49,7 @@ class LoginComponent extends Component {
 
   render() {
     if (this.props.isLoggedIn === true) {
-      return <Redirect to="/home" />;
+      return <Redirect to="/" />;
     }
     return (
       <div className={styles.LoginComponent}>
