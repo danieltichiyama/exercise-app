@@ -10,7 +10,8 @@ import {
   LOAD_USER,
   GET_DIARY_DATA,
   DELETE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  ADD_FOOD
 } from "../actions";
 
 const initialStore = {
@@ -75,8 +76,8 @@ let reducer = (store = initialStore, action) => {
     default:
       return store;
 
-    //   case TOGGLE:
-    //     return Object.assign({}, store, { display: action.payload });
+    case ADD_FOOD:
+      return Object.assign({}, store, { foods: action.payload });
   }
 };
 
