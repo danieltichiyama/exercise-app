@@ -4,6 +4,7 @@ import styles from "../AddMealButtonComponent/AddMealButtonComponent.module.scss
 
 class AddMealButtonComponent extends Component {
   handleMealClick = event => {
+    let dataset;
     console.log("event target", event.target.dataset.meal);
   };
 

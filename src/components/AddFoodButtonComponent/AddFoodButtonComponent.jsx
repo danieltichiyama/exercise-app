@@ -17,7 +17,7 @@ class AddFoodButtonComponent extends Component {
     return {
       date: new Date(),
       api_id: this.props.api_id,
-      meal_type_id: 1,
+      meal_type_id: this.props.meal_type_id,
       user_id: stringToId.id,
       calories: this.props.calories,
       serving_size: this.props.serving_size
@@ -50,7 +50,8 @@ const mapStateToProps = store => {
     addFood: store.addFood,
     api_id: store.foods.fdcId,
     calories: store.foods.foodNutrients[3].amount,
-    serving_size: store.foods.foodPortions[0].portionDescription
+    serving_size: store.foods.foodPortions[0].portionDescription,
+    meal_type_id: store.meal_type_id
   };
 };
 
