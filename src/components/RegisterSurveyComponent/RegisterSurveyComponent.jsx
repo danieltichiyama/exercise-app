@@ -15,24 +15,34 @@ class RegisterSurveyComponent extends Component {
       height: "",
       weight: 0,
       activity_level_id: 0,
-      birth_date:[],
       gender_id: 0,
       user_tier_id: 1,
       goal_id: 0,
+      birthYear: '',
+      birthMonth: '',
+      birthDay: '',
+      birth_date: ''
     }
   }
 
   handleKeyUpHeight = (e) => {
-    if (e.target.value.length === 1 && e.keyCode === 8){
-      e.target.value = '';
-    } else if (e.target.value.length === 4 && e.keyCode === 8){ 
-      e.target.value = e.target.value.slice(0, 3)
-    } else if (e.target.value.length === 1 && !(isNaN(parseInt(e.target.value)))){
-      e.target.value += "'";
-    } else if (e.target.value.length === 4 && !(isNaN(parseInt(e.target.value)))){
-      e.target.value += '"';
-    } else if (e.target.value.length > 5){
-      e.target.value = e.target.value.slice(0, -(e.target.value.length - 5));
+    // if (e.target.value.length === 1 && e.keyCode === 8){
+    //   e.target.value = '';
+    // } else if (e.target.value.length === 4 && e.keyCode === 8){ 
+    //   e.target.value = e.target.value.slice(0, 3)
+    // } else if (e.target.value.length === 1 && !(isNaN(parseInt(e.target.value)))){
+    //   e.target.value += "'";
+    // } else if (e.target.value.length === 4 && !(isNaN(parseInt(e.target.value)))){
+    //   e.target.value += '"';
+    // } else if (e.target.value.length > 5){
+    //   e.target.value = e.target.value.slice(0, -(e.target.value.length - 5));
+    // }
+    const reg = /^[0-9\b]+$/;
+    // if value is not blank, then test the regex
+    if (!reg.test(e.target.value)) {
+      e.target.value = e.target.value.slice(0, -1);
+    } else {
+      this.setState({ height: e.target.value })
     }
   }
 
@@ -41,8 +51,24 @@ class RegisterSurveyComponent extends Component {
     // if value is not blank, then test the regex
     if (!reg.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
+    } else {
+      this.setState({ weight: e.target.value })
     }
   }
+
+  handleRegister = e => {
+    e.preventDefault();
+    console.log(this.state);
+    let formData = { ...this.state };
+    console.log('handle register',formData);
+    delete formData.birthDay;
+    delete formData.birthMonth;
+    delete formData.birthYear;
+    delete formData.confirm_password;
+    console.log('AFTER', formData);
+    this.props.dispatchRegister(formData);
+    return this.props.isRegistered();
+  };
 
   render() { 
     return ( 
@@ -55,6 +81,7 @@ class RegisterSurveyComponent extends Component {
               onKeyUp={this.handleKeyUpHeight}
               placeholder="Your Height"
             /> 
+            cm
           </li>
           <li>
             <input 
@@ -63,23 +90,23 @@ class RegisterSurveyComponent extends Component {
               onChange={this.handleOnChangeWeight}
               placeholder="Your Weight"
             />
-            lbs
+            kgs
           </li>
         </ul>
         <li>
-          Birthday
+          Birthday: 
           <YearPicker
             defaultValue={'Select Year'}
             start={1900}
-            end={2020}
+            end={2019}
             reverse
             required={true}
             value={this.state.year}
             // mandatory
-            onChange={async (year) => {
-                await this.setState({ birth_date: [year]});
-                console.log(year);
-                console.log(this.state);
+            onChange={(year) => {
+              this.setState({ birthYear: year});
+              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              console.log(year);
             }}
             id={'year'}
             name={'year'}
@@ -87,13 +114,7 @@ class RegisterSurveyComponent extends Component {
             optionClasses={'option classes'}
           />
           <MonthPicker
-            defaultValue={'select month'}
-            // to get months as numbers
-            numeric
-            // default is full name
-            short
-            // default is Titlecase
-            caps
+            defaultValue={'Select Month'}
             // mandatory if end={} is given in YearPicker
             endYearGiven
             // mandatory
@@ -104,8 +125,13 @@ class RegisterSurveyComponent extends Component {
             value={this.state.month}
             // mandatory
             onChange={(month) => {
-                this.setState({ month });
-                console.log(month);
+              let birthMonth = (parseInt(month) + 1).toString();
+              if(birthMonth.length === 1){
+                birthMonth = '0' + birthMonth; 
+              }
+              this.setState({ birthMonth });
+              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              console.log((parseInt(month) + 1).toString());
             }}
             id={'month'}
             name={'month'}
@@ -113,11 +139,11 @@ class RegisterSurveyComponent extends Component {
             optionClasses={'option classes'}
           />
           <DayPicker
-            defaultValue={'select day'}
+            defaultValue={'Select Day'}
             // mandatory
-            year={this.state.year}
+            year={this.state.birthYear}
             // mandatory
-            month={this.state.month}
+            month={this.state.birthMonth}
             // mandatory if end={} is given in YearPicker
             endYearGiven
             // default is false
@@ -126,8 +152,13 @@ class RegisterSurveyComponent extends Component {
             value={this.state.day}
             // mandatory
             onChange={(day) => {
-                this.setState({ day });
-                console.log(day);
+              let birthDay;
+              if (day.length === 1){
+                birthDay = "0" + day;
+              }
+              this.setState({ birthDay: birthDay });
+              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              console.log(day);
             }}
             id={'day'}
             name={'day'}
@@ -136,39 +167,134 @@ class RegisterSurveyComponent extends Component {
           />
         </li>
         <li>
-          <select 
+          Gender:
+          <input 
+            type="radio"
             name="gender"
-            // onChange={ DO SOMETHING }
-          >
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="3">Other</option>
-          </select>
+            value="1"
+            onClick={(e) => {
+              this.setState({ gender_id: e.target.value });
+            }}
+          />
+          Male
+          <input 
+            type="radio"
+            name="gender"
+            value="2"
+            onClick={(e) => {
+              this.setState({ gender_id: e.target.value });
+            }}
+          />
+          Female
+          <input 
+            type="radio"
+            name="gender"
+            value="3"
+            onClick={(e) => {
+              this.setState({ gender_id: e.target.value });
+            }}
+          />
+          Other
         </li>
         <li>
-          <select
-            name="activity_level"
-            // onChange={ DO SOMETHING }
-          >
-            <option value="1">Sedentary</option>
-            <option value="2">Light</option>
-            <option value="3">Active</option>
-            <option value="4">Very Active</option>
-          </select>
+          Activity Level:
+          <input 
+            type="radio"
+            name="activityLevel"
+            value="1"
+            onClick={(e) => {
+              this.setState({ activity_level_id: e.target.value });
+            }}
+          />
+          Sedentary
+          <input 
+            type="radio"
+            name="activityLevel"
+            value="2"
+            onClick={(e) => {
+              this.setState({ activity_level_id: e.target.value });
+            }}
+          />
+          Light
+          <input 
+            type="radio"
+            name="activityLevel"
+            value="3"
+            onClick={(e) => {
+              this.setState({ activity_level_id: e.target.value });
+            }}
+          />
+          Active
+          <input 
+            type="radio"
+            name="activityLevel"
+            value="4"
+            onClick={(e) => {
+              this.setState({ activity_level_id: e.target.value });
+            }}
+          />
+          Very Active
         </li>
         <li>
-            <select 
-              name= "goals"
-              // onChange={DO SOMETHING}
-            >
-              <option value="1">mild weight loss</option>
-              <option value="2">moderate weight loss</option>
-              <option value="3">extreme weight loss</option>
-              <option value="4">maintain weight</option>
-              <option value="5">muscle gain</option>
-              <option value="6">no goal</option>
-            </select>
+          Goal:
+          <input 
+            type="radio"
+            name="goal"
+            value="1"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          Mild Weight Loss
+          <input 
+            type="radio"
+            name="goal"
+            value="2"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          Moderate Weight Loss
+          <input 
+            type="radio"
+            name="goal"
+            value="3"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          Extreme Weight Loss
+          <input 
+            type="radio"
+            name="goal"
+            value="4"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          Maintain Weight
+          <input 
+            type="radio"
+            name="goal"
+            value="5"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          Gain muscle
+          <input 
+            type="radio"
+            name="goal"
+            value="6"
+            onClick={(e) => {
+              this.setState({ goal_id: e.target.value })
+            }}
+          />
+          No Goal
         </li>
+        <button onClick={this.handleRegister}>
+          Register
+        </button>
       </form>
      );
   }

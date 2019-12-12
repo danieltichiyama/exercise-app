@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
-import { actionsRegister } from "../../actions";
+// import { actionsRegister } from "../../actions";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -36,17 +36,6 @@ class RegisterComponent extends Component {
     const state = { ...this.state };
     state[name] = value;
     this.setState(state);
-  };
-
-  handleRegister = e => {
-    e.preventDefault();
-    let formData = { ...this.state };
-    console.log('BEFORE: ', formData);
-    delete formData.formErrors;
-    delete formData["confirm password"];
-    console.log('AFTER', formData);
-    this.props.dispatchRegister(formData);
-    return this.props.isRegistered();
   };
 
   handleLoginClick = () => {
@@ -161,14 +150,14 @@ class RegisterComponent extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchRegister: data => {
-      return dispatch(actionsRegister(data));
-    }
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     dispatchRegister: data => {
+//       return dispatch(actionsRegister(data));
+//     }
+//   };
+// };
 
-RegisterComponent = connect(null, mapDispatchToProps)(RegisterComponent);
+// RegisterComponent = connect(null, mapDispatchToProps)(RegisterComponent);
 
 export default RegisterComponent;

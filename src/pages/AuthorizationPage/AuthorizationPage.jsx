@@ -38,7 +38,11 @@ class AuthorizationPage extends Component {
               takingSurvey={this.takingSurvey}
             >  
             </RegisterComponent>
-          ) : (<RegisterSurveyComponent obj={this.state.obj}></RegisterSurveyComponent>)
+          ) : (<RegisterSurveyComponent 
+                obj={this.state.obj}
+                isRegistered={this.isRegistered}
+              >   
+              </RegisterSurveyComponent>)
         ) : (
           <LoginComponent isRegistered={this.isRegistered}></LoginComponent>
         )}

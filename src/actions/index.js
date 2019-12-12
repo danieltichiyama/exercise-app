@@ -42,6 +42,7 @@ export const actionsLoginSubmit = data => async dispatch => {
 };
 
 export const actionsRegister = data => async dispatch => {
+  console.log(data);
   await Axios.post("/api/auth/register", data)
     .then(response => {
       return dispatch({
