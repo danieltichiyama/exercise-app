@@ -21,11 +21,12 @@ const initialStore = {
   display: "meal",
   diaryData: [],
   users: [],
-  isLoggedIn: false
+  isLoggedIn: false,
+  addFood: {}
 };
 
 let reducer = (store = initialStore, action) => {
-  // console.log(action.payload);
+  console.log(action.payload);
 
   switch (action.type) {
     case LOAD_ACTIVITIES:
@@ -77,7 +78,7 @@ let reducer = (store = initialStore, action) => {
       return store;
 
     case ADD_FOOD:
-      return Object.assign({}, store, { foods: action.payload });
+      return Object.assign({}, store, { addFood: action.payload });
   }
 };
 

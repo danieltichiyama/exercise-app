@@ -9,11 +9,28 @@ class AddFoodButtonComponent extends Component {
     this.state = {};
   }
 
+  compileFoodData = () => {
+    // anything from localStorage will be a string first
+    let id = localStorage.getItem("session"); // returns as id as string
+    let stringToId = JSON.parse(id); // now an object
+
+    return {
+      date: new Date(),
+      api_id: this.props.api_id,
+      meal_type_id: 1,
+      user_id: stringToId.id,
+      calories: this.props.calories,
+      serving_size: this.props.serving_size
+    };
+  };
+
   handleAddClick = () => {
-    this.props.addFood(this.state);
+    let apiFood = this.compileFoodData();
+    this.props.dispatchAddFood(apiFood);
   };
 
   render() {
+    console.log(this.props.addFood);
     return (
       <div className={styles.addFoodButton}>
         <p className={styles.description}>ADD TO DIARY</p>
@@ -29,16 +46,18 @@ class AddFoodButtonComponent extends Component {
 }
 
 const mapStateToProps = store => {
-  return {};
+  return {
+    addFood: store.addFood,
+    api_id: store.foods.fdcId,
+    calories: store.foods.foodNutrients[3].amount,
+    serving_size: store.foods.foodPortions[0].portionDescription
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    // NEED TO COME BACK TO THIS
-    // let data = Object.assign({}, state.???)
-
-    addFood: state => {
-      return dispatch(actionsAddProduct(data));
+    dispatchAddFood: foodObject => {
+      return dispatch(actionsAddProduct(foodObject));
     }
   };
 };

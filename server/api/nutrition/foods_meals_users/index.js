@@ -2,6 +2,20 @@ const express = require("express");
 const foodMealUserRouter = express.Router();
 const moment = require("moment");
 
+foodMealUserRouter.route("/new").post((req, res) => {
+  // console.log("server works");
+  return req.db.FoodMealUser.forge(req.body)
+    .save()
+    .then(response => {
+      console.log("server response", response);
+      return res.json(response);
+    })
+    .catch(err => {
+      console.log("error in addFood", err);
+      return res.status(500).send({ message: "error" });
+    });
+});
+
 foodMealUserRouter
   .route("/")
   .get((req, res) => {
@@ -35,4 +49,5 @@ foodMealUserRouter
         console.log(err);
       });
   });
+
 module.exports = foodMealUserRouter;

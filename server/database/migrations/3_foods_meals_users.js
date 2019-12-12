@@ -15,7 +15,7 @@ exports.up = function(knex) {
       .inTable("users")
       .notNullable();
     table.integer("calories").notNullable();
-    table.integer("serving_size").notNullable();
+    table.string("serving_size").notNullable();
     table.timestamps(true, true);
   });
 };
