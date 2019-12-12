@@ -48,9 +48,9 @@ class LoginComponent extends Component {
   }
 
   render() {
-    if (this.props.isLoggedIn === true) {
-      return <Redirect to="/" />;
-    }
+    // if (this.props.isLoggedIn === true) {
+    //   return <Redirect to="/authorization" />;
+    // }
     return (
       <div className={styles.LoginComponent}>
         <form>

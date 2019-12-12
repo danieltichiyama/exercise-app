@@ -5,13 +5,12 @@ import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
 import { actionsLogout } from "../actions";
+import { Redirect } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playground: true
-    };
+    this.state = {};
   }
 
   handleLogout = () => {
@@ -19,6 +18,10 @@ class App extends Component {
   };
 
   render() {
+    if (!this.props.isLoggedIn) {
+      return <Redirect to="/authorization" />;
+    }
+
     return (
       <div>
         {this.props.isLoggedIn ? (
