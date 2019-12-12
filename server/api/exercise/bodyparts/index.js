@@ -9,9 +9,12 @@ bodypartsRouter.route("/")
                 "muscle_group_id"
             ]
         })
-        .then(response => {
-            return res.json(response);
-        })
+            .then(response => {
+                return res.json(response);
+            })
+            .catch(err => {
+                console.log("Error in bodypartsRouter: ", err);
+            })
     })
 
 module.exports = bodypartsRouter;

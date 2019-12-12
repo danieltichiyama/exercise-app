@@ -16,6 +16,7 @@ export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
 export const FOOD_VISION = "FOOD_VISION";
+export const LOAD_BODY_PART = "LOAD_BODY_PART";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -160,7 +161,7 @@ export const actionLoadUser = id => async dispatch => {
 
 export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
-  await Axios.post("api/foods_meals_users", { date, session })
+  await Axios.post("/api/foods_meals_users", { date, session })
     .then(response => {
       return dispatch({
         type: GET_DIARY_DATA,
@@ -190,4 +191,17 @@ export const actionsChangeDate = date => async dispatch => {
     type: CHANGE_DATE,
     payload: date
   });
+};
+
+export const actionsLoadBodyParts = () => async dispatch => {
+  await Axios.get("/api/bodyparts")
+    .then(response => {
+      return dispatch({
+        type: LOAD_BODY_PART,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsLoadBodyParts: ", err)
+    });
 };

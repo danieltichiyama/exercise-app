@@ -11,12 +11,14 @@ import {
   LOAD_USER,
   CHANGE_DATE,
   DELETE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  LOAD_BODY_PART
 } from "../actions";
 import moment from "moment";
 
 const initialStore = {
   foods: [],
+  bodyparts: [],
   activity_levels: [],
   community_posts: [],
   diaryData: [],
@@ -77,6 +79,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, {
         diaryDate: newMoment.format("YYYY-MM-D")
       });
+
+    case LOAD_BODY_PART:
+      return Object.assign({}, store, { bodyparts: action.payload })
 
     case ADD_COMMENT:
       return store;
