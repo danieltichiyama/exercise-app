@@ -12,6 +12,7 @@ import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
 import Playground from "./pages/Playground";
 
+
 export const routes = [
   {
     path: "/home",
@@ -67,7 +68,7 @@ export const routes = [
     path: "/playground",
     exact: true,
     component: Playground
-  }
+  },
 ];
 
 const Routes = () => {

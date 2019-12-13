@@ -16,7 +16,22 @@ export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
 export const FOOD_VISION = "FOOD_VISION";
-export const LOAD_BODY_PART = "LOAD_BODY_PART";
+export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
+export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
+export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
+
+export const actionsFilterBodyParts = (data) => async dispatch => {
+  await Axios.get(`/api/bodyparts/${data}`)
+    .then(response => {
+      return dispatch({
+        type: FILTER_BODY_PARTS,
+        payload: response.data[0].exercises
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsFilterBodyParts: ", err);
+    })
+};
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -197,11 +212,24 @@ export const actionsLoadBodyParts = () => async dispatch => {
   await Axios.get("/api/bodyparts")
     .then(response => {
       return dispatch({
-        type: LOAD_BODY_PART,
+        type: LOAD_BODY_PARTS,
         payload: response.data
       })
     })
     .catch(err => {
       console.log("Error in actionsLoadBodyParts: ", err)
+    });
+};
+
+export const actionsLoadExerciseList = () => async dispatch => {
+  await Axios.get("/api/exercises")
+    .then(response => {
+      return dispatch({
+        type: LOAD_EXERCISE_LIST,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsLoadExerciseList: ", err);
     });
 };

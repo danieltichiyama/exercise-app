@@ -1,29 +1,32 @@
 import {
+  ADD_COMMENT,
+  CHANGE_DATE,
+  CLEAR,
+  DELETE_COMMENT,
+  FOOD_NUTRIENT_SEARCH,
+  FOOD_SEARCH,
+  GET_DIARY_DATA,
   LOAD_ACTIVITIES,
-  REGISTER,
+  LOAD_BODY_PARTS,
+  LOAD_EXERCISE_LIST,
+  LOAD_POSTS,
   LOGIN,
   LOGOUT,
-  LOAD_POSTS,
-  FOOD_SEARCH,
-  FOOD_NUTRIENT_SEARCH,
-  CLEAR,
-  GET_DIARY_DATA,
   LOAD_USER,
-  CHANGE_DATE,
-  DELETE_COMMENT,
-  ADD_COMMENT,
-  LOAD_BODY_PART
+  REGISTER,
+  FILTER_BODY_PARTS,
 } from "../actions";
 import moment from "moment";
 
 const initialStore = {
-  foods: [],
-  bodyparts: [],
   activity_levels: [],
+  bodyparts: [],
   community_posts: [],
   diaryData: [],
-  users: [],
+  exercises: [],
+  foods: [],
   foods_meals_users: [],
+  users: [],
   isLoggedIn: false,
   diaryDate: moment()
     .utc()
@@ -32,7 +35,6 @@ const initialStore = {
 };
 
 let reducer = (store = initialStore, action) => {
-  // console.log(action.payload);
 
   switch (action.type) {
     case LOAD_ACTIVITIES:
@@ -80,8 +82,14 @@ let reducer = (store = initialStore, action) => {
         diaryDate: newMoment.format("YYYY-MM-D")
       });
 
-    case LOAD_BODY_PART:
-      return Object.assign({}, store, { bodyparts: action.payload })
+    case LOAD_BODY_PARTS:
+      return Object.assign({}, store, { bodyparts: action.payload });
+
+    case LOAD_EXERCISE_LIST:
+      return Object.assign({}, store, { exercises: action.payload });
+
+    case FILTER_BODY_PARTS:
+      return Object.assign({}, store, { exercises: action.payload });
 
     case ADD_COMMENT:
       return store;
