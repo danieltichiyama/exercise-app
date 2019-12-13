@@ -12,6 +12,7 @@ class AddBreakfastPage extends Component {
     return (
       <div>
         <h1>Breakfast</h1>
+        {/* <FoodSearchComponent meal_type_id={"1"} /> */}
         <FoodSearchComponent />
       </div>
     );

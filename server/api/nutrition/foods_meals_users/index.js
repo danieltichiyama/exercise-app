@@ -3,11 +3,11 @@ const foodMealUserRouter = express.Router();
 const moment = require("moment");
 
 foodMealUserRouter.route("/new").post((req, res) => {
-  // console.log("server works");
+  console.log("server works");
   return req.db.FoodMealUser.forge(req.body)
     .save()
     .then(response => {
-      console.log("server response", response);
+      console.log("server response: ", response);
       return res.json(response);
     })
     .catch(err => {

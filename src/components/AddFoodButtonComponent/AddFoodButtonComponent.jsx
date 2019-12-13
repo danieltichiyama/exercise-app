@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "../AddFoodButtonComponent/AddFoodButtonComponent.module.scss";
 import { actionsAddProduct } from "../../actions";
+import { convertToObject } from "typescript";
 
 class AddFoodButtonComponent extends Component {
   constructor(props) {
@@ -14,6 +15,11 @@ class AddFoodButtonComponent extends Component {
     let id = localStorage.getItem("session"); // returns as id as string
     let stringToId = JSON.parse(id); // now an object
 
+    console.log("meal_type_id: ", this.props.meal_type_id);
+    //   if (this.props.meal_type_id == 1) {
+
+    //   }
+
     return {
       date: new Date(),
       api_id: this.props.api_id,
@@ -25,12 +31,13 @@ class AddFoodButtonComponent extends Component {
   };
 
   handleAddClick = () => {
+    console.log("handleAddClickWorks");
     let apiFood = this.compileFoodData();
     this.props.dispatchAddFood(apiFood);
   };
 
   render() {
-    console.log(this.props.addFood);
+    console.log("this.props.addFood: ", this.props.addFood);
     return (
       <div className={styles.addFoodButton}>
         <p className={styles.description}>ADD TO DIARY</p>
