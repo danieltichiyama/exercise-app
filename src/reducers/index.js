@@ -22,7 +22,7 @@ const initialStore = {
   diaryData: [],
   users: [],
   foods_meals_users: [],
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getItem("session"),
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),

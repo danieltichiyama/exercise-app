@@ -33,7 +33,8 @@ class LoginComponent extends Component {
     } else if (!email.includes("@")) {
       return this.setState({ error: true });
     } else {
-      return this.props.dispatchLoginSubmit(this.state);
+      this.props.dispatchLoginSubmit(this.state);
+      return <Redirect to="/" />;
     }
   };
 
@@ -49,7 +50,8 @@ class LoginComponent extends Component {
 
   render() {
     // if (this.props.isLoggedIn === true) {
-    //   return <Redirect to="/authorization" />;
+    //   console.log("redirecting");
+    //   return <Redirect to="/" />;
     // }
     return (
       <div className={styles.LoginComponent}>

@@ -7,7 +7,7 @@ class AuthorizationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRegistered: false
+      isRegistered: true
     };
   }
 

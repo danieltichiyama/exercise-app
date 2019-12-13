@@ -5,7 +5,6 @@ import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
 import { actionsLogout } from "../actions";
-import { Redirect } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -18,10 +17,6 @@ class App extends Component {
   };
 
   render() {
-    if (!this.props.isLoggedIn) {
-      return <Redirect to="/authorization" />;
-    }
-
     return (
       <div>
         {this.props.isLoggedIn ? (
