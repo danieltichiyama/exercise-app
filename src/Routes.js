@@ -10,6 +10,8 @@ import AddBreakfastPage from "./pages/AddBreakfastPage";
 import AddLunchPage from "./pages/AddLunchPage";
 import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
+import UserEditPage from "./pages/UserEditPage";
+
 import Playground from "./pages/Playground";
 
 export const routes = [
@@ -52,6 +54,11 @@ export const routes = [
     path: "/community",
     exact: true,
     component: CommunityPage
+  },
+  {
+    path: "/user/edit",
+    exact: true,
+    component: UserEditPage
   },
   {
     path: "/user",

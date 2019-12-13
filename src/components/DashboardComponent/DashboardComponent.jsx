@@ -30,6 +30,7 @@ class DashboardComponent extends Component {
         return total + data.calories;
       }, 0);
     let remaining = JSON.stringify(goal - food);
+    let consumed = JSON.stringify(food);
 
     return (
       <>
@@ -64,7 +65,7 @@ class DashboardComponent extends Component {
 
           <div className={styles.caloriesConsumedText}>
             <p>Calories consumed:</p>
-            <p className={styles.remainingP}>{remaining}</p>
+            <p className={styles.consumedP}>{consumed}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>
