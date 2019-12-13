@@ -6,74 +6,99 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex("foods_meals_users").insert([
         {
-          calories: 70,
-          api_id: 209592,
+          api_id: 340635,
           meal_type_id: 1,
           user_id: 1,
-          date: "2019-10-15"
+          calories: 150,
+          servings: 1,
+          description: "Kashi GoLean",
+          protein: 6,
+          fat: 2,
+          carbs: 22,
+          serving_size: "58g"
+
+          //cereal
         },
         {
-          calories: 320,
-          api_id: 683503,
+          api_id: 336070,
+          meal_type_id: 1,
+          user_id: 1,
+          calories: 100,
+          servings: 1,
+          description: "Milk",
+          protein: 2,
+          fat: 5,
+          carbs: 6,
+          serving_size: "100ml"
+          //milk
+        },
+        {
+          api_id: 341455,
+          meal_type_id: 1,
+          user_id: 1,
+          calories: 100,
+          servings: 1,
+          description: "Orange Juice",
+          protein: 0,
+          fat: 0,
+          carbs: 25,
+          serving_size: "80fl oz"
+          //orange juice
+        },
+        {
+          api_id: 338684,
           meal_type_id: 2,
           user_id: 1,
-          date: "2019-10-15"
+          calories: 500,
+          servings: 1,
+          description: "Broiled Chicken Sandwich, Burger King",
+          protein: 14,
+          fat: 8,
+          carbs: 40,
+          serving_size: "1 sandwich"
+          //Burger King Broiled Chicken Sandwich
         },
         {
-          calories: 860,
-          api_id: 817528,
+          api_id: 170327,
+          meal_type_id: 2,
+          user_id: 1,
+          calories: 250,
+          servings: 1,
+          description: "French fries, Burger King",
+          protein: 0,
+          fat: 6,
+          carbs: 22,
+          serving_size: "1 small"
+
+          //Burger King French Fries
+        },
+        {
+          api_id: 344475,
+          meal_type_id: 2,
+          user_id: 1,
+          calories: 500,
+          servings: 1,
+          description: "Rum and Coke",
+          protein: 0,
+          fat: 0,
+          carbs: 30,
+          serving_size: "24 fl oz"
+
+          //rum and coke
+        },
+        {
+          api_id: 338406,
           meal_type_id: 3,
           user_id: 1,
-          date: "2019-10-15"
-        },
-        {
-          calories: 200,
-          api_id: 311877,
-          meal_type_id: 4,
-          user_id: 1,
-          date: "2019-10-15"
-        },
-        {
-          calories: 70,
-          api_id: 698889,
-          meal_type_id: 1,
-          user_id: 2,
-          date: "2019-12-21"
-        },
-        {
-          calories: 70,
-          api_id: 131312,
-          meal_type_id: 1,
-          user_id: 2,
-          date: "2019-12-21"
-        },
-        {
-          calories: 200,
-          api_id: 951821,
-          meal_type_id: 4,
-          user_id: 3,
-          date: "2019-04-20"
-        },
-        {
-          calories: 200,
-          api_id: 306276,
-          meal_type_id: 4,
-          user_id: 3,
-          date: "2019-04-20"
-        },
-        {
-          calories: 70,
-          api_id: 467763,
-          meal_type_id: 1,
-          user_id: 5,
-          date: "2019-06-29"
-        },
-        {
-          calories: 320,
-          api_id: 178699,
-          meal_type_id: 2,
-          user_id: 8,
-          date: "2019-04-17"
+          calories: 300,
+          servings: 1,
+          description: "Steak, ribeye",
+          protein: 18,
+          fat: 6,
+          carbs: 2,
+          serving_size: "8oz"
+
+          //steak
         }
       ]);
     });

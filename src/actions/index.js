@@ -6,12 +6,16 @@ export const LOGOUT = "LOGOUT";
 export const REGISTER = "REGISTER";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
 export const LOAD_COMMENT = "LOAD_COMMENT";
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
-export const LOAD_USER = "LOAD_USER";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
+export const CHANGE_DATE = "CHANGE_DATE";
+export const FOOD_VISION = "FOOD_VISION";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -118,6 +122,16 @@ export const actionClear = () => dispatch => {
   });
 };
 
+export const actionFoodVision = data => async dispatch => {
+  console.log("DATA: ", data);
+  await Axios.post("/api/vision", data).then(response => {
+    return dispatch({
+      type: FOOD_VISION,
+      payload: response.data
+    });
+  });
+};
+
 export const actionFoodNutrients = fdcId => async dispatch => {
   await Axios.get(`/api/nutrition/${fdcId}`)
     .then(response => {
@@ -140,7 +154,7 @@ export const actionLoadUser = id => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadUsers: ", err);
+      console.log("Error in actionLoadUser: ", err);
     });
 };
 
@@ -148,7 +162,6 @@ export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
   await Axios.post("api/foods_meals_users", { date, session })
     .then(response => {
-      console.log("gotResponse", response);
       return dispatch({
         type: GET_DIARY_DATA,
         payload: response.data
@@ -157,4 +170,24 @@ export const actionsGetDiaryData = date => async dispatch => {
     .catch(err => {
       console.log("Error in actionsGetDiaryData: ", err);
     });
+};
+
+export const actionsDeleteComment = data => async dispatch => {
+  await Axios.delete("/api/community_comments", { data: { data } })
+    .then(response => {
+      return dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsDeleteComment: ", err);
+    });
+};
+
+export const actionsChangeDate = date => async dispatch => {
+  return dispatch({
+    type: CHANGE_DATE,
+    payload: date
+  });
 };

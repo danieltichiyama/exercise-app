@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import styles from "./LoginComponent.module.scss";
 import { actionsLoginSubmit } from "../../actions";
 
@@ -47,6 +48,9 @@ class LoginComponent extends Component {
   }
 
   render() {
+    if (this.props.isLoggedIn === true) {
+      return <Redirect to="/home" />;
+    }
     return (
       <div className={styles.LoginComponent}>
         <form>
@@ -131,7 +135,8 @@ class LoginComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    registeredUserEmail: store.registeredUserEmail
+    registeredUserEmail: store.registeredUserEmail,
+    isLoggedIn: store.isLoggedIn
   };
 };
 
