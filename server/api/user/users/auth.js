@@ -67,7 +67,7 @@ passport.use(
 
 passport.serializeUser(function(user, done) {
   console.log("serializing, user: ", user);
-  return done(null, { id: user.id, email: user.email, name: user.name });
+  return done(null, { id: user.id, name: user.name });
 });
 
 passport.deserializeUser(function(user, done) {
