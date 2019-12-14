@@ -30,14 +30,15 @@ class AddFoodButtonComponent extends Component {
 
   render() {
     return (
-      <div className={styles.addFoodButton}>
-        <p className={styles.description}>ADD TO DIARY</p>
-        <img
-          className="addFoodButton"
-          src="https://image.flaticon.com/icons/svg/1237/1237946.svg"
-          alt="add button"
-          onClick={this.handleAddClick}
-        />
+      <div>
+        <button className={styles.addFoodButton} onClick={this.handleAddClick}>
+          <p className={styles.description}>ADD TO DIARY</p>
+          <img
+            className="addFoodButton"
+            src="https://image.flaticon.com/icons/svg/1237/1237946.svg"
+            alt="add button"
+          />
+        </button>
       </div>
     );
   }
