@@ -18,9 +18,9 @@ class DiaryComponent extends Component {
     return this.props.dispatchGetDiaryData(UTCdate);
   };
 
-  componentDidMount = () => {
-    return this.handleNewDate();
-  };
+  // componentDidMount = () => {
+  //   return this.handleNewDate();
+  // };
 
   componentDidUpdate = prevProps => {
     if (this.props.diaryDate !== prevProps.diaryDate) {

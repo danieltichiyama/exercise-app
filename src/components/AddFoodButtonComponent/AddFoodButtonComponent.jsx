@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "../AddFoodButtonComponent/AddFoodButtonComponent.module.scss";
-import { actionsAddProduct } from "../../actions";
-import { convertToObject } from "typescript";
+import { actionsAddFood } from "../../actions";
 
 class AddFoodButtonComponent extends Component {
   constructor(props) {
@@ -15,12 +14,12 @@ class AddFoodButtonComponent extends Component {
     let stringToId = JSON.parse(id);
 
     return {
-      date: new Date(),
       api_id: this.props.api_id,
       meal_type_id: this.props.meal_type_id,
       user_id: stringToId.id,
       calories: this.props.calories,
-      serving_size: this.props.serving_size
+      serving_size: this.props.serving_size,
+      servings: 1
     };
   };
 

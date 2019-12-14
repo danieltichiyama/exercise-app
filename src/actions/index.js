@@ -197,6 +197,8 @@ export const actionsAddFood = data => async dispatch => {
     .catch(err => {
       console.log("Error in actionsAddFood: ", err);
     });
+};
+
 export const actionsChangeDate = date => async dispatch => {
   return dispatch({
     type: CHANGE_DATE,

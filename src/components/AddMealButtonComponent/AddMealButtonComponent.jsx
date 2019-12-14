@@ -3,20 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "../AddMealButtonComponent/AddMealButtonComponent.module.scss";
 
 class AddMealButtonComponent extends Component {
-  handleMealClick = event => {
-    let dataset;
-    console.log("event target", event.target.dataset.meal);
-  };
-
   render() {
     return (
       <div className={styles.mealNavigation}>
         <div>
           <Link to="/nutrition/add_breakfast">
-            <button
-              className={styles.mealButton}
-              onClick={this.handleMealClick}
-            >
+            <button className={styles.mealButton}>
               <img
                 src="https://image.flaticon.com/icons/svg/926/926292.svg"
                 alt="breakfast"
@@ -27,10 +19,7 @@ class AddMealButtonComponent extends Component {
         </div>
         <div>
           <Link to="/nutrition/add_lunch">
-            <button
-              className={styles.mealButton}
-              onClick={this.handleMealClick}
-            >
+            <button className={styles.mealButton}>
               <img
                 src="https://image.flaticon.com/icons/svg/926/926305.svg"
                 alt="lunch"

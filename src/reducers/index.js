@@ -25,7 +25,6 @@ const initialStore = {
   isLoggedIn: false,
   addFood: {},
   foods_meals_users: [],
-  isLoggedIn: false,
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
