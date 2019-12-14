@@ -55,9 +55,9 @@ const mapStateToProps = store => {
     calories: store.foods.foodNutrients[3].amount,
     serving_size: store.foods.foodPortions[0].portionDescription,
     description: store.foods.description,
-    fat: store.foods.foodNutrients[1].nutrient.number,
-    carbs: store.foods.foodNutrients[2].nutrient.number,
-    protein: store.foods.foodNutrients[0].nutrient.number
+    fat: store.foods.foodNutrients[1].amount,
+    carbs: store.foods.foodNutrients[2].amount,
+    protein: store.foods.foodNutrients[0].amount
   };
 };
 

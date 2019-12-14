@@ -13,7 +13,8 @@ class FoodNutrientComponent extends Component {
         <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
         <h3>{this.props.description}</h3>
         <p>Calories: {this.props.calories}</p>
-        <p>Protien: {this.props.protien}</p>
+        <p>Fat: {this.props.fat}</p>
+        <p>Protein: {this.props.protein}</p>
         <p>Carbohydrates: {this.props.carbohydrates}</p>
         <p>Sugars: {this.props.sugars}</p>
         <p>Fiber: {this.props.fiber}</p>

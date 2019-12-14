@@ -5,9 +5,9 @@ exports.up = function(knex) {
     table.integer("servings").notNullable();
     table.integer("api_id").notNullable();
     table.string("description");
-    table.integer("protein");
-    table.integer("carbs");
-    table.integer("fat");
+    table.decimal("protein");
+    table.decimal("carbs");
+    table.decimal("fat");
     table.string("serving_size");
     //foreign keys
     table

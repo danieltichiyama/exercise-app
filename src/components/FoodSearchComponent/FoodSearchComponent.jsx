@@ -18,7 +18,7 @@ class FoodSearchComponent extends Component {
     this.props.dispatchFoodSearch(this.state);
   }
 
-  async searchKeyword(e){
+  async searchKeyword(e) {
     await this.setState({ data: e.target.value });
     // UNCOMMENT FOR LIVE SEARCHBAR
     // this.props.dispatchFoodSearch(this.state);
@@ -42,8 +42,9 @@ class FoodSearchComponent extends Component {
           key={data.description}
           description={data.description}
           calories={`${data.foodNutrients[3].amount} ${data.foodNutrients[3].nutrient.unitName}`}
-          protien={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
+          fat={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
           carbohydrates={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+          protein={`${data.foodNutrients[0].amount} ${data.foodNutrients[0].nutrient.unitName}`}
           sugars={`${data.foodNutrients[8].amount} ${data.foodNutrients[8].nutrient.unitName}`}
           fiber={`${data.foodNutrients[9].amount} ${data.foodNutrients[9].nutrient.unitName}`}
           calcium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
