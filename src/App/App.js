@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
-import SmokeButton from "../components/SmokeButton";
+import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
 import { withRouter } from "react-router";
 import MainBodyPage from "../pages/MainBodyPage";
@@ -15,11 +15,6 @@ class App extends Component {
     };
   }
 
-  handleHidePlayground = () => {
-    let toggle = this.state.playground;
-    return this.setState({ playground: !toggle });
-  };
-
   handleLogout = () => {
     return this.props.dispatchLogout();
   };
@@ -32,15 +27,6 @@ class App extends Component {
         ) : null}
         <MainBodyPage {...this.props}></MainBodyPage>
         <NavigationComponent></NavigationComponent>
-        {/* Below is a section for playing with new components, that can be hidden or shown by clicking the button below in the App.  I thought it might help to have it separate until new components are ready to be added to their appropriate place? idk... Daniel */}
-        <button onClick={this.handleHidePlayground}>
-          {this.state.playground ? "Hide Playground" : "Show Playground"}
-        </button>
-        {this.state.playground ? (
-          <div className="component_playground">
-            <SmokeButton></SmokeButton>
-          </div>
-        ) : null}
       </div>
     );
   }

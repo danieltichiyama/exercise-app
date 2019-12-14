@@ -7,20 +7,26 @@ import {
   FOOD_SEARCH,
   FOOD_NUTRIENT_SEARCH,
   CLEAR,
-  LOAD_USER,
   GET_DIARY_DATA,
+  LOAD_USER,
+  CHANGE_DATE,
   DELETE_COMMENT,
   ADD_COMMENT
 } from "../actions";
+import moment from "moment";
 
 const initialStore = {
   foods: [],
   activity_levels: [],
   community_posts: [],
-  display: "meal",
   diaryData: [],
   users: [],
-  isLoggedIn: false
+  foods_meals_users: [],
+  isLoggedIn: false,
+  diaryDate: moment()
+    .utc()
+    .format("YYYY-MM-D"),
+  display: "meal"
 };
 
 let reducer = (store = initialStore, action) => {
@@ -52,27 +58,31 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case FOOD_SEARCH:
-      console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload.foods });
 
     case FOOD_NUTRIENT_SEARCH:
-      console.log(action.payload);
       return Object.assign({}, store, { foods: action.payload });
+
+    case GET_DIARY_DATA:
+      return Object.assign({}, store, { diaryData: action.payload });
 
     case LOAD_USER:
       return Object.assign({}, store, { users: action.payload });
 
-    case GET_DIARY_DATA:
-      return Object.assign({}, store, { diaryData: action.payload });
+    case CLEAR:
+      return Object.assign({}, store, { foods: action.payload });
+
+    case CHANGE_DATE:
+      let newMoment = moment.utc(action.payload);
+      return Object.assign({}, store, {
+        diaryDate: newMoment.format("YYYY-MM-D")
+      });
 
     case ADD_COMMENT:
       return store;
 
     case DELETE_COMMENT:
       return store;
-
-    case CLEAR:
-      return Object.assign({}, store, { foods: action.payload });
 
     default:
       return store;
