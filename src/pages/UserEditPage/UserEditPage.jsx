@@ -21,7 +21,11 @@ class UserEditPage extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}></form>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" />
+          <input type="text" />
+        </form>
+
         <div>
           EDIT MY SHIZ
           <button>
