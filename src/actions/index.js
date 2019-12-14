@@ -104,15 +104,15 @@ export const actionFoodSearch = data => async dispatch => {
     },
     data
   })
-    .then(response => {
-      return dispatch({
-        type: FOOD_SEARCH,
-        payload: response.data
-      });
-    })
-    .catch(err => {
-      console.log(err);
+  .then(response => {
+    return dispatch({
+      type: FOOD_SEARCH,
+      payload: response.data
     });
+  })
+  .catch(err => {
+    console.log(err);
+  });
 };
 
 export const actionClear = () => dispatch => {
@@ -124,7 +124,8 @@ export const actionClear = () => dispatch => {
 
 export const actionFoodVision = data => async dispatch => {
   console.log("DATA: ", data);
-  await Axios.post("/api/vision", data).then(response => {
+  await Axios.post("/api/vision", data)
+    .then(response => {
     return dispatch({
       type: FOOD_VISION,
       payload: response.data

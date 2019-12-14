@@ -9,16 +9,14 @@ class FoodSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.searchDataOnClick = this.searchDataOnClick.bind(this);
-    this.searchKeyword = this.searchKeyword.bind(this);
   }
 
-  searchDataOnClick(e) {
+  searchDataOnClick = (e) => {
     e.preventDefault();
     this.props.dispatchFoodSearch(this.state);
   }
 
-  async searchKeyword(e){
+  searchKeyword = async (e) => {
     await this.setState({ data: e.target.value });
     // UNCOMMENT FOR LIVE SEARCHBAR
     // this.props.dispatchFoodSearch(this.state);
