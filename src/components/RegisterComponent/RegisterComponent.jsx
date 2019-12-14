@@ -10,27 +10,10 @@ class RegisterComponent extends Component {
       name: "",
       email: "",
       password: "",
-      confirm_password: "",
-      // height: 200,
-      // weight: 75,
-      // activity_level_id: 1,
-      // birth_date: "1999-01-01",
-      // gender_id: 1,
-      // user_tier_id: 1,
-      // goal_id: 1,
-      // formErrors: {
-        // name: "",
-        // email: "",
-        // password: "",
-        // "confirm password": "",
-        // height: "",
-        // weight: "",
-        // activity_level: "",
-        // birth_date: ""
-      // }
+      confirm_password: ""
     };
   }
-
+  
   handleInput = event => {
     const { value, name } = event.target;
     const state = { ...this.state };
@@ -42,14 +25,37 @@ class RegisterComponent extends Component {
     return this.props.isRegistered();
   };
 
-  handleContinueClick = (data) => {
-    return this.props.takingSurvey(data);
+  handleContinueClick = (e) => {
+    e.preventDefault();
+    if (!this.state.name || !this.state.email || !this.state.password){
+      alert("Please fill in all fields");
+      return false;
+    }
+    if (!this.validateEmail(this.state.email)){
+      alert("Please enter a valid email address");
+      return false;
+    }
+    if (this.state.password !== this.state.confirm_password){
+      alert("Passwords do not match.");
+      return false;
+    }
+    if (this.state.password.length < 6){
+      alert("Password must be at least 6 characters long.");
+      return false;
+    }
+    return this.props.takingSurvey(this.state);
+    
+  }
+
+  validateEmail = (email) => {
+    var reg = /\S+@\S+\.\S+/;
+    return reg.test(email);
   }
 
   render() {
     return (
       <div className={styles.RegisterComponent}>
-        <form>
+        <form onSubmit={this.handleContinueClick}> 
           <ul>
             {/* name */}
             <li className={styles.form_li}>
@@ -117,7 +123,7 @@ class RegisterComponent extends Component {
               <input
                 type="password"
                 name="confirm_password"
-                value={this.state["confirm password"]}
+                value={this.state.confirm_password}
                 onChange={this.handleInput}
                 placeholder="Confirm your password"
                 className={styles.form_input}
@@ -125,7 +131,7 @@ class RegisterComponent extends Component {
             </li>
           </ul>
 
-          <button onClick={() => this.handleContinueClick(this.state)} className={styles.login_button}>
+          <button onClick={() => this.handleContinueClick} className={styles.login_button}>
             Continue
           </button>
         </form>
@@ -149,15 +155,5 @@ class RegisterComponent extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     dispatchRegister: data => {
-//       return dispatch(actionsRegister(data));
-//     }
-//   };
-// };
-
-// RegisterComponent = connect(null, mapDispatchToProps)(RegisterComponent);
 
 export default RegisterComponent;

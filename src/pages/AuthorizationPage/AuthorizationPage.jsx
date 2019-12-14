@@ -15,7 +15,6 @@ class AuthorizationPage extends Component {
   }
 
   takingSurvey = (data) => {
-    console.log(data);
     return this.setState({ 
       takingSurvey: !this.state.takingSurvey,
       obj: data,
@@ -23,7 +22,6 @@ class AuthorizationPage extends Component {
   }
 
   isRegistered = () => {
-    console.log('hi')
     return this.setState({ isRegistered: !this.state.isRegistered });
   };
 

@@ -26,17 +26,6 @@ class RegisterSurveyComponent extends Component {
   }
 
   handleKeyUpHeight = (e) => {
-    // if (e.target.value.length === 1 && e.keyCode === 8){
-    //   e.target.value = '';
-    // } else if (e.target.value.length === 4 && e.keyCode === 8){ 
-    //   e.target.value = e.target.value.slice(0, 3)
-    // } else if (e.target.value.length === 1 && !(isNaN(parseInt(e.target.value)))){
-    //   e.target.value += "'";
-    // } else if (e.target.value.length === 4 && !(isNaN(parseInt(e.target.value)))){
-    //   e.target.value += '"';
-    // } else if (e.target.value.length > 5){
-    //   e.target.value = e.target.value.slice(0, -(e.target.value.length - 5));
-    // }
     const reg = /^[0-9\b]+$/;
     // if value is not blank, then test the regex
     if (!reg.test(e.target.value)) {
@@ -58,14 +47,11 @@ class RegisterSurveyComponent extends Component {
 
   handleRegister = e => {
     e.preventDefault();
-    console.log(this.state);
     let formData = { ...this.state };
-    console.log('handle register',formData);
     delete formData.birthDay;
     delete formData.birthMonth;
     delete formData.birthYear;
     delete formData.confirm_password;
-    console.log('AFTER', formData);
     this.props.dispatchRegister(formData);
     return this.props.isRegistered();
   };
@@ -75,6 +61,7 @@ class RegisterSurveyComponent extends Component {
       <form>
         <ul>
           <li>
+            Height: 
             <input     
               type="text"
               name="height"
@@ -84,6 +71,7 @@ class RegisterSurveyComponent extends Component {
             cm
           </li>
           <li>
+            Weight: 
             <input 
               type="text"
               name="weight"
@@ -103,10 +91,11 @@ class RegisterSurveyComponent extends Component {
             required={true}
             value={this.state.year}
             // mandatory
-            onChange={(year) => {
-              this.setState({ birthYear: year});
+            onChange={async (year) => {
+              await this.setState({ birthYear: year});
               this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              console.log(year);
+              // console.log(year);
+              console.log(this.state);
             }}
             id={'year'}
             name={'year'}
@@ -124,14 +113,15 @@ class RegisterSurveyComponent extends Component {
             // mandatory
             value={this.state.month}
             // mandatory
-            onChange={(month) => {
+            onChange={async (month) => {
               let birthMonth = (parseInt(month) + 1).toString();
               if(birthMonth.length === 1){
                 birthMonth = '0' + birthMonth; 
               }
-              this.setState({ birthMonth });
+              await this.setState({ birthMonth });
               this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              console.log((parseInt(month) + 1).toString());
+              // console.log((parseInt(month) + 1).toString());
+              console.log(this.state)
             }}
             id={'month'}
             name={'month'}
@@ -151,14 +141,14 @@ class RegisterSurveyComponent extends Component {
             // mandatory
             value={this.state.day}
             // mandatory
-            onChange={(day) => {
-              let birthDay;
+            onChange={async (day) => {
+              let birthDay = '';
               if (day.length === 1){
                 birthDay = "0" + day;
               }
-              this.setState({ birthDay: birthDay });
+              await this.setState({ birthDay: birthDay });
               this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              console.log(day);
+              console.log(this.state);
             }}
             id={'day'}
             name={'day'}
