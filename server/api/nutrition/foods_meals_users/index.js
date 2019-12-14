@@ -31,6 +31,7 @@ foodMealUserRouter
   .post((req, res) => {
     let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
     let nextDay = moment(date).add(1, "day");
+
     return req.db.FoodMealUser.query(qb => {
       return qb
         .select()

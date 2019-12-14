@@ -1,14 +1,14 @@
-
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('meal_types').del()
-    .then(function () {
+  return knex("meal_types")
+    .del()
+    .then(function() {
       // Inserts seed entries
-      return knex('meal_types').insert([
-        {meal_type: 'breakfast'},
-        {meal_type: 'lunch'},
-        {meal_type: 'dinner'},
-        {meal_type: 'snack'}
+      return knex("meal_types").insert([
+        { meal_type: "Breakfast" },
+        { meal_type: "Lunch" },
+        { meal_type: "Dinner" },
+        { meal_type: "Snack" }
       ]);
     });
 };

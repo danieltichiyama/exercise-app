@@ -56,7 +56,7 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     dispatchAddFood: foodObject => {
-      return dispatch(actionsAddProduct(foodObject));
+      return dispatch(actionsAddFood(foodObject));
     }
   };
 };

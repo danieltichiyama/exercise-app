@@ -1,9 +1,15 @@
 exports.up = function(knex) {
   return knex.schema.createTable("foods_meals_users", table => {
     table.increments();
-    table.date("date");
-    //foreign keys
+    table.integer("calories").notNullable();
+    table.integer("servings").notNullable();
     table.integer("api_id").notNullable();
+    table.string("description");
+    table.integer("protein");
+    table.integer("carbs");
+    table.integer("fat");
+    table.string("serving_size");
+    //foreign keys
     table
       .integer("meal_type_id")
       .references("id")
