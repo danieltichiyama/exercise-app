@@ -18,6 +18,7 @@ class NewsFeedComponent extends Component {
           return (
             <CommunityPostComponent
               key={post.id}
+              id={post.id}
               title={post.title}
               body={post.body}
               community_comment_id={post.community_comment_id}
