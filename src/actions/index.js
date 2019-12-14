@@ -176,7 +176,6 @@ export const actionsDeleteComment = data => async dispatch => {
 export const actionsAddProduct = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
     .then(response => {
-      console.log("actions response: ", response);
       return dispatch({
         type: ADD_FOOD,
         payload: response.data

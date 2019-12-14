@@ -14,8 +14,6 @@ class AddFoodButtonComponent extends Component {
     let id = localStorage.getItem("session");
     let stringToId = JSON.parse(id);
 
-    console.log("meal_type_id: ", this.props.meal_type_id);
-
     return {
       date: new Date(),
       api_id: this.props.api_id,
@@ -27,13 +25,11 @@ class AddFoodButtonComponent extends Component {
   };
 
   handleAddClick = () => {
-    console.log("handleAddClickWorks");
     let apiFood = this.compileFoodData();
     this.props.dispatchAddFood(apiFood);
   };
 
   render() {
-    console.log("this.props.addFood: ", this.props.addFood);
     return (
       <div className={styles.addFoodButton}>
         <p className={styles.description}>ADD TO DIARY</p>

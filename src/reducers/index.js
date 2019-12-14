@@ -23,12 +23,9 @@ const initialStore = {
   users: [],
   isLoggedIn: false,
   addFood: {}
-  // meal_type_id: 1
 };
 
 let reducer = (store = initialStore, action) => {
-  console.log("action.payload: ", action.payload);
-
   switch (action.type) {
     case LOAD_ACTIVITIES:
       return Object.assign({}, store, { activity_levels: action.payload });
