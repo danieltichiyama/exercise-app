@@ -91,11 +91,10 @@ class RegisterSurveyComponent extends Component {
             required={true}
             value={this.state.year}
             // mandatory
-            onChange={async (year) => {
-              await this.setState({ birthYear: year});
-              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              // console.log(year);
-              console.log(this.state);
+            onChange={(year) => {
+              this.setState({ birthYear: year}, () => {
+                this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              });
             }}
             id={'year'}
             name={'year'}
@@ -113,15 +112,14 @@ class RegisterSurveyComponent extends Component {
             // mandatory
             value={this.state.month}
             // mandatory
-            onChange={async (month) => {
+            onChange={(month) => {
               let birthMonth = (parseInt(month) + 1).toString();
               if(birthMonth.length === 1){
                 birthMonth = '0' + birthMonth; 
               }
-              await this.setState({ birthMonth });
-              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              // console.log((parseInt(month) + 1).toString());
-              console.log(this.state)
+              this.setState({ birthMonth }, () => {
+                this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              });
             }}
             id={'month'}
             name={'month'}
@@ -141,14 +139,14 @@ class RegisterSurveyComponent extends Component {
             // mandatory
             value={this.state.day}
             // mandatory
-            onChange={async (day) => {
+            onChange={(day) => {
               let birthDay = '';
               if (day.length === 1){
                 birthDay = "0" + day;
               }
-              await this.setState({ birthDay: birthDay });
-              this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
-              console.log(this.state);
+              this.setState({ birthDay: birthDay }, () => {
+                this.setState({ birth_date: `${this.state.birthYear}-${this.state.birthMonth}-${this.state.birthDay}` });
+              });
             }}
             id={'day'}
             name={'day'}
