@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "./App.css";
 import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
-import { withRouter } from "react-router";
 import MainBodyPage from "../pages/MainBodyPage";
 import { actionsLogout } from "../actions";
 
