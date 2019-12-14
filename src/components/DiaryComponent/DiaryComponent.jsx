@@ -18,12 +18,14 @@ class DiaryComponent extends Component {
     return this.props.dispatchGetDiaryData(UTCdate);
   };
 
-  // componentDidMount = () => {
-  //   return this.handleNewDate();
-  // };
+  componentDidMount = () => {
+    return this.handleNewDate();
+  };
 
   componentDidUpdate = prevProps => {
     if (this.props.diaryDate !== prevProps.diaryDate) {
+      return this.handleNewDate();
+    } else if (this.props.addFood !== prevProps.addFood) {
       return this.handleNewDate();
     }
   };
@@ -35,6 +37,7 @@ class DiaryComponent extends Component {
   };
 
   render() {
+    console.log("this.props: ", this.props);
     return (
       <div className={styles.DiaryComponent}>
         <ul>
@@ -56,7 +59,8 @@ class DiaryComponent extends Component {
 const mapStateToProps = store => {
   return {
     diaryData: store.diaryData,
-    diaryDate: store.diaryDate
+    diaryDate: store.diaryDate,
+    addFood: store.addFood
   };
 };
 
