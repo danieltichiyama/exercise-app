@@ -3,15 +3,30 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const decorator = require("./database/decorator");
 const api = require("./api/index");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static("./server/public"));
+// app.use(express.static("./server/public"));
+
+//production - uncommment when serve -s build
+app.use(express.static(path.join(__dirname, "build")));
+
+//production - uncomment when serve -s build
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 //body-parsers and decorator
-app.use(bodyParser.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
-app.use(bodyParser.json({ extended: true, limit:"50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+    limit: "50mb",
+    parameterLimit: 50000
+  })
+);
+app.use(bodyParser.json({ extended: true, limit: "50mb" }));
 app.use(decorator);
 
 //routers
