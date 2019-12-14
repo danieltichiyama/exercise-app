@@ -22,8 +22,8 @@ const initialStore = {
   diaryData: [],
   users: [],
   isLoggedIn: false,
-  addFood: {},
-  meal_type_id: 1
+  addFood: {}
+  // meal_type_id: 1
 };
 
 let reducer = (store = initialStore, action) => {

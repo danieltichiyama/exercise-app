@@ -10,7 +10,7 @@ class FoodNutrientComponent extends Component {
   render() {
     return (
       <div>
-        <AddFoodButtonComponent />
+        <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
         <h3>{this.props.description}</h3>
         <p>Calories: {this.props.calories}</p>
         <p>Protien: {this.props.protien}</p>

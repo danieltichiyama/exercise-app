@@ -11,14 +11,10 @@ class AddFoodButtonComponent extends Component {
   }
 
   compileFoodData = () => {
-    // anything from localStorage will be a string first
-    let id = localStorage.getItem("session"); // returns as id as string
-    let stringToId = JSON.parse(id); // now an object
+    let id = localStorage.getItem("session");
+    let stringToId = JSON.parse(id);
 
     console.log("meal_type_id: ", this.props.meal_type_id);
-    //   if (this.props.meal_type_id == 1) {
-
-    //   }
 
     return {
       date: new Date(),
@@ -57,8 +53,7 @@ const mapStateToProps = store => {
     addFood: store.addFood,
     api_id: store.foods.fdcId,
     calories: store.foods.foodNutrients[3].amount,
-    serving_size: store.foods.foodPortions[0].portionDescription,
-    meal_type_id: store.meal_type_id
+    serving_size: store.foods.foodPortions[0].portionDescription
   };
 };
 

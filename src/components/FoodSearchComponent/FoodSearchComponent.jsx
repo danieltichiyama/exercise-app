@@ -38,6 +38,7 @@ class FoodSearchComponent extends Component {
     } else if (data.foodNutrients) {
       return (
         <FoodNutrientComponent
+          meal_type_id={this.props.meal_type_id}
           key={data.description}
           description={data.description}
           calories={`${data.foodNutrients[3].amount} ${data.foodNutrients[3].nutrient.unitName}`}

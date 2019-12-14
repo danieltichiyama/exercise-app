@@ -15,20 +15,22 @@ class AddMealButtonComponent extends Component {
           <Link to="/nutrition/add_breakfast">
             <button
               className={styles.mealButton}
-              data-meal="1"
               onClick={this.handleMealClick}
             >
               <img
                 src="https://image.flaticon.com/icons/svg/926/926292.svg"
                 alt="breakfast"
               />
-              {/* <span className={styles.mealDescription}>Breakfast +</span> */}
+              <span className={styles.mealDescription}>Breakfast +</span>
             </button>
           </Link>
         </div>
         <div>
           <Link to="/nutrition/add_lunch">
-            <button className={styles.mealButton} value="2">
+            <button
+              className={styles.mealButton}
+              onClick={this.handleMealClick}
+            >
               <img
                 src="https://image.flaticon.com/icons/svg/926/926305.svg"
                 alt="lunch"
