@@ -21,8 +21,6 @@ class UserPage extends Component {
   }
 
   render() {
-    console.log("user page props:::::", this.props.users);
-
     //change date format
     let birthDate = moment(this.props.users.birth_date)
       .utc()
