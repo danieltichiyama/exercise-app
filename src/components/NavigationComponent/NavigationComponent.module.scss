@@ -4,6 +4,7 @@
   flex-direction: row;
   position: fixed;
   bottom: 0;
+  overflow: hidden; // not sure what this does
   justify-content: space-around;
   align-content: center;
   background: #04c9b5;
