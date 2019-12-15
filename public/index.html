@@ -11,13 +11,14 @@
     <!-- adds a meta tag description of the site for SEO -->
     <meta name="description" content="A nutrition and exercise logging app" />
 
-    <!-- adds necessary functionality for apple iOS -->
+    <!-- iOS support section - adds necessary functionality for apple iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Fitworks" />
     <link rel="apple-touch-icon" href="/images/icons/icon-152x152.png" />
-
     <link rel="apple-touch-icon" href="logo192.png" />
+    <!-- iOS support section end -->
+
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -49,11 +50,11 @@
     -->
 
     <!-- The script below checks if a serviceWorker exists in the nagivator and if there is one, registers it once the window is loaded. -->
-    <script>
+    <!-- Do I need this in my index.html during development?? -->
+    <!-- <script>
       if ("serviceWorker" in navigator) {
         //navigator is an object that displays information about the browser.  It has a lot of useful information in it about the browser.  Learn more at: https://www.w3schools.com/jsref/obj_navigator.asp
 
-        console.log("navigator object", navigator);
         window.addEventListener("load", function() {
           navigator.serviceWorker
             .register("customWorker.js")
@@ -75,6 +76,6 @@
       } else {
         console.log("Service Worker is not supported by browser.");
       }
-    </script>
+    </script> -->
   </body>
 </html>
