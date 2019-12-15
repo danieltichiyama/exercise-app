@@ -28,12 +28,12 @@ class CommunityPostComponent extends Component {
       <div className={styles.post}>
         <h3>Title: {title}</h3>
         <h4>Body: {body}</h4>
-        <h4>Exercise: {exercise_id.name}</h4>
+        {/* <h4>Exercise: {exercise_id.name}</h4> */}
         <h4>Posted by: {user_id.name}</h4>￼
         <button onClick={this.handleLoadComments}>
           {this.state.buttonValue}
         </button>
-        <AddCommentComponent />
+        <AddCommentComponent id={this.props.id} />
         {this.state.showComments ? (
           <ul>
             {this.props.community_comment_id.map(comment => {
@@ -42,6 +42,7 @@ class CommunityPostComponent extends Component {
                   key={comment.id}
                   id={comment.id}
                   user={comment.user_id.name}
+                  userID={comment.user_id.id}
                   body={comment.comment_body}
                   user_goal={comment.user_id.goal_id.goal}
                 />

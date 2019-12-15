@@ -10,7 +10,6 @@ communityPostsRouter.route("/")
                 "food_images_id",
                 "exercise_id",
                 "community_comment_id.user_id.goal_id",
-                //references community_comment_id from the CommunityPost Model, then references user_id from CommunityComment Model. (chainable)
             ]
         })
             .then(response => {
