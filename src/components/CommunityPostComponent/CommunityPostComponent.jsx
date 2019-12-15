@@ -26,10 +26,9 @@ class CommunityPostComponent extends Component {
 
     return (
       <div className={styles.post}>
-        <h3>Title: {title}</h3>
-        <h4>Body: {body}</h4>
+        <h3>{title}</h3>
+        <div className={styles.postedBy}>{user_id.name}</div>￼<div>{body}</div>
         {/* <h4>Exercise: {exercise_id.name}</h4> */}
-        <h4>Posted by: {user_id.name}</h4>￼
         <button onClick={this.handleLoadComments}>
           {this.state.buttonValue}
         </button>
