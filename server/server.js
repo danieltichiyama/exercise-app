@@ -3,15 +3,23 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const decorator = require("./database/decorator");
 const api = require("./api/index");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static("./server/public"));
+// app.use(express.static("./server/public"));
+app.use(express.static(path.join(__dirname, "build")));
 
 //body-parsers and decorator
-app.use(bodyParser.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
-app.use(bodyParser.json({ extended: true, limit:"50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+    limit: "50mb",
+    parameterLimit: 50000
+  })
+);
+app.use(bodyParser.json({ extended: true, limit: "50mb" }));
 app.use(decorator);
 
 //routers
@@ -42,7 +50,11 @@ app.use("/api/vision", api.vision);
 //routers-end
 
 app.get("/smoke", (req, res) => {
-  return res.json({ message: "hiyee" });
+  return res.json({ message: "Here's some smoke from server.js" });
+});
+
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(PORT, () => {

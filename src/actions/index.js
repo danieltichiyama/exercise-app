@@ -20,31 +20,45 @@ export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+export const GET_SMOKE = "GET_SMOKE";
 
-export const actionsLoadSingleExercise = (data) => async dispatch => {
+export const actionsGetSmoke = () => async dispatch => {
+  await Axios.get("/smoke")
+    .then(response => {
+      return dispatch({
+        type: GET_SMOKE,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsGetSmoke: ", err);
+    });
+};
+
+export const actionsLoadSingleExercise = data => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
     .then(response => {
       return dispatch({
         type: LOAD_SINGLE_EXERCISE,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in ationsLoadSingleExercise: ", err);
-    })
-}
+    });
+};
 
-export const actionsFilterBodyParts = (data) => async dispatch => {
+export const actionsFilterBodyParts = data => async dispatch => {
   await Axios.get(`/api/bodyparts/${data}`)
     .then(response => {
       return dispatch({
         type: FILTER_BODY_PARTS,
         payload: response.data[0].exercises
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsFilterBodyParts: ", err);
-    })
+    });
 };
 
 export const actionsLoadActivity = () => async dispatch => {
@@ -228,10 +242,10 @@ export const actionsLoadBodyParts = () => async dispatch => {
       return dispatch({
         type: LOAD_BODY_PARTS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsLoadBodyParts: ", err)
+      console.log("Error in actionsLoadBodyParts: ", err);
     });
 };
 
@@ -241,7 +255,7 @@ export const actionsLoadExerciseList = () => async dispatch => {
       return dispatch({
         type: LOAD_EXERCISE_LIST,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsLoadExerciseList: ", err);

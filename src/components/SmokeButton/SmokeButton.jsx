@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionsLoadActivity } from "../../actions";
+import { actionsGetSmoke } from "../../actions";
 // import styles from "./SmokeButton.module.scss";
 
 class SmokeButton extends Component {
@@ -10,14 +10,16 @@ class SmokeButton extends Component {
   }
 
   handleButtonClick = () => {
-    return this.props.dispatchLoadActivities();
+    return this.props.dispatchGetSmoke();
   };
 
   render() {
     return (
       <div>
-        <button onClick={this.handleButtonClick}>Return Activity Levels</button>
-        <div>{JSON.stringify(this.props.activity_levels)}</div>
+        <button onClick={this.handleButtonClick}>
+          Query database for smoke
+        </button>
+        <div>{JSON.stringify(this.props.smoke.message)}</div>
       </div>
     );
   }
@@ -25,15 +27,14 @@ class SmokeButton extends Component {
 
 const mapStateToProps = store => {
   return {
-    activity_levels: store.activity_levels
+    smoke: store.smoke
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchLoadActivities: () => {
-      console.log("dispatchLoadActivities");
-      return dispatch(actionsLoadActivity());
+    dispatchGetSmoke: () => {
+      return dispatch(actionsGetSmoke());
     }
   };
 };
