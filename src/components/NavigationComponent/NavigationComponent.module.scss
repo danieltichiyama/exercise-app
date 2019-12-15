@@ -6,7 +6,7 @@
   bottom: 0;
   justify-content: space-around;
   align-content: center;
-  background: #f6f7f4;
+  background: #04c9b5;
 
   .navButton {
     height: 25px;
@@ -19,8 +19,18 @@
       height: 25px;
       width: 25px;
     }
+    // svg {
+    //   height: 25px;
+    //   width: 25px;
+    // }
+    // svg:hover {
+    //   fill: red;
+    // }
     &:hover {
       cursor: pointer;
+      // img {
+      //   color: red;
+      // }
     }
   }
 }
