@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { actionsLoadExerciseList } from '../../actions';
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import styles from "./ExerciseListComponent.module.scss";
 
 class ExerciseListComponent extends Component {
     constructor(props) {
@@ -13,16 +15,21 @@ class ExerciseListComponent extends Component {
     }
 
     render() {
+        let thisExercise = this.props.exercises;
         return (
-            <div>
-                {this.props.exercises.map(exercise => {
+            <div className={styles.exerciseList}>
+                {thisExercise.map(exercise => {
                     return (
-                        <h3
+                        <Link
                             key={exercise.id}
-                            id={exercise.id}
-                        >
-                            {exercise.name}
-                        </h3>)
+                            to={location => ({
+                                ...location, pathname: `/exercise/${exercise.id}`
+                            })}>
+                            <h2 className={styles.exercisebutton}>
+                                Exercise: {exercise.name}
+                            </h2>
+                        </Link>
+                    )
                 })}
             </div>
         );

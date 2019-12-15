@@ -15,6 +15,7 @@ import {
   LOAD_USER,
   REGISTER,
   FILTER_BODY_PARTS,
+  LOAD_SINGLE_EXERCISE
 } from "../actions";
 import moment from "moment";
 
@@ -24,6 +25,7 @@ const initialStore = {
   community_posts: [],
   diaryData: [],
   exercises: [],
+  exerciseInfo: [],
   foods: [],
   foods_meals_users: [],
   users: [],
@@ -37,6 +39,10 @@ const initialStore = {
 let reducer = (store = initialStore, action) => {
 
   switch (action.type) {
+
+    case LOAD_SINGLE_EXERCISE:
+      return Object.assign({}, store, { exerciseInfo: action.payload })
+
     case LOAD_ACTIVITIES:
       return Object.assign({}, store, { activity_levels: action.payload });
 

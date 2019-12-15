@@ -19,6 +19,20 @@ export const FOOD_VISION = "FOOD_VISION";
 export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
+export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+
+export const actionsLoadSingleExercise = (data) => async dispatch => {
+  await Axios.get(`/api/exercises/${data}`)
+    .then(response => {
+      return dispatch({
+        type: LOAD_SINGLE_EXERCISE,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in ationsLoadSingleExercise: ", err);
+    })
+}
 
 export const actionsFilterBodyParts = (data) => async dispatch => {
   await Axios.get(`/api/bodyparts/${data}`)

@@ -7,7 +7,10 @@ bodypartsRouter.route("/:id")
         return req.db.Bodypart.where({ id: newID })
             .fetchAll({
                 withRelated: [
-                    "exercises"
+                    "exercises",
+                    "exercises.exercise_type_id",
+                    "exercises.exercise_difficulty_id",
+                    "exercises.exercise_equipment_id"
                 ]
             })
             .then(response => {
@@ -23,7 +26,10 @@ bodypartsRouter.route("/")
         return req.db.Bodypart.fetchAll({
             withRelated: [
                 "exercises",
-                "muscle_group_id"
+                "muscle_group_id",
+                "exercises.exercise_type_id",
+                "exercises.exercise_difficulty_id",
+                "exercises.exercise_equipment_id"
             ]
         })
             .then(response => {

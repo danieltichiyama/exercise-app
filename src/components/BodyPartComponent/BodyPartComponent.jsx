@@ -10,6 +10,7 @@ class BodyPartComponent extends Component {
             bodypartID: ''
         }
     }
+
     componentDidMount() {
         this.props.dispatchLoadBodyParts();
     }
@@ -27,14 +28,20 @@ class BodyPartComponent extends Component {
     render() {
         return (
             <>
-                < button onClick={this.handleShowAllBodyParts}>ALL</button >
+                < button
+                    onClick={this.handleShowAllBodyParts}
+                    className={styles.bodypartbutton}
+                >ALL</button >
                 {this.props.bodyparts.map(bodypart => {
                     return (
                         <div
                             className={styles.bodypart}
                             key={bodypart.id}
                         >
-                            <button id={bodypart.id} onClick={this.handleBodyPartClick}>{bodypart.bodypart}</button>
+                            <button
+                                className={styles.bodypartbutton}
+                                id={bodypart.id}
+                                onClick={this.handleBodyPartClick}>{bodypart.bodypart}</button>
                         </div>
                     )
                 })}
