@@ -10,7 +10,13 @@ exports.seed = function(knex) {
           meal_type_id: 1,
           user_id: 1,
           calories: 150,
-          serving_size: 1
+          servings: 1,
+          description: "Kashi GoLean",
+          protein: 6,
+          fat: 2,
+          carbs: 22,
+          serving_size: "58g"
+
           //cereal
         },
         {
@@ -18,7 +24,12 @@ exports.seed = function(knex) {
           meal_type_id: 1,
           user_id: 1,
           calories: 100,
-          serving_size: 1
+          servings: 1,
+          description: "Milk",
+          protein: 2,
+          fat: 5,
+          carbs: 6,
+          serving_size: "100ml"
           //milk
         },
         {
@@ -26,7 +37,12 @@ exports.seed = function(knex) {
           meal_type_id: 1,
           user_id: 1,
           calories: 100,
-          serving_size: 1
+          servings: 1,
+          description: "Orange Juice",
+          protein: 0,
+          fat: 0,
+          carbs: 25,
+          serving_size: "80fl oz"
           //orange juice
         },
         {
@@ -34,7 +50,12 @@ exports.seed = function(knex) {
           meal_type_id: 2,
           user_id: 1,
           calories: 500,
-          serving_size: 1
+          servings: 1,
+          description: "Broiled Chicken Sandwich, Burger King",
+          protein: 14,
+          fat: 8,
+          carbs: 40,
+          serving_size: "1 sandwich"
           //Burger King Broiled Chicken Sandwich
         },
         {
@@ -42,7 +63,13 @@ exports.seed = function(knex) {
           meal_type_id: 2,
           user_id: 1,
           calories: 250,
-          serving_size: 1
+          servings: 1,
+          description: "French fries, Burger King",
+          protein: 0,
+          fat: 6,
+          carbs: 22,
+          serving_size: "1 small"
+
           //Burger King French Fries
         },
         {
@@ -50,7 +77,13 @@ exports.seed = function(knex) {
           meal_type_id: 2,
           user_id: 1,
           calories: 500,
-          serving_size: 1
+          servings: 1,
+          description: "Rum and Coke",
+          protein: 0,
+          fat: 0,
+          carbs: 30,
+          serving_size: "24 fl oz"
+
           //rum and coke
         },
         {
@@ -58,7 +91,13 @@ exports.seed = function(knex) {
           meal_type_id: 3,
           user_id: 1,
           calories: 300,
-          serving_size: 1
+          servings: 1,
+          description: "Steak, ribeye",
+          protein: 18,
+          fat: 6,
+          carbs: 2,
+          serving_size: "8oz"
+
           //steak
         }
       ]);
