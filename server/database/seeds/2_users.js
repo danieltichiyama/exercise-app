@@ -16,7 +16,7 @@ exports.seed = function(knex) {
           gender_id: 1,
           birth_date: "1986-08-16",
           activity_level_id: 3,
-          weight: 151.81,
+          weight: 151,
           height: 180,
           points: 0,
           user_tier_id: 2,

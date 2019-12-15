@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
-import { actionsRegister } from "../../actions";
+// import { actionsRegister } from "../../actions";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -10,27 +10,10 @@ class RegisterComponent extends Component {
       name: "",
       email: "",
       password: "",
-      "confirm password": "",
-      height: 200,
-      weight: 75,
-      activity_level_id: 1,
-      birth_date: "1999-01-01",
-      gender_id: 1,
-      user_tier_id: 1,
-      goal_id: 1,
-      formErrors: {
-        name: "",
-        email: "",
-        password: "",
-        "confirm password": "",
-        height: "",
-        weight: "",
-        activity_level: "",
-        birth_date: ""
-      }
+      confirm_password: ""
     };
   }
-
+  
   handleInput = event => {
     const { value, name } = event.target;
     const state = { ...this.state };
@@ -38,24 +21,41 @@ class RegisterComponent extends Component {
     this.setState(state);
   };
 
-  handleRegister = e => {
-    e.preventDefault();
-
-    let formData = { ...this.state };
-    delete formData.formErrors;
-    delete formData["confirm password"];
-    this.props.dispatchRegister(formData);
-    return this.props.isRegistered();
-  };
-
   handleLoginClick = () => {
     return this.props.isRegistered();
   };
 
+  handleContinueClick = (e) => {
+    e.preventDefault();
+    if (!this.state.name || !this.state.email || !this.state.password){
+      alert("Please fill in all fields");
+      return false;
+    }
+    if (!this.validateEmail(this.state.email)){
+      alert("Please enter a valid email address");
+      return false;
+    }
+    if (this.state.password !== this.state.confirm_password){
+      alert("Passwords do not match.");
+      return false;
+    }
+    if (this.state.password.length < 6){
+      alert("Password must be at least 6 characters long.");
+      return false;
+    }
+    return this.props.takingSurvey(this.state);
+    
+  }
+
+  validateEmail = (email) => {
+    var reg = /\S+@\S+\.\S+/;
+    return reg.test(email);
+  }
+
   render() {
     return (
       <div className={styles.RegisterComponent}>
-        <form>
+        <form onSubmit={this.handleContinueClick}> 
           <ul>
             {/* name */}
             <li className={styles.form_li}>
@@ -122,8 +122,8 @@ class RegisterComponent extends Component {
               </div>
               <input
                 type="password"
-                name="confirm password"
-                value={this.state["confirm password"]}
+                name="confirm_password"
+                value={this.state.confirm_password}
                 onChange={this.handleInput}
                 placeholder="Confirm your password"
                 className={styles.form_input}
@@ -131,8 +131,8 @@ class RegisterComponent extends Component {
             </li>
           </ul>
 
-          <button onClick={this.handleRegister} className={styles.login_button}>
-            Register
+          <button onClick={() => this.handleContinueClick} className={styles.login_button}>
+            Continue
           </button>
         </form>
 
@@ -155,15 +155,5 @@ class RegisterComponent extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchRegister: data => {
-      return dispatch(actionsRegister(data));
-    }
-  };
-};
-
-RegisterComponent = connect(null, mapDispatchToProps)(RegisterComponent);
 
 export default RegisterComponent;
