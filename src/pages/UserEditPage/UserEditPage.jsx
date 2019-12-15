@@ -24,7 +24,6 @@ class UserEditPage extends Component {
   }
 
   handleChange = event => {
-    console.log("handleChange event target::", event.target);
     switch (event.target.name) {
       case "name":
         this.setState({ name: event.target.value });
@@ -75,13 +74,14 @@ class UserEditPage extends Component {
             <input
               type="number"
               name="weight"
-              min="50"
-              max="1400"
-              placeholder={this.props.user.weight}
+              placeholder="Change Weight"
               value={this.state.weight}
               onChange={this.handleChange}
-            />{" "}
+            />
+            <input type="radio" name="weight" value="lbs" />
             lbs
+            <input type="radio" name="weight" value="kg" />
+            kg
           </div>
 
           <div>
@@ -89,13 +89,14 @@ class UserEditPage extends Component {
             <input
               type="number"
               name="height"
-              placeholder={this.props.user.height}
-              min="36"
-              max="90"
+              placeholder="Change Height"
               value={this.state.height}
               onChange={this.handleChange}
-            />{" "}
+            />
+            <input type="radio" name="height" value="in" />
             in
+            <input type="radio" name="height" value="cm" />
+            cm
           </div>
 
           <div>

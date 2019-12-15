@@ -26,10 +26,13 @@ class UserPage extends Component {
       .utc()
       .format("MM/DD/YYYY");
 
-    //convert in to ft+in
-    let convertHeight = this.props.users.height / 12;
+    //convert cm to ft+in
+    let convertHeight = this.props.users.height * 0.0328084;
     let feet = Math.floor(convertHeight);
-    let inches = Math.round(convertHeight - feet);
+    let inches = Math.round((convertHeight - feet) * 12);
+
+    //convert kg to lbs
+    let convertWeight = Math.floor(this.props.users.weight * 2.20462);
 
     return (
       <>
@@ -50,7 +53,7 @@ class UserPage extends Component {
 
           <div className={styles.rows}>
             <h3>Weight</h3>
-            <p>{this.props.users.weight} lbs</p>
+            <p>{convertWeight} lbs</p>
           </div>
 
           <div className={styles.rows}>
