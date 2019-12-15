@@ -37,12 +37,13 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sass": "^1.23.7",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "pwa": "npm run build && serve -s build"
   },
@@ -64,7 +65,9 @@
   "proxy": "http://localhost:8080",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "react-app-rewired": "^2.1.5"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

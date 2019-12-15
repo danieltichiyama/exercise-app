@@ -50,14 +50,13 @@
     -->
 
     <!-- The script below checks if a serviceWorker exists in the nagivator and if there is one, registers it once the window is loaded. -->
-    <!-- Do I need this in my index.html during development?? -->
-    <!-- <script>
+    <script>
       if ("serviceWorker" in navigator) {
         //navigator is an object that displays information about the browser.  It has a lot of useful information in it about the browser.  Learn more at: https://www.w3schools.com/jsref/obj_navigator.asp
 
         window.addEventListener("load", function() {
           navigator.serviceWorker
-            .register("customWorker.js")
+            .register("custom-service-worker.js")
             .then(
               function(registration) {
                 console.log(
@@ -76,6 +75,6 @@
       } else {
         console.log("Service Worker is not supported by browser.");
       }
-    </script> -->
+    </script>
   </body>
 </html>

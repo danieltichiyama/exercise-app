@@ -146,11 +146,17 @@ export const actionFoodNutrients = fdcId => async dispatch => {
 };
 
 export const actionLoadUser = id => async dispatch => {
-  await Axios.get(`/api/users/${id}`)
+  console.log("actionLoadUser firing.");
+  await fetch(`/api/users/${id}`)
+    .then(responseFromServer => {
+      return responseFromServer.json();
+    })
+    // await Axios.get(`/api/users/${id}`)
     .then(response => {
       return dispatch({
         type: LOAD_USER,
-        payload: response.data
+        payload: response
+        // payload: response.data
       });
     })
     .catch(err => {
