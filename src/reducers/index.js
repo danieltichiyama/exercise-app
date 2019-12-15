@@ -1,4 +1,5 @@
 import {
+  EDIT_USER,
   LOAD_ACTIVITIES,
   REGISTER,
   LOGIN,
@@ -33,6 +34,9 @@ let reducer = (store = initialStore, action) => {
   // console.log(action.payload);
 
   switch (action.type) {
+    case EDIT_USER:
+      return Object.assign({}, store, { users: action.payload });
+
     case LOAD_ACTIVITIES:
       return Object.assign({}, store, { activity_levels: action.payload });
 

@@ -1,33 +1,152 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { actionLoadUser } from "../../actions";
+import { actionLoadUser, actionsEditUser } from "../../actions";
+import { connect } from "react-redux";
 
 class UserEditPage extends Component {
   constructor(props) {
     super(props);
 
-    let getId = localStorage.getItem("session");
-    let id = JSON.parse(getId);
-
     this.state = {
-      id,
       name: "",
-      birth_date: "00/00/0000"
+      weight: "",
+      height: "",
+      gender_id: 1,
+      activity_level_id: 1,
+      user_tier_id: 1,
+      goal_id: 1
     };
   }
 
-  handleSubmit() {}
+  componentDidMount() {
+    let { dispatchLoadUser, match } = this.props;
+    dispatchLoadUser(match.params.id);
+  }
+
+  handleChange = event => {
+    console.log("handleChange event target::", event.target);
+    switch (event.target.name) {
+      case "name":
+        this.setState({ name: event.target.value });
+        break;
+      case "weight":
+        this.setState({ weight: event.target.value });
+        break;
+      case "height":
+        this.setState({ height: event.target.value });
+        break;
+      case "gender":
+        this.setState({ gender_id: parseInt(event.target.value) });
+        break;
+      case "activity_level":
+        this.setState({ activity_level_id: parseInt(event.target.value) });
+        break;
+    }
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log(this.state);
+    this.props.dispatchEditUser();
+  };
 
   render() {
+    console.log(this.props.user);
+
     return (
       <>
+        <div>
+          <h1>Edit User</h1>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" />
-          <input type="text" />
+          <div>
+            <h3>Name:</h3>
+            <input
+              type="text"
+              name="name"
+              placeholder={this.props.user.name}
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </div>
+
+          <div>
+            <h3>Weight:</h3>
+            <input
+              type="number"
+              name="weight"
+              min="50"
+              max="1400"
+              placeholder={this.props.user.weight}
+              value={this.state.weight}
+              onChange={this.handleChange}
+            />{" "}
+            lbs
+          </div>
+
+          <div>
+            <h3>Height:</h3>
+            <input
+              type="number"
+              name="height"
+              placeholder={this.props.user.height}
+              min="36"
+              max="90"
+              value={this.state.height}
+              onChange={this.handleChange}
+            />{" "}
+            in
+          </div>
+
+          <div>
+            <h3>Gender:</h3>
+            <select
+              value={this.state.gender_id}
+              name="gender"
+              onChange={this.handleChange}
+            >
+              <option value={1}>Male</option>
+              <option value={2}>Female</option>
+              <option value={3}>Other</option>
+            </select>
+          </div>
+
+          <div>
+            <h3>Activity Level:</h3>
+            <select
+              value={this.state.activity_level_id}
+              name="activity_level"
+              onChange={this.handleChange}
+            >
+              <option value={1}>Sedentary</option>
+              <option value={2}>Light</option>
+              <option value={3}>Active</option>
+              <option value={4}>Very Active</option>
+            </select>
+          </div>
+
+          <div>
+            <h3>Goals:</h3>
+            <select
+              value={this.state.goal_id}
+              name="goal"
+              onChange={this.handleChange}
+            >
+              <option value={1}>Lose Weight Mild</option>
+              <option value={2}>Lose Weight Moderate</option>
+              <option value={3}>Lose Weight Extreme</option>
+              <option value={4}>Maintain Weight</option>
+              <option value={5}>Gain Weight</option>
+              <option value={6}>No Goal</option>
+            </select>
+          </div>
+
+          <div>
+            <input type="submit" value="Submit" />
+          </div>
         </form>
 
         <div>
-          EDIT MY SHIZ
           <button>
             <Link to="/user">Cancel</Link>
           </button>
@@ -37,4 +156,21 @@ class UserEditPage extends Component {
   }
 }
 
-export default UserEditPage;
+const mapStateToProps = store => {
+  return {
+    user: store.users
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchLoadUser: id => {
+      return dispatch(actionLoadUser(id));
+    },
+    dispatchEditUser: (id, data) => {
+      return dispatch(actionsEditUser(id, data));
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserEditPage);

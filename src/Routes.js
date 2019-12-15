@@ -56,7 +56,7 @@ export const routes = [
     component: CommunityPage
   },
   {
-    path: "/user/edit",
+    path: "/user/:id/edit",
     exact: true,
     component: UserEditPage
   },

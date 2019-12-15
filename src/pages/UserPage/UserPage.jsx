@@ -26,13 +26,10 @@ class UserPage extends Component {
       .utc()
       .format("MM/DD/YYYY");
 
-    //convert cm to ft+in
-    let convertHeight = this.props.users.height * 0.032808;
+    //convert in to ft+in
+    let convertHeight = this.props.users.height / 12;
     let feet = Math.floor(convertHeight);
-    let inches = Math.round((convertHeight - feet) * 12);
-
-    //convert kg to lbs
-    let convertWeight = Math.floor(this.props.users.weight * 2.2046);
+    let inches = Math.round(convertHeight - feet);
 
     return (
       <>
@@ -53,7 +50,7 @@ class UserPage extends Component {
 
           <div className={styles.rows}>
             <h3>Weight</h3>
-            <p>{convertWeight} lbs</p>
+            <p>{this.props.users.weight} lbs</p>
           </div>
 
           <div className={styles.rows}>
@@ -92,7 +89,14 @@ class UserPage extends Component {
           </div>
 
           <button className={styles.button}>
-            <Link to="/user/edit">Edit</Link>
+            <Link
+              to={location => ({
+                ...location,
+                pathname: `/user/${this.state.id.id}/edit`
+              })}
+            >
+              Edit
+            </Link>
           </button>
         </div>
       </>

@@ -1,5 +1,6 @@
 import Axios from "axios";
 
+export const EDIT_USER = "EDIT_USER";
 export const LOAD_ACTIVITIES = "LOAD_ACTIVITIES";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
@@ -16,6 +17,20 @@ export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
 export const FOOD_VISION = "FOOD_VISION";
+
+export const actionsEditUser = (id, data) => async dispatch => {
+  console.log("actions edit user data:::", data);
+  await Axios.put(`/api/user/${id}`, data)
+    .then(response => {
+      return dispatch({
+        type: EDIT_USER,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionEditUser:", err);
+    });
+};
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
