@@ -14,7 +14,7 @@ class FoodNutrientComponent extends Component {
         <p>Protien: {this.props.protien}</p>
         <p>Carbohydrates: {this.props.carbohydrates}</p>
         <p>Sugars: {this.props.sugars}</p>
-        <p>Fiber: {this.props.fiber}</p>
+        <p>Fats: {this.props.fats}</p>
         <p>Calcium: {this.props.calcium}</p>
         <p>Iron: {this.props.iron}</p>
         <p>Sodium: {this.props.sodium}</p>

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { actionClear, actionFoodNutrients } from "../../actions";
 import { connect } from "react-redux";
-// import styles from "./Food.module.scss";
-// import { Link } from "react-router-dom";
 
 class FoodComponent extends Component {
   constructor(props) {

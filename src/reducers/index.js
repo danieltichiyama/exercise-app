@@ -6,6 +6,7 @@ import {
   LOAD_POSTS,
   FOOD_SEARCH,
   FOOD_NUTRIENT_SEARCH,
+  FOOD_VISION,
   CLEAR,
   GET_DIARY_DATA,
   LOAD_USER,
@@ -22,6 +23,7 @@ const initialStore = {
   diaryData: [],
   users: [],
   foods_meals_users: [],
+  food_labels: [],
   isLoggedIn: false,
   diaryDate: moment()
     .utc()
@@ -58,11 +60,16 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case FOOD_SEARCH:
+      console.log(action.payload)
       return Object.assign({}, store, { foods: action.payload.foods });
 
     case FOOD_NUTRIENT_SEARCH:
+      console.log(action.payload)
       return Object.assign({}, store, { foods: action.payload });
 
+    case FOOD_VISION:
+      return Object.assign({}, store, { food_labels: action.payload})
+    
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
 

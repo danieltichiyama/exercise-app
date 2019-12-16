@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionFoodVision } from "../../actions";
+import LabelComponent from "../LabelComponent";
 
 class ImageUploadComponent extends Component {
   constructor(props) {
@@ -11,8 +12,10 @@ class ImageUploadComponent extends Component {
   handleUpload = (e) => {
     const formData = new FormData();
     formData.append('foodImage', e.target.files[0]);
-    this.props.dispatchFoodVision(formData);
-    // console.log(formData, e.target.files[0]);
+    this.props.dispatchFoodVision(formData)
+    .then(
+      console.log(this.props.imgData)
+    )
   }
 
   render() { 
@@ -25,6 +28,18 @@ class ImageUploadComponent extends Component {
             // className={styles.upload}
             onChange={this.handleUpload}
           />
+          {this.props.imgData.length !== 0 ? (
+            this.props.imgData.map(imgData => {
+              return (
+                <LabelComponent
+                  key={imgData.description}
+                  label={imgData.description}
+                />
+              )
+            })
+          ) : (
+            ''
+          )}
       </div>
     );
   }
@@ -32,7 +47,7 @@ class ImageUploadComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    imgData: store
+    imgData: store.food_labels
   }
 }
 

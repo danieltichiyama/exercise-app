@@ -34,21 +34,52 @@ class FoodSearchComponent extends Component {
         );
       });
     } else if (data.foodNutrients) {
-      return (
-        <FoodNutrientComponent
+      if (data.dataType === "Survey (FNDDS)"){
+        return (
+          <FoodNutrientComponent
+            key={data.description}
+            description={data.description}
+            calories={`${data.foodNutrients[3].amount} ${data.foodNutrients[3].nutrient.unitName}`}
+            protien={`${data.foodNutrients[0].amount} ${data.foodNutrients[0].nutrient.unitName}`}
+            carbohydrates={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+            sugars={`${data.foodNutrients[8].amount} ${data.foodNutrients[8].nutrient.unitName}`}
+            fats={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
+            calcium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
+            iron={`${data.foodNutrients[11].amount} ${data.foodNutrients[11].nutrient.unitName}`}
+            sodium={`${data.foodNutrients[15].amount} ${data.foodNutrients[15].nutrient.unitName}`}
+          />
+        );
+      } else if (data.dataType === "SR Legacy") {
+        return (
+          <FoodNutrientComponent
           key={data.description}
           description={data.description}
-          calories={`${data.foodNutrients[3].amount} ${data.foodNutrients[3].nutrient.unitName}`}
-          protien={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
-          carbohydrates={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
-          sugars={`${data.foodNutrients[8].amount} ${data.foodNutrients[8].nutrient.unitName}`}
-          fiber={`${data.foodNutrients[9].amount} ${data.foodNutrients[9].nutrient.unitName}`}
-          calcium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
-          iron={`${data.foodNutrients[11].amount} ${data.foodNutrients[11].nutrient.unitName}`}
-          sodium={`${data.foodNutrients[15].amount} ${data.foodNutrients[15].nutrient.unitName}`}
-          zinc={`${data.foodNutrients[16].amount} ${data.foodNutrients[16].nutrient.unitName}`}
-        />
-      );
+          calories={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+          protien={`${data.foodNutrients[4].amount} ${data.foodNutrients[4].nutrient.unitName}`}
+          carbohydrates={`${data.foodNutrients[7].amount} ${data.foodNutrients[7].nutrient.unitName}`}
+          sugars={`${data.foodNutrients[10].amount + data.foodNutrients[11].amount + data.foodNutrients[12].amount} ${data.foodNutrients[8].nutrient.unitName}`}
+          fats={`${data.foodNutrients[5].amount} ${data.foodNutrients[5].nutrient.unitName}`}
+          calcium={`${data.foodNutrients[17].amount} ${data.foodNutrients[17].nutrient.unitName}`}
+          iron={`${data.foodNutrients[18].amount} ${data.foodNutrients[18].nutrient.unitName}`}
+          sodium={`${data.foodNutrients[22].amount} ${data.foodNutrients[22].nutrient.unitName}`}
+          />
+        )
+      } else if (data.dataType === "Branded") {
+        return (
+          <FoodNutrientComponent
+            key={data.description}
+            description={data.description}
+            calories={`${data.foodNutrients[8].amount} ${data.foodNutrients[8].nutrient.unitName}`}
+            protien={`${data.foodNutrients[5].amount} ${data.foodNutrients[5].nutrient.unitName}`}
+            carbohydrates={`${data.foodNutrients[7].amount} ${data.foodNutrients[7].nutrient.unitName}`}
+            sugars={`${data.foodNutrients[9].amount} ${data.foodNutrients[9].nutrient.unitName}`}
+            fats={`${data.foodNutrients[6].amount} ${data.foodNutrients[6].nutrient.unitName}`}
+            calcium={`${data.foodNutrients[1].amount} ${data.foodNutrients[1].nutrient.unitName}`}
+            iron={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+            sodium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
+          />
+        )
+      }
     }
   };
 

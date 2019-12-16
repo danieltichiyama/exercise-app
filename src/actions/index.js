@@ -123,9 +123,9 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log("DATA: ", data);
   await Axios.post("/api/vision", data)
     .then(response => {
+      console.log("response", response.data);
     return dispatch({
       type: FOOD_VISION,
       payload: response.data

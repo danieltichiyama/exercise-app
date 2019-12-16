@@ -18,7 +18,7 @@ nutritionRouter
         includeDataTypes: {
           "Survey (FNDDS)": true
         },
-        "requireAllWords":"true",
+        requireAllWords:"true",
       }
     })
     .then(response => {
@@ -37,10 +37,11 @@ nutritionRouter
       },
       data: {
         generalSearchInput: req.body.data,
-        includeDataTypes: {
-          "Survey (FNDDS)": true
-        },
-        "requireAllWords":"true"
+        // includeDataTypes: {
+        //   "Survey (FNDDS)": true
+        // },
+        "requireAllWords":"true",
+        pageNumber: "1"
       }    
     })
     .then(response => {
@@ -64,7 +65,7 @@ nutritionRouter.route("/:id")
     return res.json(response.data);
   })
   .catch(err => {
-    console.log(err);
+    console.log('calvin is doodooboy', err); 
   });
 });
 
