@@ -8,8 +8,10 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// app.use(express.static("./server/public"));
-app.use(express.static(path.join(__dirname, "build")));
+//necessary for local spin up of front end with npm run build, remove before deploying.
+//use localhost:8080/ for npm run build
+app.use(express.static(path.join(__dirname, "../build")));
+//end
 
 //body-parsers and decorator
 app.use(
@@ -53,8 +55,10 @@ app.get("/smoke", (req, res) => {
   return res.json({ message: "Here's some smoke from server.js" });
 });
 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+//necessary for local spin up of front end with npm run build, remove before deploying
+//use localhost:8080/ for npm run build
+app.get(`*`, function(req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
 app.listen(PORT, () => {
