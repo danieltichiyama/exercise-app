@@ -35,7 +35,6 @@ const initialStore = {
   users: [],
   isLoggedIn: false,
   addFood: {},
-  foods_meals_users: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
@@ -43,10 +42,7 @@ const initialStore = {
   smoke: ""
 };
 
-<<<<<<< HEAD
 let reducer = (store = initialStore, action) => {
-=======
->>>>>>> d673a6a2cbe3f7fb5e06c3c16c46bc585adcb804
   switch (action.type) {
     case GET_SMOKE:
       return Object.assign({}, store, { smoke: action.payload });
