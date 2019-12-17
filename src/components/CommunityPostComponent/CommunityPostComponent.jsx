@@ -22,7 +22,7 @@ class CommunityPostComponent extends Component {
   };
 
   render() {
-    let { title, body, exercise_id, user_id } = this.props;
+    let { title, body, user_id } = this.props;
 
     return (
       <div className={styles.post}>

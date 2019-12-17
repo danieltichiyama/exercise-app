@@ -26,7 +26,6 @@ const initialStore = {
   bodyparts: [],
   community_posts: [],
   diaryData: [],
-
   exercises: [],
   exerciseInfo: [],
   foods: [],
@@ -34,17 +33,16 @@ const initialStore = {
   users: [],
   isLoggedIn: false,
   addFood: {},
-  foods_meals_users: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
   display: "meal"
 };
 
+let reducer = (store = initialStore, action) => {
   switch (action.type) {
-
     case LOAD_SINGLE_EXERCISE:
-      return Object.assign({}, store, { exerciseInfo: action.payload })
+      return Object.assign({}, store, { exerciseInfo: action.payload });
 
     case LOAD_ACTIVITIES:
       return Object.assign({}, store, { activity_levels: action.payload });
