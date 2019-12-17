@@ -8,7 +8,7 @@ class AddMealButtonComponent extends Component {
       <div className={styles.mealNavigation}>
         <div>
           <Link to="/nutrition/add_breakfast">
-            <button className={styles.mealButton} value="breakfast">
+            <button className={styles.mealButton}>
               <img
                 src="https://image.flaticon.com/icons/svg/926/926292.svg"
                 alt="breakfast"
@@ -19,7 +19,7 @@ class AddMealButtonComponent extends Component {
         </div>
         <div>
           <Link to="/nutrition/add_lunch">
-            <button className={styles.mealButton} value="lunch">
+            <button className={styles.mealButton}>
               <img
                 src="https://image.flaticon.com/icons/svg/926/926305.svg"
                 alt="lunch"
@@ -30,7 +30,7 @@ class AddMealButtonComponent extends Component {
         </div>
         <div>
           <Link to="/nutrition/add_dinner">
-            <button className={styles.mealButton} value="dinner">
+            <button className={styles.mealButton} value="3">
               <img
                 src="https://image.flaticon.com/icons/svg/2243/2243651.svg"
                 alt="dinner"
@@ -41,7 +41,7 @@ class AddMealButtonComponent extends Component {
         </div>
         <div>
           <Link to="/nutrition/add_snack">
-            <button className={styles.mealButton} value="snack">
+            <button className={styles.mealButton} value="4">
               <img
                 src="https://image.flaticon.com/icons/svg/601/601933.svg"
                 alt="snack"
