@@ -1,5 +1,6 @@
 import {
   ADD_COMMENT,
+  ADD_FOOD,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
@@ -18,6 +19,7 @@ import {
   LOAD_SINGLE_EXERCISE,
   GET_SMOKE
 } from "../actions";
+
 import moment from "moment";
 
 const initialStore = {
@@ -25,12 +27,15 @@ const initialStore = {
   bodyparts: [],
   community_posts: [],
   diaryData: [],
+
   exercises: [],
   exerciseInfo: [],
   foods: [],
   foods_meals_users: [],
   users: [],
   isLoggedIn: false,
+  addFood: {},
+  foods_meals_users: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
@@ -38,7 +43,10 @@ const initialStore = {
   smoke: ""
 };
 
+<<<<<<< HEAD
 let reducer = (store = initialStore, action) => {
+=======
+>>>>>>> d673a6a2cbe3f7fb5e06c3c16c46bc585adcb804
   switch (action.type) {
     case GET_SMOKE:
       return Object.assign({}, store, { smoke: action.payload });
@@ -109,8 +117,8 @@ let reducer = (store = initialStore, action) => {
     default:
       return store;
 
-    //   case TOGGLE:
-    //     return Object.assign({}, store, { display: action.payload });
+    case ADD_FOOD:
+      return Object.assign({}, store, { addFood: action.payload });
   }
 };
 
