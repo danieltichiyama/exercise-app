@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
-// import { actionsRegister } from "../../actions";
+import { actionsGetEmails } from "../../actions";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -14,6 +14,10 @@ class RegisterComponent extends Component {
     };
   }
   
+  componentDidMount() {
+    this.props.dispatchGetEmails()
+  }
+
   handleInput = event => {
     const { value, name } = event.target;
     const state = { ...this.state };
@@ -30,6 +34,12 @@ class RegisterComponent extends Component {
     if (!this.state.name || !this.state.email || !this.state.password){
       alert("Please fill in all fields");
       return false;
+    }
+    for (let i = 0, n = this.props.emails.length; i < n; i++){
+      if (this.props.emails[i].email === this.state.email){
+        alert ("Email is already taken");
+        return false;
+      }
     }
     if (!this.validateEmail(this.state.email)){
       alert("Please enter a valid email address");
@@ -155,5 +165,22 @@ class RegisterComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    emails: store.emails
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchGetEmails: data => {
+      return dispatch(actionsGetEmails(data));
+    }
+  };
+};
+
+RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterComponent)
+
 
 export default RegisterComponent;

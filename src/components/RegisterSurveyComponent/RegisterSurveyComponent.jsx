@@ -140,8 +140,8 @@ class RegisterSurveyComponent extends Component {
             value={this.state.day}
             // mandatory
             onChange={(day) => {
-              let birthDay = '';
-              if (day.length === 1){
+              let birthDay = day;
+              if (birthDay.length === 1){
                 birthDay = "0" + day;
               }
               this.setState({ birthDay: birthDay }, () => {

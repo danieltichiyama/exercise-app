@@ -1,6 +1,15 @@
 const express = require("express");
 const usersRouter = express.Router();
 
+usersRouter.route("/emails").get((req, res) => {
+  return req.db.User.fetchAll({
+    columns: ["email"]
+  })
+  .then(response => {
+    return res.json(response);
+  })
+})
+
 usersRouter.route("/:id").get((req, res) => {
   return req.db.User.where({ id: req.params.id })
     .fetch({
@@ -35,5 +44,6 @@ usersRouter.route("/").get((req, res) => {
     return res.json(response);
   });
 });
+
 
 module.exports = usersRouter;

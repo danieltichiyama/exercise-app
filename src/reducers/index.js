@@ -10,7 +10,8 @@ import {
   LOAD_USER,
   GET_DIARY_DATA,
   DELETE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  GET_EMAILS
 } from "../actions";
 
 const initialStore = {
@@ -20,6 +21,7 @@ const initialStore = {
   display: "meal",
   diaryData: [],
   users: [],
+  emails: [],
   isLoggedIn: false
 };
 
@@ -71,6 +73,9 @@ let reducer = (store = initialStore, action) => {
 
     case CLEAR:
       return Object.assign({}, store, { foods: action.payload });
+
+    case GET_EMAILS:
+      return Object.assign({}, store, { emails: action.payload });
 
     default:
       return store;

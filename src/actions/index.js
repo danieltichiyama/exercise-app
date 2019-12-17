@@ -14,6 +14,7 @@ export const CLEAR = "CLEAR";
 export const FOOD_VISION = "FOOD_VISION";
 export const LOAD_USER = "LOAD_USER";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+export const GET_EMAILS = "GET_EMAILS";
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -183,3 +184,16 @@ export const actionsDeleteComment = data => async dispatch => {
       console.log("Error in actionsDeleteComment: ", err);
     });
 };
+
+export const actionsGetEmails = () => async dispatch => {
+  await Axios.get("/api/users/emails")
+    .then(response => {
+      return dispatch({
+        type: GET_EMAILS,
+        payload:response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsGetEmails: ", err)
+    })
+}
