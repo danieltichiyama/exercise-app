@@ -11,10 +11,15 @@ export const LOAD_COMMENT = "LOAD_COMMENT";
 export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
-export const FOOD_VISION = "FOOD_VISION";
-export const LOAD_USER = "LOAD_USER";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+<<<<<<< HEAD
 export const GET_EMAILS = "GET_EMAILS";
+=======
+export const LOAD_USER = "LOAD_USER";
+export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
+export const CHANGE_DATE = "CHANGE_DATE";
+export const FOOD_VISION = "FOOD_VISION";
+>>>>>>> 9d320a1a0fc71b9dfc7208b08d11c5a2fed7e30e
 
 export const actionsLoadActivity = () => async dispatch => {
   await Axios.get("/api/activity_levels")
@@ -122,15 +127,14 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log('DATA: ', data)
-  await Axios.post('/api/vision', data)
-  .then(response => {
+  console.log("DATA: ", data);
+  await Axios.post("/api/vision", data).then(response => {
     return dispatch({
       type: FOOD_VISION,
       payload: response.data
-    })
-  })
-}
+    });
+  });
+};
 
 export const actionFoodNutrients = fdcId => async dispatch => {
   await Axios.get(`/api/nutrition/${fdcId}`)
@@ -154,7 +158,7 @@ export const actionLoadUser = id => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionLoadUsers: ", err);
+      console.log("Error in actionLoadUser: ", err);
     });
 };
 
@@ -197,3 +201,10 @@ export const actionsGetEmails = () => async dispatch => {
       console.log("Error in actionsGetEmails: ", err)
     })
 }
+
+export const actionsChangeDate = date => async dispatch => {
+  return dispatch({
+    type: CHANGE_DATE,
+    payload: date
+  });
+};
