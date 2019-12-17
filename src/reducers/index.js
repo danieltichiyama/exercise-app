@@ -1,5 +1,6 @@
 import {
   ADD_COMMENT,
+  ADD_FOOD,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
@@ -17,6 +18,7 @@ import {
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE
 } from "../actions";
+
 import moment from "moment";
 
 const initialStore = {
@@ -24,19 +26,20 @@ const initialStore = {
   bodyparts: [],
   community_posts: [],
   diaryData: [],
+
   exercises: [],
   exerciseInfo: [],
   foods: [],
   foods_meals_users: [],
   users: [],
   isLoggedIn: false,
+  addFood: {},
+  foods_meals_users: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
   display: "meal"
 };
-
-let reducer = (store = initialStore, action) => {
 
   switch (action.type) {
 
@@ -106,8 +109,8 @@ let reducer = (store = initialStore, action) => {
     default:
       return store;
 
-    //   case TOGGLE:
-    //     return Object.assign({}, store, { display: action.payload });
+    case ADD_FOOD:
+      return Object.assign({}, store, { addFood: action.payload });
   }
 };
 

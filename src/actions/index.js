@@ -12,6 +12,7 @@ export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+export const ADD_FOOD = "ADD_FOOD";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
@@ -212,6 +213,19 @@ export const actionsDeleteComment = data => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsDeleteComment: ", err);
+    });
+};
+
+export const actionsAddFood = data => async dispatch => {
+  await Axios.post("/api/foods_meals_users/new", data)
+    .then(response => {
+      return dispatch({
+        type: ADD_FOOD,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsAddFood: ", err);
     });
 };
 
