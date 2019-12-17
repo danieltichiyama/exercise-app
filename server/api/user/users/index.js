@@ -23,7 +23,7 @@ usersRouter
       });
   })
   .put((req, res) => {
-    console.log("req params::::", req.params);
+    return console.log("req params::::", req.params);
   });
 
 //not sure if we need this route, but i'll leave it for now.

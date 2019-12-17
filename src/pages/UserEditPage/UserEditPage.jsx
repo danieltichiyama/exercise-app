@@ -19,11 +19,15 @@ class UserEditPage extends Component {
   }
 
   componentDidMount() {
+    console.log("props in component did mount", this.props);
     let { dispatchLoadUser, match } = this.props;
     dispatchLoadUser(match.params.id);
   }
 
-  handleChange = event => {
+  handleChange = ({ target }) => {
+    console.log("target:::::", target);
+    this.setState({ [target.name]: target.value });
+
     switch (event.target.name) {
       case "name":
         this.setState({ name: event.target.value });
@@ -40,18 +44,17 @@ class UserEditPage extends Component {
       case "activity_level":
         this.setState({ activity_level_id: parseInt(event.target.value) });
         break;
+      case "goal":
+        this.setState({ goal_id: parseInt(event.target.value) });
+        break;
     }
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
-    this.props.dispatchEditUser();
   };
 
   render() {
-    console.log(this.props.user);
-
     return (
       <>
         <div>

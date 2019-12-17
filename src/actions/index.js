@@ -13,10 +13,41 @@ export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+export const ADD_FOOD = "ADD_FOOD";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
 export const FOOD_VISION = "FOOD_VISION";
+export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
+export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
+export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
+export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+
+export const actionsLoadSingleExercise = (data) => async dispatch => {
+  await Axios.get(`/api/exercises/${data}`)
+    .then(response => {
+      return dispatch({
+        type: LOAD_SINGLE_EXERCISE,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in ationsLoadSingleExercise: ", err);
+    })
+}
+
+export const actionsFilterBodyParts = (data) => async dispatch => {
+  await Axios.get(`/api/bodyparts/${data}`)
+    .then(response => {
+      return dispatch({
+        type: FILTER_BODY_PARTS,
+        payload: response.data[0].exercises
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsFilterBodyParts: ", err);
+    })
+};
 
 export const actionsEditUser = (id, data) => async dispatch => {
   console.log("actions edit user data:::", data);
@@ -175,7 +206,7 @@ export const actionLoadUser = id => async dispatch => {
 
 export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
-  await Axios.post("api/foods_meals_users", { date, session })
+  await Axios.post("/api/foods_meals_users", { date, session })
     .then(response => {
       return dispatch({
         type: GET_DIARY_DATA,
@@ -200,9 +231,48 @@ export const actionsDeleteComment = data => async dispatch => {
     });
 };
 
+export const actionsAddFood = data => async dispatch => {
+  await Axios.post("/api/foods_meals_users/new", data)
+    .then(response => {
+      return dispatch({
+        type: ADD_FOOD,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsAddFood: ", err);
+    });
+};
+
 export const actionsChangeDate = date => async dispatch => {
   return dispatch({
     type: CHANGE_DATE,
     payload: date
   });
+};
+
+export const actionsLoadBodyParts = () => async dispatch => {
+  await Axios.get("/api/bodyparts")
+    .then(response => {
+      return dispatch({
+        type: LOAD_BODY_PARTS,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsLoadBodyParts: ", err)
+    });
+};
+
+export const actionsLoadExerciseList = () => async dispatch => {
+  await Axios.get("/api/exercises")
+    .then(response => {
+      return dispatch({
+        type: LOAD_EXERCISE_LIST,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsLoadExerciseList: ", err);
+    });
 };

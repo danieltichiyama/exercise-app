@@ -13,6 +13,8 @@ import AddSnackPage from "./pages/AddSnackPage";
 import UserEditPage from "./pages/UserEditPage";
 
 import Playground from "./pages/Playground";
+import ExerciseInfoPage from "./pages/ExerciseInfoPage";
+
 
 export const routes = [
   {
@@ -74,6 +76,11 @@ export const routes = [
     path: "/playground",
     exact: true,
     component: Playground
+  },
+  {
+    path: "/exercise/:id",
+    exact: true,
+    component: ExerciseInfoPage
   }
 ];
 
