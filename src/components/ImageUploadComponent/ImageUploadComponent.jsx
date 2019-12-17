@@ -39,7 +39,6 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFoodVision: data => {
-      console.log(data);
       return dispatch(actionFoodVision(data))
     }
   }

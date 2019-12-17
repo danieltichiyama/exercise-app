@@ -20,6 +20,7 @@ export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+export const VIDEO_UPLOAD = "VIDEO_UPLOAD";
 
 export const actionsLoadSingleExercise = (data) => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
@@ -153,8 +154,8 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log("DATA: ", data);
-  await Axios.post("/api/vision", data).then(response => {
+  await Axios.post("/api/vision", data)
+  .then(response => {
     return dispatch({
       type: FOOD_VISION,
       payload: response.data
@@ -247,3 +248,17 @@ export const actionsLoadExerciseList = () => async dispatch => {
       console.log("Error in actionsLoadExerciseList: ", err);
     });
 };
+
+export const actionVideoUpload = data => async dispatch => {
+  await Axios.post("/api/video_upload", data)
+  .then(response => {
+    console.log(response);
+    return dispatch({
+      type: VIDEO_UPLOAD,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    console.log("Error in actionsVideoUpload: ", err);
+  })
+}
