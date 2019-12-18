@@ -22,6 +22,7 @@ export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+export const FILTER_EMAILS = "FILTER_EMAILS";
 
 export const actionsLoadSingleExercise = (data) => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
@@ -218,16 +219,16 @@ export const actionsDeleteComment = data => async dispatch => {
 };
 
 
-export const actionsGetEmails = () => async dispatch => {
-  await Axios.get("/api/users/emails")
+export const actionsFilterEmails = data => async dispatch => {
+  await Axios.post("/api/users/emails", data)
     .then(response => {
       return dispatch({
-        type: GET_EMAILS,
-        payload:response.data
+        type: FILTER_EMAILS,
+        payload: response.data
       })
     })
     .catch(err => {
-      console.log("Error in actionsGetEmails: ", err)
+      console.log("Error in actionsFilterEmails: ", err)
     })
 }
 

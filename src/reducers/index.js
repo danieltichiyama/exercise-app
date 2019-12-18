@@ -14,10 +14,7 @@ import {
   LOGIN,
   LOGOUT,
   LOAD_USER,
-  CHANGE_DATE,
-  DELETE_COMMENT,
-  ADD_COMMENT,
-  GET_EMAILS,
+  FILTER_EMAILS,
   REGISTER,
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE
@@ -37,8 +34,6 @@ const initialStore = {
   exerciseInfo: [],
   foods: [],
   foods_meals_users: [],
-  users: [],
-  isLoggedIn: false,
   addFood: {},
   diaryDate: moment()
     .utc()
@@ -111,11 +106,8 @@ let reducer = (store = initialStore, action) => {
     case DELETE_COMMENT:
       return store;
 
-    case CLEAR:
-      return Object.assign({}, store, { foods: action.payload });
-
-    case GET_EMAILS:
-      return Object.assign({}, store, { emails: action.payload });
+    case FILTER_EMAILS:
+      return Object.assign([], store, { emails: action.payload });
 
     default:
       return store;

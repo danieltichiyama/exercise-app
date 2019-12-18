@@ -6,7 +6,6 @@ import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 class RegisterSurveyComponent extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
     this.state = { 
       name: this.props.obj.name,
       email: this.props.obj.email,
