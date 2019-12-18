@@ -10,7 +10,6 @@ class FoodComponent extends Component {
   }
 
   handleClick() {
-    // this.props.dispatchClear();
     this.props.dispatchFoodNutrients(this.props.fdcId);
   }
 
