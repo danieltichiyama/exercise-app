@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionFoodVision } from "../../actions";
 
-class ImageUploadComponent extends Component {
+class FoodVisionComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
@@ -12,7 +12,6 @@ class ImageUploadComponent extends Component {
     const formData = new FormData();
     formData.append('foodImage', e.target.files[0]);
     this.props.dispatchFoodVision(formData);
-    // console.log(formData, e.target.files[0]);
   }
 
   render() { 
@@ -44,6 +43,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-ImageUploadComponent = connect(mapStateToProps, mapDispatchToProps)(ImageUploadComponent);
+FoodVisionComponent = connect(mapStateToProps, mapDispatchToProps)(FoodVisionComponent);
  
-export default ImageUploadComponent;
+export default FoodVisionComponent;
