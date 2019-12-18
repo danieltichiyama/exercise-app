@@ -12,6 +12,7 @@ export const FOOD_SEARCH = "FOOD_SEARCH";
 export const FOOD_NUTRIENT_SEARCH = "FOOD_NUTRIENT_SEARCH";
 export const CLEAR = "CLEAR";
 export const GET_DIARY_DATA = "GET_DIARY_DATA";
+export const GET_EMAILS = "GET_EMAILS";
 export const ADD_FOOD = "ADD_FOOD";
 export const LOAD_USER = "LOAD_USER";
 export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
@@ -21,6 +22,7 @@ export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+export const FILTER_EMAILS = "FILTER_EMAILS";
 
 export const actionsLoadSingleExercise = (data) => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
@@ -216,6 +218,20 @@ export const actionsDeleteComment = data => async dispatch => {
     });
 };
 
+
+export const actionsFilterEmails = data => async dispatch => {
+  await Axios.post("/api/users/emails", data)
+    .then(response => {
+      return dispatch({
+        type: FILTER_EMAILS,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsFilterEmails: ", err)
+    })
+}
+
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
     .then(response => {
@@ -228,6 +244,7 @@ export const actionsAddFood = data => async dispatch => {
       console.log("Error in actionsAddFood: ", err);
     });
 };
+
 
 export const actionsChangeDate = date => async dispatch => {
   return dispatch({
