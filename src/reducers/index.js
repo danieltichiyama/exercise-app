@@ -107,7 +107,7 @@ let reducer = (store = initialStore, action) => {
       return store;
 
     case FILTER_EMAILS:
-      return Object.assign([], store, { emails: action.payload });
+      return Object.assign({}, store, { emails: action.payload });
 
     default:
       return store;
