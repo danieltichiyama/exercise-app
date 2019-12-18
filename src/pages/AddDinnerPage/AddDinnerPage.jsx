@@ -12,7 +12,7 @@ class AddDinnerPage extends Component {
     return (
       <div>
         <h1>Dinner</h1>
-        <FoodSearchComponent />
+        <FoodSearchComponent meal_type_id={"3"} />
       </div>
     );
   }
