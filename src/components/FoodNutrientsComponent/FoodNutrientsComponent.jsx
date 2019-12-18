@@ -18,7 +18,6 @@ class FoodNutrientComponent extends Component {
         <p>Calcium: {this.props.calcium}</p>
         <p>Iron: {this.props.iron}</p>
         <p>Sodium: {this.props.sodium}</p>
-        <p>Zinc: {this.props.zinc}</p>
       </div>
     );
   }

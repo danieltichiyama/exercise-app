@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionFoodVision } from "../../actions";
 import LabelComponent from "../LabelComponent";
+import FoodComponent from "../FoodComponent";
 
-class ImageUploadComponent extends Component {
+class FoodVisionComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
@@ -12,10 +13,7 @@ class ImageUploadComponent extends Component {
   handleUpload = (e) => {
     const formData = new FormData();
     formData.append('foodImage', e.target.files[0]);
-    this.props.dispatchFoodVision(formData)
-    .then(
-      console.log(this.props.imgData)
-    )
+    this.props.dispatchFoodVision(formData);
   }
 
   render() { 
@@ -28,7 +26,7 @@ class ImageUploadComponent extends Component {
             // className={styles.upload}
             onChange={this.handleUpload}
           />
-          {this.props.imgData.length !== 0 ? (
+          {(this.props.imgData.length !== 0) ? (
             this.props.imgData.map(imgData => {
               return (
                 <LabelComponent
@@ -37,9 +35,18 @@ class ImageUploadComponent extends Component {
                 />
               )
             })
-          ) : (
-            ''
-          )}
+          ) : ('')}
+          {(this.props.imgData.length === 0 && this.props.searchData[0]) ? (
+            this.props.searchData.map(food => {
+              return (
+                <FoodComponent
+                  fdcId={food.fdcId}
+                  key={food.fdcId}
+                  description={food.description}
+                />
+              )
+            })
+          ) : ('')}
       </div>
     );
   }
@@ -47,19 +54,19 @@ class ImageUploadComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    imgData: store.food_labels
+    imgData: store.food_labels,
+    searchData: store.foods
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFoodVision: data => {
-      console.log(data);
       return dispatch(actionFoodVision(data))
     }
   }
 }
 
-ImageUploadComponent = connect(mapStateToProps, mapDispatchToProps)(ImageUploadComponent);
+FoodVisionComponent = connect(mapStateToProps, mapDispatchToProps)(FoodVisionComponent);
  
-export default ImageUploadComponent;
+export default FoodVisionComponent;

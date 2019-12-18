@@ -16,7 +16,7 @@ visionRouter.post("/", upload.single("foodImage"), (req, res) => {
     const [result] = await client.labelDetection(req.file.buffer);
     const labels = result.labelAnnotations;
     const filterLabel = labels.filter(label => !filterArr.includes(label.description));
-    console.log('Labels:');
+    // console.log('Labels:');
     // filterLabel.forEach(label => console.log(label.description));
     return filterLabel
   }

@@ -37,9 +37,6 @@ nutritionRouter
       },
       data: {
         generalSearchInput: req.body.data,
-        // includeDataTypes: {
-        //   "Survey (FNDDS)": true
-        // },
         "requireAllWords":"true",
         pageNumber: "1"
       }    
