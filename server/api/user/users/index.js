@@ -26,6 +26,19 @@ usersRouter
     return console.log("req params::::", req.params);
   });
 
+usersRouter.route("/emails").post((req, res) => {
+  return req.db.User.where({ email: req.body.email })
+    .fetch({
+      columns: ["email"]
+    })
+    .then(response => {
+      return res.json(response);
+    })
+    .catch(error => {
+      return res.send("");
+    });
+});
+
 //not sure if we need this route, but i'll leave it for now.
 usersRouter.route("/").get((req, res) => {
   return req.db.User.fetchAll({

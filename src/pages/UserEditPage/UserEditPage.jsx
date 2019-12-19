@@ -24,10 +24,7 @@ class UserEditPage extends Component {
     dispatchLoadUser(match.params.id);
   }
 
-  handleChange = ({ target }) => {
-    console.log("target:::::", target);
-    this.setState({ [target.name]: target.value });
-
+  handleChange = event => {
     switch (event.target.name) {
       case "name":
         this.setState({ name: event.target.value });
