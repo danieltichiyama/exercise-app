@@ -21,16 +21,24 @@ class CommentComponent extends Component {
     if (this.props.userID === JSON.parse(localStorage.getItem("session")).id) {
       return (
         <div className={styles.comments}>
-          <button onClick={this.handleDeleteComment}>x</button>
-          {this.props.body} || By: {this.props.user} || User's goal:{" "}
-          {this.props.user_goal}
+          <div className={styles.deleteButton}>
+            <button onClick={this.handleDeleteComment}>x</button>
+          </div>
+          <span className={styles.userName}>{this.props.user}</span> |{" "}
+          <span>Goal: {this.props.user_goal}</span>
+          <div className={styles.commentBody}>{this.props.body}</div>
         </div>
       );
     } else {
       return (
         <div className={styles.comments}>
-          {this.props.body} || By: {this.props.user} || User's goal:{" "}
-          {this.props.user_goal}
+          <div>
+            <span className={styles.userName}>{this.props.user}</span> | Goal:{" "}
+            <span>{this.props.user_goal}</span>
+          </div>
+          <div className={styles.commentBody}>{this.props.body}</div>
+          {/* {this.props.body} || By: {this.props.user} || User's goal:{" "}
+          {this.props.user_goal} */}
         </div>
       );
     }

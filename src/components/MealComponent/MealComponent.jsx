@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import styles from "./MealComponent.module.scss";
 
 const MealComponent = props => {

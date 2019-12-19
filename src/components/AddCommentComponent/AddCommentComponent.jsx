@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsAddComment, actionsLoadPosts } from "../../actions";
-// import styles from "./AddCommentComponent.module.scss";
+import styles from "../AddCommentComponent/AddCommentComponent.module.scss";
 
 class AddCommentComponent extends Component {
   constructor(props) {
@@ -41,6 +41,7 @@ class AddCommentComponent extends Component {
     return (
       <form action="">
         <input
+          className={styles.inputBar}
           type="text"
           placeholder="Comment"
           value={this.state.comment_field}
