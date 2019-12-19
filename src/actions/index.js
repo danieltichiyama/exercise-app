@@ -156,7 +156,6 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log("DATA: ", data);
   await Axios.post("/api/vision", data).then(response => {
     return dispatch({
       type: FOOD_VISION,
@@ -278,3 +277,23 @@ export const actionsLoadExerciseList = () => async dispatch => {
       console.log("Error in actionsLoadExerciseList: ", err);
     });
 };
+
+export const actionsFatSecretGetOauth2 = () => async dispatch => {
+  await Axios({
+    method: 'POST',
+    url: 'https://oauth.fatsecret.com/connect/token',
+    auth : {
+       user : process.env.REACT_APP_FAT_CLIENT_ID,
+       password : process.env.REACT_APP_FAT_SECRET_CLIENT
+    },
+    headers: { 'content-type': 'application/json'},
+    form: {
+       'grant_type': 'client_credentials',
+       'scope' : 'basic'
+    },
+    json: true
+  })
+  .then(response => {
+    console.log(response);
+  })
+}

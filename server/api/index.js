@@ -21,7 +21,8 @@ const community_comments = require("./community/community_comments");
 const exercise_bodyparts = require("./exercise/exercise_bodyparts");
 const foods_meals_users = require("./nutrition/foods_meals_users");
 const nutrition = require("./nutrition/nutrition");
-const vision = require("./nutrition/vision")
+const vision = require("./nutrition/vision");
+const fat_secret = require("./nutrition/fat_secret");
 
 module.exports = {
   activity_levels,
@@ -47,5 +48,6 @@ module.exports = {
   exercise_bodyparts,
   foods_meals_users,
   nutrition,
-  vision
+  vision,
+  fat_secret
 };
