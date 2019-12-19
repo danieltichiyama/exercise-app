@@ -24,16 +24,30 @@ class UserEditPage extends Component {
     dispatchLoadUser(match.params.id);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.user !== this.props.user) {
+      return this.setState({
+        name: this.props.user.name,
+        weight: this.props.user.weight,
+        height: this.props.user.height,
+        gender_id: this.props.user.gender_id.id,
+        activity_level_id: this.props.user.activity_level_id.id,
+        user_tier_id: this.props.user.user_tier_id.id,
+        goal_id: this.props.user.goal_id.id
+      });
+    }
+  }
+
   handleChange = event => {
     switch (event.target.name) {
       case "name":
         this.setState({ name: event.target.value });
         break;
       case "weight":
-        this.setState({ weight: event.target.value });
+        this.setState({ weight: parseInt(event.target.value) });
         break;
       case "height":
-        this.setState({ height: event.target.value });
+        this.setState({ height: parseInt(event.target.value) });
         break;
       case "gender":
         this.setState({ gender_id: parseInt(event.target.value) });
@@ -44,6 +58,8 @@ class UserEditPage extends Component {
       case "goal":
         this.setState({ goal_id: parseInt(event.target.value) });
         break;
+      default:
+        return;
     }
   };
 
@@ -52,6 +68,7 @@ class UserEditPage extends Component {
   };
 
   render() {
+    console.log(this.props.user);
     return (
       <>
         <div>
