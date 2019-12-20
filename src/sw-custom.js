@@ -18,6 +18,7 @@ if ("function" === typeof importScripts) {
     // Manual injection point for manifest files.
     // All assets under build/ and 5MB sizes are precached.
     workbox.precaching.precacheAndRoute([]);
+    //precacheAndRoute creates an instance of PreCacheController under the hood and also creates it's own fetch eventlisteners for these routes (this the AndRoute bit);
 
     // Font caching
     workbox.routing.registerRoute(
@@ -44,7 +45,7 @@ if ("function" === typeof importScripts) {
         ]
       })
     );
-    // JS, CSS caching
+    // JS, CSS, JSON caching
     workbox.routing.registerRoute(
       /\.(?:js|css|json)$/,
       workbox.strategies.staleWhileRevalidate({
@@ -61,3 +62,10 @@ if ("function" === typeof importScripts) {
     console.error("Workbox could not be loaded. No offline support.");
   }
 }
+
+//Route for any direct urls
+workbox.routing.registerNavigationRoute(
+  // Assuming '/single-page-app.html' has been precached,
+  // look up its corresponding cache key.
+  workbox.precaching.getCacheKeyForURL("/index.html")
+);
