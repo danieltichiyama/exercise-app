@@ -6,14 +6,14 @@ if ("function" === typeof importScripts) {
   if (workbox) {
     console.log("Workbox is loaded");
     // Disable logging
-    workbox.setConfig({ debug: false });
+    // workbox.setConfig({ debug: false });
     //`generateSW` and `generateSWString` provide the option
     // to force update an exiting service worker.
     // Since we're using `injectManifest` to build SW,
     // manually overriding the skipWaiting();
     self.addEventListener("install", event => {
       self.skipWaiting();
-      window.location.reload();
+      // window.location.reload();
     });
     // Manual injection point for manifest files.
     // All assets under build/ and 5MB sizes are precached.
@@ -45,6 +45,7 @@ if ("function" === typeof importScripts) {
         ]
       })
     );
+
     // JS, CSS, JSON caching
     workbox.routing.registerRoute(
       /\.(?:js|css|json)$/,
@@ -63,9 +64,22 @@ if ("function" === typeof importScripts) {
   }
 }
 
-//Route for any direct urls
-workbox.routing.registerNavigationRoute(
-  // Assuming '/single-page-app.html' has been precached,
-  // look up its corresponding cache key.
-  workbox.precaching.getCacheKeyForURL("/index.html")
+//sets up background sync for GET and POST requests.
+const bgSyncPlugin = new workbox.backgroundSync.Plugin("myQueueName", {
+  maxRetentionTime: 24 * 60 // Retry for max of 24 Hours (specified in minutes)
+});
+
+workbox.routing.registerRoute(
+  /\/api\/.*/,
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  })
+);
+
+workbox.routing.registerRoute(
+  /\/api\/.*/,
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  "POST"
 );
