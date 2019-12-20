@@ -21,6 +21,11 @@ export const routes = [
     component: HomePage
   },
   {
+    path: "/",
+    exact: true,
+    component: HomePage
+  },
+  {
     path: "/exercise",
     exact: true,
     component: ExercisePage
@@ -74,11 +79,6 @@ export const routes = [
     path: "/exercise/:id",
     exact: true,
     component: ExerciseInfoPage
-  },
-  {
-    path: "*",
-    exact: false,
-    component: FourOhFourPage
   }
 ];
 
@@ -96,6 +96,7 @@ const Routes = () => {
             component={AuthorizationPage}
           />
         ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
       </>
     );
   } else {
@@ -109,6 +110,7 @@ const Routes = () => {
             component={route.component}
           />
         ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
       </>
     );
   }
