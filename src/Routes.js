@@ -13,7 +13,6 @@ import AddSnackPage from "./pages/AddSnackPage";
 import Playground from "./pages/Playground";
 import ExerciseInfoPage from "./pages/ExerciseInfoPage";
 
-
 export const routes = [
   {
     path: "/home",
@@ -78,18 +77,35 @@ export const routes = [
 ];
 
 const Routes = () => {
-  return (
-    <>
-      {routes.map((route, i) => (
-        <Route
-          key={`global_routes_${i}`}
-          path={route.path}
-          exact={route.exact}
-          component={route.component}
-        />
-      ))}
-    </>
-  );
+  let session = localStorage.getItem("session");
+
+  if (!session) {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={AuthorizationPage}
+          />
+        ))}
+      </>
+    );
+  } else {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+        ))}
+      </>
+    );
+  }
 };
 
 export default Routes;
