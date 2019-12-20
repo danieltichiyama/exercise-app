@@ -18,6 +18,7 @@ if ("function" === typeof importScripts) {
     // Manual injection point for manifest files.
     // All assets under build/ and 5MB sizes are precached.
     workbox.precaching.precacheAndRoute([]);
+
     // Font caching
     workbox.routing.registerRoute(
       new RegExp("https://fonts.(?:.googlepis|gstatic).com/(.*)"),
