@@ -17,7 +17,8 @@ import {
   FILTER_EMAILS,
   REGISTER,
   FILTER_BODY_PARTS,
-  LOAD_SINGLE_EXERCISE
+  LOAD_SINGLE_EXERCISE,
+  ACTIVE_TOKEN
 } from "../actions";
 
 import moment from "moment";
@@ -38,7 +39,8 @@ const initialStore = {
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
-  display: "meal"
+  display: "meal",
+  activeToken: false
 };
 
 let reducer = (store = initialStore, action) => {
@@ -114,6 +116,9 @@ let reducer = (store = initialStore, action) => {
 
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
+
+    case ACTIVE_TOKEN:
+      return Object.assign({}, store, { activeToken: true });
   }
 };
 

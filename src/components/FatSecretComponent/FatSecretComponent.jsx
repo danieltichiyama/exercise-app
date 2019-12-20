@@ -8,14 +8,14 @@ class FatSecretComponent extends Component {
     this.state = {  }
   }
 
-  componentDidMount = () => {
-
+  handleClick = () => {
+    this.props.dispatchFatSecretGetOauth2()
   }
 
   render() { 
     return ( 
       <>
-        <div className="fatsecret_container" id="fatsecret_container"></div>
+        <button onClick={this.handleClick}>click</button>
       </>
     );
   }
@@ -23,8 +23,8 @@ class FatSecretComponent extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchFatSecretGetOauth2: data => {
-      return dispatch(actionsFatSecretGetOauth2(data))
+    dispatchFatSecretGetOauth2: () => {
+      return dispatch(actionsFatSecretGetOauth2())
     }
   }
 }

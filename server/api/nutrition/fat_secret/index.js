@@ -1,17 +1,18 @@
 const express = require("express");
-const clientID = 'YOUR_CLIENT_ID';
-const clientSecret = 'YOUR_CLIENT_SECRET';
+const axios = require("axios");
 const fatSecretRouter = express.Router();
+const request = require("request");
+const clientID = process.env.REACT_APP_FAT_SECRET_CLIENT_ID;
+const clientPW = process.env.REACT_APP_FAT_SECRET_CLIENT_SECRET
 
 var options = {
    method: 'POST',
    url: 'https://oauth.fatsecret.com/connect/token',
-   method : 'POST',
    auth : {
       user : clientID,
-      password : clientSecret
+      password : clientPW
    },
-   headers: { 'content-type': 'application/json'},
+   headers: { 'Content-Type': 'application/json'},
    form: {
       'grant_type': 'client_credentials',
       'scope' : 'basic'
@@ -19,12 +20,23 @@ var options = {
    json: true
 };
 
-
-
-// request(options, function (error, response, body) {
-//    if (error) throw new Error(error);
-
-//    console.log(body);
-// });
+fatSecretRouter.route("/")
+.get((req, res) => {
+  request(options, function (error, response, body) {
+    if (error) {
+      throw new Error(error);
+    } else {
+      res.send(body);
+    }
+  });
+})
+.post((req, res) => {
+  console.log('yoyoyoyoyoyo', req.body.data);
+  return req.db.FatSecret.forge({
+    Oauth2Token: req.body.data.access_token,
+    expires_in: req.body.data.expires_in
+  })
+  .save()
+})
 
 module.exports = fatSecretRouter;

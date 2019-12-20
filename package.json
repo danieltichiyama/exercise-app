@@ -37,6 +37,7 @@
     "redis-server": "^1.2.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
+    "request": "^2.88.0",
     "sass": "^1.23.7",
     "typescript": "^3.7.2"
   },

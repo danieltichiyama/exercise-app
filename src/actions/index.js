@@ -23,6 +23,7 @@ export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
+export const ACTIVE_TOKEN = "ACTIVE_TOKEN";
 
 export const actionsLoadSingleExercise = (data) => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
@@ -279,21 +280,14 @@ export const actionsLoadExerciseList = () => async dispatch => {
 };
 
 export const actionsFatSecretGetOauth2 = () => async dispatch => {
-  await Axios({
-    method: 'POST',
-    url: 'https://oauth.fatsecret.com/connect/token',
-    auth : {
-       user : process.env.REACT_APP_FAT_CLIENT_ID,
-       password : process.env.REACT_APP_FAT_SECRET_CLIENT
-    },
-    headers: { 'content-type': 'application/json'},
-    form: {
-       'grant_type': 'client_credentials',
-       'scope' : 'basic'
-    },
-    json: true
-  })
+  await Axios.get("/api/fat_secret")
   .then(response => {
-    console.log(response);
+    dispatch({
+      type: ACTIVE_TOKEN
+    })
+    Axios.post("/api/fat_secret", response)
+    .then(response => {
+      return console.log(response);
+    })
   })
 }

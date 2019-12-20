@@ -19,7 +19,7 @@ const UserTier = require("./models/UserTier");
 const UserVideo = require("./models/UserVideo");
 const Workout = require("./models/Workout");
 const WorkoutExercise = require("./models/WorkoutExercise");
-
+const FatSecret = require("./models/FatSecret");
 
 
 module.exports = function(req, res, next) {
@@ -44,7 +44,8 @@ module.exports = function(req, res, next) {
     UserTier,
     UserVideo,
     Workout,
-    WorkoutExercise
+    WorkoutExercise,
+    FatSecret
   };
   next();
 };
