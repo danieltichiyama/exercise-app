@@ -12,6 +12,7 @@ import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
 import Playground from "./pages/Playground";
 import ExerciseInfoPage from "./pages/ExerciseInfoPage";
+import FourOhFourPage from "./pages/FourOhFourPage";
 
 export const routes = [
   {
@@ -73,6 +74,11 @@ export const routes = [
     path: "/exercise/:id",
     exact: true,
     component: ExerciseInfoPage
+  },
+  {
+    path: "*",
+    exact: false,
+    component: FourOhFourPage
   }
 ];
 

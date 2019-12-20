@@ -6,7 +6,7 @@ if ("function" === typeof importScripts) {
   if (workbox) {
     console.log("Workbox is loaded");
     // Disable logging
-    workbox.setConfig({ debug: false });
+    workbox.setConfig({ debug: true });
     //`generateSW` and `generateSWString` provide the option
     // to force update an exiting service worker.
     // Since we're using `injectManifest` to build SW,
@@ -25,7 +25,7 @@ if ("function" === typeof importScripts) {
     // Font caching
     workbox.routing.registerRoute(
       new RegExp("https://fonts.(?:.googlepis|gstatic).com/(.*)"),
-      workbox.strategies.cacheFirst({
+      new workbox.strategies.CacheFirst({
         cacheName: "googleapis",
         plugins: [
           new workbox.expiration.Plugin({
@@ -35,11 +35,9 @@ if ("function" === typeof importScripts) {
       })
     );
 
-    console.log("precaching", workbox.precaching);
-    // //catch all and send back to index.html
+    //catch all and send back to index.html (which has our App.js in it, the route typed in after the main url is then used by react-router-dom)
     workbox.routing.registerNavigationRoute(
       workbox.precaching.getCacheKeyForURL("/index.html"),
-      //not working...
       {
         blacklist: [
           new RegExp("^/api/"), // Exclude URLs starting with /api/, as they're API calls (not navigation)
@@ -49,11 +47,12 @@ if ("function" === typeof importScripts) {
     );
 
     //next try to setup a registerNR for error handling and going to pages that aren't found in the cached page...
+    // workbox.routing.registerRoute;
 
     // Image caching
     workbox.routing.registerRoute(
       /\.(?:png|gif|jpg|jpeg|svg)$/,
-      workbox.strategies.cacheFirst({
+      new workbox.strategies.CacheFirst({
         cacheName: "images",
         plugins: [
           new workbox.expiration.Plugin({
@@ -67,7 +66,7 @@ if ("function" === typeof importScripts) {
     // JS, CSS, JSON caching
     workbox.routing.registerRoute(
       /\.(?:js|css|json)$/,
-      workbox.strategies.staleWhileRevalidate({
+      new workbox.strategies.StaleWhileRevalidate({
         cacheName: "static-resources",
         plugins: [
           new workbox.expiration.Plugin({
@@ -117,3 +116,34 @@ workbox.routing.registerRoute(
   }),
   "DELETE"
 );
+
+workbox.routing.setDefaultHandler(
+  new workbox.strategies.StaleWhileRevalidate()
+);
+
+// This "catch" handler is triggered when any of the other routes fail to
+// generate a response.
+workbox.routing.setCatchHandler(({ event }) => {
+  console.log(event);
+  // The FALLBACK_URL entries must be added to the cache ahead of time, either via runtime
+  // or precaching.
+  // If they are precached, then call workbox.precaching.getCacheKeyForURL(FALLBACK_URL)
+  // to get the correct cache key to pass in to caches.match().
+  //
+  // Use event, request, and url to figure out how to respond.
+  // One approach would be to use request.destination, see
+  // https://medium.com/dev-channel/service-worker-caching-strategies-based-on-request-types-57411dd7652c
+  switch (event.request.destination) {
+    case "document":
+      return caches.match(workbox.precaching.getCacheKeyForURL("/404.html"));
+
+    case "image":
+      return caches.match(
+        workbox.precaching.getCacheKeyForURL("/image404Icon.png")
+      );
+
+    default:
+      // If we don't have a fallback, just return an error response.
+      return Response.error();
+  }
+});
