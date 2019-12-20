@@ -9,7 +9,7 @@ class FoodMealUser extends bookshelf.Model {
         return true;
     }
 
-    food_image_id(){
+    food_image_id() {
         return this.hasOne("FoodImage", "id", "foods_meals_users_id");
     }
     meal_type_id() {

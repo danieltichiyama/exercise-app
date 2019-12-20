@@ -11,7 +11,7 @@ app.use(express.static("./server/public"));
 
 //body-parsers and decorator
 app.use(bodyParser.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
-app.use(bodyParser.json({ extended: true, limit:"50mb" }));
+app.use(bodyParser.json({ extended: true, limit: "50mb" }));
 app.use(decorator);
 
 //routers
@@ -32,7 +32,7 @@ app.use("/api/workouts", api.workouts);
 app.use("/api/food_images", api.food_images);
 app.use("/api/tutorial_videos", api.tutorial_videos);
 app.use("/api/user_videos", api.user_videos);
-app.use("/api/workouts_exercises", api.workouts_exercises);
+app.use("/api/exercises_users_workouts", api.exercises_users_workouts);
 app.use("/api/community_posts", api.community_posts);
 app.use("/api/community_comments", api.community_comments);
 app.use("/api/exercise_bodyparts", api.exercise_bodyparts);
