@@ -4,17 +4,21 @@ import styles from "./MealComponent.module.scss";
 const MealComponent = props => {
   return (
     <div className={styles.MealComponent}>
-      <h1>Meal Component</h1>
-      <h2>{props.meal}</h2>
+      <h3>{props.meal}</h3>
+      <hr />
       <ul>
-        {props.foods.map(food => {
-          return (
-            <li key={food.description}>
-              {food.description} Calories: {food.calories} Fat: {food.fat}{" "}
-              Carbs: {food.carbs} Protein: {food.protein}
-            </li>
-          );
-        })}
+        {props.foods.length >= 1 ? (
+          props.foods.map(food => {
+            return (
+              <li key={food.description}>
+                <div className={styles.foodDesc}>{food.description}</div>
+                <div className={styles.foodCal}>{food.calories}</div>
+              </li>
+            );
+          })
+        ) : (
+          <div className={styles.recommendedCal}>Recommended calories: 500</div>
+        )}
       </ul>
     </div>
   );

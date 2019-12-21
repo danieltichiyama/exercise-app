@@ -33,29 +33,35 @@ class DashboardComponent extends Component {
 
     return (
       <>
-        <div className={styles.dashboard}>
+        <div className={styles.Dashboard}>
           <div className={styles.remainingCalories}>
             <div className={styles.column}>
               <h2>{goal}</h2>
               <p>Goal</p>
             </div>
-
-            <p>-</p>
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>-</p>
+            </div>
 
             <div className={styles.column}>
               <h2>{food}</h2>
               <p>Food</p>
             </div>
 
-            <p>+</p>
-
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>+</p>
+            </div>
             <div className={styles.column}>
               <h2>0</h2>
               <p>Exercise</p>
             </div>
 
-            <p>=</p>
-
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>=</p>
+            </div>
             <div className={styles.column}>
               <h2>{remaining}</h2>
               <p>Remaining</p>
