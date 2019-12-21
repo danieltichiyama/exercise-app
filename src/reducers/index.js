@@ -19,7 +19,8 @@ import {
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE,
   ADD_WORKOUT,
-  LOAD_WORKOUTS
+  LOAD_WORKOUTS,
+  GET_SMOKE
 } from "../actions";
 
 import moment from "moment";
@@ -42,11 +43,15 @@ const initialStore = {
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
-  display: "meal"
+  display: "meal",
+  smoke: ""
 };
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case GET_SMOKE:
+      return Object.assign({}, store, { smoke: action.payload });
+
     case LOAD_SINGLE_EXERCISE:
       return Object.assign({}, store, { exerciseInfo: action.payload });
 

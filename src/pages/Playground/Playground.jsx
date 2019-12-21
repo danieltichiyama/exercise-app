@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Playground.module.scss";
+import SmokeButton from "../../components/SmokeButton";
 
 class Playground extends Component {
   constructor(props) {
@@ -9,8 +10,9 @@ class Playground extends Component {
   render() {
     return (
       <div className={styles.Playground}>
-        <p>No Pushing. No jumping. Have fun.</p>
+        <p>Pushing and pulling encouraged. Have fun.</p>
         {/* insert playground equipment here. */}
+        <SmokeButton></SmokeButton>
       </div>
     );
   }

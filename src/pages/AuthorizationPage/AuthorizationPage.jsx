@@ -8,39 +8,38 @@ class AuthorizationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isRegistered: false,
+      isRegistered: true,
       takingSurvey: false,
       obj: {}
     };
   }
 
-  takingSurvey = (data) => {
-    return this.setState({ 
+  takingSurvey = data => {
+    return this.setState({
       takingSurvey: !this.state.takingSurvey,
-      obj: data,
+      obj: data
     });
-  }
+  };
 
   isRegistered = () => {
     return this.setState({ isRegistered: !this.state.isRegistered });
   };
-
 
   render() {
     return (
       <div className={styles.AuthorizationPage}>
         {!this.state.isRegistered ? (
           !this.state.takingSurvey ? (
-            <RegisterComponent 
+            <RegisterComponent
               isRegistered={this.isRegistered}
               takingSurvey={this.takingSurvey}
-            >  
-            </RegisterComponent>
-          ) : (<RegisterSurveyComponent 
-                obj={this.state.obj}
-                isRegistered={this.isRegistered}
-              >   
-              </RegisterSurveyComponent>)
+            ></RegisterComponent>
+          ) : (
+            <RegisterSurveyComponent
+              obj={this.state.obj}
+              isRegistered={this.isRegistered}
+            ></RegisterSurveyComponent>
+          )
         ) : (
           <LoginComponent isRegistered={this.isRegistered}></LoginComponent>
         )}
