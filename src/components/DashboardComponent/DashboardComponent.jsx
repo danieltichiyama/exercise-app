@@ -18,8 +18,11 @@ class DashboardComponent extends Component {
     };
   }
   componentDidMount() {
-    this.props.dispatchLoadUser(this.state.id.id);
-    this.props.dispatchGetDiaryData(this.state.date);
+    if (this.state.id) {
+      //wrapped in a conditional for PWA
+      this.props.dispatchLoadUser(this.state.id.id);
+      this.props.dispatchGetDiaryData(this.state.date);
+    }
   }
 
   render() {

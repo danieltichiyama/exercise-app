@@ -12,11 +12,16 @@ import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
 import Playground from "./pages/Playground";
 import ExerciseInfoPage from "./pages/ExerciseInfoPage";
-
+import FourOhFourPage from "./pages/FourOhFourPage";
 
 export const routes = [
   {
     path: "/home",
+    exact: true,
+    component: HomePage
+  },
+  {
+    path: "/",
     exact: true,
     component: HomePage
   },
@@ -78,18 +83,37 @@ export const routes = [
 ];
 
 const Routes = () => {
-  return (
-    <>
-      {routes.map((route, i) => (
-        <Route
-          key={`global_routes_${i}`}
-          path={route.path}
-          exact={route.exact}
-          component={route.component}
-        />
-      ))}
-    </>
-  );
+  let session = localStorage.getItem("session");
+
+  if (!session) {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={AuthorizationPage}
+          />
+        ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
+      </>
+    );
+  } else {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+        ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
+      </>
+    );
+  }
 };
 
 export default Routes;
