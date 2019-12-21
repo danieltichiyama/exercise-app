@@ -46,7 +46,9 @@ class FoodVisionComponent extends Component {
                 />
               )
             })
-          ) : ('')}
+          ) : (
+            'CRAP'
+          )}
       </div>
     );
   }

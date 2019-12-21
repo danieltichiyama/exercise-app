@@ -23,6 +23,7 @@ class FoodSearchComponent extends Component {
   }
 
   mapFoods = data => {
+    console.log('DATA: ', data);
     if (data[0]) {
       return data.map(food => {
         return (
