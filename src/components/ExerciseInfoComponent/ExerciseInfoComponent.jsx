@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
-import { actionsLoadSingleExercise } from "../../actions";
+import { actionsLoadSingleExercise, actionLoadUser } from "../../actions";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-
+import DurationPopUpComponent from "../DurationPopUpComponent/index";
 
 class ExerciseInfoComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            user_id: JSON.parse(localStorage.getItem("session")).id,
+            showPopup: false
+        }
     }
 
     componentDidMount() {
         this.props.dispatchLoadSingleExercise(this.props.match.params.id);
+        this.props.dispatchLoadUser(this.state.user_id);
     }
 
-    handleAddWorkout = () => {
-        console.log('test')
-
+    handlePopup = () => {
+        this.setState({
+            showPopup: !this.state.showPopup
+        })
     }
 
     render() {
         let singleExercise = this.props.exerciseInfo;
+        console.log("11111111111", this.props)
         return (
             <>
                 <Link to="/exercise" >Back to Exercises</Link>
@@ -31,8 +37,17 @@ class ExerciseInfoComponent extends Component {
                     <h3>Exercise Type: {singleExercise.exercise_type_id ? singleExercise.exercise_type_id.exercise_type : null}</h3>
                     <h3>Equipment: {singleExercise.exercise_equipment_id ? singleExercise.exercise_equipment_id.exercise_equipment : null}</h3>
                     <p>{singleExercise.description}</p>
-                    <button onClick={this.handleAddWorkout}>Add to Workout</button>
+                    <button onClick={this.handlePopup}>Add to Workout</button>
                 </div>
+                {this.state.showPopup ? (
+                    <DurationPopUpComponent
+                        handlePopup={this.handlePopup}
+                        id={singleExercise.id}
+                        exercise_name={singleExercise.name}
+                        exercise_multiplier={singleExercise.exercise_difficulty_id.exercise_multiplier}
+                        user_weight={this.props.user.weight}
+                    />
+                ) : null}
             </>
         );
     }
@@ -40,7 +55,8 @@ class ExerciseInfoComponent extends Component {
 
 const mapStateToProps = store => {
     return {
-        exerciseInfo: store.exerciseInfo
+        exerciseInfo: store.exerciseInfo,
+        user: store.users
     }
 }
 
@@ -48,6 +64,9 @@ const mapDispatchToProps = dispatch => {
     return {
         dispatchLoadSingleExercise: (data) => {
             return dispatch(actionsLoadSingleExercise(data));
+        },
+        dispatchLoadUser: (id) => {
+            return dispatch(actionLoadUser(id));
         }
     }
 }
