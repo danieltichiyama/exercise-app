@@ -33,8 +33,8 @@ fatSecretRouter.route("/")
 .post((req, res) => {
   console.log('yoyoyoyoyoyo', req.body.data);
   return req.db.FatSecret.forge({
-    Oauth2Token: req.body.data.access_token,
-    expires_in: req.body.data.expires_in
+    Oauth2Token: req.body.access_token,
+    expires_in: req.body.expires_in
   })
   .save()
 })

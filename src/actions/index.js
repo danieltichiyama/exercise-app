@@ -138,15 +138,15 @@ export const actionFoodSearch = data => async dispatch => {
     },
     data
   })
-    .then(response => {
-      return dispatch({
-        type: FOOD_SEARCH,
-        payload: response.data
-      });
-    })
-    .catch(err => {
-      console.log(err);
+  .then(response => {
+    return dispatch({
+      type: FOOD_SEARCH,
+      payload: response.data
     });
+  })
+  .catch(err => {
+    console.log(err);
+  });
 };
 
 export const actionClear = () => dispatch => {
