@@ -41,12 +41,12 @@ nutritionRouter
         }
       }
     })
-      .then(response => {
-        return res.json(response.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    .then(response => {
+      return res.json(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   });
 
 nutritionRouter.route("/:id").get((req, res) => {

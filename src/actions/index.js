@@ -280,11 +280,13 @@ export const actionsLoadExerciseList = () => async dispatch => {
 };
 
 export const actionsFatSecretGetOauth2 = () => async dispatch => {
+  console.log('ACTIONSSS');
   await Axios.get("/api/fat_secret")
   .then(response => {
     dispatch({
       type: ACTIVE_TOKEN
     })
+    
     Axios.post("/api/fat_secret", response)
     .then(response => {
       return console.log(response);
