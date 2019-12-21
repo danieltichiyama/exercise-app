@@ -4,7 +4,14 @@ import styles from "./MealComponent.module.scss";
 const MealComponent = props => {
   return (
     <div className={styles.MealComponent}>
-      <h3>{props.meal}</h3>
+      <div className={styles.mealHeader}>
+        <h3>{props.meal}</h3>
+        <h3>
+          {props.foods.reduce((total, food) => {
+            return total + food.calories;
+          }, 0)}
+        </h3>
+      </div>
       <hr />
       <ul>
         {props.foods.length >= 1 ? (

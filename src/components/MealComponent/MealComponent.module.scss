@@ -2,12 +2,17 @@
   padding: 20px 5px 5px 5px;
   margin-bottom: 5px;
 
-  h3 {
-    color: #fc4a1a;
-    font-weight: bold;
-    margin-bottom: 5px;
-    margin-left: 10px;
-    margin-top: 0px;
+  .mealHeader {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    h3 {
+      color: #fc4a1a;
+      font-weight: bold;
+      margin: 0px 10px 5px 10px;
+    }
   }
 
   hr {
@@ -26,6 +31,7 @@
       width: 100%;
       margin: 20px 0px 10px 0px;
       justify-content: space-between;
+      font-weight: 300;
 
       .foodDesc {
         text-align: left;

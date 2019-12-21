@@ -29,8 +29,10 @@ class DashboardComponent extends Component {
       this.props.diaryData.reduce((total, data) => {
         return total + data.calories;
       }, 0);
-    let remaining = JSON.stringify(goal - food);
+    let remaining = JSON.stringify(goal - (goal - food));
+    let percent = (food / goal) * 100;
 
+    let redBarStyle = { width: `${percent}%` };
     return (
       <>
         <div className={styles.Dashboard}>
@@ -68,8 +70,12 @@ class DashboardComponent extends Component {
             </div>
           </div>
 
+          <div className={styles.statusBar}>
+            <div className={styles.redBar} style={redBarStyle}></div>
+          </div>
+
           <div className={styles.caloriesConsumedText}>
-            <p>Calories consumed:</p>
+            <p>Calories consumed: </p>
             <p className={styles.remainingP}>{remaining}</p>
             <p>/{goal} kcal</p>
           </div>
