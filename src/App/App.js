@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "./App.css";
+import styles from "./App.css";
 import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.App}>
         {this.props.isLoggedIn ? (
           <button onClick={this.handleLogout}>Log out</button>
         ) : null}
