@@ -1,30 +1,42 @@
 import {
+  ADD_COMMENT,
+  ADD_FOOD,
+  CHANGE_DATE,
+  CLEAR,
+  DELETE_COMMENT,
+  FILTER_BODY_PARTS,
+  FILTER_EMAILS,
+  FOOD_NUTRIENT_SEARCH,
+  FOOD_SEARCH,
+  FOOD_VISION,
+  GET_DIARY_DATA,
   LOAD_ACTIVITIES,
-  REGISTER,
+  LOAD_BODY_PARTS,
+  LOAD_EXERCISE_LIST,
+  LOAD_POSTS,
   LOGIN,
   LOGOUT,
-  LOAD_POSTS,
-  FOOD_SEARCH,
-  FOOD_NUTRIENT_SEARCH,
-  FOOD_VISION,
-  CLEAR,
-  GET_DIARY_DATA,
   LOAD_USER,
-  CHANGE_DATE,
-  DELETE_COMMENT,
-  ADD_COMMENT
+  LOAD_SINGLE_EXERCISE,
+  REGISTER
 } from "../actions";
+
 import moment from "moment";
 
 const initialStore = {
-  foods: [],
   activity_levels: [],
+  bodyparts: [],
   community_posts: [],
   diaryData: [],
   users: [],
-  foods_meals_users: [],
   food_labels: [],
+  emails: [],
   isLoggedIn: false,
+  exercises: [],
+  exerciseInfo: [],
+  foods: [],
+  foods_meals_users: [],
+  addFood: {},
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
@@ -32,9 +44,10 @@ const initialStore = {
 };
 
 let reducer = (store = initialStore, action) => {
-  // console.log(action.payload);
-
   switch (action.type) {
+    case LOAD_SINGLE_EXERCISE:
+      return Object.assign({}, store, { exerciseInfo: action.payload });
+
     case LOAD_ACTIVITIES:
       return Object.assign({}, store, { activity_levels: action.payload });
 
@@ -84,17 +97,29 @@ let reducer = (store = initialStore, action) => {
         diaryDate: newMoment.format("YYYY-MM-D")
       });
 
+    case LOAD_BODY_PARTS:
+      return Object.assign({}, store, { bodyparts: action.payload });
+
+    case LOAD_EXERCISE_LIST:
+      return Object.assign({}, store, { exercises: action.payload });
+
+    case FILTER_BODY_PARTS:
+      return Object.assign({}, store, { exercises: action.payload });
+
     case ADD_COMMENT:
       return store;
 
     case DELETE_COMMENT:
       return store;
 
+    case FILTER_EMAILS:
+      return Object.assign({}, store, { emails: action.payload });
+
     default:
       return store;
 
-    //   case TOGGLE:
-    //     return Object.assign({}, store, { display: action.payload });
+    case ADD_FOOD:
+      return Object.assign({}, store, { addFood: action.payload });
   }
 };
 

@@ -1,17 +1,20 @@
 import React, { Component } from "react";
+import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 
 class FoodNutrientComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = {};
   }
 
-  render() { 
+  render() {
     return (
       <div>
+        <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
         <h3>{this.props.description}</h3>
         <p>Calories: {this.props.calories}</p>
-        <p>Protien: {this.props.protien}</p>
+        <p>Fat: {this.props.fat}</p>
+        <p>Protein: {this.props.protein}</p>
         <p>Carbohydrates: {this.props.carbohydrates}</p>
         <p>Sugars: {this.props.sugars}</p>
         <p>Fats: {this.props.fats}</p>
@@ -22,5 +25,5 @@ class FoodNutrientComponent extends Component {
     );
   }
 }
- 
+
 export default FoodNutrientComponent;

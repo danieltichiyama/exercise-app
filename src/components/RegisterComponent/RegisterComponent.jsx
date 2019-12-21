@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
-// import { actionsRegister } from "../../actions";
+import { actionsFilterEmails } from "../../actions";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -25,30 +25,37 @@ class RegisterComponent extends Component {
     return this.props.isRegistered();
   };
 
-  handleContinueClick = (e) => {
+  handleContinueClick = async (e) => {
     e.preventDefault();
     if (!this.state.name || !this.state.email || !this.state.password){
       alert("Please fill in all fields");
       return false;
-    }
+    };
+
+    let emailObj = { email: this.state.email };
+    await this.props.dispatchFilterEmails(emailObj)
+    if ((typeof this.props.filteredEmails) === "object"){
+      alert("Email is already registered with us");
+      return false;
+    };
+    
     if (!this.validateEmail(this.state.email)){
       alert("Please enter a valid email address");
       return false;
-    }
+    };
     if (this.state.password !== this.state.confirm_password){
       alert("Passwords do not match.");
       return false;
-    }
+    };
     if (this.state.password.length < 6){
       alert("Password must be at least 6 characters long.");
       return false;
-    }
+    };
     return this.props.takingSurvey(this.state);
-    
-  }
+  };
 
   validateEmail = (email) => {
-    var reg = /\S+@\S+\.\S+/;
+    const reg = /\S+@\S+\.\S+/;
     return reg.test(email);
   }
 
@@ -155,5 +162,21 @@ class RegisterComponent extends Component {
     );
   }
 }
+
+const mapStateToProps = store => {
+  return {
+    filteredEmails: store.emails
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchFilterEmails: data => {
+      return dispatch(actionsFilterEmails(data));
+    }
+  };
+};
+
+RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterComponent)
 
 export default RegisterComponent;

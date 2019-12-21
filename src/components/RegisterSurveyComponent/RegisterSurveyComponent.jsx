@@ -6,7 +6,6 @@ import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 class RegisterSurveyComponent extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
     this.state = { 
       name: this.props.obj.name,
       email: this.props.obj.email,
@@ -140,8 +139,8 @@ class RegisterSurveyComponent extends Component {
             value={this.state.day}
             // mandatory
             onChange={(day) => {
-              let birthDay = '';
-              if (day.length === 1){
+              let birthDay = day;
+              if (birthDay.length === 1){
                 birthDay = "0" + day;
               }
               this.setState({ birthDay: birthDay }, () => {
