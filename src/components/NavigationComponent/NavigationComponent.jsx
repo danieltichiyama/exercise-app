@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../NavigationComponent/NavigationComponent.module.scss";
-// import Routes from "../../Routes";
+import styles from "./NavigationComponent.module.scss";
 
 const NavigationComponent = props => {
   let session = localStorage.getItem("session");
