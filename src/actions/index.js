@@ -25,36 +25,37 @@ export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
 
-export const actionsLoadSingleExercise = (data) => async dispatch => {
+export const actionsLoadSingleExercise = data => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
     .then(response => {
       return dispatch({
         type: LOAD_SINGLE_EXERCISE,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in ationsLoadSingleExercise: ", err);
-    })
-}
+    });
+};
 
-export const actionsFilterBodyParts = (data) => async dispatch => {
+export const actionsFilterBodyParts = data => async dispatch => {
   await Axios.get(`/api/bodyparts/${data}`)
     .then(response => {
       return dispatch({
         type: FILTER_BODY_PARTS,
         payload: response.data[0].exercises
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsFilterBodyParts: ", err);
-    })
+    });
 };
 
 export const actionsEditUser = (id, data) => async dispatch => {
   console.log("actions edit user data:::", data);
-  await Axios.put(`/api/user/${id}`, data)
+  await Axios.put(`/api/users/${id}`, data)
     .then(response => {
+      console.log("response in edit", response);
       return dispatch({
         type: EDIT_USER,
         payload: response.data
@@ -233,19 +234,18 @@ export const actionsDeleteComment = data => async dispatch => {
     });
 };
 
-
 export const actionsFilterEmails = data => async dispatch => {
   await Axios.post("/api/users/emails", data)
     .then(response => {
       return dispatch({
         type: FILTER_EMAILS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsFilterEmails: ", err)
-    })
-}
+      console.log("Error in actionsFilterEmails: ", err);
+    });
+};
 
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
@@ -260,7 +260,6 @@ export const actionsAddFood = data => async dispatch => {
     });
 };
 
-
 export const actionsChangeDate = date => async dispatch => {
   return dispatch({
     type: CHANGE_DATE,
@@ -274,10 +273,10 @@ export const actionsLoadBodyParts = () => async dispatch => {
       return dispatch({
         type: LOAD_BODY_PARTS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsLoadBodyParts: ", err)
+      console.log("Error in actionsLoadBodyParts: ", err);
     });
 };
 
@@ -287,7 +286,7 @@ export const actionsLoadExerciseList = () => async dispatch => {
       return dispatch({
         type: LOAD_EXERCISE_LIST,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsLoadExerciseList: ", err);

@@ -46,6 +46,7 @@ let reducer = (store = initialStore, action) => {
   switch (action.type) {
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
+
     case LOAD_SINGLE_EXERCISE:
       return Object.assign({}, store, { exerciseInfo: action.payload });
 

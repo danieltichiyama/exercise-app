@@ -32,7 +32,8 @@ class UserPage extends Component {
     let inches = Math.round((convertHeight - feet) * 12);
 
     //convert kg to lbs
-    let convertWeight = Math.floor(this.props.users.weight * 2.20462);
+    let convertWeight = Math.round(this.props.users.weight * 2.205);
+    console.log("user weight", convertWeight);
 
     return (
       <>

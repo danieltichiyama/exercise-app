@@ -23,7 +23,15 @@ usersRouter
       });
   })
   .put((req, res) => {
-    return console.log("req params::::", req.params);
+    return req.db.User.where({ id: req.params.id })
+      .save(req.body, { method: "update", patch: true })
+      .then(results => {
+        console.log("results in api", results);
+        return res.json(results);
+      })
+      .catch(err => {
+        console.log("Error:", err);
+      });
   });
 
 usersRouter.route("/emails").post((req, res) => {
