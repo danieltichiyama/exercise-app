@@ -16,7 +16,6 @@ class NutritionPage extends Component {
       <div className={styles.NutritionPage}>
         <DateComponent></DateComponent>
         <DashboardComponent></DashboardComponent>
-
         <AddMealButtonComponent />
         <DiaryComponent></DiaryComponent>
       </div>

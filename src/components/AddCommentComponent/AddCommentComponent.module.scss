@@ -1,19 +1,21 @@
-.inputBar {
-  border: 1px solid #4abdac;
-  border-radius: 5px;
-  margin: 5px;
-}
+.AddComment {
+  .inputBar {
+    border: 1px solid #4abdac;
+    border-radius: 5px;
+    margin: 5px;
+  }
 
-input {
-  padding-left: 5px;
-}
+  input {
+    padding-left: 5px;
+  }
 
-button {
-  color: #ffffff;
-  background-color: #4abdac;
-}
+  button {
+    color: #ffffff;
+    background-color: #4abdac;
 
-button:hover {
-  background-color: #fc4a1a;
-  border-color: #fc4a1a;
+    &:hover {
+      background-color: #fc4a1a;
+      border-color: #fc4a1a;
+    }
+  }
 }
