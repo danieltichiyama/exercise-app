@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../NavigationComponent/NavigationComponent.module.scss";
 import communityIcon from "../../navIcons/community.png";
@@ -34,18 +34,17 @@ class NavigationComponent extends Component {
           <img src={communityIcon} alt="community button" />
         </Link>
 
-        {/* user profile */}
+      {session ? (
         <Link to="/user" className={styles.navButton}>
           <img src={userProfileIcon} alt="user profile button" />
         </Link>
-
-        {/* authorization */}
+      ) : (
         <Link to="/authorization" className={styles.navButton}>
           <img src={registerIcon} alt="register / login button" />
         </Link>
-      </nav>
-    );
-  }
-}
+      )}
+    </nav>
+  );
+};
 
 export default NavigationComponent;
