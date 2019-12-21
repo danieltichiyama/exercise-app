@@ -26,7 +26,6 @@ class ExerciseInfoComponent extends Component {
 
     render() {
         let singleExercise = this.props.exerciseInfo;
-        console.log("11111111111", this.props)
         return (
             <>
                 <Link to="/exercise" >Back to Exercises</Link>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./DurationPopUpComponent.module.scss";
+import { connect } from "react-redux";
+import { actionsAddWorkout } from "../../actions"
 
 class DurationPopUpComponent extends Component {
     constructor(props) {
@@ -22,13 +24,18 @@ class DurationPopUpComponent extends Component {
     }
 
     handleCalorieCount = (e) => {
-        let caloriesBurned = (.0175 * this.state.exercise_multiplier * this.state.user_weight) * this.state.duration;
-        this.setState({ calories_burned: caloriesBurned })
-        console.log("AFTER CALCULATIONS: ", this.state)
+        e.preventDefault();
+        let caloriesBurned = Math.round((.0175 * this.state.exercise_multiplier * this.state.user_weight) * this.state.duration);
+        this.setState({ calories_burned: caloriesBurned }, this.props.handlePopup);
+    }
+
+    componentDidUpdate(_prevProps, prevState) {
+        if (this.state.calories_burned !== prevState.calories_burned) {
+            this.props.dispatchAddWorkout(this.state)
+        }
     }
 
     render() {
-        console.log("pop up state::::::::::::::::", this.state)
         return (<div className={styles.popup}>
             <div className={styles.popup_inner}>
                 <h2>{this.props.exerciseName}</h2>
@@ -48,5 +55,21 @@ class DurationPopUpComponent extends Component {
         </div >);
     }
 }
+
+const mapStateToProps = store => {
+    return {
+        workout: store.workout
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatchAddWorkout: data => {
+            return dispatch(actionsAddWorkout(data));
+        }
+    }
+}
+
+DurationPopUpComponent = connect(mapStateToProps, mapDispatchToProps)(DurationPopUpComponent);
 
 export default DurationPopUpComponent;
