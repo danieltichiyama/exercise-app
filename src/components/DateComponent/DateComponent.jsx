@@ -28,9 +28,9 @@ class DateComponent extends Component {
 
     return (
       <div className={styles.DateComponent}>
-        <button onClick={this.getPreviousDate}>&lt;</button>
+        <button onClick={this.getPreviousDate}>&lt; </button>
         <h1>{local}</h1>
-        <button onClick={this.getNextDate}>&gt;</button>
+        <button onClick={this.getNextDate}> &gt;</button>
       </div>
     );
   }
