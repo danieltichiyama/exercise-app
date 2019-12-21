@@ -84,60 +84,13 @@ class UserEditPage extends Component {
     this.setState({ editSuccessful: true });
 
     if (this.state.selectedWeight === "lbs") {
-      this.setState(
-        {
-          weight: this.state.weight / 2.205
-        }
-        // ,
-        // () => {
-        //   const {
-        //     name,
-        //     weight,
-        //     height,
-        //     gender_id,
-        //     activity_level_id,
-        //     user_tier_id,
-        //     goal_id
-        //   } = this.state;
-        //   return dispatchEditUser(match.params.id, {
-        //     name,
-        //     weight,
-        //     height,
-        //     gender_id,
-        //     activity_level_id,
-        //     user_tier_id,
-        //     goal_id
-        //   });
-        // }
-      );
+      this.setState({
+        weight: this.state.weight / 2.205
+      });
     } else {
-      this.setState(
-        {
-          weight: this.state.weight
-        }
-        // ,
-        // () => {
-        //   const {
-        //     name,
-        //     weight,
-        //     height,
-        //     gender_id,
-        //     activity_level_id,
-        //     user_tier_id,
-        //     goal_id
-        //   } = this.state;
-
-        //   return dispatchEditUser(match.params.id, {
-        //     name,
-        //     weight,
-        //     height,
-        //     gender_id,
-        //     activity_level_id,
-        //     user_tier_id,
-        //     goal_id
-        //   });
-        // }
-      );
+      this.setState({
+        weight: this.state.weight
+      });
     }
 
     if (this.state.selectedHeight === "in") {
