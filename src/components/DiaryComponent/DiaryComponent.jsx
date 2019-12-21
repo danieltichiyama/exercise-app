@@ -23,7 +23,10 @@ class DiaryComponent extends Component {
   };
 
   componentDidUpdate = prevProps => {
-    if (this.props.diaryDate !== prevProps.diaryDate) {
+    if (
+      this.props.diaryDate !== prevProps.diaryDate ||
+      this.props.deletedFood !== prevProps.deletedFood
+    ) {
       return this.handleNewDate();
     } else if (this.props.addFood !== prevProps.addFood) {
       return this.handleNewDate();
@@ -60,7 +63,8 @@ const mapStateToProps = store => {
   return {
     diaryData: store.diaryData,
     diaryDate: store.diaryDate,
-    addFood: store.addFood
+    addFood: store.addFood,
+    deletedFood: store.deletedFood
   };
 };
 

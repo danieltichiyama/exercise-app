@@ -50,6 +50,26 @@ foodMealUserRouter
       .catch(err => {
         console.log(err);
       });
+  })
+  .delete((req, res) => {
+    let foodId = req.body.data;
+
+    console.log("req.body.data: ", req.body.data);
+
+    return req.db.FoodImage.where({ foods_meals_users_id: req.body.data })
+      .destroy()
+      .then(response => {
+        req.db.FoodMealUser.where({ id: req.body.data })
+          .destroy()
+          .then(() => {
+            res.send({
+              message: `Deletion of food with ID: ${foodId} successful`
+            });
+          });
+      })
+      .catch(err => {
+        console.log("Error in deleteFood: ", err);
+      });
   });
 
 module.exports = foodMealUserRouter;

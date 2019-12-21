@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "./MealComponent.module.scss";
+import DeleteFoodButtonComponent from "../DeleteFoodButtonComponent/DeleteFoodButtonComponent";
 
 const MealComponent = props => {
   return (
@@ -12,6 +13,7 @@ const MealComponent = props => {
             <li key={food.description}>
               {food.description} Calories: {food.calories} Fat: {food.fat}{" "}
               Carbs: {food.carbs} Protein: {food.protein}
+              <DeleteFoodButtonComponent id={food.id} />
             </li>
           );
         })}

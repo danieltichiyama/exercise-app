@@ -17,7 +17,8 @@ import {
   FILTER_EMAILS,
   REGISTER,
   FILTER_BODY_PARTS,
-  LOAD_SINGLE_EXERCISE
+  LOAD_SINGLE_EXERCISE,
+  DELETE_FOOD
 } from "../actions";
 
 import moment from "moment";
@@ -114,6 +115,9 @@ let reducer = (store = initialStore, action) => {
 
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
+
+    case DELETE_FOOD:
+      return Object.assign({}, store, { deletedFood: action.payload });
   }
 };
 
