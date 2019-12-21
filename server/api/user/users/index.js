@@ -3,15 +3,15 @@ const usersRouter = express.Router();
 
 usersRouter.route("/emails").post((req, res) => {
   return req.db.User.where({ email: req.body.email })
-  .fetch({
-    columns: ["email"]
-  })
-  .then(response => {
-    return res.json(response);
-  })
-  .catch(error => {
-    return res.send("");
-  })
+    .fetch({
+      columns: ["email"]
+    })
+    .then(response => {
+      return res.json(response);
+    })
+    .catch(error => {
+      return res.send("");
+    })
 })
 
 usersRouter.route("/:id").get((req, res) => {
@@ -22,7 +22,6 @@ usersRouter.route("/:id").get((req, res) => {
         "activity_level_id",
         "user_tier_id",
         "goal_id",
-        "workout_id"
       ]
     })
     .then(response => {
@@ -42,7 +41,6 @@ usersRouter.route("/").get((req, res) => {
       "activity_level_id",
       "user_tier_id",
       "goal_id",
-      "workout_id"
     ]
   }).then(response => {
     return res.json(response);

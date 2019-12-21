@@ -18,6 +18,8 @@ import {
   REGISTER,
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE,
+  ADD_WORKOUT,
+  LOAD_WORKOUTS,
   GET_SMOKE
 } from "../actions";
 
@@ -36,6 +38,8 @@ const initialStore = {
   foods: [],
   foods_meals_users: [],
   addFood: {},
+  workout: [],
+  workouts: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
@@ -114,11 +118,17 @@ let reducer = (store = initialStore, action) => {
     case FILTER_EMAILS:
       return Object.assign({}, store, { emails: action.payload });
 
-    default:
-      return store;
-
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
+
+    case ADD_WORKOUT:
+      return Object.assign({}, store, { workout: action.payload })
+
+    case LOAD_WORKOUTS:
+      return Object.assign({}, store, { workouts: action.payload })
+
+    default:
+      return store;
   }
 };
 
