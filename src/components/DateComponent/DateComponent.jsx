@@ -24,13 +24,13 @@ class DateComponent extends Component {
     let local = moment(this.props.diaryDate)
       .parseZone()
       .local()
-      .format("MMMM D");
+      .format("MMM D");
 
     return (
       <div className={styles.DateComponent}>
-        <button onClick={this.getPreviousDate}>Yesterday</button>
-        <h3>{local}</h3>
-        <button onClick={this.getNextDate}>Tomorrow</button>
+        <button onClick={this.getPreviousDate}>&lt; </button>
+        <h1>{local}</h1>
+        <button onClick={this.getNextDate}> &gt;</button>
       </div>
     );
   }
