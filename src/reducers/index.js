@@ -1,4 +1,5 @@
 import {
+  EDIT_USER,
   ADD_COMMENT,
   ADD_FOOD,
   CHANGE_DATE,
@@ -49,6 +50,8 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case EDIT_USER:
+      return Object.assign({}, store, { users: action.payload });
     case GET_SMOKE:
       return Object.assign({}, store, { smoke: action.payload });
 
@@ -122,10 +125,10 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { addFood: action.payload });
 
     case ADD_WORKOUT:
-      return Object.assign({}, store, { workout: action.payload })
+      return Object.assign({}, store, { workout: action.payload });
 
     case LOAD_WORKOUTS:
-      return Object.assign({}, store, { workouts: action.payload })
+      return Object.assign({}, store, { workouts: action.payload });
 
     default:
       return store;

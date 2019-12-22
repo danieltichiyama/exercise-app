@@ -1,5 +1,6 @@
 import Axios from "axios";
 
+export const EDIT_USER = "EDIT_USER";
 export const LOAD_ACTIVITIES = "LOAD_ACTIVITIES";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
@@ -25,7 +26,7 @@ export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const GET_SMOKE = "GET_SMOKE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
 export const ADD_WORKOUT = "ADD_WORKOUT";
-export const LOAD_WORKOUTS = "LOAD_WORKOUTS"
+export const LOAD_WORKOUTS = "LOAD_WORKOUTS";
 
 export const actionsLoadWorkouts = () => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts`)
@@ -33,26 +34,28 @@ export const actionsLoadWorkouts = () => async dispatch => {
       return dispatch({
         type: LOAD_WORKOUTS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsLoadWorkouts: ", err);
-    })
-}
+    });
+};
 
-export const actionsAddWorkout = (data) => async dispatch => {
-  await Axios.post('/api/exercises_users_workouts', data)
+export const actionsAddWorkout = data => async dispatch => {
+  await Axios.post("/api/exercises_users_workouts", data)
     .then(response => {
-      alert(`Workout Added! You burned ${response.data.calories_burned} calories!`)
+      alert(
+        `Workout Added! You burned ${response.data.calories_burned} calories!`
+      );
       return dispatch({
         type: ADD_WORKOUT,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsAddWorkout: ", err)
-    })
-}
+      console.log("Error in actionsAddWorkout: ", err);
+    });
+};
 
 export const actionsGetSmoke = () => async dispatch => {
   await Axios.get("/smoke")
@@ -90,6 +93,21 @@ export const actionsFilterBodyParts = data => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsFilterBodyParts: ", err);
+    });
+};
+
+export const actionsEditUser = (id, data) => async dispatch => {
+  console.log("actions edit user data:::", data);
+  await Axios.put(`/api/users/${id}`, data)
+    .then(response => {
+      console.log("response in edit", response);
+      return dispatch({
+        type: EDIT_USER,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionEditUser:", err);
     });
 };
 
