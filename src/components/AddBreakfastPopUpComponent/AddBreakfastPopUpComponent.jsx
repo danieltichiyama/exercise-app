@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import FoodSearchComponent from "../../components/FoodSearchComponent";
+import FoodSearchComponent from "../FoodSearchComponent";
 
-class AddBreakfastPage extends Component {
+class AddBreakfastPopUpComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -26,9 +26,9 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-AddBreakfastPage = connect(
+AddBreakfastPopUpComponent = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddBreakfastPage);
+)(AddBreakfastPopUpComponent);
 
-export default AddBreakfastPage;
+export default AddBreakfastPopUpComponent;
