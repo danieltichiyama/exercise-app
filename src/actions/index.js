@@ -25,6 +25,7 @@ export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const GET_SMOKE = "GET_SMOKE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
+export const DELETE_FOOD = "DELETE_FOOD";
 export const ADD_WORKOUT = "ADD_WORKOUT";
 export const LOAD_WORKOUTS = "LOAD_WORKOUTS";
 
@@ -205,7 +206,7 @@ export const actionFoodSearch = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionFoodSearch: ", err);
     });
 };
 
@@ -217,7 +218,6 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log("DATA: ", data);
   await Axios.post("/api/vision", data).then(response => {
     return dispatch({
       type: FOOD_VISION,
@@ -235,7 +235,7 @@ export const actionFoodNutrients = fdcId => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionFoodNutrients: ", err);
     });
 };
 
@@ -335,5 +335,19 @@ export const actionsLoadExerciseList = () => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsLoadExerciseList: ", err);
+    });
+};
+
+export const actionsDeleteFood = data => async dispatch => {
+  console.log("data: ", data);
+  await Axios.delete("api/foods_meals_users", { data: { data } })
+    .then(response => {
+      return dispatch({
+        type: DELETE_FOOD,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsDeleteFood: ", err);
     });
 };

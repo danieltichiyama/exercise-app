@@ -19,6 +19,7 @@ import {
   REGISTER,
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE,
+  DELETE_FOOD,
   ADD_WORKOUT,
   LOAD_WORKOUTS,
   GET_SMOKE
@@ -123,6 +124,9 @@ let reducer = (store = initialStore, action) => {
 
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
+
+    case DELETE_FOOD:
+      return Object.assign({}, store, { deletedFood: action.payload });
 
     case ADD_WORKOUT:
       return Object.assign({}, store, { workout: action.payload });
