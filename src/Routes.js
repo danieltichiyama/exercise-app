@@ -15,7 +15,6 @@ import UserEditPage from "./pages/UserEditPage";
 import Playground from "./pages/Playground";
 import ExerciseInfoPage from "./pages/ExerciseInfoPage";
 import WorkoutLogPage from "./pages/WorkoutLogPage";
-import FourOhFourPage from "./pages/FourOhFourPage";
 
 export const routes = [
   {
