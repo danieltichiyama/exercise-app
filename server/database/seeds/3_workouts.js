@@ -6,45 +6,14 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('workouts').insert([
         {
-          workout: 'abc',
-          user_id: 1
+          workout: 'Chest day',
         },
         {
-          workout: 'abc',
-          user_id: 2
+          workout: 'Going hard today',
         },
         {
-          workout: 'abc',
-          user_id: 3
+          workout: 'Leg day',
         },
-        {
-          workout: 'abc',
-          user_id: 4
-        },
-        {
-          workout: 'abc',
-          user_id: 5
-        },
-        {
-          workout: 'abc',
-          user_id: 6
-        },
-        {
-          workout: 'abc',
-          user_id: 7
-        },
-        {
-          workout: 'abc',
-          user_id: 8
-        },
-        {
-          workout: 'abc',
-          user_id: 9
-        },
-        {
-          workout: 'abc',
-          user_id: 10
-        }
       ]);
     });
 };

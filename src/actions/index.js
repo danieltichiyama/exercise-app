@@ -22,34 +22,77 @@ export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
 export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
+export const GET_SMOKE = "GET_SMOKE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
 export const ACTIVE_TOKEN = "ACTIVE_TOKEN";
 export const FAT_SECRET_FOOD_SEARCH = "FAT_SECRET_FOOD_SEARCH";
+export const ADD_WORKOUT = "ADD_WORKOUT";
+export const LOAD_WORKOUTS = "LOAD_WORKOUTS"
 
-export const actionsLoadSingleExercise = (data) => async dispatch => {
+export const actionsLoadWorkouts = () => async dispatch => {
+  await Axios.get(`/api/exercises_users_workouts`)
+    .then(response => {
+      return dispatch({
+        type: LOAD_WORKOUTS,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsLoadWorkouts: ", err);
+    })
+}
+
+export const actionsAddWorkout = (data) => async dispatch => {
+  await Axios.post('/api/exercises_users_workouts', data)
+    .then(response => {
+      alert(`Workout Added! You burned ${response.data.calories_burned} calories!`)
+      return dispatch({
+        type: ADD_WORKOUT,
+        payload: response.data
+      })
+    })
+    .catch(err => {
+      console.log("Error in actionsAddWorkout: ", err)
+    })
+}
+
+export const actionsGetSmoke = () => async dispatch => {
+  await Axios.get("/smoke")
+    .then(response => {
+      return dispatch({
+        type: GET_SMOKE,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsGetSmoke: ", err);
+    });
+};
+
+export const actionsLoadSingleExercise = data => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
     .then(response => {
       return dispatch({
         type: LOAD_SINGLE_EXERCISE,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in ationsLoadSingleExercise: ", err);
-    })
-}
+    });
+};
 
-export const actionsFilterBodyParts = (data) => async dispatch => {
+export const actionsFilterBodyParts = data => async dispatch => {
   await Axios.get(`/api/bodyparts/${data}`)
     .then(response => {
       return dispatch({
         type: FILTER_BODY_PARTS,
         payload: response.data[0].exercises
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsFilterBodyParts: ", err);
-    })
+    });
 };
 
 export const actionsLoadActivity = () => async dispatch => {
@@ -219,19 +262,18 @@ export const actionsDeleteComment = data => async dispatch => {
     });
 };
 
-
 export const actionsFilterEmails = data => async dispatch => {
   await Axios.post("/api/users/emails", data)
     .then(response => {
       return dispatch({
         type: FILTER_EMAILS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsFilterEmails: ", err)
-    })
-}
+      console.log("Error in actionsFilterEmails: ", err);
+    });
+};
 
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
@@ -246,7 +288,6 @@ export const actionsAddFood = data => async dispatch => {
     });
 };
 
-
 export const actionsChangeDate = date => async dispatch => {
   return dispatch({
     type: CHANGE_DATE,
@@ -260,10 +301,10 @@ export const actionsLoadBodyParts = () => async dispatch => {
       return dispatch({
         type: LOAD_BODY_PARTS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
-      console.log("Error in actionsLoadBodyParts: ", err)
+      console.log("Error in actionsLoadBodyParts: ", err);
     });
 };
 
@@ -273,7 +314,7 @@ export const actionsLoadExerciseList = () => async dispatch => {
       return dispatch({
         type: LOAD_EXERCISE_LIST,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsLoadExerciseList: ", err);

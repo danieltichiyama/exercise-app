@@ -20,9 +20,11 @@ const UserVideo = require("./models/UserVideo");
 const Workout = require("./models/Workout");
 const WorkoutExercise = require("./models/WorkoutExercise");
 const FatSecret = require("./models/FatSecret");
+const ExerciseUserWorkout = require("./models/ExerciseUserWorkout");
 
 
-module.exports = function(req, res, next) {
+
+module.exports = function (req, res, next) {
   req.db = {
     ActivityLevel,
     Bodypart,
@@ -44,8 +46,12 @@ module.exports = function(req, res, next) {
     UserTier,
     UserVideo,
     Workout,
+<<<<<<< HEAD
     WorkoutExercise,
     FatSecret
+=======
+    ExerciseUserWorkout
+>>>>>>> 5591afa992f6c4a1328e3d3567b26eb7ee7b94ff
   };
   next();
 };

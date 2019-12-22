@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFatSecretGetOauth2 } from "../../actions"
+import FatSecretFoodComponent from "../FatSecretFoodComponent/FatSecretFoodComponent";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -31,7 +32,16 @@ class FatSecretSearchComponent extends Component {
           <button>Submit</button>
         </form>
         {(this.props.foods[0]) ? (
-          'foods here'
+          this.props.foods.map(food => {
+            return (
+              <FatSecretFoodComponent
+                key={food.food_id}
+                foodID={food.food_id}
+                food_description={food.food_description}
+
+              />
+            )
+          })
         ) : ('foods not here')}
       </>
     )

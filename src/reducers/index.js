@@ -20,6 +20,9 @@ import {
   LOGOUT,
   LOAD_USER,
   REGISTER,
+  ADD_WORKOUT,
+  LOAD_WORKOUTS,
+  GET_SMOKE
 } from "../actions";
 
 import moment from "moment";
@@ -37,16 +40,21 @@ const initialStore = {
   foods: [],
   foods_meals_users: [],
   addFood: {},
+  workout: [],
+  workouts: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
   display: "meal",
-  activeToken: false,
   fat_secret_foods: [],
+  smoke: ""
 };
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case GET_SMOKE:
+      return Object.assign({}, store, { smoke: action.payload });
+
     case LOAD_SINGLE_EXERCISE:
       return Object.assign({}, store, { exerciseInfo: action.payload });
 
@@ -113,19 +121,21 @@ let reducer = (store = initialStore, action) => {
     case FILTER_EMAILS:
       return Object.assign({}, store, { emails: action.payload });
 
-    default:
-      return store;
-
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
-
-    case ACTIVE_TOKEN:
-      return Object.assign({}, store, { activeToken: true });
     
     case FAT_SECRET_FOOD_SEARCH:
       return Object.assign({}, store, { fat_secret_foods: action.payload });
 
     
+    case ADD_WORKOUT:
+      return Object.assign({}, store, { workout: action.payload })
+
+    case LOAD_WORKOUTS:
+      return Object.assign({}, store, { workouts: action.payload })
+
+    default:
+      return store;
   }
 };
 

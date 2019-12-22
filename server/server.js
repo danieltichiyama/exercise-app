@@ -3,15 +3,25 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const decorator = require("./database/decorator");
 const api = require("./api/index");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static("./server/public"));
+//necessary for local spin up of front end with npm run build, remove before deploying.
+//use localhost:8080/ for npm run build
+app.use(express.static(path.join(__dirname, "../build")));
+//end
 
 //body-parsers and decorator
-app.use(bodyParser.urlencoded({ extended: false, limit: "50mb", parameterLimit: 50000 }));
-app.use(bodyParser.json({ extended: true, limit:"50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    extended: false,
+    limit: "50mb",
+    parameterLimit: 50000
+  })
+);
+app.use(bodyParser.json({ extended: true, limit: "50mb" }));
 app.use(decorator);
 
 //routers
@@ -32,7 +42,7 @@ app.use("/api/workouts", api.workouts);
 app.use("/api/food_images", api.food_images);
 app.use("/api/tutorial_videos", api.tutorial_videos);
 app.use("/api/user_videos", api.user_videos);
-app.use("/api/workouts_exercises", api.workouts_exercises);
+app.use("/api/exercises_users_workouts", api.exercises_users_workouts);
 app.use("/api/community_posts", api.community_posts);
 app.use("/api/community_comments", api.community_comments);
 app.use("/api/exercise_bodyparts", api.exercise_bodyparts);
@@ -43,7 +53,13 @@ app.use("/api/fat_secret", api.fat_secret);
 //routers-end
 
 app.get("/smoke", (req, res) => {
-  return res.json({ message: "hiyee" });
+  return res.json({ message: "Here's some smoke from server.js" });
+});
+
+//necessary for local spin up of front end with npm run build, remove before deploying
+//use localhost:8080/ for npm run build
+app.get(`*`, function(req, res) {
+  res.sendFile(path.join(__dirname, "../build", "sw.js"));
 });
 
 app.listen(PORT, () => {

@@ -24,10 +24,6 @@ class User extends bookshelf.Model {
   goal_id() {
     return this.hasOne("Goal", "id", "goal_id");
   }
-
-  workout_id() {
-    return this.hasMany("Workout");
-  }
 }
 
 module.exports = bookshelf.model("User", User);

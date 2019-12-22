@@ -9,13 +9,14 @@ class Workout extends bookshelf.Model {
     return true;
   }
 
-  user_id() {
-    return this.belongsTo("User");
+  exercisesUsersWorkouts() {
+    return this.hasMany("ExerciseUserWorkout");
   }
 
-  exercises() {
-    return this.belongsToMany("Exercise", "workouts_exercises");
-  }
+  // user_id() {
+  //   return this.belongsTo("User");
+  // }
+
 }
 
 module.exports = bookshelf.model("Workout", Workout);

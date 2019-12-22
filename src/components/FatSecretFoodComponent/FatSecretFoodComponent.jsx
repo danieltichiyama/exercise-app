@@ -6,9 +6,9 @@ class FatSecretFoodComponent extends Component {
     super(props);
     this.state = {  }
   }
-  render() { 
-    return (  );
-  }
+  // render() { 
+  //   return (  );
+  // }
 }
  
 export default FatSecretFoodComponent;

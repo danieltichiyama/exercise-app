@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styles from "./Playground.module.scss";
 import FatSecretSearchComponent from "../../components/FatSecretSearchComponent";
+import SmokeButton from "../../components/SmokeButton";
 
 class Playground extends Component {
   constructor(props) {
@@ -10,9 +11,10 @@ class Playground extends Component {
   render() {
     return (
       <div className={styles.Playground}>
-        <p>No Pushing. No jumping. Have fun.</p>
+        <p>Pushing and pulling encouraged. Have fun.</p>
         {/* insert playground equipment here. */}
         <FatSecretSearchComponent/>
+        <SmokeButton></SmokeButton>
       </div>
     );
   }

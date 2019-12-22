@@ -25,7 +25,7 @@ class CommunityPostComponent extends Component {
     let { title, body, user_id } = this.props;
 
     return (
-      <div className={styles.post}>
+      <div className={styles.CommunityPost}>
         <div className={styles.postHeader}>{title}</div>
         <div className={styles.postedBy}>{user_id.name}</div>
         <div>{body}</div>

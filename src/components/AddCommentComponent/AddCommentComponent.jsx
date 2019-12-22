@@ -39,7 +39,7 @@ class AddCommentComponent extends Component {
 
   render() {
     return (
-      <form action="">
+      <form className={styles.AddComment} action="">
         <input
           className={styles.inputBar}
           type="text"
