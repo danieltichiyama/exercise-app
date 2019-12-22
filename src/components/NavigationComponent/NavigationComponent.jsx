@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../NavigationComponent/NavigationComponent.module.scss";
-import communityIcon from "../../navIcons/community.png";
-import homeIcon from "../../navIcons/home.png";
-import nutritionIcon from "../../navIcons/nutrition.png";
-import registerIcon from "../../navIcons/register.png";
-import userProfileIcon from "../../navIcons/user_profile.png";
-import exerciseIcon from "../../navIcons/workout.png";
+import communityIcon from "../../imgs/community.png";
+import homeIcon from "../../imgs/home.png";
+import nutritionIcon from "../../imgs/nutrition.png";
+import registerIcon from "../../imgs/register.png";
+import userProfileIcon from "../../imgs/user_profile.png";
+import exerciseIcon from "../../imgs/workout.png";
 
 // import Routes from "../../Routes";
 

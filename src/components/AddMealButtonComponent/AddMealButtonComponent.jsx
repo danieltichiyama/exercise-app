@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "../AddMealButtonComponent/AddMealButtonComponent.module.scss";
 
-import addBreakfast from "../../icons/addBreakfast.png";
-import addLunch from "../../icons/addLunch.png";
-import addDinner from "../../icons/addDinner.png";
-import addSnack from "../../icons/addSnack.png";
+import addBreakfast from "../../imgs/addBreakfast.png";
+import addLunch from "../../imgs/addLunch.png";
+import addDinner from "../../imgs/addDinner.png";
+import addSnack from "../../imgs/addSnack.png";
 
 const AddMealButtonComponent = props => {
   return (
