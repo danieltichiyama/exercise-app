@@ -6,26 +6,32 @@ class WorkoutCardComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {}
-    }
-    render() {
+    };
 
+    render() {
+        let thisDay = this.props.exercises;
         return (
             <div className={styles.workout}>
-                <h3>
-                    Date: {moment(this.props.created_at).format("MM/DD/YYYY")}
-                </h3>
-                <h4>
-                    Exercise: {this.props.name}
-                </h4>
-                <h5>
-                    Calories burned: {this.props.calories_burned || 0}
-                </h5>
-                <h5>
-                    Length of exercise: {this.props.duration || 0} minutes
-            </h5>
+                <h2>
+                    Date: {moment(this.props.date).format("MMM D")}
+                </h2>
+                <ul>
+                    {thisDay.map(day => {
+                        return (
+                            <li key={day.id}>
+                                <h3>
+                                    Exercise: {day.exercises_id.name}
+                                </h3>
+                                <h4>
+                                    Calories burned: {day.calories_burned | 666}
+                                </h4>
+                            </li>
+                        )
+                    })}
+                </ul>
             </div>
         );
-    }
-}
+    };
+};
 
 export default WorkoutCardComponent;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { actionsLoadWorkouts } from "../../actions";
 import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
+import * as moment from "moment";
 
 class WorkoutLogComponent extends Component {
     constructor(props) {
@@ -15,18 +16,24 @@ class WorkoutLogComponent extends Component {
     };
 
     render() {
-        console.log("workout component: ", this.props)
+        // Hardcoding new date and pushing to workouts array to check if workoutObj sorts it into new day
+        // this.props.workouts.push({ created_at: "2019-12-23T03:50:18.592Z" })
+
+        const workoutObj = this.props.workouts.reduce((acc, workout) => {
+            let newTime = moment(workout.created_at).format("MM-DD-YYYY");
+            console.log('newtime', newTime)
+            return { ...acc, [newTime]: [...(acc[newTime] || []), workout] };
+        }, {});
+
         return (
             <div>
-                {this.props.workouts.map(workout => {
+                {Object.keys(workoutObj).map(key => {
+                    console.log(workoutObj[key])
                     return (
                         <WorkoutCardComponent
-                            key={workout.id}
-                            id={workout.workout_id}
-                            name={workout.exercises_id.name}
-                            calories_burned={workout.calories_burned}
-                            duration={workout.exercise_duration}
-                            created_at={workout.created_at}
+                            key={key}
+                            date={key}
+                            exercises={workoutObj[key]}
                         />
                     )
                 })}
