@@ -10,8 +10,7 @@ usersRouter
           "gender_id",
           "activity_level_id",
           "user_tier_id",
-          "goal_id",
-          "workout_id"
+          "goal_id"
         ]
       })
       .then(response => {
@@ -33,6 +32,7 @@ usersRouter
         console.log("Error:", err);
       });
   });
+
 usersRouter.route("/emails").post((req, res) => {
   return req.db.User.where({ email: req.body.email })
     .fetch({
