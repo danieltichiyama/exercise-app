@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./MealComponent.module.scss";
+import DeleteFoodButtonComponent from "../DeleteFoodButtonComponent/DeleteFoodButtonComponent";
 
 const MealComponent = props => {
   return (
@@ -20,6 +21,7 @@ const MealComponent = props => {
               <li key={food.description}>
                 <div className={styles.foodDesc}>{food.description}</div>
                 <div className={styles.foodCal}>{food.calories}</div>
+                <DeleteFoodButtonComponent id={food.id} />
               </li>
             );
           })

@@ -1,10 +1,12 @@
 import {
+  EDIT_USER,
   ADD_COMMENT,
   ADD_FOOD,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
   FAT_SECRET_FOOD_SEARCH,
+  FAT_SECRET_FOOD_NUTRIENT_SEARCH,
   FILTER_BODY_PARTS,
   FILTER_EMAILS,
   FOOD_NUTRIENT_SEARCH,
@@ -19,10 +21,10 @@ import {
   LOGOUT,
   LOAD_USER,
   REGISTER,
+  DELETE_FOOD,
   ADD_WORKOUT,
   LOAD_WORKOUTS,
   GET_SMOKE,
-  FAT_SECRET_FOOD_NUTRIENT_SEARCH
 } from "../actions";
 
 import moment from "moment";
@@ -53,6 +55,8 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case EDIT_USER:
+      return Object.assign({}, store, { users: action.payload });
     case GET_SMOKE:
       return Object.assign({}, store, { smoke: action.payload });
 
@@ -135,11 +139,14 @@ let reducer = (store = initialStore, action) => {
       console.log(action.payload);
       return Object.assign({}, store, { fat_secret_nutrients: action.payload })
 
+    case DELETE_FOOD:
+      return Object.assign({}, store, { deletedFood: action.payload });
+
     case ADD_WORKOUT:
-      return Object.assign({}, store, { workout: action.payload })
+      return Object.assign({}, store, { workout: action.payload });
 
     case LOAD_WORKOUTS:
-      return Object.assign({}, store, { workouts: action.payload })
+      return Object.assign({}, store, { workouts: action.payload });
 
     default:
       return store;

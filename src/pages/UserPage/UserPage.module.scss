@@ -1,0 +1,18 @@
+.body {
+  width: 100%;
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+  .rows {
+    margin: 0px 50px 0px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .button {
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+}
