@@ -122,10 +122,15 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { addFood: action.payload });
 
     case ADD_WORKOUT:
-      return Object.assign({}, store, { workout: action.payload })
+      return Object.assign({}, store, { workout: action.payload });
 
     case LOAD_WORKOUTS:
-      return Object.assign({}, store, { workouts: action.payload })
+      let sortedArr = action.payload.sort((a, b) => {
+        let aTime = moment(a.created_at).unix();
+        let bTime = moment(b.created_at).unix();
+        return bTime - aTime;
+      })
+      return Object.assign({}, store, { workouts: sortedArr });
 
     default:
       return store;

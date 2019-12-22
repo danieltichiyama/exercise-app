@@ -27,18 +27,18 @@ export const FILTER_EMAILS = "FILTER_EMAILS";
 export const ADD_WORKOUT = "ADD_WORKOUT";
 export const LOAD_WORKOUTS = "LOAD_WORKOUTS"
 
-export const actionsLoadWorkouts = () => async dispatch => {
-  await Axios.get(`/api/exercises_users_workouts`)
+export const actionsLoadWorkouts = (data) => async dispatch => {
+  await Axios.get(`/api/exercises_users_workouts/${data}`, data)
     .then(response => {
       return dispatch({
         type: LOAD_WORKOUTS,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsLoadWorkouts: ", err);
-    })
-}
+    });
+};
 
 export const actionsAddWorkout = (data) => async dispatch => {
   await Axios.post('/api/exercises_users_workouts', data)
@@ -47,12 +47,12 @@ export const actionsAddWorkout = (data) => async dispatch => {
       return dispatch({
         type: ADD_WORKOUT,
         payload: response.data
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsAddWorkout: ", err)
-    })
-}
+    });
+};
 
 export const actionsGetSmoke = () => async dispatch => {
   await Axios.get("/smoke")
