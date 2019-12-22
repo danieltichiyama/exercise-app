@@ -3,6 +3,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("exercise_difficulties", table => {
         table.increments();
         table.string("exercise_difficulty");
+        table.decimal("exercise_multiplier")
         table.timestamps(true, true);
     });
 };

@@ -1,4 +1,5 @@
 import {
+  EDIT_USER,
   ADD_COMMENT,
   ADD_FOOD,
   CHANGE_DATE,
@@ -18,7 +19,10 @@ import {
   REGISTER,
   FILTER_BODY_PARTS,
   LOAD_SINGLE_EXERCISE,
-  DELETE_FOOD
+  DELETE_FOOD,
+  ADD_WORKOUT,
+  LOAD_WORKOUTS,
+  GET_SMOKE
 } from "../actions";
 
 import moment from "moment";
@@ -36,14 +40,22 @@ const initialStore = {
   foods: [],
   foods_meals_users: [],
   addFood: {},
+  workout: [],
+  workouts: [],
   diaryDate: moment()
     .utc()
     .format("YYYY-MM-D"),
-  display: "meal"
+  display: "meal",
+  smoke: ""
 };
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case EDIT_USER:
+      return Object.assign({}, store, { users: action.payload });
+    case GET_SMOKE:
+      return Object.assign({}, store, { smoke: action.payload });
+
     case LOAD_SINGLE_EXERCISE:
       return Object.assign({}, store, { exerciseInfo: action.payload });
 
@@ -110,14 +122,20 @@ let reducer = (store = initialStore, action) => {
     case FILTER_EMAILS:
       return Object.assign({}, store, { emails: action.payload });
 
-    default:
-      return store;
-
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
 
     case DELETE_FOOD:
       return Object.assign({}, store, { deletedFood: action.payload });
+
+    case ADD_WORKOUT:
+      return Object.assign({}, store, { workout: action.payload });
+
+    case LOAD_WORKOUTS:
+      return Object.assign({}, store, { workouts: action.payload });
+
+    default:
+      return store;
   }
 };
 

@@ -10,13 +10,20 @@ import AddBreakfastPage from "./pages/AddBreakfastPage";
 import AddLunchPage from "./pages/AddLunchPage";
 import AddDinnerPage from "./pages/AddDinnerPage";
 import AddSnackPage from "./pages/AddSnackPage";
+import UserEditPage from "./pages/UserEditPage";
+
 import Playground from "./pages/Playground";
 import ExerciseInfoPage from "./pages/ExerciseInfoPage";
-
+import WorkoutLogPage from "./pages/WorkoutLogPage";
 
 export const routes = [
   {
     path: "/home",
+    exact: true,
+    component: HomePage
+  },
+  {
+    path: "/",
     exact: true,
     component: HomePage
   },
@@ -56,6 +63,11 @@ export const routes = [
     component: CommunityPage
   },
   {
+    path: "/user/:id/edit",
+    exact: true,
+    component: UserEditPage
+  },
+  {
     path: "/user",
     exact: true,
     component: UserPage
@@ -74,22 +86,46 @@ export const routes = [
     path: "/exercise/:id",
     exact: true,
     component: ExerciseInfoPage
+  },
+  {
+    path: "/workout",
+    exact: true,
+    component: WorkoutLogPage
   }
 ];
 
 const Routes = () => {
-  return (
-    <>
-      {routes.map((route, i) => (
-        <Route
-          key={`global_routes_${i}`}
-          path={route.path}
-          exact={route.exact}
-          component={route.component}
-        />
-      ))}
-    </>
-  );
+  let session = localStorage.getItem("session");
+
+  if (!session) {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={AuthorizationPage}
+          />
+        ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
+      </>
+    );
+  } else {
+    return (
+      <>
+        {routes.map((route, i) => (
+          <Route
+            key={`global_routes_${i}`}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+        ))}
+        {/* <Route path="/*" exact={false} component={FourOhFourPage} /> */}
+      </>
+    );
+  }
 };
 
 export default Routes;

@@ -30,7 +30,7 @@ class Exercise extends bookshelf.Model {
     }
 
     workouts() {
-        return this.belongsToMany("Workout", "workouts_exercises");
+        return this.belongsToMany("Workout", "exercises_users_workouts");
     }
 }
 
