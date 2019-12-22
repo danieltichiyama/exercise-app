@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Playground.module.scss";
-import FatSearchComponent from "../../components/FatSecretComponent";
+import FatSecretSearchComponent from "../../components/FatSecretSearchComponent";
 
 class Playground extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Playground extends Component {
       <div className={styles.Playground}>
         <p>No Pushing. No jumping. Have fun.</p>
         {/* insert playground equipment here. */}
-        <FatSearchComponent/>
+        <FatSecretSearchComponent/>
       </div>
     );
   }

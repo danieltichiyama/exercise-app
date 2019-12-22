@@ -1,7 +1,7 @@
 const express = require("express");
-const axios = require("axios");
 const fatSecretRouter = express.Router();
 const request = require("request");
+const axios = require("axios");
 const clientID = process.env.REACT_APP_FAT_SECRET_CLIENT_ID;
 const clientPW = process.env.REACT_APP_FAT_SECRET_CLIENT_SECRET;
 const FatSecret = require("../../../database/models/FatSecret");
@@ -81,14 +81,23 @@ let fatSecretApi = () => {
 fatSecretApi();
 
 fatSecretRouter.route("/")
-.get((req, res) => {
-  request(options, function (error, response, body) {
-    if (error) {
-      throw new Error(error);
-    } else {
-      res.send(body);
+.post((req, res) => {
+  return axios({
+    method: 'post',
+    url: "https://platform.fatsecret.com/rest/server.api",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${tokenClosure.getToken().access_token}`
+    },
+    params: {
+      method : "foods.search",
+      search_expression: req.body.data,
+      format: "json"
     }
-  });
+  })
+  .then(response => {
+    return res.json(response.data);
+  })
 })
 
 module.exports = fatSecretRouter;

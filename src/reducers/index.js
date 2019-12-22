@@ -1,9 +1,13 @@
 import {
+  ACTIVE_TOKEN,
   ADD_COMMENT,
   ADD_FOOD,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
+  FAT_SECRET_FOOD_SEARCH,
+  FILTER_BODY_PARTS,
+  FILTER_EMAILS,
   FOOD_NUTRIENT_SEARCH,
   FOOD_SEARCH,
   GET_DIARY_DATA,
@@ -11,14 +15,11 @@ import {
   LOAD_BODY_PARTS,
   LOAD_EXERCISE_LIST,
   LOAD_POSTS,
+  LOAD_SINGLE_EXERCISE,
   LOGIN,
   LOGOUT,
   LOAD_USER,
-  FILTER_EMAILS,
   REGISTER,
-  FILTER_BODY_PARTS,
-  LOAD_SINGLE_EXERCISE,
-  ACTIVE_TOKEN
 } from "../actions";
 
 import moment from "moment";
@@ -40,7 +41,8 @@ const initialStore = {
     .utc()
     .format("YYYY-MM-D"),
   display: "meal",
-  activeToken: false
+  activeToken: false,
+  fat_secret_foods: [],
 };
 
 let reducer = (store = initialStore, action) => {
@@ -119,6 +121,11 @@ let reducer = (store = initialStore, action) => {
 
     case ACTIVE_TOKEN:
       return Object.assign({}, store, { activeToken: true });
+    
+    case FAT_SECRET_FOOD_SEARCH:
+      return Object.assign({}, store, { fat_secret_foods: action.payload });
+
+    
   }
 };
 

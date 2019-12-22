@@ -24,6 +24,7 @@ export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const FILTER_EMAILS = "FILTER_EMAILS";
 export const ACTIVE_TOKEN = "ACTIVE_TOKEN";
+export const FAT_SECRET_FOOD_SEARCH = "FAT_SECRET_FOOD_SEARCH";
 
 export const actionsLoadSingleExercise = (data) => async dispatch => {
   await Axios.get(`/api/exercises/${data}`)
@@ -279,17 +280,15 @@ export const actionsLoadExerciseList = () => async dispatch => {
     });
 };
 
-export const actionsFatSecretGetOauth2 = () => async dispatch => {
-  console.log('ACTIONSSS');
-  await Axios.get("/api/fat_secret")
-  .then(response => {
-    dispatch({
-      type: ACTIVE_TOKEN
-    })
-    
-    Axios.post("/api/fat_secret", response)
+export const actionsFatSecretGetOauth2 = data => async dispatch => {
+  await Axios.post("/api/fat_secret", data)
     .then(response => {
-      return console.log(response);
+      return dispatch({
+        type: FAT_SECRET_FOOD_SEARCH,
+        payload: response.data.foods.food
+      })
     })
-  })
+    .catch(err => {
+      console.log("Error in actionsFatSecretGetOauth2: ", err);
+    })
 }
