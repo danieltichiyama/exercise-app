@@ -9,7 +9,16 @@ class FatSecretFoodNutrientsComponent extends Component {
 
   render() {
     return (
-      <h1>{this.props.index}</h1>
+      <>
+        <h3>{this.props.name}</h3>
+        <ul>
+          <li>Serving Size: {this.props.servingSize}</li>
+          <li>Calories: {this.props.calories}</li>
+          <li>Fats: {this.props.fat}</li>
+          <li>Carbohydrates: {this.props.carbohydrate}</li>
+          <li>Protein: {this.props.protein}</li>
+        </ul>
+      </>
     );
   }
 }

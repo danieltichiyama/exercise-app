@@ -8,12 +8,17 @@ class FatSecretSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      fatSearchData: ''
+      fatSearchData: '',
+      servingIndex: 0
     }
   }
 
   handleChange = (e) => {
     this.setState({ fatSearchData: e.target.value });
+  }
+
+  handleSelectChange = (e) => {
+    this.setState({ servingIndex: e.target.value });
   }
 
   handleClick = (e) => {
@@ -32,7 +37,7 @@ class FatSecretSearchComponent extends Component {
           />
           <button>Submit</button>
         </form>
-        {(this.props.foods[0] && !this.props.foodNutrients.servings) ? (
+        {(this.props.foods.length > 0 && !this.props.foodNutrients.servings) ? (
           this.props.foods.map(food => {
             return (
               <FatSecretFoodComponent
@@ -45,29 +50,53 @@ class FatSecretSearchComponent extends Component {
           })
         ) : ('')}
 
-        {(this.props.foodNutrients.servings) ? (
-          
-          this.props.foodNutrients.servings.serving.map(serving => {
-            // console.log(serving);
-            // console.log(this.props.foodNutrients.servings.indexOf(serving));
-            return(
-              <FatSecretFoodNutrientsComponent
-                key={serving.serving_id}
-                description={serving.serving_description}
-                index={this.props.foodNutrients.servings.serving.indexOf(serving)}
-              />
-            )
-          })
+        {(this.props.foodNutrients.servings && Array.isArray(this.props.foodNutrients.servings.serving)) ? (
+          <div>
+            Serving Size: 
+            <select onChange={this.handleSelectChange}>
+              {this.props.foodNutrients.servings.serving.map((serving, index) => {
+                return(
+                  <option
+                    key={index}
+                    value={index}
+                  >
+                    {serving.serving_description}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+        ) : ('')}
+
+        {(this.props.foodNutrients.servings && !Array.isArray(this.props.foodNutrients.servings.serving) && typeof this.props.foodNutrients.servings.serving === 'object') ? (
+          <FatSecretFoodNutrientsComponent
+            key={this.props.foodNutrients.food_name}
+            name={this.props.foodNutrients.food_name}
+            servingSize={this.props.foodNutrients.servings.serving.serving_description}
+            calories={`${this.props.foodNutrients.servings.serving.calories}kcal`}
+            fat={`${this.props.foodNutrients.servings.serving.fat}g`}
+            carbohydrate={`${this.props.foodNutrients.servings.serving.carbohydrate}g`}
+            protein={`${this.props.foodNutrients.servings.serving.protein}g`}
+          />
+        ) : ('')}
+
+        {(this.props.foodNutrients.servings && Array.isArray(this.props.foodNutrients.servings.serving)) ? (
+          <FatSecretFoodNutrientsComponent
+            key={this.state.servingIndex}
+            name={this.props.foodNutrients.food_name}
+            servingSize={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].serving_description}`}
+            calories={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].calories}kcal`}
+            fat={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].fat}g`}
+            carbohydrate={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].carbohydrate}g`}
+            protein={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].protein}g`}
+          />
         ) : ('')}
       </>
     )
   }
 }
 
-const mapStateToProps = store => {
-  console.log(store.fat_secret_nutrients);
-  console.log((store.fat_secret_foods[0] && !store.fat_secret_nutrients.servings));
-
+const mapStateToProps = store => {  
   return {
     foods: store.fat_secret_foods,
     foodNutrients: store.fat_secret_nutrients
