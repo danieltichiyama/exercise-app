@@ -1,0 +1,3 @@
+import FatSecretFoodNutrientsComponent from "./FatSecretFoodNutrientsComponent";
+
+export default FatSecretFoodNutrientsComponent;

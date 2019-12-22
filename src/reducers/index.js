@@ -1,5 +1,4 @@
 import {
-  ACTIVE_TOKEN,
   ADD_COMMENT,
   ADD_FOOD,
   CHANGE_DATE,
@@ -22,7 +21,8 @@ import {
   REGISTER,
   ADD_WORKOUT,
   LOAD_WORKOUTS,
-  GET_SMOKE
+  GET_SMOKE,
+  FAT_SECRET_FOOD_NUTRIENT_SEARCH
 } from "../actions";
 
 import moment from "moment";
@@ -47,6 +47,7 @@ const initialStore = {
     .format("YYYY-MM-D"),
   display: "meal",
   fat_secret_foods: [],
+  fat_secret_nutrients: [],
   smoke: ""
 };
 
@@ -125,9 +126,15 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { addFood: action.payload });
     
     case FAT_SECRET_FOOD_SEARCH:
-      return Object.assign({}, store, { fat_secret_foods: action.payload });
+      return Object.assign({}, store, { 
+        fat_secret_nutrients: [],
+        fat_secret_foods: action.payload
+      });
 
-    
+    case FAT_SECRET_FOOD_NUTRIENT_SEARCH:
+      console.log(action.payload);
+      return Object.assign({}, store, { fat_secret_nutrients: action.payload })
+
     case ADD_WORKOUT:
       return Object.assign({}, store, { workout: action.payload })
 

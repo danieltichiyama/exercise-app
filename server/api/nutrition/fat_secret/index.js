@@ -98,6 +98,32 @@ fatSecretRouter.route("/")
   .then(response => {
     return res.json(response.data);
   })
+  .catch(err => {
+    console.log(err);
+  })
+})
+
+fatSecretRouter.route("/nutrients")
+.post((req, res) => {
+  return axios({
+    method: 'post',
+    url: "https://platform.fatsecret.com/rest/server.api",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${tokenClosure.getToken().access_token}`
+    },
+    params: {
+      method : "food.get",
+      food_id: req.body.data,
+      format: "json"
+    }
+  })
+  .then(response => {
+    return res.json(response.data);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 })
 
 module.exports = fatSecretRouter;

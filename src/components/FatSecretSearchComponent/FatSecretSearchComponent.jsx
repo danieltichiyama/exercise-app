@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionsFatSecretGetOauth2 } from "../../actions"
+import { actionsFatSecretFoodSearch } from "../../actions"
 import FatSecretFoodComponent from "../FatSecretFoodComponent/FatSecretFoodComponent";
+import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent/FatSecretFoodNutrientsComponent";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class FatSecretSearchComponent extends Component {
 
   handleClick = (e) => {
     e.preventDefault();
-    this.props.dispatchFatSecretGetOauth2({ data: this.state.fatSearchData });
+    this.props.dispatchFatSecretFoodSearch({ data: this.state.fatSearchData });
   }
 
   render() { 
@@ -31,34 +32,52 @@ class FatSecretSearchComponent extends Component {
           />
           <button>Submit</button>
         </form>
-        {(this.props.foods[0]) ? (
+        {(this.props.foods[0] && !this.props.foodNutrients.servings) ? (
           this.props.foods.map(food => {
             return (
               <FatSecretFoodComponent
                 key={food.food_id}
                 foodID={food.food_id}
+                name={food.food_name}
                 food_description={food.food_description}
-
               />
             )
           })
-        ) : ('foods not here')}
+        ) : ('')}
+
+        {(this.props.foodNutrients.servings) ? (
+          
+          this.props.foodNutrients.servings.serving.map(serving => {
+            // console.log(serving);
+            // console.log(this.props.foodNutrients.servings.indexOf(serving));
+            return(
+              <FatSecretFoodNutrientsComponent
+                key={serving.serving_id}
+                description={serving.serving_description}
+                index={this.props.foodNutrients.servings.serving.indexOf(serving)}
+              />
+            )
+          })
+        ) : ('')}
       </>
     )
   }
 }
 
 const mapStateToProps = store => {
-  console.log(store.fat_secret_foods);
+  console.log(store.fat_secret_nutrients);
+  console.log((store.fat_secret_foods[0] && !store.fat_secret_nutrients.servings));
+
   return {
-    foods: store.fat_secret_foods
+    foods: store.fat_secret_foods,
+    foodNutrients: store.fat_secret_nutrients
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchFatSecretGetOauth2: (data) => {
-      return dispatch(actionsFatSecretGetOauth2(data))
+    dispatchFatSecretFoodSearch: (data) => {
+      return dispatch(actionsFatSecretFoodSearch(data))
     }
   }
 }

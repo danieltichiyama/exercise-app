@@ -27,7 +27,8 @@ export const FILTER_EMAILS = "FILTER_EMAILS";
 export const ACTIVE_TOKEN = "ACTIVE_TOKEN";
 export const FAT_SECRET_FOOD_SEARCH = "FAT_SECRET_FOOD_SEARCH";
 export const ADD_WORKOUT = "ADD_WORKOUT";
-export const LOAD_WORKOUTS = "LOAD_WORKOUTS"
+export const LOAD_WORKOUTS = "LOAD_WORKOUTS";
+export const FAT_SECRET_FOOD_NUTRIENT_SEARCH = "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 
 export const actionsLoadWorkouts = () => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts`)
@@ -321,7 +322,7 @@ export const actionsLoadExerciseList = () => async dispatch => {
     });
 };
 
-export const actionsFatSecretGetOauth2 = data => async dispatch => {
+export const actionsFatSecretFoodSearch = data => async dispatch => {
   await Axios.post("/api/fat_secret", data)
     .then(response => {
       return dispatch({
@@ -330,6 +331,16 @@ export const actionsFatSecretGetOauth2 = data => async dispatch => {
       })
     })
     .catch(err => {
-      console.log("Error in actionsFatSecretGetOauth2: ", err);
+      console.log("Error in actionsFatSecretFoodSearch: ", err);
+    })
+}
+
+export const actionsFatSecretFoodNutrientSearch = data => async dispatch => {
+  await Axios.post("/api/fat_secret/nutrients", {data: data})
+    .then(response => {
+      return dispatch({
+        type: FAT_SECRET_FOOD_NUTRIENT_SEARCH,
+        payload: response.data.food
+      })
     })
 }
