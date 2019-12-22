@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import FoodSearchComponent from "../../components/FoodSearchComponent";
+import FoodSearchComponent from "../FoodSearchComponent";
 
-class AddDinnerPage extends Component {
+class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -11,8 +11,8 @@ class AddDinnerPage extends Component {
   render() {
     return (
       <div>
-        <h1>Dinner</h1>
-        <FoodSearchComponent meal_type_id={"3"} />
+        <h1>Breakfast</h1>
+        <FoodSearchComponent meal_type_id={"1"} />
       </div>
     );
   }
@@ -26,6 +26,9 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-AddDinnerPage = connect(mapStateToProps, mapDispatchToProps)(AddDinnerPage);
+AddFoodPopUpComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddFoodPopUpComponent);
 
-export default AddDinnerPage;
+export default AddFoodPopUpComponent;
