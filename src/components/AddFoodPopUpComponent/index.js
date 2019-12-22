@@ -1,2 +1,2 @@
-import AddBreakfastPopUpComponent from "./AddBreakfastPopUpComponent";
-export default AddBreakfastPopUpComponent;
+import AddFoodPopUpComponent from "./AddFoodPopUpComponent";
+export default AddFoodPopUpComponent;

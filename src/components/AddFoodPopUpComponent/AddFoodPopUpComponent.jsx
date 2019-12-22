@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import styles from "./AddFoodPopUpComponent.module.scss";
 import FoodSearchComponent from "../FoodSearchComponent";
 
 class AddFoodPopUpComponent extends Component {
@@ -10,9 +11,17 @@ class AddFoodPopUpComponent extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Breakfast</h1>
-        <FoodSearchComponent meal_type_id={"1"} />
+      <div className={styles.foodPopUp}>
+        <div className={styles.foodPopUpInner}>
+          <button onClick={this.props.handleFoodPopUp}>x</button>
+          <FoodSearchComponent />
+          // {/* <h1>Breakfast</h1> */}
+          //{" "}
+          {/* <FoodSearchComponent meal_type_id={"1"} /> //breakfast
+        // <FoodSearchComponent meal_type_id={"2"} /> //lunch
+        // <FoodSearchComponent meal_type_id={"3"} /> //dinner
+        // <FoodSearchComponent meal_type_id={"4"} /> //snack */}
+        </div>
       </div>
     );
   }
