@@ -57,7 +57,7 @@ foodMealUserRouter
     console.log("req.body.data: ", req.body.data);
 
     return req.db.FoodImage.where({ foods_meals_users_id: req.body.data })
-      .destroy()
+      .destroy({ require: false })
       .then(response => {
         req.db.FoodMealUser.where({ id: req.body.data })
           .destroy()

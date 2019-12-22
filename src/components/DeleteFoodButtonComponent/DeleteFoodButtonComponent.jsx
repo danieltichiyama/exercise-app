@@ -12,7 +12,6 @@ class DeleteFoodButtonComponent extends Component {
   handleDeleteFood = e => {
     console.log("this.props.id: ", this.props.id);
     this.props.dispatchDeleteFood(this.props.id);
-    // loadFoods?
   };
 
   render() {
