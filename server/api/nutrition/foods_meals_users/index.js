@@ -3,8 +3,6 @@ const foodMealUserRouter = express.Router();
 const moment = require("moment");
 
 foodMealUserRouter.route("/new").post((req, res) => {
-  // console.log("server works");
-  console.log(req.body);
   return req.db.FoodMealUser.forge(req.body)
     .save()
     .then(response => {
@@ -20,7 +18,6 @@ foodMealUserRouter.route("/new").post((req, res) => {
 foodMealUserRouter
   .route("/")
   .get((req, res) => {
-    console.log("foodMealUserRouter");
     return req.db.FoodMealUser.fetchAll()
       .then(response => {
         return res.json(response);
@@ -53,8 +50,6 @@ foodMealUserRouter
   })
   .delete((req, res) => {
     let foodId = req.body.data;
-
-    console.log("req.body.data: ", req.body.data);
 
     return req.db.FoodImage.where({ foods_meals_users_id: req.body.data })
       .destroy({ require: false })

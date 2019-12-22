@@ -145,7 +145,7 @@ export const actionFoodSearch = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionFoodSearch: ", err);
     });
 };
 
@@ -157,7 +157,6 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  console.log("DATA: ", data);
   await Axios.post("/api/vision", data).then(response => {
     return dispatch({
       type: FOOD_VISION,
@@ -175,7 +174,7 @@ export const actionFoodNutrients = fdcId => async dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      console.log("Error in actionFoodNutrients: ", err);
     });
 };
 
