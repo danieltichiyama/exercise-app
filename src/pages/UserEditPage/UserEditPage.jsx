@@ -23,14 +23,12 @@ class UserEditPage extends Component {
   }
 
   componentDidMount() {
-    console.log("props in component did mount", this.props);
     let { dispatchLoadUser, match } = this.props;
     dispatchLoadUser(match.params.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.user !== this.props.user) {
-      console.log("component did update");
       return this.setState({
         name: this.props.user.name,
         weight: this.props.user.weight,
@@ -44,7 +42,6 @@ class UserEditPage extends Component {
   }
 
   handleChange = event => {
-    console.log("event target", event.target.value);
     switch (event.target.name) {
       case "name":
         this.setState({ name: event.target.value });
@@ -108,7 +105,6 @@ class UserEditPage extends Component {
             user_tier_id,
             goal_id
           } = this.state;
-          console.log("imperial", this.state);
           return dispatchEditUser(match.params.id, {
             name,
             weight,
@@ -135,7 +131,6 @@ class UserEditPage extends Component {
             user_tier_id,
             goal_id
           } = this.state;
-          console.log("metric", this.state);
           return dispatchEditUser(match.params.id, {
             name,
             weight,
@@ -177,7 +172,6 @@ class UserEditPage extends Component {
             <input
               type="number"
               name="weight"
-              // value={this.state.weight}
               placeholder="Change Weight"
               onChange={this.handleChange}
             />
@@ -200,7 +194,6 @@ class UserEditPage extends Component {
             <input
               type="number"
               name="height"
-              // value={this.state.height}
               placeholder="Change height"
               onChange={this.handleChange}
             />

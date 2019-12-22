@@ -18,8 +18,11 @@ class DashboardComponent extends Component {
     };
   }
   componentDidMount() {
-    this.props.dispatchLoadUser(this.state.id.id);
-    this.props.dispatchGetDiaryData(this.state.date);
+    if (this.state.id) {
+      //wrapped in a conditional for PWA
+      this.props.dispatchLoadUser(this.state.id.id);
+      this.props.dispatchGetDiaryData(this.state.date);
+    }
   }
 
   render() {
@@ -29,43 +32,54 @@ class DashboardComponent extends Component {
       this.props.diaryData.reduce((total, data) => {
         return total + data.calories;
       }, 0);
-    let remaining = JSON.stringify(goal - food);
-    let consumed = JSON.stringify(food);
+    let remaining = JSON.stringify(goal - (goal - food));
+    let percent = (food / goal) * 100;
 
+    let redBarStyle = { width: `${percent}%` };
     return (
       <>
-        <div className={styles.dashboard}>
+        <div className={styles.Dashboard}>
           <div className={styles.remainingCalories}>
             <div className={styles.column}>
               <h2>{goal}</h2>
               <p>Goal</p>
             </div>
-
-            <p>-</p>
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>-</p>
+            </div>
 
             <div className={styles.column}>
               <h2>{food}</h2>
               <p>Food</p>
             </div>
 
-            <p>+</p>
-
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>+</p>
+            </div>
             <div className={styles.column}>
               <h2>0</h2>
               <p>Exercise</p>
             </div>
 
-            <p>=</p>
-
+            <div className={styles.column}>
+              <h2 className={styles.spaceFiller}> </h2>
+              <p>=</p>
+            </div>
             <div className={styles.column}>
               <h2>{remaining}</h2>
               <p>Remaining</p>
             </div>
           </div>
 
+          <div className={styles.statusBar}>
+            <div className={styles.redBar} style={redBarStyle}></div>
+          </div>
+
           <div className={styles.caloriesConsumedText}>
-            <p>Calories consumed:</p>
-            <p className={styles.consumedP}>{consumed}</p>
+            <p>Calories consumed: </p>
+            <p className={styles.remainingP}>{remaining}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>

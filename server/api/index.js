@@ -15,7 +15,7 @@ const workouts = require("./exercise/workouts");
 const food_images = require("./nutrition/food_images");
 const tutorial_videos = require("./exercise/tutorial_videos");
 const user_videos = require("./exercise/user_videos");
-const workouts_exercises = require("./exercise/workouts_exercises");
+const exercises_users_workouts = require("./exercise/exercises_users_workouts");
 const community_posts = require("./community/community_posts");
 const community_comments = require("./community/community_comments");
 const exercise_bodyparts = require("./exercise/exercise_bodyparts");
@@ -41,7 +41,7 @@ module.exports = {
   food_images,
   tutorial_videos,
   user_videos,
-  workouts_exercises,
+  exercises_users_workouts,
   community_posts,
   community_comments,
   exercise_bodyparts,

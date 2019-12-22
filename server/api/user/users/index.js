@@ -33,7 +33,6 @@ usersRouter
         console.log("Error:", err);
       });
   });
-
 usersRouter.route("/emails").post((req, res) => {
   return req.db.User.where({ email: req.body.email })
     .fetch({
@@ -50,13 +49,7 @@ usersRouter.route("/emails").post((req, res) => {
 //not sure if we need this route, but i'll leave it for now.
 usersRouter.route("/").get((req, res) => {
   return req.db.User.fetchAll({
-    withRelated: [
-      "gender_id",
-      "activity_level_id",
-      "user_tier_id",
-      "goal_id",
-      "workout_id"
-    ]
+    withRelated: ["gender_id", "activity_level_id", "user_tier_id", "goal_id"]
   }).then(response => {
     return res.json(response);
   });

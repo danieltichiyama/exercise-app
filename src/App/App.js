@@ -21,9 +21,6 @@ class App extends Component {
   render() {
     return (
       <div className={styles.App}>
-        {this.props.isLoggedIn ? (
-          <button onClick={this.handleLogout}>Log out</button>
-        ) : null}
         <MainBodyPage {...this.props}></MainBodyPage>
         <NavigationComponent></NavigationComponent>
       </div>
