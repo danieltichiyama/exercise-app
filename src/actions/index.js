@@ -24,6 +24,7 @@ export const LOAD_EXERCISE_LIST = "LOAD_EXERCISE_LIST";
 export const FILTER_BODY_PARTS = "FILTER_BODY_PARTS";
 export const LOAD_SINGLE_EXERCISE = "LOAD_SINGLE_EXERCISE";
 export const GET_SMOKE = "GET_SMOKE";
+export const VIDEO_UPLOAD = "VIDEO_UPLOAD";
 export const FILTER_EMAILS = "FILTER_EMAILS";
 export const FAT_SECRET_FOOD_SEARCH = "FAT_SECRET_FOOD_SEARCH";
 export const ADD_WORKOUT = "ADD_WORKOUT";
@@ -379,3 +380,16 @@ export const actionsDeleteFood = data => async dispatch => {
       console.log("Error in actionsDeleteFood: ", err);
     });
 };
+export const actionVideoUpload = data => async dispatch => {
+  await Axios.post("/api/video_upload", data)
+  .then(response => {
+    console.log(response);
+    return dispatch({
+      type: VIDEO_UPLOAD,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    console.log("Error in actionsVideoUpload: ", err);
+  })
+}
