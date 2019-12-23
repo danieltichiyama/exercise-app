@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFatSecretFoodSearch } from "../../actions"
-import FatSecretFoodComponent from "../FatSecretFoodComponent/FatSecretFoodComponent";
-import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent/FatSecretFoodNutrientsComponent";
+import FatSecretFoodComponent from "../FatSecretFoodComponent";
+import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
+import LabelComponent from "../LabelComponent"
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -19,11 +20,11 @@ class FatSecretSearchComponent extends Component {
   }
 
   handleSelectChange = (e) => {
-    this.setState({ servingIndex: e.target.value }, console.log(this.state.servingIndex));
+    this.setState({ servingIndex: e.target.value })
   }
 
   handleMultiplier = (e) => {
-    this.setState({ servingMultiplier: e.target.value }, console.log(this.state.servingMultiplier));
+    this.setState({ servingMultiplier: e.target.value });
   }
 
   handleClick = (e) => {
@@ -46,6 +47,17 @@ class FatSecretSearchComponent extends Component {
           />
           <button>Submit</button>
         </form>
+        {(this.props.imgData.length !== 0) ? (
+            this.props.imgData.map(imgData => {
+              return (
+                <LabelComponent
+                  key={imgData.description}
+                  label={imgData.description}
+                />
+              )
+            })
+          ) : ('')}
+
         {(this.props.foods.length > 0 && !this.props.foodNutrients.servings) ? (
           this.props.foods.map(food => {
             return (
@@ -89,10 +101,10 @@ class FatSecretSearchComponent extends Component {
             <FatSecretFoodNutrientsComponent
               key={this.props.foodNutrients.food_name}
               name={this.props.foodNutrients.food_name}
-              calories={`${Math.floor(this.props.foodNutrients.servings.serving.calories * this.state.servingMultiplier)}kcal`}
-              fat={`${Math.floor(this.props.foodNutrients.servings.serving.fat * this.state.servingMultiplier)}g`}
-              carbohydrate={`${Math.floor(this.props.foodNutrients.servings.serving.carbohydrate * this.state.servingMultiplier)}g`}
-              protein={`${Math.floor(this.props.foodNutrients.servings.serving.protein * this.state.servingMultiplier)}g`}
+              calories={`${Math.round(((this.props.foodNutrients.servings.serving.calories * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}kcal`}
+              fat={`${Math.round(((this.props.foodNutrients.servings.serving.fat * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
+              carbohydrate={`${Math.round(((this.props.foodNutrients.servings.serving.carbohydrate * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
+              protein={`${Math.round(((this.props.foodNutrients.servings.serving.protein * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
             />
           </>
         ) : ('')}
@@ -102,10 +114,10 @@ class FatSecretSearchComponent extends Component {
             key={this.state.servingIndex}
             name={this.props.foodNutrients.food_name}
             servingSize={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].serving_description}`}
-            calories={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].calories * this.state.servingMultiplier)}kcal`}
-            fat={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].fat * this.state.servingMultiplier)}g`}
-            carbohydrate={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].carbohydrate * this.state.servingMultiplier)}g`}
-            protein={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].protein * this.state.servingMultiplier)}g`}
+            calories={`${Math.round(((this.props.foodNutrients.servings.serving[this.state.servingIndex].calories * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}kcal`}
+            fat={`${Math.round(((this.props.foodNutrients.servings.serving[this.state.servingIndex].fat * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
+            carbohydrate={`${Math.round(((this.props.foodNutrients.servings.serving[this.state.servingIndex].carbohydrate * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
+            protein={`${Math.round(((this.props.foodNutrients.servings.serving[this.state.servingIndex].protein * this.state.servingMultiplier) + Number.EPSILON) * 100) / 100}g`}
           />
         ) : ('')}
       </>
@@ -116,7 +128,8 @@ class FatSecretSearchComponent extends Component {
 const mapStateToProps = store => {  
   return {
     foods: store.fat_secret_foods,
-    foodNutrients: store.fat_secret_nutrients
+    foodNutrients: store.fat_secret_nutrients,
+    imgData: store.food_labels
   }
 }
 

@@ -97,7 +97,11 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case FOOD_VISION:
-      return Object.assign({}, store, { food_labels: action.payload})
+      return Object.assign({}, store, { 
+        food_labels: action.payload,
+        fat_secret_nutrients: [],
+        fat_secret_foods: []
+      })
     
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
@@ -137,13 +141,16 @@ let reducer = (store = initialStore, action) => {
     
     case FAT_SECRET_FOOD_SEARCH:
       return Object.assign({}, store, { 
+        food_labels: [],
         fat_secret_nutrients: [],
         fat_secret_foods: action.payload
       });
 
     case FAT_SECRET_FOOD_NUTRIENT_SEARCH:
-      console.log(action.payload);
-      return Object.assign({}, store, { fat_secret_nutrients: action.payload })
+      return Object.assign({}, store, { 
+        food_labels: [],
+        fat_secret_nutrients: action.payload 
+      })
 
     case DELETE_FOOD:
       return Object.assign({}, store, { deletedFood: action.payload });

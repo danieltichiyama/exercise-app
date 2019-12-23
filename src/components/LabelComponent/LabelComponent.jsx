@@ -1,6 +1,6 @@
 import React, { Component } from "react"; 
 import { connect } from "react-redux";
-import { actionFoodSearch } from "../../actions";
+import { actionsFatSecretFoodSearch } from "../../actions";
 
 class LabelComponent extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class LabelComponent extends Component {
   }
 
   handleClick = (e) => {
-    this.props.dispatchFoodSearch({ data: this.props.label });
+    this.props.dispatchFatSecretFoodSearch({ data: this.props.label });
   }
 
   render() { 
@@ -23,8 +23,8 @@ class LabelComponent extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchFoodSearch: data => {
-      return dispatch(actionFoodSearch(data))
+    dispatchFatSecretFoodSearch: data => {
+      return dispatch(actionsFatSecretFoodSearch(data))
     }
   }
 }

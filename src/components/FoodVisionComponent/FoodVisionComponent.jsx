@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionFoodVision } from "../../actions";
-import LabelComponent from "../LabelComponent";
-import FoodComponent from "../FoodComponent";
+import { actionsFoodVision } from "../../actions";
 
 class FoodVisionComponent extends Component {
   constructor(props) {
@@ -26,29 +24,6 @@ class FoodVisionComponent extends Component {
             // className={styles.upload}
             onChange={this.handleUpload}
           />
-          {(this.props.imgData.length !== 0) ? (
-            this.props.imgData.map(imgData => {
-              return (
-                <LabelComponent
-                  key={imgData.description}
-                  label={imgData.description}
-                />
-              )
-            })
-          ) : ('')}
-          {(this.props.imgData.length === 0 && this.props.searchData[0]) ? (
-            this.props.searchData.map(food => {
-              return (
-                <FoodComponent
-                  fdcId={food.fdcId}
-                  key={food.fdcId}
-                  description={food.description}
-                />
-              )
-            })
-          ) : (
-            'CRAP'
-          )}
       </div>
     );
   }
@@ -57,14 +32,13 @@ class FoodVisionComponent extends Component {
 const mapStateToProps = store => {
   return {
     imgData: store.food_labels,
-    searchData: store.foods
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFoodVision: data => {
-      return dispatch(actionFoodVision(data))
+      return dispatch(actionsFoodVision(data))
     }
   }
 }

@@ -128,8 +128,10 @@ export const actionsLoadActivity = () => async dispatch => {
 };
 
 export const actionsLoginSubmit = data => async dispatch => {
+  console.log(data);
   await Axios.post("/api/auth/login", data)
     .then(response => {
+      console.log(response);
       return dispatch({
         type: LOGIN,
         payload: response.data
@@ -219,7 +221,7 @@ export const actionClear = () => dispatch => {
   });
 };
 
-export const actionFoodVision = data => async dispatch => {
+export const actionsFoodVision = data => async dispatch => {
   await Axios.post("/api/vision", data)
     .then(response => {
     return dispatch({
