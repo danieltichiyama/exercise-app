@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
 import { actionsFilterEmails } from "../../actions";
 
