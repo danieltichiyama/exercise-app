@@ -9,7 +9,8 @@ class FatSecretSearchComponent extends Component {
     super(props);
     this.state = { 
       fatSearchData: '',
-      servingIndex: 0
+      servingIndex: 0,
+      servingMultiplier: 1
     }
   }
 
@@ -18,11 +19,19 @@ class FatSecretSearchComponent extends Component {
   }
 
   handleSelectChange = (e) => {
-    this.setState({ servingIndex: e.target.value });
+    this.setState({ servingIndex: e.target.value }, console.log(this.state.servingIndex));
+  }
+
+  handleMultiplier = (e) => {
+    this.setState({ servingMultiplier: e.target.value }, console.log(this.state.servingMultiplier));
   }
 
   handleClick = (e) => {
     e.preventDefault();
+    this.setState({
+      servingMultiplier: 1,
+      servingIndex: 1
+    })
     this.props.dispatchFatSecretFoodSearch({ data: this.state.fatSearchData });
   }
 
@@ -65,19 +74,27 @@ class FatSecretSearchComponent extends Component {
                 )
               })}
             </select>
+            Servings: 
+            <input type="number" name="multiplier" min="1" max="99" onChange={this.handleMultiplier}/>
           </div>
         ) : ('')}
 
         {(this.props.foodNutrients.servings && !Array.isArray(this.props.foodNutrients.servings.serving) && typeof this.props.foodNutrients.servings.serving === 'object') ? (
-          <FatSecretFoodNutrientsComponent
-            key={this.props.foodNutrients.food_name}
-            name={this.props.foodNutrients.food_name}
-            servingSize={this.props.foodNutrients.servings.serving.serving_description}
-            calories={`${this.props.foodNutrients.servings.serving.calories}kcal`}
-            fat={`${this.props.foodNutrients.servings.serving.fat}g`}
-            carbohydrate={`${this.props.foodNutrients.servings.serving.carbohydrate}g`}
-            protein={`${this.props.foodNutrients.servings.serving.protein}g`}
-          />
+          <>  
+            <div>
+              Serving Size: {`${this.props.foodNutrients.servings.serving.serving_description}  `}
+              Servings:
+              <input type="number" min="1" max="99" onChange={this.handleMultiplier}/>
+            </div>
+            <FatSecretFoodNutrientsComponent
+              key={this.props.foodNutrients.food_name}
+              name={this.props.foodNutrients.food_name}
+              calories={`${Math.floor(this.props.foodNutrients.servings.serving.calories * this.state.servingMultiplier)}kcal`}
+              fat={`${Math.floor(this.props.foodNutrients.servings.serving.fat * this.state.servingMultiplier)}g`}
+              carbohydrate={`${Math.floor(this.props.foodNutrients.servings.serving.carbohydrate * this.state.servingMultiplier)}g`}
+              protein={`${Math.floor(this.props.foodNutrients.servings.serving.protein * this.state.servingMultiplier)}g`}
+            />
+          </>
         ) : ('')}
 
         {(this.props.foodNutrients.servings && Array.isArray(this.props.foodNutrients.servings.serving)) ? (
@@ -85,10 +102,10 @@ class FatSecretSearchComponent extends Component {
             key={this.state.servingIndex}
             name={this.props.foodNutrients.food_name}
             servingSize={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].serving_description}`}
-            calories={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].calories}kcal`}
-            fat={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].fat}g`}
-            carbohydrate={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].carbohydrate}g`}
-            protein={`${this.props.foodNutrients.servings.serving[this.state.servingIndex].protein}g`}
+            calories={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].calories * this.state.servingMultiplier)}kcal`}
+            fat={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].fat * this.state.servingMultiplier)}g`}
+            carbohydrate={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].carbohydrate * this.state.servingMultiplier)}g`}
+            protein={`${Math.floor(this.props.foodNutrients.servings.serving[this.state.servingIndex].protein * this.state.servingMultiplier)}g`}
           />
         ) : ('')}
       </>

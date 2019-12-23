@@ -343,6 +343,7 @@ export const actionsLoadExerciseList = () => async dispatch => {
 export const actionsFatSecretFoodSearch = data => async dispatch => {
   await Axios.post("/api/fat_secret", data)
     .then(response => {
+      console.log(response);
       return dispatch({
         type: FAT_SECRET_FOOD_SEARCH,
         payload: response.data.foods.food
