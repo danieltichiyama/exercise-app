@@ -2,9 +2,11 @@ import {
   EDIT_USER,
   ADD_COMMENT,
   ADD_FOOD,
+  ADD_WORKOUT,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
+  DELETE_FOOD,
   FAT_SECRET_FOOD_SEARCH,
   FAT_SECRET_FOOD_NUTRIENT_SEARCH,
   FILTER_BODY_PARTS,
@@ -13,46 +15,48 @@ import {
   FOOD_SEARCH,
   FOOD_VISION,
   GET_DIARY_DATA,
+  IMAGE_UPLOAD,
   LOAD_ACTIVITIES,
   LOAD_BODY_PARTS,
   LOAD_EXERCISE_LIST,
   LOAD_POSTS,
   LOAD_SINGLE_EXERCISE,
+  LOAD_WORKOUTS,
   LOGIN,
   LOGOUT,
   LOAD_USER,
   REGISTER,
-  DELETE_FOOD,
-  ADD_WORKOUT,
-  LOAD_WORKOUTS,
   GET_SMOKE,
+  VIDEO_UPLOAD
 } from "../actions";
 
 import moment from "moment";
 
 const initialStore = {
   activity_levels: [],
+  addFood: {},
   bodyparts: [],
   community_posts: [],
   diaryData: [],
-  users: [],
-  food_labels: [],
-  emails: [],
-  isLoggedIn: false,
-  exercises: [],
-  exerciseInfo: [],
-  foods: [],
-  foods_meals_users: [],
-  addFood: {},
-  workout: [],
-  workouts: [],
   diaryDate: moment()
-    .utc()
-    .format("YYYY-MM-D"),
+  .utc()
+  .format("YYYY-MM-D"),
   display: "meal",
+  emails: [],
+  exerciseInfo: [],
+  exercises: [],
   fat_secret_foods: [],
   fat_secret_nutrients: [],
-  smoke: ""
+  foods: [],
+  food_labels: [],
+  foods_meals_users: [],
+  images: [],
+  isLoggedIn: false,
+  smoke: "",
+  users: [],
+  videos: [],
+  workout: [],
+  workouts: [],
 };
 
 let reducer = (store = initialStore, action) => {
@@ -161,6 +165,14 @@ let reducer = (store = initialStore, action) => {
     case LOAD_WORKOUTS:
       return Object.assign({}, store, { workouts: action.payload });
 
+    case VIDEO_UPLOAD:
+      console.log(action.payload);
+      return Object.assign({}, store, { videos: action.payload });
+
+    case IMAGE_UPLOAD:
+      console.log(action.payload);
+      return Object.assign({}, store, { images: action.payload }); 
+      
     default:
       return store;
   }

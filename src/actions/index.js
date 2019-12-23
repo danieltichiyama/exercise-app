@@ -31,6 +31,7 @@ export const ADD_WORKOUT = "ADD_WORKOUT";
 export const LOAD_WORKOUTS = "LOAD_WORKOUTS";
 export const FAT_SECRET_FOOD_NUTRIENT_SEARCH = "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
+export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 
 export const actionsLoadWorkouts = () => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts`)
@@ -391,5 +392,18 @@ export const actionVideoUpload = data => async dispatch => {
   })
   .catch(err => {
     console.log("Error in actionsVideoUpload: ", err);
+  })
+}
+
+export const actionImageUpload = data => async dispatch => {
+  await Axios.post("/api/image_upload", data)
+  .then(response => {
+    return dispatch({
+      type: IMAGE_UPLOAD,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    console.log("Error in actionsImageUpload: ", err);
   })
 }

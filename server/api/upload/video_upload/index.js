@@ -11,7 +11,7 @@ const s3 = new aws.S3({
   Bucket: "fitworks-videos"
 })
 
-const exerciseTutorialVideoUpload = multer({
+const videoUpload = multer({
   storage: multerS3({
     s3: s3,
     bucket: "fitworks-videos",
@@ -24,7 +24,7 @@ const exerciseTutorialVideoUpload = multer({
   fileFilter: function( req, file, cb ){
     checkFileType(file, cb);
   }
-}).single('exerciseVideo');
+}).single('videoUpload');
 
 function checkFileType( file, cb ){
   // Allowed ext
@@ -41,7 +41,7 @@ function checkFileType( file, cb ){
 }
 
 videoUploadRouter.post('/', (req, res) => {
-  exerciseTutorialVideoUpload( req, res, (error) => {
+  videoUpload( req, res, (error) => {
     if (error){
       console.log('errors', error);
       res.json({ error: error });

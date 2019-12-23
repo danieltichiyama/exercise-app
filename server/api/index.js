@@ -23,7 +23,8 @@ const foods_meals_users = require("./nutrition/foods_meals_users");
 const nutrition = require("./nutrition/nutrition");
 const vision = require("./nutrition/vision");
 const fat_secret = require("./nutrition/fat_secret");
-const video_upload = require("./video_upload");
+const video_upload = require("./upload/video_upload");
+const image_upload = require("./upload/image_upload")
 
 module.exports = {
   activity_levels,
@@ -51,5 +52,6 @@ module.exports = {
   nutrition,
   vision,
   fat_secret,
-  video_upload
+  video_upload,
+  image_upload
 };
