@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
 import { actionsFilterEmails } from "../../actions";
 
@@ -13,7 +13,7 @@ class RegisterComponent extends Component {
       confirm_password: ""
     };
   }
-
+  
   handleInput = event => {
     const { value, name } = event.target;
     const state = { ...this.state };
@@ -178,6 +178,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(RegisterComponent)
-
 
 export default RegisterComponent;

@@ -11,6 +11,7 @@ import {
   FILTER_EMAILS,
   FOOD_NUTRIENT_SEARCH,
   FOOD_SEARCH,
+  FOOD_VISION,
   GET_DIARY_DATA,
   LOAD_ACTIVITIES,
   LOAD_BODY_PARTS,
@@ -35,6 +36,7 @@ const initialStore = {
   community_posts: [],
   diaryData: [],
   users: [],
+  food_labels: [],
   emails: [],
   isLoggedIn: false,
   exercises: [],
@@ -88,11 +90,15 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case FOOD_SEARCH:
+      console.log(action.payload.foods);
       return Object.assign({}, store, { foods: action.payload.foods });
 
     case FOOD_NUTRIENT_SEARCH:
       return Object.assign({}, store, { foods: action.payload });
 
+    case FOOD_VISION:
+      return Object.assign({}, store, { food_labels: action.payload})
+    
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
 

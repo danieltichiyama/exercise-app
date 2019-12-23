@@ -189,7 +189,7 @@ export const actionsAddComment = data => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsAddComment: ", err);
-    });
+    })
 };
 
 export const actionFoodSearch = data => async dispatch => {
@@ -220,7 +220,8 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionFoodVision = data => async dispatch => {
-  await Axios.post("/api/vision", data).then(response => {
+  await Axios.post("/api/vision", data)
+    .then(response => {
     return dispatch({
       type: FOOD_VISION,
       payload: response.data

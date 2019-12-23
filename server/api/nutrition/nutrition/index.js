@@ -17,7 +17,8 @@ nutritionRouter
         generalSearchInput: req.body.data,
         includeDataTypes: {
           "Survey (FNDDS)": true
-        }
+        },
+        requireAllWords:"true",
       }
     })
     .then(response => {
@@ -36,10 +37,15 @@ nutritionRouter
       },
       data: {
         generalSearchInput: req.body.data,
-        includeDataTypes: {
-          "Survey (FNDDS)": true
-        }
-      }
+        "requireAllWords":"true",
+        pageNumber: "1"
+      }    
+    })
+    .then(response => {
+      return res.json(response.data);
+    })
+    .catch(err => {
+      console.log(err);
     })
     .then(response => {
       return res.json(response.data);
@@ -49,7 +55,8 @@ nutritionRouter
     });
   });
 
-nutritionRouter.route("/:id").get((req, res) => {
+nutritionRouter.route("/:id")
+  .get((req, res) => {
   return axios({
     method: "get",
     url: `https://api.nal.usda.gov/fdc/v1/${req.params.id}?api_key=${process.env.NUTRITION_API_KEY}`,
@@ -57,12 +64,12 @@ nutritionRouter.route("/:id").get((req, res) => {
       "Content-Type": "application/json"
     }
   })
-    .then(response => {
-      return res.json(response.data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  .then(response => {
+    return res.json(response.data);
+  })
+  .catch(err => {
+    console.log('calvin is doodooboy', err); 
+  });
 });
 
 module.exports = nutritionRouter;
