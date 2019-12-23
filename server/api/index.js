@@ -22,11 +22,8 @@ const exercise_bodyparts = require("./exercise/exercise_bodyparts");
 const foods_meals_users = require("./nutrition/foods_meals_users");
 const nutrition = require("./nutrition/nutrition");
 const vision = require("./nutrition/vision");
-<<<<<<< HEAD
 const fat_secret = require("./nutrition/fat_secret");
-=======
-const video_upload = require("./exercise/video_upload");
->>>>>>> 48fb2ca7f633fa1a423ee81b53303a6957e536ff
+const video_upload = require("./video_upload");
 
 module.exports = {
   activity_levels,
@@ -53,9 +50,6 @@ module.exports = {
   foods_meals_users,
   nutrition,
   vision,
-<<<<<<< HEAD
-  fat_secret
-=======
+  fat_secret,
   video_upload
->>>>>>> 48fb2ca7f633fa1a423ee81b53303a6957e536ff
 };

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styles from "./Playground.module.scss";
 import FatSecretSearchComponent from "../../components/FatSecretSearchComponent";
 import SmokeButton from "../../components/SmokeButton";
-import FoodVisionComponent from "../../components/FoodVisionComponent/FoodVisionComponent";
+import FoodVisionComponent from "../../components/FoodVisionComponent";
+import VideoUploadComponent from "../../components/VideoUploadComponent"
 
 class Playground extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Playground extends Component {
         {/* insert playground equipment here. */}
         <FoodVisionComponent/>
         <FatSecretSearchComponent/>
+        <VideoUploadComponent/>
         <SmokeButton></SmokeButton>
       </div>
     );

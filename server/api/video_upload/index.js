@@ -3,12 +3,7 @@ const videoUploadRouter = express.Router();
 const multer = require("multer");
 const multerS3 = require("multer-s3");
 const path = require('path');
-const url = require('url');
 const aws = require("aws-sdk");
-
-
-require("dotenv").config();
-
 
 const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -57,17 +52,16 @@ videoUploadRouter.post('/', (req, res) => {
         res.json('Error: No File Selected!');
       } else {
         //success
-        const imageName = req.file.key;
-        const imageLocation = req.file.location;
+        const videoName = req.file.key;
+        const videoLocation = req.file.location;
         //save file name into database
         res.json({
-          image: imageName,
-          location: imageLocation
+          video: videoName,
+          location: videoLocation
         })
       }
     }
   })
 });
-
 
 module.exports = videoUploadRouter;
