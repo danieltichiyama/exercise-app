@@ -94,7 +94,6 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { community_posts: action.payload });
 
     case FOOD_SEARCH:
-      console.log(action.payload.foods);
       return Object.assign({}, store, { foods: action.payload.foods });
 
     case FOOD_NUTRIENT_SEARCH:
@@ -166,11 +165,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { workouts: action.payload });
 
     case VIDEO_UPLOAD:
-      console.log(action.payload);
       return Object.assign({}, store, { videos: action.payload });
 
     case IMAGE_UPLOAD:
-      console.log(action.payload);
       return Object.assign({}, store, { images: action.payload }); 
       
     default:

@@ -21,7 +21,6 @@ class FoodVisionComponent extends Component {
             type="file"
             name="foodImage"
             accept="image/*"
-            // className={styles.upload}
             onChange={this.handleUpload}
           />
       </div>

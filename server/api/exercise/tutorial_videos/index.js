@@ -11,11 +11,9 @@ tutorialVideoRouter.route("/")
     }
   )
   .post((req, res) => {
-    console.log(req.body);
     return req.db.TutorialVideo.forge(req.body)
     .save()
     .then(results => {
-      console.log('VIDEO POST', results);
       res.status(200).json(results)
     })
     .catch(err => {
