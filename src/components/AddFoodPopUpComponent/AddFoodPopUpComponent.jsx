@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AddFoodPopUpComponent.module.scss";
-import FatSecretFoodSearchComponent from "../FatSecretFoodSearchComponent";
+import FatSecretSearchComponent from "../FatSecretSearchComponent";
 
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class AddFoodPopUpComponent extends Component {
       <div className={styles.foodPopUp}>
         <div className={styles.foodPopUpInner}>
           <button onClick={this.props.handleFoodPopUp}>x</button>
-          <FatSecretFoodSearchComponent />
+          <FatSecretSearchComponent />
           {/* <h1>Breakfast</h1> */}{" "}
           {/* <FoodSearchComponent meal_type_id={"1"} /> //breakfast
         // <FoodSearchComponent meal_type_id={"2"} /> //lunch
