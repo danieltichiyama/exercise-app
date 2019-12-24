@@ -14,7 +14,9 @@ class DashboardComponent extends Component {
 
     this.state = {
       id,
-      date
+      date,
+      overAte: false,
+      style: { width: "0" }
     };
   }
   componentDidMount() {
@@ -25,6 +27,27 @@ class DashboardComponent extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.diaryData !== prevProps.diaryData) {
+      let goal = this.props.users && this.props.users.recommended_calories;
+      let food =
+        this.props.diaryData &&
+        this.props.diaryData.reduce((total, data) => {
+          return total + data.calories;
+        }, 0);
+      if (Math.sign(goal - food) === -1) {
+        this.setState({
+          overAte: true,
+          style: { width: "100%", backgroundColor: `orange` }
+        });
+      } else {
+        let percent = (food / goal) * 100;
+
+        this.setState({ overAte: false, style: { width: `${percent}%` } });
+      }
+    }
+  }
+
   render() {
     let goal = this.props.users && this.props.users.recommended_calories;
     let food =
@@ -32,10 +55,8 @@ class DashboardComponent extends Component {
       this.props.diaryData.reduce((total, data) => {
         return total + data.calories;
       }, 0);
-    let remaining = JSON.stringify(goal - (goal - food));
-    let percent = (food / goal) * 100;
+    let remaining = JSON.stringify(goal - food);
 
-    let redBarStyle = { width: `${percent}%` };
     return (
       <>
         <div className={styles.Dashboard}>
@@ -74,12 +95,12 @@ class DashboardComponent extends Component {
           </div>
 
           <div className={styles.statusBar}>
-            <div className={styles.redBar} style={redBarStyle}></div>
+            <div className={styles.redBar} style={this.state.style}></div>
           </div>
 
           <div className={styles.caloriesConsumedText}>
             <p>Calories consumed: </p>
-            <p className={styles.remainingP}>{remaining}</p>
+            <p className={styles.remainingP}>{food}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>

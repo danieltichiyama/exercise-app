@@ -20,8 +20,10 @@ const MealComponent = props => {
             return (
               <li key={food.description}>
                 <div className={styles.foodDesc}>{food.description}</div>
-                <div className={styles.foodCal}>{food.calories}</div>
-                <DeleteFoodButtonComponent id={food.id} />
+                <div className={styles.caloriesAndDelete}>
+                  <div className={styles.foodCal}>{food.calories}</div>
+                  <DeleteFoodButtonComponent id={food.id} />
+                </div>
               </li>
             );
           })

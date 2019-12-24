@@ -17,7 +17,7 @@ class DeleteFoodButtonComponent extends Component {
     return (
       <div>
         <button className={styles.deleteButton} onClick={this.handleDeleteFood}>
-          x
+          X
         </button>
       </div>
     );
