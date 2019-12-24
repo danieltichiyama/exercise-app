@@ -7,11 +7,14 @@ import {
   actionsLoadExerciseList
 } from "../../actions";
 
+import BodyParts from "../../imgs/bodyparts";
+
 class BodyPartComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      bodypartID: ""
+      bodypartID: "",
+      style: {}
     };
   }
 
@@ -20,7 +23,9 @@ class BodyPartComponent extends Component {
   }
 
   handleBodyPartClick = e => {
+    console.log(e.target.dataset.bodypart);
     e.preventDefault();
+    this.changeBackground(e.target.dataset.bodypart);
     this.props.dispatchFilterBodyParts(e.target.id);
   };
 
@@ -29,9 +34,26 @@ class BodyPartComponent extends Component {
     this.props.dispatchLoadExerciseList();
   };
 
+  changeBackground = bodypart => {
+    for (let key in BodyParts) {
+      console.log("key", key);
+
+      if (bodypart === key) {
+        console.log("match found", bodypart);
+        return this.setState({
+          style: {
+            backgroundImage: `url(${BodyParts[key]})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat"
+          }
+        });
+      }
+    }
+  };
+
   render() {
     return (
-      <div className={styles.BodyParts}>
+      <div className={styles.BodyParts} style={this.state.style}>
         <button
           onClick={this.handleShowAllBodyParts}
           className={styles.bodypartbutton}
@@ -45,6 +67,7 @@ class BodyPartComponent extends Component {
               id={bodypart.id}
               onClick={this.handleBodyPartClick}
               key={bodypart.id}
+              data-bodypart={bodypart.bodypart}
             >
               {bodypart.bodypart}
             </button>
