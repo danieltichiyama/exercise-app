@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
 }
 *,
 *:before,
@@ -9,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  padding-bottom: 45px;
+  /* padding-bottom: 45px; */
   font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

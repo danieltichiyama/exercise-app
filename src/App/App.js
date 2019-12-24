@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styles from "./App.css";
+import styles from "./App.module.scss";
 import { withRouter } from "react-router";
 import NavigationComponent from "../components/NavigationComponent";
 import MainBodyPage from "../pages/MainBodyPage";
