@@ -13,8 +13,8 @@ class ExercisePage extends Component {
     return (
       <div>
         <h1 className={styles.header}>EXERCISE LIST</h1>
-        <Link to="/workout">
-          +Add Workout
+        <Link to="/workout" style={{ textDecoration: 'none' }}>
+          <h2>Workout Log</h2>
         </Link>
         <BodyPartComponent />
         <ExerciseListComponent />

@@ -1,52 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsLoadWorkouts } from "../../actions";
+import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
+import * as moment from "moment";
 
 class WorkoutLogComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {}
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    componentDidMount() {
-        this.props.dispatchLoadWorkouts();
-    }
+  componentDidMount() {
+    let userID = JSON.parse(localStorage.getItem("session")).id;
+    this.props.dispatchLoadWorkouts(userID);
+  }
 
-    render() {
-        console.log("workout component: ", this.props)
-        return (
-            <div>
-                {this.props.workouts.map(workout => {
-                    return (
-                        <div key={workout.id}>
-                            <h1>
-                                {workout.workouts_id.workout}
-                                <div>
-                                    {workout.exercises_id.name}
-                                </div>
-                            </h1>
-                        </div>
-                    )
-                })}
-            </div>
-        );
-    }
+  render() {
+    const workoutObj = this.props.workouts.reduce((acc, workout) => {
+      let newTime = moment(workout.created_at).format("MM-DD-YYYY");
+      return { ...acc, [newTime]: [...(acc[newTime] || []), workout] };
+    }, {});
+
+    return (
+      <div>
+        {Object.keys(workoutObj).map(key => {
+          return (
+            <WorkoutCardComponent
+              key={key}
+              date={key}
+              exercises={workoutObj[key]}
+            />
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = store => {
-    return {
-        workouts: store.workouts
-    }
-}
+  return {
+    workouts: store.workouts
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
-        dispatchLoadWorkouts: () => {
-            return dispatch(actionsLoadWorkouts());
-        }
+  return {
+    dispatchLoadWorkouts: data => {
+      return dispatch(actionsLoadWorkouts(data));
     }
-}
+  };
+};
 
-WorkoutLogComponent = connect(mapStateToProps, mapDispatchToProps)(WorkoutLogComponent);
+WorkoutLogComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WorkoutLogComponent);
 
 export default WorkoutLogComponent;

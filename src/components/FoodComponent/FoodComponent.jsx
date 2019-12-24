@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { actionClear, actionFoodNutrients } from "../../actions";
 import { connect } from "react-redux";
-// import styles from "./Food.module.scss";
 
 class FoodComponent extends Component {
   constructor(props) {
@@ -11,7 +10,6 @@ class FoodComponent extends Component {
   }
 
   handleClick() {
-    this.props.dispatchClear();
     this.props.dispatchFoodNutrients(this.props.fdcId);
   }
 

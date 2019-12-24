@@ -37,7 +37,8 @@ passport.use(
       passwordField: "password"
     },
     function(email, password, done) {
-      return new User({ email })
+      let lowerCaseEmail = email.toLowerCase();
+      return new User({ email: lowerCaseEmail })
         .fetch({ require: false })
         .then(user => {
           if (user === null) {
