@@ -2,51 +2,61 @@ import {
   EDIT_USER,
   ADD_COMMENT,
   ADD_FOOD,
+  ADD_WORKOUT,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
+  DELETE_FOOD,
+  FAT_SECRET_FOOD_SEARCH,
+  FAT_SECRET_FOOD_NUTRIENT_SEARCH,
+  FILTER_BODY_PARTS,
+  FILTER_EMAILS,
   FOOD_NUTRIENT_SEARCH,
   FOOD_SEARCH,
+  FOOD_VISION,
   GET_DIARY_DATA,
+  IMAGE_UPLOAD,
   LOAD_ACTIVITIES,
   LOAD_BODY_PARTS,
   LOAD_EXERCISE_LIST,
   LOAD_POSTS,
+  LOAD_SINGLE_EXERCISE,
+  LOAD_WORKOUTS,
   LOGIN,
   LOGOUT,
   LOAD_USER,
-  FILTER_EMAILS,
   REGISTER,
-  FILTER_BODY_PARTS,
-  LOAD_SINGLE_EXERCISE,
-  DELETE_FOOD,
-  ADD_WORKOUT,
-  LOAD_WORKOUTS,
-  GET_SMOKE
+  GET_SMOKE,
+  VIDEO_UPLOAD
 } from "../actions";
 
 import moment from "moment";
 
 const initialStore = {
   activity_levels: [],
+  addFood: {},
   bodyparts: [],
   community_posts: [],
   diaryData: [],
-  users: [],
+  diaryDate: moment()
+  .utc()
+  .format("YYYY-MM-D"),
+  display: "meal",
   emails: [],
-  isLoggedIn: false,
-  exercises: [],
   exerciseInfo: [],
+  exercises: [],
+  fat_secret_foods: [],
+  fat_secret_nutrients: [],
   foods: [],
+  food_labels: [],
   foods_meals_users: [],
-  addFood: {},
+  images: [],
+  isLoggedIn: false,
+  smoke: "",
+  users: [],
+  videos: [],
   workout: [],
   workouts: [],
-  diaryDate: moment()
-    .utc()
-    .format("YYYY-MM-D"),
-  display: "meal",
-  smoke: ""
 };
 
 let reducer = (store = initialStore, action) => {
@@ -89,6 +99,13 @@ let reducer = (store = initialStore, action) => {
     case FOOD_NUTRIENT_SEARCH:
       return Object.assign({}, store, { foods: action.payload });
 
+    case FOOD_VISION:
+      return Object.assign({}, store, { 
+        food_labels: action.payload,
+        fat_secret_nutrients: [],
+        fat_secret_foods: []
+      })
+    
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
 
@@ -124,6 +141,19 @@ let reducer = (store = initialStore, action) => {
 
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
+    
+    case FAT_SECRET_FOOD_SEARCH:
+      return Object.assign({}, store, { 
+        food_labels: [],
+        fat_secret_nutrients: [],
+        fat_secret_foods: action.payload
+      });
+
+    case FAT_SECRET_FOOD_NUTRIENT_SEARCH:
+      return Object.assign({}, store, { 
+        food_labels: [],
+        fat_secret_nutrients: action.payload 
+      })
 
     case DELETE_FOOD:
       return Object.assign({}, store, { deletedFood: action.payload });
@@ -134,6 +164,12 @@ let reducer = (store = initialStore, action) => {
     case LOAD_WORKOUTS:
       return Object.assign({}, store, { workouts: action.payload });
 
+    case VIDEO_UPLOAD:
+      return Object.assign({}, store, { videos: action.payload });
+
+    case IMAGE_UPLOAD:
+      return Object.assign({}, store, { images: action.payload }); 
+      
     default:
       return store;
   }

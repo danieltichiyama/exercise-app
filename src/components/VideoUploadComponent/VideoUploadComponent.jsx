@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionImageUpload } from "../../actions";
+import { actionVideoUpload } from "../../actions";
 
-class ImageUploadComponent extends Component {
+class VideoUploadComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
@@ -10,8 +10,8 @@ class ImageUploadComponent extends Component {
 
   handleUpload = (e) => {
     const formData = new FormData();
-    formData.append('imageUpload', e.target.files[0]);
-    this.props.dispatchImageUpload(formData);
+    formData.append('videoUpload', e.target.files[0]);
+    this.props.dispatchVideoUpload(formData);
   }
 
   render() { 
@@ -19,8 +19,8 @@ class ImageUploadComponent extends Component {
       <div>
           <input
             type="file"
-            name="imageUpload"
-            accept="image/*"
+            name="videoUpload"
+            accept="video/*"
             onChange={this.handleUpload}
           />
       </div>
@@ -36,12 +36,12 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dispatchImageUpload: data => {
-      return dispatch(actionImageUpload(data))
+    dispatchVideoUpload: data => {
+      return dispatch(actionVideoUpload(data))
     }
   }
 }
 
-ImageUploadComponent = connect(mapStateToProps, mapDispatchToProps)(ImageUploadComponent);
+VideoUploadComponent = connect(mapStateToProps, mapDispatchToProps)(VideoUploadComponent);
  
-export default ImageUploadComponent;
+export default VideoUploadComponent;
