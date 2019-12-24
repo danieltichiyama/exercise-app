@@ -12,7 +12,7 @@ class FatSecretFoodNutrientsComponent extends Component {
       <>
         <h3>{this.props.name}</h3>
         <ul>
-          <li>Serving Size: {this.props.servingSize}</li>
+          {/* <li>Serving Size: {this.props.servingSize}</li> */}
           <li>Calories: {this.props.calories}</li>
           <li>Fats: {this.props.fat}</li>
           <li>Carbohydrates: {this.props.carbohydrate}</li>
