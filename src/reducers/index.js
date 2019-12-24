@@ -38,7 +38,6 @@ const initialStore = {
   exercises: [],
   exerciseInfo: [],
   foods: [],
-  foods_meals_users: [],
   addFood: {},
   workout: [],
   workouts: [],

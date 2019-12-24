@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionLoadUser } from "../../actions";
-import { actionsGetDiaryData } from "../../actions";
+import { actionLoadUser, actionsGetDiaryData } from "../../actions";
 import styles from "./DashboardComponent.module.scss";
 
 class DashboardComponent extends Component {
