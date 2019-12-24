@@ -54,14 +54,9 @@ let fatSecretApi = () => {
             .save()
             .then(() => {
               //set timer to refresh token;
-              timer = setInterval(
-                () => {
-                  fatSecretApi();
-                },
-                82,
-                800,
-                000
-              );
+              timer = setInterval(() => {
+                fatSecretApi();
+              }, 82800000);
             });
         }
       });
