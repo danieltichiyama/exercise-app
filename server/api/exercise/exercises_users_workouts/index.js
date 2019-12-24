@@ -1,6 +1,25 @@
 const express = require('express');
 const exercisesUsersWorkoutsRouter = express.Router();
 
+exercisesUsersWorkoutsRouter.route("/:userID")
+    .get((req, res) => {
+        let userID = req.params.userID;
+        return req.db.ExerciseUserWorkout.where({ user_id: userID })
+            .fetchAll({
+                withRelated: [
+                    "workouts_id",
+                    "exercises_id",
+                    "user_id"
+                ]
+            })
+            .then(response => {
+                return res.json(response);
+            })
+            .catch(err => {
+                console.log("Error in exercisesUsersWorkoutsRouter get '/' : ", err)
+            })
+    })
+
 exercisesUsersWorkoutsRouter.route("/")
     .get((req, res) => {
         return req.db.ExerciseUserWorkout.fetchAll({

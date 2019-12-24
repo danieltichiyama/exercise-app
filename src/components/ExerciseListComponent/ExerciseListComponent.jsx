@@ -21,12 +21,13 @@ class ExerciseListComponent extends Component {
                 {thisExercise.map(exercise => {
                     return (
                         <Link
+                            style={{ textDecoration: 'none' }}
                             key={exercise.id}
                             to={location => ({
                                 ...location, pathname: `/exercise/${exercise.id}`
                             })}>
                             <h2 className={styles.exercisebutton}>
-                                Exercise: {exercise.name}
+                                {exercise.name}
                             </h2>
                         </Link>
                     )
