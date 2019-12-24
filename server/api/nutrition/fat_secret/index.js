@@ -71,6 +71,9 @@ let fatSecretApi = () => {
         .then(() => {
           clearInterval(timer);
           fatSecretApi();
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   });
