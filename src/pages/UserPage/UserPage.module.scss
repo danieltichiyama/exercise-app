@@ -12,25 +12,50 @@
   height: 100%;
 
   .topProfile {
-    height: 100%;
-    background-color: #fac611;
+    height: 30%;
+    background-color: #04c9b5;
+    color: white;
 
     h1 {
       display: flex;
       justify-content: center;
+      padding: 10px 0px 10px 0px;
+    }
+
+    .profilePic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: space-around;
+      margin: 0 auto;
     }
 
     .name {
       display: flex;
       justify-content: center;
+      margin: 10px 0px 10px 0px;
+      // color: #444444;
+    }
+
+    .userTier {
+      display: flex;
+      justify-content: space-evenly;
     }
   }
 
   .rows {
-    margin: 0px 50px 0px 50px;
+    margin: 50px;
     display: flex;
-    justify-content: space-between;
     align-items: baseline;
+    justify-content: space-between;
+    border-bottom: rgba($color: #444444, $alpha: 0.3) solid;
+    h3 {
+      color: #fc4a1a;
+    }
   }
 
   .button {

@@ -4,6 +4,7 @@ import { actionLoadUser } from "../../actions";
 import styles from "./UserPage.module.scss";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import defaultPicture from "../../imgs/default-profile-icon.png";
 
 class UserPage extends Component {
   constructor(props) {
@@ -40,12 +41,16 @@ class UserPage extends Component {
           <div className={styles.topProfile}>
             <h1>User Profile</h1>
 
+            <div className={styles.profilePic}>
+              <img src={defaultPicture} alt="" />
+            </div>
+
             <div className={styles.name}>
               <h2>{this.props.users.name}</h2>
             </div>
 
             <div className={styles.userTier}>
-              <h3>User Tier</h3>
+              <h3>USER TIER</h3>
               <p>
                 {this.props.users.user_tier_id &&
                   this.props.users.user_tier_id.tier}
@@ -54,31 +59,31 @@ class UserPage extends Component {
           </div>
 
           <div className={styles.rows}>
-            <h3>Birth Date</h3>
+            <h3>BIRTH DATE</h3>
             <p>{birthDate}</p>
           </div>
 
           <div className={styles.rows}>
-            <h3>Weight</h3>
+            <h3>WEIGHT</h3>
             <p>{convertWeight} lbs</p>
           </div>
 
           <div className={styles.rows}>
-            <h3>Height</h3>
+            <h3>HEIGHT</h3>
             <p>
               {feet} ft. {inches} in.{" "}
             </p>
           </div>
 
           <div className={styles.rows}>
-            <h3>Gender</h3>
+            <h3>GENDER</h3>
             <p>
               {this.props.users.gender_id && this.props.users.gender_id.gender}
             </p>
           </div>
 
           <div className={styles.rows}>
-            <h3>Activity Level</h3>
+            <h3>ACTIVITY LEVEL</h3>
             <p>
               {this.props.users.activity_level_id &&
                 this.props.users.activity_level_id.activity_level}
@@ -86,7 +91,7 @@ class UserPage extends Component {
           </div>
 
           <div className={styles.rows}>
-            <h3>Goal</h3>
+            <h3>GOAL</h3>
             <p>{this.props.users.goal_id && this.props.users.goal_id.goal}</p>
           </div>
 
