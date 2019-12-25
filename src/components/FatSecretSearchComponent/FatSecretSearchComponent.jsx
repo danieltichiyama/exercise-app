@@ -74,6 +74,7 @@ class FatSecretSearchComponent extends Component {
                   name={food.food_name}
                   food_description={food.food_description}
                   resetServingMultiplier={this.resetServingMultiplier}
+                  meal_type_id={this.props.meal_type_id}
                 />
               );
             })
@@ -127,6 +128,7 @@ class FatSecretSearchComponent extends Component {
             <FatSecretFoodNutrientsComponent
               key={this.props.foodNutrients.food_name}
               name={this.props.foodNutrients.food_name}
+              meal_type_id={this.props.meal_type_id}
               calories={`${Math.round(
                 (this.props.foodNutrients.servings.serving.calories *
                   this.state.servingMultiplier +
@@ -162,6 +164,7 @@ class FatSecretSearchComponent extends Component {
           <FatSecretFoodNutrientsComponent
             key={this.state.servingIndex}
             name={this.props.foodNutrients.food_name}
+            meal_type_id={this.props.meal_type_id}
             servingSize={`${
               this.props.foodNutrients.servings.serving[this.state.servingIndex]
                 .serving_description

@@ -12,19 +12,19 @@ class AddMealButtonComponent extends Component {
     super(props);
     this.state = {
       showPopUp: false,
-      meal_type: 0
+      meal_type_id: 0
     };
   }
 
   handleFoodPopUp = e => {
-    console.log("e.target", e.target);
+    // console.log("e.target: ", e.target);
     let { id } = e.target;
 
-    console.log("id:", id);
+    // console.log("id: ", id);
     // let { meal_type } = e.target.dataset;
 
     this.setState({
-      meal_type: id,
+      meal_type_id: id,
       showPopUp: !this.state.showPopUp
     });
   };
@@ -33,7 +33,7 @@ class AddMealButtonComponent extends Component {
     return (
       <div className={styles.mealNavigation}>
         {this.state.showPopUp ? (
-          <AddFoodPopUpComponent meal_type={this.state.meal_type} />
+          <AddFoodPopUpComponent meal_type_id={this.state.meal_type_id} />
         ) : null}
 
         <div>
@@ -49,30 +49,30 @@ class AddMealButtonComponent extends Component {
         <div>
           <button
             className={styles.mealButton}
-            value="2"
+            id="2"
             onClick={this.handleFoodPopUp}
           >
-            <img src={addLunch} alt="lunch" />
+            <img src={addLunch} id="2" alt="lunch" />
           </button>
         </div>
 
         <div>
           <button
             className={styles.mealButton}
-            value="3"
+            id="3"
             onClick={this.handleFoodPopUp}
           >
-            <img src={addDinner} alt="dinner" />
+            <img src={addDinner} id="3" alt="dinner" />
           </button>
         </div>
 
         <div>
           <button
             className={styles.mealButton}
-            value="4"
+            id="4"
             onClick={this.handleFoodPopUp}
           >
-            <img src={addSnack} alt="snack" />
+            <img src={addSnack} id="4" alt="snack" />
           </button>
         </div>
       </div>

@@ -28,6 +28,7 @@ class AddFoodButtonComponent extends Component {
   };
 
   handleAddClick = () => {
+    console.log("handleAddClick works");
     let apiFood = this.compileFoodData();
     this.props.dispatchAddFood(apiFood);
   };

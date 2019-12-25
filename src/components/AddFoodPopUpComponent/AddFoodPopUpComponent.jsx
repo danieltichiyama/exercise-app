@@ -6,11 +6,17 @@ import FatSecretSearchComponent from "../FatSecretSearchComponent";
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { showPopUp: false };
+    this.state = {
+      // meal_type_id: id,
+      showPopUp: false
+    };
   }
 
   handleFoodPopUp = e => {
+    // let { id } = e.target;
+
     this.setState({
+      // meal_type_id: id,
       showPopUp: !this.state.showPopUp
     });
   };
@@ -20,12 +26,7 @@ class AddFoodPopUpComponent extends Component {
       <div className={styles.foodPopUp}>
         <div className={styles.foodPopUpInner}>
           <button onClick={this.props.handleFoodPopUp}>x</button>
-          <FatSecretSearchComponent />
-          {/* <h1>Breakfast</h1> */}{" "}
-          {/* <FoodSearchComponent meal_type_id={"1"} /> //breakfast
-        // <FoodSearchComponent meal_type_id={"2"} /> //lunch
-        // <FoodSearchComponent meal_type_id={"3"} /> //dinner
-        // <FoodSearchComponent meal_type_id={"4"} /> //snack */}
+          <FatSecretSearchComponent meal_type_id={this.props.meal_type_id} />
         </div>
       </div>
     );
