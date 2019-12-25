@@ -37,13 +37,20 @@ class UserPage extends Component {
     return (
       <>
         <div className={styles.body}>
-          <div>
+          <div className={styles.topProfile}>
             <h1>User Profile</h1>
-          </div>
 
-          <div className={styles.rows}>
-            <h3>Name</h3>
-            <p>{this.props.users.name}</p>
+            <div className={styles.name}>
+              <h2>{this.props.users.name}</h2>
+            </div>
+
+            <div className={styles.userTier}>
+              <h3>User Tier</h3>
+              <p>
+                {this.props.users.user_tier_id &&
+                  this.props.users.user_tier_id.tier}
+              </p>
+            </div>
           </div>
 
           <div className={styles.rows}>
@@ -75,14 +82,6 @@ class UserPage extends Component {
             <p>
               {this.props.users.activity_level_id &&
                 this.props.users.activity_level_id.activity_level}
-            </p>
-          </div>
-
-          <div className={styles.rows}>
-            <h3>User Tier</h3>
-            <p>
-              {this.props.users.user_tier_id &&
-                this.props.users.user_tier_id.tier}
             </p>
           </div>
 

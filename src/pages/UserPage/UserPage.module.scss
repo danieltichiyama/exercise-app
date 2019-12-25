@@ -1,15 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+}
+
 .body {
   width: 100%;
-  h1 {
-    display: flex;
-    justify-content: center;
+  height: 100%;
+
+  .topProfile {
+    height: 100%;
+    background-color: #fac611;
+
+    h1 {
+      display: flex;
+      justify-content: center;
+    }
+
+    .name {
+      display: flex;
+      justify-content: center;
+    }
   }
+
   .rows {
     margin: 0px 50px 0px 50px;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
   }
+
   .button {
     text-align: center;
     display: block;
