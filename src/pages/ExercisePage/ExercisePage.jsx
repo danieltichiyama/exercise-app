@@ -11,7 +11,8 @@ class ExercisePage extends Component {
     super(props);
     this.state = {
       openMenu: false,
-      searchTerm: ""
+      searchTerm: "",
+      bodypartID: ""
     };
   }
 
@@ -21,6 +22,10 @@ class ExercisePage extends Component {
 
   handleSearchInput = e => {
     return this.setState({ searchTerm: e.target.value });
+  };
+
+  filterByBodypart = id => {
+    return this.setState({ bodypartID: id });
   };
 
   render() {
@@ -55,10 +60,16 @@ class ExercisePage extends Component {
           </Link>
         </div>
         {this.state.openMenu ? (
-          <BodyPartComponent menuClick={this.handleMenuClick} />
+          <BodyPartComponent
+            menuClick={this.handleMenuClick}
+            filterByBodypart={this.filterByBodypart}
+          />
         ) : null}
 
-        <ExerciseListComponent searchTerm={this.state.searchTerm} />
+        <ExerciseListComponent
+          searchTerm={this.state.searchTerm}
+          bodypartID={this.state.bodypartID}
+        />
       </div>
     );
   }
