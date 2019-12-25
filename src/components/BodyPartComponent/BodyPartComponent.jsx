@@ -23,7 +23,6 @@ class BodyPartComponent extends Component {
   }
 
   handleBodyPartClick = e => {
-    console.log(e.target.dataset.bodypart);
     e.preventDefault();
     this.changeBackground(e.target.dataset.bodypart);
     this.props.dispatchFilterBodyParts(e.target.id);
@@ -36,10 +35,7 @@ class BodyPartComponent extends Component {
 
   changeBackground = bodypart => {
     for (let key in BodyParts) {
-      console.log("key", key);
-
       if (bodypart === key) {
-        console.log("match found", bodypart);
         return this.setState({
           style: {
             backgroundImage: `url(${BodyParts[key]})`,
@@ -53,8 +49,8 @@ class BodyPartComponent extends Component {
 
   render() {
     return (
-      <div className={styles.BodyParts} style={this.state.style}>
-        <div className={styles.menu}>
+      <div className={styles.BodyPartsPopUp} style={this.state.style}>
+        <div className={styles.BodyPartsPopUpInner}>
           <button
             onClick={this.handleShowAllBodyParts}
             className={styles.bodypartbutton}

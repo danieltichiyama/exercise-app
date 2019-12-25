@@ -4,7 +4,7 @@ import styles from "./MainBodyPage.module.scss";
 
 const MainBodyPage = () => {
   return (
-    <div className={styles.MainBodyPage}>
+    <div className={styles.routes}>
       <Routes></Routes>
     </div>
   );

@@ -16,7 +16,6 @@ class ExerciseListComponent extends Component {
 
   render() {
     let { exercises } = this.props;
-    let difficultyStyle = { color: "#04c9b5" };
 
     return (
       <div className={styles.ExerciseList}>
@@ -31,9 +30,6 @@ class ExerciseListComponent extends Component {
           if (exercise_difficulty === "Vigorous") {
             difficultyStyle = { color: "#fc4a1a" };
           }
-          // yellow // #fac611
-          // turquoise // #04c9b5
-          // red // #fc4a1a
 
           return (
             <>
