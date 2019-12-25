@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AddFoodPopUpComponent.module.scss";
 import FatSecretSearchComponent from "../FatSecretSearchComponent";
+import exitButton from "../../imgs/exitButton352.png";
 
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // showPopUp: false
-    };
+    this.state = {};
   }
 
   handleFoodPopUp = e => {
@@ -20,8 +19,14 @@ class AddFoodPopUpComponent extends Component {
   render() {
     return (
       <div className={styles.foodPopUp}>
+        {/* onClick={this.props.handleFoodPopUp}> SAVE FOR LATER */}
         <div className={styles.foodPopUpInner}>
-          <button onClick={this.props.handleFoodPopUp}>x</button>
+          <button
+            className={styles.exitButton}
+            onClick={this.props.handleFoodPopUp}
+          >
+            <img src={exitButton} alt="exit button" />
+          </button>
           <FatSecretSearchComponent meal_type_id={this.props.meal_type_id} />
         </div>
       </div>

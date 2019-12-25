@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import { actionsFatSecretFoodSearch } from "../../actions";
 import FatSecretFoodComponent from "../FatSecretFoodComponent";
 import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
+import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
 import LabelComponent from "../LabelComponent";
+import searchIcon from "../../imgs/magnifying_glass.png";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -51,8 +53,11 @@ class FatSecretSearchComponent extends Component {
             autoComplete="off"
             onChange={this.handleChange}
             placeholder="Fat Secret Search"
+            className={styles.foodInput}
           />
-          <button>Submit</button>
+          <button className={styles.searchButton}>
+            <img src={searchIcon} alt="search button" />
+          </button>
         </form>
         {this.props.imgData.length !== 0
           ? this.props.imgData.map(imgData => {
