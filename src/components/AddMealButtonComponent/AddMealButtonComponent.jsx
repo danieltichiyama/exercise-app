@@ -33,7 +33,10 @@ class AddMealButtonComponent extends Component {
     return (
       <div className={styles.mealNavigation}>
         {this.state.showPopUp ? (
-          <AddFoodPopUpComponent meal_type_id={this.state.meal_type_id} />
+          <AddFoodPopUpComponent
+            meal_type_id={this.state.meal_type_id}
+            handleFoodPopUp={this.handleFoodPopUp}
+          />
         ) : null}
 
         <div>

@@ -7,16 +7,12 @@ class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // meal_type_id: id,
-      showPopUp: false
+      // showPopUp: false
     };
   }
 
   handleFoodPopUp = e => {
-    // let { id } = e.target;
-
     this.setState({
-      // meal_type_id: id,
       showPopUp: !this.state.showPopUp
     });
   };
