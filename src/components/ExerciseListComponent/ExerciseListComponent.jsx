@@ -15,22 +15,49 @@ class ExerciseListComponent extends Component {
   }
 
   render() {
-    let thisExercise = this.props.exercises;
+    let { exercises } = this.props;
+    let difficultyStyle = { color: "#04c9b5" };
+
     return (
       <div className={styles.ExerciseList}>
-        {thisExercise.map(exercise => {
+        {exercises.map(exercise => {
+          let { exercise_difficulty } = exercise.exercise_difficulty_id;
+          let difficultyStyle = { color: "#04c9b5" };
+
+          if (exercise_difficulty === "Moderate") {
+            difficultyStyle = { color: "#fac611" };
+          }
+
+          if (exercise_difficulty === "Vigorous") {
+            difficultyStyle = { color: "#fc4a1a" };
+          }
+          // yellow // #fac611
+          // turquoise // #04c9b5
+          // red // #fc4a1a
+
           return (
-            <Link
-              style={{ textDecoration: "none" }}
-              key={exercise.id}
-              to={location => ({
-                ...location,
-                pathname: `/exercise/${exercise.id}`
-              })}
-            >
-              <h4 className={styles.exercisebutton}>{exercise.name}</h4>
+            <>
+              <Link
+                style={{ textDecoration: "none" }}
+                className={styles.exercise}
+                key={exercise.id}
+                to={location => ({
+                  ...location,
+                  pathname: `/exercise/${exercise.id}`
+                })}
+              >
+                <div className={styles.info}>
+                  <p>{exercise.name}</p>
+                  <p className={styles.difficulty} style={difficultyStyle}>
+                    {exercise_difficulty}
+                  </p>
+                </div>
+                <div>
+                  <h3>></h3>
+                </div>
+              </Link>
               <hr />
-            </Link>
+            </>
           );
         })}
       </div>

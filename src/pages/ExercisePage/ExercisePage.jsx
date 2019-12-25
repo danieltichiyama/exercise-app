@@ -13,11 +13,12 @@ class ExercisePage extends Component {
     return (
       <div className={styles.ExercisePage}>
         <input className={styles.exerciseSearchPH} type="text" />
-        <Link to="/workout" style={{ textDecoration: "none" }}>
-          <h2>Workout Log</h2>
-        </Link>
+        {/* <BodyPartComponent /> */}
 
-        <BodyPartComponent />
+        {/* <Link to="/workout" style={{ textDecoration: "none" }}>
+          <p>Workout Log</p>
+        </Link> */}
+
         <ExerciseListComponent />
       </div>
     );

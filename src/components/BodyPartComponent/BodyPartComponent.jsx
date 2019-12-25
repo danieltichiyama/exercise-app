@@ -54,25 +54,27 @@ class BodyPartComponent extends Component {
   render() {
     return (
       <div className={styles.BodyParts} style={this.state.style}>
-        <button
-          onClick={this.handleShowAllBodyParts}
-          className={styles.bodypartbutton}
-        >
-          Show all
-        </button>
-        {this.props.bodyparts.map(bodypart => {
-          return (
-            <button
-              className={styles.bodypartbutton}
-              id={bodypart.id}
-              onClick={this.handleBodyPartClick}
-              key={bodypart.id}
-              data-bodypart={bodypart.bodypart}
-            >
-              {bodypart.bodypart}
-            </button>
-          );
-        })}
+        <div className={styles.menu}>
+          <button
+            onClick={this.handleShowAllBodyParts}
+            className={styles.bodypartbutton}
+          >
+            Show all
+          </button>
+          {this.props.bodyparts.map(bodypart => {
+            return (
+              <button
+                className={styles.bodypartbutton}
+                id={bodypart.id}
+                onClick={this.handleBodyPartClick}
+                key={bodypart.id}
+                data-bodypart={bodypart.bodypart}
+              >
+                {bodypart.bodypart}
+              </button>
+            );
+          })}
+        </div>
       </div>
     );
   }
