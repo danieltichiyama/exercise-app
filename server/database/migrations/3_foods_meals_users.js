@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.decimal("carbs");
     table.decimal("fat");
     table.string("serving_size");
+    table.date("date").notNullable();
     //foreign keys
     table
       .integer("meal_type_id")

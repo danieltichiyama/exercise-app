@@ -15,6 +15,7 @@ class DiaryComponent extends Component {
 
   handleNewDate = () => {
     let UTCdate = moment.utc(this.props.diaryDate).format();
+    console.log(UTCdate);
     return this.props.dispatchGetDiaryData(UTCdate);
   };
 
@@ -27,6 +28,7 @@ class DiaryComponent extends Component {
       this.props.diaryDate !== prevProps.diaryDate ||
       this.props.deletedFood !== prevProps.deletedFood
     ) {
+      console.log("newDate found, running handleNewDate()");
       return this.handleNewDate();
     } else if (this.props.addFood !== prevProps.addFood) {
       return this.handleNewDate();

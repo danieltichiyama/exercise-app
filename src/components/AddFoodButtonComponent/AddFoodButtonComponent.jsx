@@ -23,7 +23,8 @@ class AddFoodButtonComponent extends Component {
       description: this.props.description,
       fat: this.props.fat,
       carbs: this.props.carbs,
-      protein: this.props.protein
+      protein: this.props.protein,
+      date: this.props.date
     };
   };
 
@@ -59,7 +60,8 @@ const mapStateToProps = store => {
     description: store.fat_secret_nutrients.food_name,
     fat: store.fat_secret_nutrients.servings.serving[0].fat,
     carbs: store.fat_secret_nutrients.servings.serving[0].carbohydrate,
-    protein: store.fat_secret_nutrients.servings.serving[0].protein
+    protein: store.fat_secret_nutrients.servings.serving[0].protein,
+    date: store.diaryDate
   };
 };
 
