@@ -20,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.App}>
+      <div className={styles.App} id="app">
         <MainBodyPage {...this.props}></MainBodyPage>
         <NavigationComponent></NavigationComponent>
       </div>

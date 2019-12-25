@@ -53,6 +53,7 @@ class LoginComponent extends Component {
     }
     return (
       <div className={styles.LoginComponent}>
+        <h1>login</h1>
         <form>
           <ul>
             <li className={styles.form_li}>

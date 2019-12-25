@@ -62,6 +62,7 @@ class RegisterComponent extends Component {
   render() {
     return (
       <div className={styles.RegisterComponent}>
+        <h1>register</h1>
         <form onSubmit={this.handleContinueClick}> 
           <ul>
             {/* name */}
@@ -139,7 +140,7 @@ class RegisterComponent extends Component {
           </ul>
 
           <button onClick={() => this.handleContinueClick} className={styles.login_button}>
-            Continue
+            get started
           </button>
         </form>
 
@@ -152,7 +153,7 @@ class RegisterComponent extends Component {
                   className={styles.options_span}
                   onClick={this.handleLoginClick}
                 >
-                  Login
+                  Sign in
                 </span>
               </p>
             </div>
