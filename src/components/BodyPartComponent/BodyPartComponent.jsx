@@ -6,7 +6,7 @@ import {
   actionsFilterBodyParts,
   actionsLoadExerciseList
 } from "../../actions";
-
+import ExitButton from "../../imgs/exitButton.png";
 import BodyParts from "../../imgs/bodyparts";
 
 class BodyPartComponent extends Component {
@@ -23,13 +23,11 @@ class BodyPartComponent extends Component {
   }
 
   handleBodyPartClick = e => {
-    e.preventDefault();
     this.changeBackground(e.target.dataset.bodypart);
     this.props.dispatchFilterBodyParts(e.target.id);
   };
 
   handleShowAllBodyParts = e => {
-    e.preventDefault();
     this.props.dispatchLoadExerciseList();
   };
 
@@ -49,17 +47,26 @@ class BodyPartComponent extends Component {
 
   render() {
     return (
-      <div className={styles.BodyPartsPopUp} style={this.state.style}>
-        <div className={styles.BodyPartsPopUpInner}>
-          <button
+      <div className={styles.BodyPartsPopUp}>
+        <div className={styles.exerciseMenu}>
+          <div className={styles.exerciseSearchPH}> </div>
+          <img
+            src={ExitButton}
+            alt="exit button"
+            className={styles.menuButton}
+            onClick={this.props.menuClick}
+          />
+        </div>
+        <div className={styles.BodyPartsPopUpInner} style={this.state.style}>
+          <div
             onClick={this.handleShowAllBodyParts}
             className={styles.bodypartbutton}
           >
             Show all
-          </button>
+          </div>
           {this.props.bodyparts.map(bodypart => {
             return (
-              <button
+              <div
                 className={styles.bodypartbutton}
                 id={bodypart.id}
                 onClick={this.handleBodyPartClick}
@@ -67,7 +74,7 @@ class BodyPartComponent extends Component {
                 data-bodypart={bodypart.bodypart}
               >
                 {bodypart.bodypart}
-              </button>
+              </div>
             );
           })}
         </div>

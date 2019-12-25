@@ -10,7 +10,7 @@ class ExercisePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openMenu: true
+      openMenu: false
     };
   }
 
@@ -25,7 +25,7 @@ class ExercisePage extends Component {
           {this.state.openMenu ? (
             <img
               src={ExitButton}
-              alt="menu"
+              alt="exit button"
               className={styles.menuButton}
               onClick={this.handleMenuClick}
             />
@@ -38,7 +38,9 @@ class ExercisePage extends Component {
             />
           )}
         </div>
-        {this.state.openMenu ? <BodyPartComponent /> : null}
+        {this.state.openMenu ? (
+          <BodyPartComponent menuClick={this.handleMenuClick} />
+        ) : null}
 
         {/* <Link to="/workout" style={{ textDecoration: "none" }}>
           <p>Workout Log</p>
