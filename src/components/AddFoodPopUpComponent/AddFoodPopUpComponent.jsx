@@ -6,8 +6,14 @@ import FatSecretSearchComponent from "../FatSecretSearchComponent";
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showPopUp: false };
   }
+
+  handleFoodPopUp = e => {
+    this.setState({
+      showPopUp: !this.state.showPopUp
+    });
+  };
 
   render() {
     return (

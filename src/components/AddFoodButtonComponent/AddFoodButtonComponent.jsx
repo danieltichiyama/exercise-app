@@ -51,13 +51,14 @@ class AddFoodButtonComponent extends Component {
 const mapStateToProps = store => {
   return {
     addFood: store.addFood,
-    api_id: store.foods.fdcId,
-    calories: store.foods.foodNutrients[3].amount,
-    serving_size: store.foods.foodPortions[0].portionDescription,
-    description: store.foods.description,
-    fat: store.foods.foodNutrients[1].amount,
-    carbs: store.foods.foodNutrients[2].amount,
-    protein: store.foods.foodNutrients[0].amount
+    api_id: store.fat_secret_nutrients.food_id,
+    calories: store.fat_secret_nutrients.servings.serving[0].calories,
+    serving_size:
+      store.fat_secret_nutrients.servings.serving[0].serving_description,
+    description: store.fat_secret_nutrients.food_name,
+    fat: store.fat_secret_nutrients.servings.serving[0].fat,
+    carbs: store.fat_secret_nutrients.servings.serving[0].carbohydrate,
+    protein: store.fat_secret_nutrients.servings.serving[0].protein
   };
 };
 
