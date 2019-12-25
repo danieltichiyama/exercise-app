@@ -1,6 +1,8 @@
 .ExercisePage {
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   .exerciseMenu {
     display: flex;
@@ -12,10 +14,14 @@
     height: 80px;
 
     .exerciseSearchPH {
-      height: 35px;
-      width: 80%;
+      height: 50px;
+      width: 70%;
       margin: 20px 0px 20px 20px;
-      border: 1px red dashed;
+      border: 2px solid lightgray;
+      border-radius: 2px;
+      padding: 0 10px;
+      outline: none;
+      font-size: 16px;
     }
 
     .menuButton {

@@ -4,32 +4,37 @@ import BodyPartComponent from "../../components/BodyPartComponent/BodyPartCompon
 import ExerciseListComponent from "../../components/ExerciseListComponent/ExerciseListComponent";
 import { Link } from "react-router-dom";
 import MenuButton from "../../imgs/menuButton.png";
-import ExitButton from "../../imgs/exitButton.png";
+import LogButton from "../../imgs/log.png";
 
 class ExercisePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openMenu: false
+      openMenu: false,
+      searchTerm: ""
     };
   }
 
   handleMenuClick = () => {
     this.setState({ openMenu: !this.state.openMenu });
   };
+
+  handleSearchInput = e => {
+    return this.setState({ searchTerm: e.target.value });
+  };
+
   render() {
     return (
       <div className={styles.ExercisePage}>
         <div className={styles.exerciseMenu}>
-          <input className={styles.exerciseSearchPH} type="text" />
-          {this.state.openMenu ? (
-            <img
-              src={ExitButton}
-              alt="exit button"
-              className={styles.menuButton}
-              onClick={this.handleMenuClick}
-            />
-          ) : (
+          <input
+            className={styles.exerciseSearchPH}
+            type="text"
+            placeholder="Search for an exercise..."
+            value={this.state.searchTerm}
+            onChange={this.handleSearchInput}
+          />
+          {this.state.openMenu ? null : (
             <img
               src={MenuButton}
               alt="menu"
@@ -37,16 +42,23 @@ class ExercisePage extends Component {
               onClick={this.handleMenuClick}
             />
           )}
+          <Link
+            to="/workout"
+            style={{ textDecoration: "none" }}
+            className={styles.menuButton}
+          >
+            <img
+              src={LogButton}
+              alt="workout log"
+              className={styles.menuButton}
+            />
+          </Link>
         </div>
         {this.state.openMenu ? (
           <BodyPartComponent menuClick={this.handleMenuClick} />
         ) : null}
 
-        {/* <Link to="/workout" style={{ textDecoration: "none" }}>
-          <p>Workout Log</p>
-        </Link> */}
-
-        <ExerciseListComponent />
+        <ExerciseListComponent searchTerm={this.state.searchTerm} />
       </div>
     );
   }

@@ -7,15 +7,33 @@ import styles from "./ExerciseListComponent.module.scss";
 class ExerciseListComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      exercises: []
+    };
   }
 
   componentDidMount() {
     this.props.dispatchLoadExerciseList();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.searchTerm !== prevProps.searchTerm) {
+      let { exercises, searchTerm } = this.props;
+
+      let filteredExercises = exercises.filter(exercise => {
+        return exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+
+      return this.setState({ exercises: filteredExercises });
+    }
+
+    if (this.props.exercises !== prevProps.exercises) {
+      return this.setState({ exercises: this.props.exercises });
+    }
+  }
+
   render() {
-    let { exercises } = this.props;
+    let { exercises } = this.state;
 
     return (
       <div className={styles.ExerciseList}>

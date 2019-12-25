@@ -8,6 +8,7 @@ import {
 } from "../../actions";
 import ExitButton from "../../imgs/exitButton.png";
 import BodyParts from "../../imgs/bodyparts";
+import LogButton from "../../imgs/log.png";
 
 class BodyPartComponent extends Component {
   constructor(props) {
@@ -55,6 +56,11 @@ class BodyPartComponent extends Component {
             alt="exit button"
             className={styles.menuButton}
             onClick={this.props.menuClick}
+          />
+          <img
+            src={LogButton}
+            alt="workout log"
+            className={styles.menuButton}
           />
         </div>
         <div className={styles.BodyPartsPopUpInner} style={this.state.style}>
