@@ -36,7 +36,6 @@ class ExerciseInfoComponent extends Component {
 
     return (
       <div className={styles.ExerciseInfo}>
-        {/* <div className={styles.videoPH}>Placeholder for video</div> */}
         <VideoPlayerComponent></VideoPlayerComponent>
         <div className={styles.belowVideo}>
           <div className={styles.header}>
