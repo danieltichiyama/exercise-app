@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8080;
 
 //necessary for local spin up of front end with npm run build, remove before deploying.
 //use localhost:8080/ for npm run build
-app.use(express.static(path.join(__dirname, "../build")));
+// app.use(express.static(path.join(__dirname, "../build")));
 //end
 
 //body-parsers and decorator
@@ -51,7 +51,7 @@ app.use("/api/nutrition", api.nutrition);
 app.use("/api/vision", api.vision);
 app.use("/api/fat_secret", api.fat_secret);
 app.use("/api/video_upload", api.video_upload);
-app.use("/api/image_upload", api.image_upload)
+app.use("/api/image_upload", api.image_upload);
 //routers-end
 
 app.get("/smoke", (req, res) => {
@@ -60,9 +60,9 @@ app.get("/smoke", (req, res) => {
 
 //necessary for local spin up of front end with npm run build, remove before deploying
 //use localhost:8080/ for npm run build
-app.get(`*`, function(req, res) {
-  res.sendFile(path.join(__dirname, "../build", "sw.js"));
-});
+// app.get(`*`, function(req, res) {
+//   res.sendFile(path.join(__dirname, "../build", "sw.js"));
+// });
 
 app.listen(PORT, () => {
   console.log(`PORT ${PORT} at your service.`);
