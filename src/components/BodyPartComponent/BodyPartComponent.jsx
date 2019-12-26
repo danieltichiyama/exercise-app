@@ -25,9 +25,6 @@ class BodyPartComponent extends Component {
 
   handleBodyPartClick = e => {
     this.changeBackground(e.target.dataset.bodypart);
-    // this.props.dispatchFilterBodyParts(e.target.id);
-
-    console.log(e.target.id);
     this.props.filterByBodypart(e.target.id);
   };
 

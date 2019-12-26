@@ -31,11 +31,8 @@ class ExerciseListComponent extends Component {
       let { exercises, bodypartID } = this.props;
 
       let filteredExercises = exercises.filter(exercise => {
-        console.log("filtering", exercise.primary_bodypart_id.id, bodypartID);
         return exercise.primary_bodypart_id.id === parseInt(bodypartID);
       });
-
-      console.log(filteredExercises);
 
       return this.setState({ exercises: filteredExercises });
     }
