@@ -10,10 +10,11 @@ const VideoPlayerComponent = props => {
       </div>
     );
   };
+
   return (
     <div className={styles.playerWrapper}>
       <ReactPlayer
-        url="http://www.youtube.com/watch?v=ScMzIvxBSi4"
+        url="https://www.youtube.com/watch?v=ScMzIvxBSi4"
         controls
         light={true}
         playIcon={PlayIcon()}
@@ -25,8 +26,7 @@ const VideoPlayerComponent = props => {
             playerVars: {
               autoplay: 1,
               fs: 0,
-              modestbranding: 1,
-              origin: "https://localhost:3000"
+              modestbranding: 1
             }
           }
         }}
