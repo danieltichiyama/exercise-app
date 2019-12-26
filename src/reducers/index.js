@@ -3,6 +3,7 @@ import {
   ADD_COMMENT,
   ADD_FOOD,
   ADD_WORKOUT,
+  BCRYPT,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
@@ -23,6 +24,7 @@ import {
   LOAD_SINGLE_EXERCISE,
   LOAD_WORKOUTS,
   LOGIN,
+  LOGIN_ERROR,
   LOGOUT,
   LOAD_USER,
   REGISTER,
@@ -35,6 +37,7 @@ import moment from "moment";
 const initialStore = {
   activity_levels: [],
   addFood: {},
+  bcrypt: '',
   bodyparts: [],
   community_posts: [],
   diaryData: [],
@@ -52,6 +55,7 @@ const initialStore = {
   foods_meals_users: [],
   images: [],
   isLoggedIn: false,
+  loginError: false,
   smoke: "",
   users: [],
   videos: [],
@@ -84,7 +88,13 @@ let reducer = (store = initialStore, action) => {
         { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
-      return Object.assign({}, store, { isLoggedIn: true });
+      return Object.assign({}, store, { 
+        isLoggedIn: true,
+        loginError: false 
+      });
+
+    case LOGIN_ERROR:
+      return Object.assign({}, store, { loginError: true })
 
     case LOGOUT:
       localStorage.removeItem("session");
@@ -175,6 +185,9 @@ let reducer = (store = initialStore, action) => {
     case IMAGE_UPLOAD:
       return Object.assign({}, store, { images: action.payload }); 
       
+    case BCRYPT:
+      return Object.assign('', store, { bcrypt: action.payload })
+
     default:
       return store;
   }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./RegisterComponent.module.scss";
-import { actionsFilterEmails } from "../../actions";
+import { actionsFilterEmails, actionsBcrypt } from "../../actions";
 
 class RegisterComponent extends Component {
   constructor(props) {
@@ -51,7 +51,12 @@ class RegisterComponent extends Component {
       alert("Password must be at least 6 characters long.");
       return false;
     };
-    return this.props.takingSurvey(this.state);
+    
+    await this.props.dispatchBcrypt({ password: this.state.password });
+    return this.setState({ password: this.props.password}, () => {
+      delete this.state.confirm_password;
+      this.props.takingSurvey(this.state);
+    })
   };
 
   validateEmail = (email) => {
@@ -166,7 +171,8 @@ class RegisterComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    filteredEmails: store.emails
+    filteredEmails: store.emails,
+    password: store.bcrypt
   }
 }
 
@@ -174,6 +180,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchFilterEmails: data => {
       return dispatch(actionsFilterEmails(data));
+    },
+    dispatchBcrypt: data => {
+      return dispatch(actionsBcrypt(data));
     }
   };
 };

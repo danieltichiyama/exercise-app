@@ -48,6 +48,9 @@ class LoginComponent extends Component {
   }
 
   render() {
+    if (this.props.loginError === true){
+      alert("Email and password combination to not match.");
+    }
     if (this.props.isLoggedIn === true) {
       return <Redirect to="/home" />;
     }
@@ -137,7 +140,8 @@ class LoginComponent extends Component {
 const mapStateToProps = store => {
   return {
     registeredUserEmail: store.registeredUserEmail,
-    isLoggedIn: store.isLoggedIn
+    isLoggedIn: store.isLoggedIn,
+    loginError: store.loginError
   };
 };
 
