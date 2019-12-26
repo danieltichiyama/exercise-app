@@ -1,0 +1,29 @@
+.playerWrapper {
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+
+  .reactPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .PlayIcon {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    border-radius: 50%;
+    background-color: #fac611;
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+
+      border-left: 15px solid white;
+    }
+  }
+}
