@@ -173,6 +173,7 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { videos: action.payload });
 
     case IMAGE_UPLOAD:
+      console.log(action.payload);
       return Object.assign({}, store, { images: action.payload }); 
       
     default:

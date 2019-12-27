@@ -9,6 +9,7 @@ class ImageUploadComponent extends Component {
   }
 
   handleUpload = (e) => {
+    console.log(e.target.files)
     const formData = new FormData();
     formData.append('imageUpload', e.target.files[0]);
     this.props.dispatchImageUpload(formData);

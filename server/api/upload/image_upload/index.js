@@ -42,15 +42,16 @@ function checkFileType( file, cb ){
 
 imageUploadRouter.post('/', (req, res) => {
   imageUpload( req, res, (error) => {
+    console.log(req.file);
     if (error){
       console.log('errors', error);
       res.json({ error: error });
     } else {
       //if file not found
-      if(req.file === undefined){
+      if(req.file === undefined && req.body === undefined){
         console.log('Error: No File Selected!');
         res.json('Error: No File Selected!');
-      } else {
+      } else if (req.file){
         //success
         const imageName = req.file.key;
         const imageLocation = req.file.location;
@@ -58,6 +59,11 @@ imageUploadRouter.post('/', (req, res) => {
         res.json({
           image: imageName,
           location: imageLocation
+        })
+      } else {
+        res.json({
+          image: 'idk',
+          location: req.body
         })
       }
     }
