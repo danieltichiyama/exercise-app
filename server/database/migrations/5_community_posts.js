@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable("community_posts", table => {
     table.increments();
     table.string("title");
@@ -9,9 +9,10 @@ exports.up = function(knex) {
       .references("id")
       .inTable("users")
       .notNullable();
+    table.timestamps(true, true);
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("community_posts");
 };
