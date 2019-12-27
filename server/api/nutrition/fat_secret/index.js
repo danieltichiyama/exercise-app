@@ -62,9 +62,9 @@ let fatSecretApi = () => {
       });
     } else {
       //if oauthtoken table not empty delete it
-      new FatSecret()
+      new FatSecret({ expires_in: 86400})
         .where({
-          Oauth2Token: tokenClosure.getToken().access_token
+          expires_in: 86400
         })
         .destroy({ require: false })
         //stop timer then re run function
