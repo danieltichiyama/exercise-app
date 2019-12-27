@@ -3,6 +3,7 @@ const foodMealUserRouter = express.Router();
 const moment = require("moment");
 
 foodMealUserRouter.route("/new").post((req, res) => {
+  // console.log("addFoodRoute works");
   return req.db.FoodMealUser.forge(req.body)
     .save()
     .then(response => {
@@ -27,14 +28,20 @@ foodMealUserRouter
       });
   })
   .post((req, res) => {
-    let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
-    let nextDay = moment(date).add(1, "day");
+    let date = new Date(req.body.date).toISOString().slice(0, 10);
+    // let date = new Date(new Date(req.body.date).toISOString().slice(0, 10));
+
+    let nextDay = new Date(moment(date).add(1, "day"));
+
+    // console.log("date", date);
+    // console.log("nextDay", nextDay);
 
     return req.db.FoodMealUser.query(qb => {
       return qb
         .select()
         .where("user_id", req.body.session.id)
-        .whereBetween("created_at", [date, nextDay]);
+        .andWhere("date", date);
+      // .whereBetween("date", [date, nextDay]);
     })
       .fetchAll({ withRelated: ["meal_type_id"] })
       .then(response => {

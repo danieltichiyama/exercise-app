@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
+import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 
 class FatSecretFoodNutrientsComponent extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class FatSecretFoodNutrientsComponent extends Component {
   render() {
     return (
       <>
+        <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
         <h3>{this.props.name}</h3>
         <ul>
           {/* <li>Serving Size: {this.props.servingSize}</li> */}
