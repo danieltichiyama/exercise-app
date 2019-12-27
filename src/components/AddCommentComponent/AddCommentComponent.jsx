@@ -21,7 +21,6 @@ class AddCommentComponent extends Component {
     e.preventDefault();
     if (this.state.comment_field !== "") {
       let user_id = JSON.parse(localStorage.getItem("session")).id;
-      // console.log("AddCommentComponent, user_id", user_id);
       this.props.dispatchAddComment({
         comment_body: this.state.comment_field,
         user_id: user_id,
