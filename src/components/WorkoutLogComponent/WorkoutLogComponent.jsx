@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { actionsLoadWorkouts } from "../../actions";
 import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
 import * as moment from "moment";
+import styles from "./WorkoutLogComponent.module.scss";
 
 class WorkoutLogComponent extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class WorkoutLogComponent extends Component {
     }, {});
 
     return (
-      <div>
+      <div className={styles.WorkoutLog}>
+        <h1>Workouts</h1>
         {Object.keys(workoutObj).map(key => {
           return (
             <WorkoutCardComponent
