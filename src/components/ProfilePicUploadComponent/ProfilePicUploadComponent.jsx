@@ -102,14 +102,14 @@ class ProfilePicUploadComponent extends PureComponent {
     });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state.user_id);
     const file = new File([this.fileUrl], this.state.imageName, {type: "image/jpeg"});
     console.log(file);
     const formData = new FormData();
     formData.append('imageUpload', file);
-    this.props.dispatchImageUpload(formData, this.state.user_id);
+    await this.props.dispatchImageUpload(formData, this.state.user_id);
+    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id);
   }
 
   render() {
@@ -141,17 +141,23 @@ class ProfilePicUploadComponent extends PureComponent {
   }
 }
 
+const mapStateToProps = store => {
+  return {
+    imgData: store.images
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     dispatchImageUpload: data => {
       return dispatch(actionImageUpload(data));
     },
-    dispatchUploadProfilePic: data => {
-      return dispatch(actionUploadProfilePic(data));
+    dispatchUploadProfilePic: (data, user_id) => {
+      return dispatch(actionUploadProfilePic(data, user_id));
     }
   }
 }
 
-ProfilePicUploadComponent = connect(null, mapDispatchToProps)(ProfilePicUploadComponent);
+ProfilePicUploadComponent = connect(mapStateToProps, mapDispatchToProps)(ProfilePicUploadComponent);
 
 export default ProfilePicUploadComponent;

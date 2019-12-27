@@ -1,9 +1,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable("user_pictures", table => {
       table.increments();
+      table.string("name").notNullable();
       table.string("url", 1000).notNullable();
       table
-        .integer("expires_in")
+        .integer("user_id")
         .references("id")
         .inTable("users")
         .notNullable();

@@ -51,7 +51,7 @@ imageUploadRouter.post('/', (req, res) => {
       if(req.file === undefined && req.body === undefined){
         console.log('Error: No File Selected!');
         res.json('Error: No File Selected!');
-      } else if (req.file){
+      } else {
         //success
         const imageName = req.file.key;
         const imageLocation = req.file.location;
@@ -60,14 +60,24 @@ imageUploadRouter.post('/', (req, res) => {
           image: imageName,
           location: imageLocation
         })
-      } else {
-        res.json({
-          image: 'idk',
-          location: req.body
-        })
       }
     }
   })
 });
+
+imageUploadRouter.post('/:id', (req, res) => {
+  return req.db.UserPicture.forge({
+    url: req.body.location,
+    name: req.body.image,
+    user_id: req.params.id
+  })
+  .save()
+  .then(() => {
+    return res.status(200);
+  })
+  .catch(err => {
+    return console.log(err);
+  })
+})
 
 module.exports = imageUploadRouter;

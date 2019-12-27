@@ -408,13 +408,11 @@ export const actionImageUpload = data => async dispatch => {
   })
 }
 
-export const actionUploadProfilePic = data => async dispatch => {
-  await Axios.post("/api/video_upload", data)
+export const actionUploadProfilePic = (data, user_id) => async dispatch => {
+  await Axios.post(`/api/image_upload/${user_id}`, data)
+  console.log(data)
   .then(response => {
-    return dispatch({
-      type: IMAGE_UPLOAD,
-      payload: response.data
-    })
+    console.log(response);
   })
   .catch(err => {
     console.log("Error in actionsImageUpload: ", err);
