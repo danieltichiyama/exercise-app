@@ -205,11 +205,6 @@ class FatSecretSearchComponent extends Component {
                 }
               )}
             </select>
-
-            {/* <div className={styles.servingSizeContainer}>
-              Serving Size: */}
-
-            {/* </div> */}
             <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
           </div>
         ) : null}
@@ -272,8 +267,7 @@ class FatSecretSearchComponent extends Component {
                 ></div>
               </div>
               <div className={styles.servingSize}>
-                {/* Serving Size: */}
-                {`${this.props.foodNutrients.servings.serving.serving_description}  `}
+                {`${this.props.foodNutrients.servings.serving.serving_description}`}
               </div>
               <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
             </div>
