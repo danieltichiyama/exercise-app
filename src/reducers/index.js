@@ -40,8 +40,8 @@ const initialStore = {
   community_posts: [],
   diaryData: [],
   diaryDate: moment()
-  .utc()
-  .format("YYYY-MM-D"),
+    .utc()
+    .format("YYYY-MM-D"),
   display: "meal",
   emails: [],
   exerciseInfo: [],
@@ -59,13 +59,14 @@ const initialStore = {
   users: [],
   videos: [],
   workout: [],
-  workouts: [],
+  workouts: []
 };
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
+
     case GET_SMOKE:
       return Object.assign({}, store, { smoke: action.payload });
 
@@ -110,12 +111,12 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case FOOD_VISION:
-      return Object.assign({}, store, { 
+      return Object.assign({}, store, {
         food_labels: action.payload,
         fat_secret_nutrients: [],
         fat_secret_foods: []
-      })
-    
+      });
+
     case GET_DIARY_DATA:
       return Object.assign({}, store, { diaryData: action.payload });
 
@@ -151,19 +152,19 @@ let reducer = (store = initialStore, action) => {
 
     case ADD_FOOD:
       return Object.assign({}, store, { addFood: action.payload });
-    
+
     case FAT_SECRET_FOOD_SEARCH:
-      return Object.assign({}, store, { 
+      return Object.assign({}, store, {
         food_labels: [],
         fat_secret_nutrients: [],
         fat_secret_foods: action.payload
       });
 
     case FAT_SECRET_FOOD_NUTRIENT_SEARCH:
-      return Object.assign({}, store, { 
+      return Object.assign({}, store, {
         food_labels: [],
-        fat_secret_nutrients: action.payload 
-      })
+        fat_secret_nutrients: action.payload
+      });
 
     case DELETE_FOOD:
       return Object.assign({}, store, { deletedFood: action.payload });
@@ -176,7 +177,7 @@ let reducer = (store = initialStore, action) => {
         let aTime = moment(a.created_at).unix();
         let bTime = moment(b.created_at).unix();
         return bTime - aTime;
-      })
+      });
       return Object.assign({}, store, { workouts: sortedArr });
 
     case VIDEO_UPLOAD:
