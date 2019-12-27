@@ -18,7 +18,10 @@ class CommunityPostComponent extends Component {
     if (this.state.showComments === false) {
       return this.setState({ buttonValue: "hide", showComments: true });
     } else {
-      return this.setState({ buttonValue: `${this.props.community_comment_id.length} comments`, showComments: false });
+      return this.setState({
+        buttonValue: `${this.props.community_comment_id.length} comments`,
+        showComments: false
+      });
     }
   };
 
@@ -28,42 +31,51 @@ class CommunityPostComponent extends Component {
       <div className={styles.CommunityPost}>
         <div className={styles.top}>
           <div className={styles.profilePic}>
-            <img className={styles.profilePicImage} src="https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png" alt="profile" />
+            <img
+              className={styles.profilePicImage}
+              src="https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png"
+              alt="profile"
+            />
           </div>
           <div className={styles.postInfo}>
             <div className={styles.postHeader}>{title}</div>
-            <div className={styles.postedBy}>{user_id.name} <span className={styles.timestamp}> posted {moment(this.props.timestamp).fromNow()}
-            </span>
+            <div className={styles.postedBy}>
+              {user_id.name}{" "}
+              <span className={styles.timestamp}>
+                {" "}
+                posted {moment(this.props.timestamp).fromNow()}
+              </span>
             </div>
             <div className={styles.postBody}>{body}</div>
           </div>
         </div>
         <div className={styles.commentButton}>
-          <button className={styles.showComments} onClick={this.handleLoadComments}>
+          <button
+            className={styles.showComments}
+            onClick={this.handleLoadComments}
+          >
             {this.state.buttonValue}
           </button>
         </div>
-        {
-          this.state.showComments ? (
-            <ul>
-              {this.props.community_comment_id.map(comment => {
-                return (
-                  <CommentComponent
-                    key={comment.id}
-                    id={comment.id}
-                    user={comment.user_id.name}
-                    userID={comment.user_id.id}
-                    body={comment.comment_body}
-                    user_goal={comment.user_id.goal_id.goal}
-                    timestamp={comment.created_at}
-                  />
-                );
-              })}
-              <AddCommentComponent id={this.props.id} />
-            </ul>
-          ) : null
-        }
-      </div >
+        {this.state.showComments ? (
+          <ul className={styles.commentSection}>
+            {this.props.community_comment_id.map(comment => {
+              return (
+                <CommentComponent
+                  key={comment.id}
+                  id={comment.id}
+                  user={comment.user_id.name}
+                  userID={comment.user_id.id}
+                  body={comment.comment_body}
+                  user_goal={comment.user_id.goal_id.goal}
+                  timestamp={comment.created_at}
+                />
+              );
+            })}
+            <AddCommentComponent id={this.props.id} />
+          </ul>
+        ) : null}
+      </div>
     );
   }
 }

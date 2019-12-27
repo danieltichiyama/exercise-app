@@ -27,36 +27,40 @@
   }
 }
 
-.profilePic{
+.profilePic {
   margin-top: 20px;
   margin-left: 10px;
-    .profilePicImage{
+  .profilePicImage {
     max-width: 70px;
     height: 70px;
     border-radius: 50%;
   }
 }
-.postInfo{
+.postInfo {
   margin: 20px;
 }
-.top{
+.top {
   display: flex;
   flex-direction: row;
 }
-.showComments{
-      float: right;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      height: 100%;
-      padding: 0 20px;
-      background-color: #4abdac;
-      color: white;
-      border-radius: 40px;
-      line-height: 2em;
-      border: none;
+.showComments {
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  height: 100%;
+  padding: 0 20px;
+  background-color: #4abdac;
+  color: white;
+  border-radius: 40px;
+  line-height: 2em;
+  border: none;
 }
-.timestamp{
+.timestamp {
   margin-left: 5px;
   font-weight: 300;
   color: #6b6b6b;
+}
+
+.commentSection {
+  border-top: 1px solid rgba($color: #cecece, $alpha: 1);
 }
