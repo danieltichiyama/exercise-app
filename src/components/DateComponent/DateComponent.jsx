@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DateComponent.module.scss";
 import { connect } from "react-redux";
-import { actionsChangeDate, actionsUpdateToday } from "../../actions";
+import { actionsChangeDate } from "../../actions";
 import moment from "moment";
 
 class DateComponent extends Component {
@@ -9,20 +9,6 @@ class DateComponent extends Component {
     super(props);
     this.state = {};
   }
-
-  // componentDidMount = () => {
-  //   console.log("componentDidMount");
-  //   let today = moment()
-  //     .local()
-  //     .format("YYYY-MM-D");
-
-  //   console.log(today);
-
-  //   // if (this.props.diaryDate !== today) {
-  //   //   console.log("dates don't match, updating today");
-  //   //   return this.props.dispatchUpdateToday(today);
-  //   // }
-  // };
 
   getPreviousDate = () => {
     let previousDate = moment(this.props.diaryDate).subtract(1, "days");
@@ -60,9 +46,6 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchChangeDate: date => {
       return dispatch(actionsChangeDate(date));
-    },
-    dispatchUpdateToday: today => {
-      return dispatch(actionsUpdateToday(today));
     }
   };
 };

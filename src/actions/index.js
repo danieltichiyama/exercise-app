@@ -16,7 +16,6 @@ export const GET_DIARY_DATA = "GET_DIARY_DATA";
 export const GET_EMAILS = "GET_EMAILS";
 export const ADD_FOOD = "ADD_FOOD";
 export const LOAD_USER = "LOAD_USER";
-export const LOAD_FOOD_MEAL_USER = "LOAD_FOOD_MEAL_USER";
 export const CHANGE_DATE = "CHANGE_DATE";
 export const FOOD_VISION = "FOOD_VISION";
 export const LOAD_BODY_PARTS = "LOAD_BODY_PARTS";
@@ -33,14 +32,6 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
-export const UPDATE_TODAY = "UPDATE_TODAY";
-
-export const actionsUpdateToday = today => async dispatch => {
-  return dispatch({
-    type: UPDATE_TODAY,
-    payload: today
-  });
-};
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)

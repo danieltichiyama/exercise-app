@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsLoadPosts } from "../../actions";
 import CommunityPostComponent from "../CommunityPostComponent";
+import styles from "./NewsFeedComponent.module.scss";
 
 class NewsFeedComponent extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class NewsFeedComponent extends Component {
   }
   render() {
     return (
-      <ul>
+      <ul className={styles.newsFeed}>
         {this.props.community_posts.map(post => {
           return (
             <CommunityPostComponent
@@ -24,6 +25,7 @@ class NewsFeedComponent extends Component {
               community_comment_id={post.community_comment_id}
               exercise_id={post.exercise_id}
               user_id={post.user_id}
+              timestamp={post.created_at}
             />
           );
         })}
