@@ -63,8 +63,8 @@ class FatSecretSearchComponent extends Component {
     let count = this.state.servingMultiplier;
     count++;
     return this.setState({ servingMultiplier: count });
-  }
-  
+  };
+
   handleFoodVisionPopUp = e => {
     this.setState({
       showVisionPopUp: !this.state.showVisionPopUp
@@ -119,13 +119,14 @@ class FatSecretSearchComponent extends Component {
                 />
               );
             })
-<<<<<<< HEAD
           : null}
         {/* labels display end */}
 
         {/* list results for fat_secret api */}
 
-        {this.props.food && this.props.foods.length > 0 && !this.props.foodNutrients.servings
+        {this.props.food &&
+        this.props.foods.length > 0 &&
+        !this.props.foodNutrients.servings
           ? this.props.foods.map(food => {
               return (
                 <FatSecretFoodComponent
@@ -143,28 +144,6 @@ class FatSecretSearchComponent extends Component {
         {/* list results end */}
 
         {/* food details, if multiple servings are present */}
-=======
-          : ""}
-
-        <div className={styles.foodDiv}>
-          {this.props.food &&
-          this.props.foods.length > 0 &&
-          !this.props.foodNutrients.servings
-            ? this.props.foods.map(food => {
-                return (
-                  <FatSecretFoodComponent
-                    key={food.food_id}
-                    foodID={food.food_id}
-                    name={food.food_name}
-                    food_description={food.food_description}
-                    resetServingMultiplier={this.resetServingMultiplier}
-                    meal_type_id={this.props.meal_type_id}
-                  />
-                );
-              })
-            : ""}
-        </div>
->>>>>>> a07f6bb8557ab1f5eb6990f8ddced91fa9d30be1
 
         {this.props.foodNutrients.servings &&
         Array.isArray(this.props.foodNutrients.servings.serving) ? (
