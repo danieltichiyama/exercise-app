@@ -34,7 +34,7 @@ class LoginComponent extends Component {
       return this.setState({ error: true });
     } else {
       this.props.dispatchLoginSubmit(this.state);
-      return <Redirect to="/home"></Redirect>;
+      this.props.history.push("/home");
     }
   };
 

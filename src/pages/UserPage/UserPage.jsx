@@ -22,7 +22,7 @@ class UserPage extends Component {
 
   handleLogoutClick = () => {
     this.props.dispatchLogout();
-    return <Redirect to="/authorization" />;
+    this.props.history.push("/authorization");
   };
 
   render() {
