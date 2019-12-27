@@ -29,11 +29,12 @@ export const FILTER_EMAILS = "FILTER_EMAILS";
 export const FAT_SECRET_FOOD_SEARCH = "FAT_SECRET_FOOD_SEARCH";
 export const ADD_WORKOUT = "ADD_WORKOUT";
 export const LOAD_WORKOUTS = "LOAD_WORKOUTS";
-export const FAT_SECRET_FOOD_NUTRIENT_SEARCH = "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
+export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
+  "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 
-export const actionsLoadWorkouts = (data) => async dispatch => {
+export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
     .then(response => {
       return dispatch({
@@ -58,7 +59,7 @@ export const actionsAddWorkout = data => async dispatch => {
       });
     })
     .catch(err => {
-      console.log("Error in actionsAddWorkout: ", err)
+      console.log("Error in actionsAddWorkout: ", err);
     });
 };
 
@@ -130,10 +131,8 @@ export const actionsLoadActivity = () => async dispatch => {
 };
 
 export const actionsLoginSubmit = data => async dispatch => {
-  console.log(data);
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: LOGIN,
         payload: response.data
@@ -160,6 +159,7 @@ export const actionsRegister = data => async dispatch => {
 export const actionsLogout = () => async dispatch => {
   await Axios.get("/api/auth/logout")
     .then(response => {
+      alert(`${response.data.message}`);
       return dispatch({
         type: LOGOUT,
         payload: response.data
@@ -193,7 +193,7 @@ export const actionsAddComment = data => async dispatch => {
     })
     .catch(err => {
       console.log("Error in actionsAddComment: ", err);
-    })
+    });
 };
 
 export const actionFoodSearch = data => async dispatch => {
@@ -205,15 +205,15 @@ export const actionFoodSearch = data => async dispatch => {
     },
     data
   })
-  .then(response => {
-    return dispatch({
-      type: FOOD_SEARCH,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: FOOD_SEARCH,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
-  })
-  .catch(err => {
-    console.log(err);
-  });
 };
 
 export const actionClear = () => dispatch => {
@@ -224,8 +224,7 @@ export const actionClear = () => dispatch => {
 };
 
 export const actionsFoodVision = data => async dispatch => {
-  await Axios.post("/api/vision", data)
-    .then(response => {
+  await Axios.post("/api/vision", data).then(response => {
     return dispatch({
       type: FOOD_VISION,
       payload: response.data
@@ -352,22 +351,23 @@ export const actionsFatSecretFoodSearch = data => async dispatch => {
       return dispatch({
         type: FAT_SECRET_FOOD_SEARCH,
         payload: response.data.foods.food
-      })
+      });
     })
     .catch(err => {
       console.log("Error in actionsFatSecretFoodSearch: ", err);
-    })
-}
+    });
+};
 
 export const actionsFatSecretFoodNutrientSearch = data => async dispatch => {
-  await Axios.post("/api/fat_secret/nutrients", {data: data})
-    .then(response => {
+  await Axios.post("/api/fat_secret/nutrients", { data: data }).then(
+    response => {
       return dispatch({
         type: FAT_SECRET_FOOD_NUTRIENT_SEARCH,
         payload: response.data.food
-      })
-    })
-}
+      });
+    }
+  );
+};
 export const actionsDeleteFood = data => async dispatch => {
   console.log("data: ", data);
   await Axios.delete("api/foods_meals_users", { data: { data } })
@@ -383,27 +383,26 @@ export const actionsDeleteFood = data => async dispatch => {
 };
 export const actionVideoUpload = data => async dispatch => {
   await Axios.post("/api/video_upload", data)
-  .then(response => {
-    console.log(response);
-    return dispatch({
-      type: VIDEO_UPLOAD,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: VIDEO_UPLOAD,
+        payload: response.data
+      });
     })
-  })
-  .catch(err => {
-    console.log("Error in actionsVideoUpload: ", err);
-  })
-}
+    .catch(err => {
+      console.log("Error in actionsVideoUpload: ", err);
+    });
+};
 
 export const actionImageUpload = data => async dispatch => {
   await Axios.post("/api/image_upload", data)
-  .then(response => {
-    return dispatch({
-      type: IMAGE_UPLOAD,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: IMAGE_UPLOAD,
+        payload: response.data
+      });
     })
-  })
-  .catch(err => {
-    console.log("Error in actionsImageUpload: ", err);
-  })
-}
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
+    });
+};

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionLoadUser } from "../../actions";
+import { actionLoadUser, actionsLogout } from "../../actions";
 import styles from "./UserPage.module.scss";
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class UserPage extends Component {
   constructor(props) {
@@ -20,6 +20,11 @@ class UserPage extends Component {
     this.props.dispatchLoadUser(this.state.id.id);
   }
 
+  handleLogoutClick = () => {
+    this.props.dispatchLogout();
+    return <Redirect to="/authorization" />;
+  };
+
   render() {
     //change date format
     let birthDate = moment(this.props.users.birth_date)
@@ -33,7 +38,6 @@ class UserPage extends Component {
 
     //convert kg to lbs
     let convertWeight = Math.round(this.props.users.weight * 2.205);
-    console.log("user weight", convertWeight);
 
     return (
       <>
@@ -102,6 +106,7 @@ class UserPage extends Component {
               Edit
             </Link>
           </button>
+          <button onClick={this.handleLogoutClick}>Logout</button>
         </div>
       </>
     );
@@ -118,6 +123,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchLoadUser: id => {
       return dispatch(actionLoadUser(id));
+    },
+    dispatchLogout: () => {
+      return dispatch(actionsLogout());
     }
   };
 };
