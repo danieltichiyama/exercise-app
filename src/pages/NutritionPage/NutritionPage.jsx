@@ -9,7 +9,7 @@ class NutritionPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      style: { overflow: "hidden" }
+      style: { overflow: "auto" }
     };
   }
 

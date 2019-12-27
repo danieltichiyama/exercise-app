@@ -317,6 +317,10 @@ export const actionsFilterEmails = data => async dispatch => {
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
     .then(response => {
+      let { data } = response;
+      alert(
+        `${data.description} added to your food diary! That was ${data.calories} calories.`
+      );
       return dispatch({
         type: ADD_FOOD,
         payload: response.data
