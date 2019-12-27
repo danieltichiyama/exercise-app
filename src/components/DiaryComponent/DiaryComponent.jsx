@@ -15,6 +15,7 @@ class DiaryComponent extends Component {
 
   handleNewDate = () => {
     let UTCdate = moment.utc(this.props.diaryDate).format();
+    console.log("UTCdate", UTCdate);
     return this.props.dispatchGetDiaryData(UTCdate);
   };
 

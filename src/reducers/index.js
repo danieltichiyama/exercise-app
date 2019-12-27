@@ -40,9 +40,7 @@ const initialStore = {
   bodyparts: [],
   community_posts: [],
   diaryData: [],
-  diaryDate: moment()
-    .utc()
-    .format("YYYY-MM-D"),
+  diaryDate: moment().format(),
   display: "meal",
   emails: [],
   exerciseInfo: [],

@@ -10,6 +10,11 @@ class DateComponent extends Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    console.log("moment", moment);
+    console.log(this.props.diaryDate);
+  };
+
   getPreviousDate = () => {
     let previousDate = moment(this.props.diaryDate).subtract(1, "days");
     return this.props.dispatchChangeDate(previousDate);
@@ -38,7 +43,9 @@ class DateComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    diaryDate: store.diaryDate
+    diaryDate: moment(store.diaryDate)
+      .utc()
+      .format()
   };
 };
 
