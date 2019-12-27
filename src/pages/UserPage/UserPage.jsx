@@ -37,7 +37,7 @@ class UserPage extends Component {
     let convertWeight = Math.round(this.props.users.weight * 2.205);
 
     return (
-      <>
+      <div className={styles.UserPage}>
         <Wave />
         <div className={styles.body}>
           <div className={styles.topProfile}>
@@ -111,7 +111,7 @@ class UserPage extends Component {
             </button>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
