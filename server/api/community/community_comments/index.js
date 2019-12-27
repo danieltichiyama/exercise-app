@@ -24,6 +24,7 @@ communityCommentsRouter.route("/")
             })
     })
     .delete((req, res) => {
+        console.log(req.body)
         let commentID = req.body.data;
         return req.db.CommunityComment
             .forge({ id: commentID })

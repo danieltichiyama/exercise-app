@@ -205,15 +205,15 @@ export const actionFoodSearch = data => async dispatch => {
     },
     data
   })
-  .then(response => {
-    return dispatch({
-      type: FOOD_SEARCH,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: FOOD_SEARCH,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
     });
-  })
-  .catch(err => {
-    console.log(err);
-  });
 };
 
 export const actionClear = () => dispatch => {
@@ -226,11 +226,11 @@ export const actionClear = () => dispatch => {
 export const actionsFoodVision = data => async dispatch => {
   await Axios.post("/api/vision", data)
     .then(response => {
-    return dispatch({
-      type: FOOD_VISION,
-      payload: response.data
+      return dispatch({
+        type: FOOD_VISION,
+        payload: response.data
+      });
     });
-  });
 };
 
 export const actionFoodNutrients = fdcId => async dispatch => {
@@ -360,7 +360,7 @@ export const actionsFatSecretFoodSearch = data => async dispatch => {
 }
 
 export const actionsFatSecretFoodNutrientSearch = data => async dispatch => {
-  await Axios.post("/api/fat_secret/nutrients", {data: data})
+  await Axios.post("/api/fat_secret/nutrients", { data: data })
     .then(response => {
       return dispatch({
         type: FAT_SECRET_FOOD_NUTRIENT_SEARCH,
@@ -383,27 +383,27 @@ export const actionsDeleteFood = data => async dispatch => {
 };
 export const actionVideoUpload = data => async dispatch => {
   await Axios.post("/api/video_upload", data)
-  .then(response => {
-    console.log(response);
-    return dispatch({
-      type: VIDEO_UPLOAD,
-      payload: response.data
+    .then(response => {
+      console.log(response);
+      return dispatch({
+        type: VIDEO_UPLOAD,
+        payload: response.data
+      })
     })
-  })
-  .catch(err => {
-    console.log("Error in actionsVideoUpload: ", err);
-  })
+    .catch(err => {
+      console.log("Error in actionsVideoUpload: ", err);
+    })
 }
 
 export const actionImageUpload = data => async dispatch => {
   await Axios.post("/api/image_upload", data)
-  .then(response => {
-    return dispatch({
-      type: IMAGE_UPLOAD,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: IMAGE_UPLOAD,
+        payload: response.data
+      })
     })
-  })
-  .catch(err => {
-    console.log("Error in actionsImageUpload: ", err);
-  })
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
+    })
 }
