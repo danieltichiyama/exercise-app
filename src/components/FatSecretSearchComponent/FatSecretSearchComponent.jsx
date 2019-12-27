@@ -6,6 +6,7 @@ import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent"
 import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
 import LabelComponent from "../LabelComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
+import cameraIcon from "../../imgs/camera.png";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class FatSecretSearchComponent extends Component {
             <input
               autoComplete="off"
               onChange={this.handleChange}
-              placeholder="Fat Secret Search"
+              placeholder="Search for a food..."
               className={styles.foodInput}
             />
             <button className={styles.searchButton}>
@@ -61,6 +62,13 @@ class FatSecretSearchComponent extends Component {
                 src={searchIcon}
                 className={styles.searchIcon}
                 alt="search button"
+              />
+            </button>
+            <button>
+              <img
+                src={cameraIcon}
+                className={styles.cameraIcon}
+                alt="picture button"
               />
             </button>
           </form>
@@ -76,20 +84,22 @@ class FatSecretSearchComponent extends Component {
             })
           : ""}
 
-        {this.props.foods.length > 0 && !this.props.foodNutrients.servings
-          ? this.props.foods.map(food => {
-              return (
-                <FatSecretFoodComponent
-                  key={food.food_id}
-                  foodID={food.food_id}
-                  name={food.food_name}
-                  food_description={food.food_description}
-                  resetServingMultiplier={this.resetServingMultiplier}
-                  meal_type_id={this.props.meal_type_id}
-                />
-              );
-            })
-          : ""}
+        <div className={styles.foodDiv}>
+          {this.props.foods.length > 0 && !this.props.foodNutrients.servings
+            ? this.props.foods.map(food => {
+                return (
+                  <FatSecretFoodComponent
+                    key={food.food_id}
+                    foodID={food.food_id}
+                    name={food.food_name}
+                    food_description={food.food_description}
+                    resetServingMultiplier={this.resetServingMultiplier}
+                    meal_type_id={this.props.meal_type_id}
+                  />
+                );
+              })
+            : ""}
+        </div>
 
         {this.props.foodNutrients.servings &&
         Array.isArray(this.props.foodNutrients.servings.serving) ? (
