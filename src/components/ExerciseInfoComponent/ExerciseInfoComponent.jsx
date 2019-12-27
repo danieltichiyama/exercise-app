@@ -33,9 +33,6 @@ class ExerciseInfoComponent extends Component {
       description = singleExercise.description.split(". ");
     }
 
-    if (description) {
-      console.log(description);
-    }
     return (
       <div className={styles.ExerciseInfo}>
         <div className={styles.videoPH}>Placeholder for video</div>

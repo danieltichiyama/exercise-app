@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { actionsLoadWorkouts } from "../../actions";
 import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
 import * as moment from "moment";
@@ -16,11 +17,17 @@ class WorkoutLogComponent extends Component {
     this.props.dispatchLoadWorkouts(userID);
   }
 
+  handleBackClick = () => {
+    this.props.history.push("/exercise");
+  };
+
   render() {
     const workoutObj = this.props.workouts.reduce((acc, workout) => {
       let newTime = moment(workout.created_at).format("MM-DD-YYYY");
       return { ...acc, [newTime]: [...(acc[newTime] || []), workout] };
     }, {});
+
+    console.log(this.props);
 
     return (
       <div className={styles.WorkoutLog}>
@@ -34,6 +41,9 @@ class WorkoutLogComponent extends Component {
             />
           );
         })}
+        <button className={styles.BackButton} onClick={this.handleBackClick}>
+          Back to Exercises
+        </button>
       </div>
     );
   }
