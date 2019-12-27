@@ -27,7 +27,8 @@ import {
   LOAD_USER,
   REGISTER,
   GET_SMOKE,
-  VIDEO_UPLOAD
+  VIDEO_UPLOAD,
+  CLEAR_FOOD_NUTRIENTS
 } from "../actions";
 
 import moment from "moment";
@@ -61,6 +62,9 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case CLEAR_FOOD_NUTRIENTS:
+      return Object.assign({}, store, { fat_secret_nutrients: action.payload });
+
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
 

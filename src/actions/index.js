@@ -32,6 +32,14 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
+
+export const actionsClearFoodNutrients = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_NUTRIENTS,
+    payload: []
+  });
+};
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)

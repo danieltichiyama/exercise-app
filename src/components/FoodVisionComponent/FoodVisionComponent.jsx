@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFoodVision } from "../../actions";
 import styles from "./FoodVisionComponent.module.scss";
+import cameraIcon from "../../imgs/camera.png";
 
 class FoodVisionComponent extends Component {
   constructor(props) {
@@ -18,9 +19,13 @@ class FoodVisionComponent extends Component {
   render() {
     return (
       <div className={styles.foodVisionDiv}>
+        <label htmlFor="foodImage">
+          <img src={cameraIcon} alt="camera button" />
+        </label>
         <input
           type="file"
           name="foodImage"
+          id="foodImage"
           accept="image/*"
           onChange={this.handleUpload}
         />

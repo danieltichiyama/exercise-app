@@ -7,8 +7,19 @@ import exitButton from "../../imgs/exitButton.png";
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      meals: ["Breakfast", "Lunch", "Dinner", "Snack"],
+      meal: ""
+    };
   }
+
+  componentDidMount = () => {
+    let { meal_type_id } = this.props;
+
+    let currentMeal = this.state.meals[parseInt(meal_type_id) - 1];
+
+    return this.setState({ meal: currentMeal });
+  };
 
   handleFoodPopUp = e => {
     this.setState({
@@ -20,12 +31,16 @@ class AddFoodPopUpComponent extends Component {
     return (
       <div className={styles.foodPopUp}>
         <div className={styles.foodPopUpInner}>
-          <button
-            className={styles.exitButton}
-            onClick={this.props.handleFoodPopUp}
-          >
-            <img src={exitButton} alt="exit button" />
-          </button>
+          <div className={styles.header}>
+            <h1>{this.state.meal}</h1>
+            <button
+              className={styles.exitButton}
+              onClick={this.props.handleFoodPopUp}
+            >
+              <img src={exitButton} alt="exit button" className={styles.exit} />
+            </button>
+          </div>
+
           <FatSecretSearchComponent meal_type_id={this.props.meal_type_id} />
         </div>
       </div>

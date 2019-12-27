@@ -1,17 +1,17 @@
 .foodVisionDiv {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: left;
-  padding-top: 10px;
-  width: 100%;
-  border: 1px solid red;
-  // margin:
+  height: 40px;
+  width: 40px;
 
-  // input {
-  //   width: 100%;
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: left;
-  // }
+  label {
+    height: 100%;
+    width: 100%;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  input {
+    display: none;
+  }
 }

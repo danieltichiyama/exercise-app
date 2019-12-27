@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionsFatSecretFoodSearch } from "../../actions";
+import {
+  actionsFatSecretFoodSearch,
+  actionsClearFoodNutrients
+} from "../../actions";
 import FatSecretFoodComponent from "../FatSecretFoodComponent";
 import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
 import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
@@ -8,7 +11,6 @@ import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
 import FoodVisionComponent from "../FoodVisionComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
-import cameraIcon from "../../imgs/camera.png";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -16,8 +18,8 @@ class FatSecretSearchComponent extends Component {
     this.state = {
       fatSearchData: "",
       servingIndex: 0,
-      servingMultiplier: 1,
-      showVisionPopUp: false
+      servingMultiplier: 1
+      // showVisionPopUp: false
     };
   }
 
@@ -65,16 +67,18 @@ class FatSecretSearchComponent extends Component {
     return this.setState({ servingMultiplier: count });
   };
 
-  handleFoodVisionPopUp = e => {
-    this.setState({
-      showVisionPopUp: !this.state.showVisionPopUp
-    });
+  handleBackButtonClick = () => {
+    return this.props.dispatchClearFoodNutrients();
   };
 
   render() {
     return (
       <div className={styles.fatSecretSearch}>
         <div className={styles.searchDiv}>
+          <div
+            className={styles.backButton}
+            onClick={this.handleBackButtonClick}
+          ></div>
           <form autoComplete="off" onSubmit={this.handleClick}>
             <input
               autoComplete="off"
@@ -92,39 +96,25 @@ class FatSecretSearchComponent extends Component {
             </button>
           </form>
 
-          <button>
-            <img
-              src={cameraIcon}
-              className={styles.cameraIcon}
-              alt="foodVision button"
-              onClick={this.handleFoodVisionPopUp}
-            />
-          </button>
+          <FoodVisionComponent />
         </div>
 
-        <div className={styles.foodVisionDiv}>
-          {this.state.showVisionPopUp ? (
-            <FoodVisionComponent
-              handleFoodVisionPopUp={this.handleFoodVisionPopUp}
-            />
-          ) : null}
+        <div className={styles.LabelContainer}>
+          {this.props.imgData.length !== 0
+            ? this.props.imgData.map(imgData => {
+                return (
+                  <LabelComponent
+                    key={imgData.description}
+                    label={imgData.description}
+                  />
+                );
+              })
+            : null}
         </div>
-
-        {this.props.imgData.length !== 0
-          ? this.props.imgData.map(imgData => {
-              return (
-                <LabelComponent
-                  key={imgData.description}
-                  label={imgData.description}
-                />
-              );
-            })
-          : null}
-        {/* labels display end */}
 
         {/* list results for fat_secret api */}
 
-        {this.props.food &&
+        {this.props.foods &&
         this.props.foods.length > 0 &&
         !this.props.foodNutrients.servings
           ? this.props.foods.map(food => {
@@ -314,6 +304,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchFatSecretFoodSearch: data => {
       return dispatch(actionsFatSecretFoodSearch(data));
+    },
+    dispatchClearFoodNutrients: () => {
+      return dispatch(actionsClearFoodNutrients());
     }
   };
 };
