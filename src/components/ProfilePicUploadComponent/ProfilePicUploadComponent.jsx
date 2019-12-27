@@ -105,8 +105,8 @@ class ProfilePicUploadComponent extends PureComponent {
     const formData = new FormData();
     formData.append('imageUpload', file);
     this.props.closeModal();
-    console.log(this.state.user_id);
-    this.props.getImg(formData, this.state.user_id);
+    console.log(JSON.parse(localStorage.getItem("session")).id);
+    this.props.getImg(formData, JSON.parse(localStorage.getItem("session")).id);
   }
 
   render() {
