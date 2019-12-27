@@ -1,28 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFoodVision } from "../../actions";
+import styles from "./FoodVisionComponent.module.scss";
 
 class FoodVisionComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {};
   }
 
-  handleUpload = (e) => {
+  handleUpload = e => {
     const formData = new FormData();
-    formData.append('foodImage', e.target.files[0]);
+    formData.append("foodImage", e.target.files[0]);
     this.props.dispatchFoodVision(formData);
-  }
+  };
 
-  render() { 
-    return ( 
-      <div>
-          <input
-            type="file"
-            name="foodImage"
-            accept="image/*"
-            onChange={this.handleUpload}
-          />
+  render() {
+    return (
+      <div className={styles.foodVisionDiv}>
+        <input
+          type="file"
+          name="foodImage"
+          accept="image/*"
+          onChange={this.handleUpload}
+        />
       </div>
     );
   }
@@ -30,18 +31,21 @@ class FoodVisionComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    imgData: store.food_labels,
-  }
-}
+    imgData: store.food_labels
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFoodVision: data => {
-      return dispatch(actionsFoodVision(data))
+      return dispatch(actionsFoodVision(data));
     }
-  }
-}
+  };
+};
 
-FoodVisionComponent = connect(mapStateToProps, mapDispatchToProps)(FoodVisionComponent);
- 
+FoodVisionComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FoodVisionComponent);
+
 export default FoodVisionComponent;

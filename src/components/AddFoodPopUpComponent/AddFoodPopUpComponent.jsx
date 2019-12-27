@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styles from "./AddFoodPopUpComponent.module.scss";
 import FatSecretSearchComponent from "../FatSecretSearchComponent";
 import exitButton from "../../imgs/exitButton.png";
+// import FoodVisionComponent from "../../components/FoodVisionComponent";
 
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
@@ -16,10 +17,23 @@ class AddFoodPopUpComponent extends Component {
     });
   };
 
+  // handleFoodVisionPopUp = e => {
+  //   this.setState({
+  //     showVisionPopUp: !this.state.showVisionPopUp
+  //   });
+  // };
+
   render() {
     return (
       <div className={styles.foodPopUp}>
         {/* onClick={this.props.handleFoodPopUp}> SAVE FOR LATER */}
+
+        {/* {this.state.showPopUp ? (
+          <FoodVisionComponent
+            handleFoodVisionPopUp={this.handleFoodVisionPopUp}
+          />
+        ) : null} */}
+
         <div className={styles.foodPopUpInner}>
           <button
             className={styles.exitButton}
@@ -27,7 +41,10 @@ class AddFoodPopUpComponent extends Component {
           >
             <img src={exitButton} alt="exit button" />
           </button>
-          <FatSecretSearchComponent meal_type_id={this.props.meal_type_id} />
+          <FatSecretSearchComponent
+            meal_type_id={this.props.meal_type_id}
+            // handleFoodVisionPopUp={this.handleFoodVisionPopUp}
+          />
         </div>
       </div>
     );

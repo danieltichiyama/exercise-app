@@ -5,6 +5,7 @@ import FatSecretFoodComponent from "../FatSecretFoodComponent";
 import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
 import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
 import LabelComponent from "../LabelComponent";
+import FoodVisionComponent from "../FoodVisionComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
 import cameraIcon from "../../imgs/camera.png";
 
@@ -14,7 +15,8 @@ class FatSecretSearchComponent extends Component {
     this.state = {
       fatSearchData: "",
       servingIndex: 0,
-      servingMultiplier: 1
+      servingMultiplier: 1,
+      showVisionPopUp: false
     };
   }
 
@@ -46,10 +48,22 @@ class FatSecretSearchComponent extends Component {
     });
   };
 
+  handleFoodVisionPopUp = e => {
+    this.setState({
+      showVisionPopUp: !this.state.showVisionPopUp
+    });
+  };
+
   render() {
     return (
       <>
         <div className={styles.searchDiv}>
+          {this.state.showVisionPopUp ? (
+            <FoodVisionComponent
+              handleFoodVisionPopUp={this.handleFoodVisionPopUp}
+            />
+          ) : null}
+
           <form autoComplete="off" onSubmit={this.handleClick}>
             <input
               autoComplete="off"
@@ -57,6 +71,7 @@ class FatSecretSearchComponent extends Component {
               placeholder="Search for a food..."
               className={styles.foodInput}
             />
+
             <button className={styles.searchButton}>
               <img
                 src={searchIcon}
@@ -64,15 +79,19 @@ class FatSecretSearchComponent extends Component {
                 alt="search button"
               />
             </button>
-            <button>
-              <img
-                src={cameraIcon}
-                className={styles.cameraIcon}
-                alt="picture button"
-              />
-            </button>
           </form>
+
+          <button>
+            <img
+              src={cameraIcon}
+              className={styles.cameraIcon}
+              alt="foodVision button"
+              // onClick={this.props.handleFoodVisionPopUp}
+              onClick={this.handleFoodVisionPopUp}
+            />
+          </button>
         </div>
+
         {this.props.imgData.length !== 0
           ? this.props.imgData.map(imgData => {
               return (
@@ -85,7 +104,9 @@ class FatSecretSearchComponent extends Component {
           : ""}
 
         <div className={styles.foodDiv}>
-          {this.props.foods.length > 0 && !this.props.foodNutrients.servings
+          {this.props.food &&
+          this.props.foods.length > 0 &&
+          !this.props.foodNutrients.servings
             ? this.props.foods.map(food => {
                 return (
                   <FatSecretFoodComponent
