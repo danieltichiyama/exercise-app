@@ -319,7 +319,7 @@ export const actionsAddFood = data => async dispatch => {
     .then(response => {
       let { data } = response;
       alert(
-        `${data.description} added to your food diary! That was ${data.calories} calories.`
+        `${data.description} added to your diary! That was ${data.calories} calories.`
       );
       return dispatch({
         type: ADD_FOOD,
