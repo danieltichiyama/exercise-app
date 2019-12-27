@@ -5,7 +5,6 @@
   flex-direction: row;
   position: fixed;
   bottom: 0;
-  overflow: hidden; // not sure what this does
   justify-content: space-around;
   align-items: center;
   background: #04c9b5;
@@ -13,7 +12,6 @@
   .navButton {
     height: 100%;
     width: 100%;
-    font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: bolder;
     display: flex;
     align-items: center;
