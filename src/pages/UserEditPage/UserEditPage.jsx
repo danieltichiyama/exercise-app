@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { actionLoadUser, actionsEditUser } from "../../actions";
+import { actionLoadUser, actionsEditUser, actionUploadProfilePic, actionImageUpload } from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent"
@@ -20,7 +20,9 @@ class UserEditPage extends Component {
       selectedWeight: "kgs",
       selectedHeight: "cm",
       editSuccessful: false,
-      show: false
+      show: false,
+      userID: 0,
+      profilePic: ""
     };
   }
 
@@ -75,9 +77,9 @@ class UserEditPage extends Component {
     }
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
-
+  
     let { dispatchEditUser, match } = this.props;
 
     this.setState({ editSuccessful: true });
@@ -145,6 +147,9 @@ class UserEditPage extends Component {
         }
       );
     }
+
+    await this.props.dispatchImageUpload(this.state.profilePic);
+    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id)
   };
 
   handleOpenModal = () => {
@@ -153,6 +158,14 @@ class UserEditPage extends Component {
 
   handleCloseModal = () => {
     this.setState({ show: false });
+  }
+
+  handleImgData = (data, id) => {
+    console.log(id);
+    this.setState({ 
+      profilePic: data,
+      userID: id
+    });
   }
 
   render() {
@@ -168,6 +181,10 @@ class UserEditPage extends Component {
         <div>
           <h3>Profile Picture:</h3>
           <ProfilePicUploadComponent
+            openModal={this.handleOpenModal}
+            closeModal={this.handleCloseModal}
+            show={this.state.show}
+            getImg={this.handleImgData}
           />
         </div>
         <form onSubmit={this.handleSubmit}>
@@ -286,7 +303,8 @@ class UserEditPage extends Component {
 
 const mapStateToProps = store => {
   return {
-    user: store.users
+    user: store.users,
+    imgData: store.images
   };
 };
 
@@ -297,6 +315,12 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchEditUser: (id, data) => {
       return dispatch(actionsEditUser(id, data));
+    },
+    dispatchImageUpload: (data) => {
+      return dispatch(actionImageUpload(data))
+    },
+    dispatchUploadProfilePic: (id, data) => {
+      return dispatch(actionUploadProfilePic(id, data))
     }
   };
 };

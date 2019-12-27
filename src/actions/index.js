@@ -130,10 +130,8 @@ export const actionsLoadActivity = () => async dispatch => {
 };
 
 export const actionsLoginSubmit = data => async dispatch => {
-  console.log(data);
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: LOGIN,
         payload: response.data
@@ -408,8 +406,8 @@ export const actionImageUpload = data => async dispatch => {
   })
 }
 
-export const actionUploadProfilePic = (data, user_id) => async dispatch => {
-  await Axios.post(`/api/image_upload/${user_id}`, data)
+export const actionUploadProfilePic = (id, data) => async () => {
+  await Axios.post(`/api/image_upload/${id}`, data)
   console.log(data)
   .then(response => {
     console.log(response);

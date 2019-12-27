@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
-import { connect } from "react-redux";
-import { actionUploadProfilePic, actionImageUpload } from "../../actions"
 import "react-image-crop/dist/ReactCrop.css";
+import styles from "./ProfilePicUploadComponent.module.scss"
 
 class ProfilePicUploadComponent extends PureComponent {
   state = {
-    user_id: JSON.parse(localStorage.getItem("session")).id,
     src: null,
     crop: {
       unit: "%",
@@ -18,7 +16,7 @@ class ProfilePicUploadComponent extends PureComponent {
 
   onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
-      // this.props.openModal();
+      this.props.openModal();
       this.setState({ imageName: e.target.files[0].name });
       const reader = new FileReader();
       reader.addEventListener("load", () =>
@@ -58,10 +56,10 @@ class ProfilePicUploadComponent extends PureComponent {
     const canvas = document.createElement("canvas");
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = 170;
-    canvas.height = 170;
+    canvas.width = 100;
+    canvas.height = 100;
     const ctx = canvas.getContext("2d");
-
+    
     ctx.save();
     ctx.beginPath();
     ctx.arc(
@@ -74,7 +72,6 @@ class ProfilePicUploadComponent extends PureComponent {
     );
     ctx.closePath();
     ctx.clip();
-
     ctx.drawImage(
       image,
       crop.x * scaleX,
@@ -83,8 +80,8 @@ class ProfilePicUploadComponent extends PureComponent {
       crop.height * scaleY,
       0,
       0,
-      canvas.width * scaleX,
-      canvas.height * scaleY
+      canvas.width,
+      canvas.height
     );
 
     return new Promise((resolve, reject) => {
@@ -102,61 +99,51 @@ class ProfilePicUploadComponent extends PureComponent {
     });
   }
 
-  handleSubmit = async (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const file = new File([this.fileUrl], this.state.imageName, {type: "image/jpeg"});
     const formData = new FormData();
     formData.append('imageUpload', file);
-    await this.props.dispatchImageUpload(formData, this.state.user_id);
-    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id);
+    this.props.closeModal();
+    console.log(this.state.user_id);
+    this.props.getImg(formData, this.state.user_id);
   }
 
   render() {
     const { crop, croppedImageUrl, src } = this.state;
 
+
     return (
-      <div className="ProfilePicUploadComponent">
+      <div className={styles.ProfilePicUploadComponent}>
         <div>
-          <input type="file" accept="image/*" onChange={this.onSelectFile} />
+          <input id="srcImg" type="file" accept="image/*" onChange={this.onSelectFile} />
         </div>
-        {src && (
-          <ReactCrop
-          src={src}
-          crop={crop}
-          ruleOfThirds
-          onImageLoaded={this.onImageLoaded}
-          onComplete={this.onCropComplete}
-          onChange={this.onCropChange}
-          />
-        )}
-        {croppedImageUrl && (
-        <form action="post" onSubmit={this.handleSubmit}>
-          <img alt="Crop" name="imageUpload" style={{ maxWidth: "100%" }} src={croppedImageUrl} />
-          <input type="submit"/>
-        </form> 
-        )}
+        <div className={styles.Modal} style={{display: this.props.show ? "block" : "none"}}>
+        {this.props.show ? (
+            croppedImageUrl && (
+              <form action="post" onSubmit={this.handleSubmit}>
+                <img alt="Crop" className={styles.croppedImg} name="imageUpload" style={{ maxWidth: "100%" }} src={croppedImageUrl} />
+              <input className={styles.backButton} type="submit"/>
+              <button className={styles.backButton} onClick={this.props.closeModal} onMouseDown={() => {document.querySelector("#srcImg").value = ""}}>Back</button>
+            </form> 
+          )) : null} 
+          {this.props.show ? (
+            src && (
+              <ReactCrop
+                className={styles.srcImg}
+                src={src}
+                crop={crop}
+                ruleOfThirds
+                onImageLoaded={this.onImageLoaded}
+                onComplete={this.onCropComplete}
+                onChange={this.onCropChange}
+              /> 
+            )
+          ) : null}
+        </div>
       </div>
     );
   }
 }
-
-const mapStateToProps = store => {
-  return {
-    imgData: store.images
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatchImageUpload: data => {
-      return dispatch(actionImageUpload(data));
-    },
-    dispatchUploadProfilePic: (data, user_id) => {
-      return dispatch(actionUploadProfilePic(data, user_id));
-    }
-  }
-}
-
-ProfilePicUploadComponent = connect(mapStateToProps, mapDispatchToProps)(ProfilePicUploadComponent);
 
 export default ProfilePicUploadComponent;

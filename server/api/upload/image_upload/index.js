@@ -42,7 +42,7 @@ function checkFileType( file, cb ){
 
 imageUploadRouter.post('/', (req, res) => {
   imageUpload( req, res, (error) => {
-    console.log(req.file);
+    console.log(req.file)
     if (error){
       console.log('errors', error);
       res.json({ error: error });

@@ -1,0 +1,51 @@
+$turquoise: #04c9b5;
+$red: #fc4a1a;
+
+.ProfilePicUploadComponent {
+  .Modal{
+    // display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  
+    .srcImg {
+      max-height: 400px;
+      max-width: 400px;
+      display: flex;
+      justify-content: center;
+      background-color: #fefefe;
+      margin: 45% auto; /* 15% from the top and centered */
+      border: 10px solid $turquoise;
+      border-radius: 5%;
+    }
+  
+    .croppedImg {
+      overflow: hidden;
+      border: 4px $turquoise solid;
+      border-radius: 50%;
+      position: absolute;
+      left: 10px;
+      top: 30px;
+    }
+  
+    .backButton {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .backButton:hover,
+    .backButton:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
