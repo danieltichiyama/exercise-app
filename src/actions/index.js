@@ -33,7 +33,6 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH = "FAT_SECRET_FOOD_NUTRIENT_SEARCH"
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 export const LOGIN_ERROR = "LOGIN_ERROR";
-export const BCRYPT = "BCRYPT";
 
 export const actionsLoadWorkouts = (data) => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -132,19 +131,19 @@ export const actionsLoadActivity = () => async dispatch => {
 };
 
 export const actionsLoginSubmit = data => async dispatch => {
-  console.log(data);
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      console.log(response);
-      return dispatch({
+      dispatch({
         type: LOGIN,
         payload: response.data
       });
+      return true
     })
     .catch(err => {
       dispatch({
         type: LOGIN_ERROR
       });
+      return false
     });
 };
 
@@ -160,19 +159,6 @@ export const actionsRegister = data => async dispatch => {
       console.log("Error in actionsRegister: ", err);
     });
 };
-
-export const actionsBcrypt = data => async dispatch => {
-  await Axios.post("/api/auth/bcrypt", data)
-    .then(response => {
-      return dispatch({
-        type: BCRYPT,
-        payload: response.data
-      })
-    })
-    .catch(err => {
-      console.log("Error in actionsBcrypt: ", err);
-    });
-}
 
 export const actionsLogout = () => async dispatch => {
   await Axios.get("/api/auth/logout")

@@ -78,13 +78,14 @@ passport.deserializeUser(function(user, done) {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log(req.user);
   return res.json({ 
     session: req.user, 
     message: `Welcome ${req.user.name}` 
   });
 });
 
-router.post("/bcrypt", (req, res) => {
+router.post("/register", (req, res) => {
   bcrypt.genSalt(saltRounds, (err, salt) => {
     if (err) {
       console.log(err);
@@ -92,58 +93,54 @@ router.post("/bcrypt", (req, res) => {
     bcrypt.hash(req.body.password, salt, (err, hash) => {
       if (err) {
         console.log(err);
-      }
-      res.send(hash);
-    })
-  })
-})
-
-router.post("/register", (req, res) => {
-  return new User(Object.assign({ ...req.body }))
-    .save()
-    .then(user => {
-      return user.toJSON();
-    })
-    .then(results => {
-      return new User()
-        .where({ id: results.id })
-        .fetch({
-          withRelated: ["gender_id", "activity_level_id", "goal_id"]
-        })
+      } // return 500
+      return new User(Object.assign({ ...req.body }, { password: hash }))
+        .save()
         .then(user => {
           return user.toJSON();
         })
         .then(results => {
-          let recommended_calories = calculator.recommendedCalories(
-            results
-          );
-          console.log("recommended_calories", recommended_calories);
-
           return new User()
             .where({ id: results.id })
-            .save(
-              { recommended_calories },
-              { method: "update", patch: true }
-            )
+            .fetch({
+              withRelated: ["gender_id", "activity_level_id", "goal_id"]
+            })
             .then(user => {
               return user.toJSON();
             })
             .then(results => {
-              let formInfo = Object.assign({}, { email: results.email });
-              return res
-                .status(200)
-                .json({ message: "You're all set!", formInfo });
-            })
-            .catch(err => {
-              console.log(err);
-              return res
-                .status(409) //"Conflict error code"
-                .json({
-                  message: "That email is already being used by someone."
+              let recommended_calories = calculator.recommendedCalories(
+                results
+              );
+              console.log("recommended_calories", recommended_calories);
+
+              return new User()
+                .where({ id: results.id })
+                .save(
+                  { recommended_calories },
+                  { method: "update", patch: true }
+                )
+                .then(user => {
+                  return user.toJSON();
+                })
+                .then(results => {
+                  let formInfo = Object.assign({}, { email: results.email });
+                  return res
+                    .status(200)
+                    .json({ message: "You're all set!", formInfo });
+                })
+                .catch(err => {
+                  console.log(err);
+                  return res
+                    .status(409) //"Conflict error code"
+                    .json({
+                      message: "That email is already being used by someone."
+                    });
                 });
             });
         });
     });
+  });
 });
 
 router.get("/logout", (req, res) => {

@@ -21,9 +21,8 @@ class LoginComponent extends Component {
     this.setState(state);
   };
 
-  handleLoginSubmit = e => {
+  handleLoginSubmit = async e => {
     e.preventDefault();
-
     let { email } = this.state;
 
     if (!email) {
@@ -33,9 +32,15 @@ class LoginComponent extends Component {
     } else if (!email.includes("@")) {
       return this.setState({ error: true });
     } else {
-      return this.props.dispatchLoginSubmit(this.state);
+      await this.props.dispatchLoginSubmit(this.state);
+      return this.setState({ error: false }, () => {
+        if(this.props.loginError){
+          alert("Email and password combination to not match.");
+          return false;
+        }
+      })
     }
-  };
+  }
 
   handleRegisterClick = () => {
     return this.props.isRegistered();
@@ -48,9 +53,6 @@ class LoginComponent extends Component {
   }
 
   render() {
-    if (this.props.loginError === true){
-      alert("Email and password combination to not match.");
-    }
     if (this.props.isLoggedIn === true) {
       return <Redirect to="/home" />;
     }

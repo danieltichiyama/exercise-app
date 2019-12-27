@@ -3,7 +3,6 @@ import {
   ADD_COMMENT,
   ADD_FOOD,
   ADD_WORKOUT,
-  BCRYPT,
   CHANGE_DATE,
   CLEAR,
   DELETE_COMMENT,
@@ -37,7 +36,6 @@ import moment from "moment";
 const initialStore = {
   activity_levels: [],
   addFood: {},
-  bcrypt: '',
   bodyparts: [],
   community_posts: [],
   diaryData: [],
@@ -55,6 +53,7 @@ const initialStore = {
   foods_meals_users: [],
   images: [],
   isLoggedIn: false,
+  isRegistered: true,
   loginError: false,
   smoke: "",
   users: [],
@@ -78,7 +77,8 @@ let reducer = (store = initialStore, action) => {
 
     case REGISTER:
       return Object.assign({}, store, {
-        registeredUserEmail: action.payload.formInfo.email
+        registeredUserEmail: action.payload.formInfo.email,
+        isRegistered: true
       });
 
     case LOGIN:
@@ -184,9 +184,6 @@ let reducer = (store = initialStore, action) => {
 
     case IMAGE_UPLOAD:
       return Object.assign({}, store, { images: action.payload }); 
-      
-    case BCRYPT:
-      return Object.assign('', store, { bcrypt: action.payload })
 
     default:
       return store;
