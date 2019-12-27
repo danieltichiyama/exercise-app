@@ -87,7 +87,6 @@ class ProfilePicUploadComponent extends PureComponent {
     );
 
     return new Promise((resolve, reject) => {
-      // console.log(canvas.toDataURL());
       canvas.toBlob(blob => {
         if (!blob) {
           //reject(new Error('Canvas is empty'));
@@ -105,7 +104,6 @@ class ProfilePicUploadComponent extends PureComponent {
   handleSubmit = async (e) => {
     e.preventDefault();
     const file = new File([this.fileUrl], this.state.imageName, {type: "image/jpeg"});
-    console.log(file);
     const formData = new FormData();
     formData.append('imageUpload', file);
     await this.props.dispatchImageUpload(formData, this.state.user_id);
