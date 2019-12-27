@@ -27,8 +27,6 @@ class WorkoutLogComponent extends Component {
       return { ...acc, [newTime]: [...(acc[newTime] || []), workout] };
     }, {});
 
-    console.log(this.props);
-
     return (
       <div className={styles.WorkoutLog}>
         <h1>Workouts</h1>
@@ -41,7 +39,7 @@ class WorkoutLogComponent extends Component {
             />
           );
         })}
-        <button className={styles.BackButton} onClick={this.handleBackClick}>
+        <button className={styles.backButton} onClick={this.handleBackClick}>
           Back to Exercises
         </button>
       </div>
