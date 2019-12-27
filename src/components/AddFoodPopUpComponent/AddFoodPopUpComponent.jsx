@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./AddFoodPopUpComponent.module.scss";
 import FatSecretSearchComponent from "../FatSecretSearchComponent";
-import exitButton from "../../imgs/exitButton352.png";
+import exitButton from "../../imgs/exitButton.png";
 
 class AddFoodPopUpComponent extends Component {
   constructor(props) {

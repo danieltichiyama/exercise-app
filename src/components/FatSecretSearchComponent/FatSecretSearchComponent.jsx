@@ -56,7 +56,11 @@ class FatSecretSearchComponent extends Component {
             className={styles.foodInput}
           />
           <button className={styles.searchButton}>
-            <img src={searchIcon} alt="search button" />
+            <img
+              src={searchIcon}
+              className={styles.searchIcon}
+              alt="search button"
+            />
           </button>
         </form>
         {this.props.imgData.length !== 0
