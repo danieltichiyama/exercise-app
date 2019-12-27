@@ -80,7 +80,6 @@ class ExerciseListComponent extends Component {
                   <h3>></h3>
                 </div>
               </Link>
-              <hr />
             </>
           );
         })}

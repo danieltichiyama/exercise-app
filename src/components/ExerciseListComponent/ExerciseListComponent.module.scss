@@ -6,14 +6,19 @@
   overflow: scroll;
 
   .exercise {
-    width: 100%;
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
     text-align: left;
     font-weight: 500;
-    padding-left: 20px;
+    padding: 30px 20px;
+    // padding: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 30px;
+    align-items: center;
+    // padding-right: 30px;
+    border-bottom: 1px solid #868686;
 
     &:hover {
       background-color: rgba($color: #000000, $alpha: 0.05);
