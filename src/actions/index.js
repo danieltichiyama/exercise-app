@@ -33,6 +33,14 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
+export const CLEAR_FOOD_SEARCH_MODAL = "CLEAR_FOOD_SEARCH_MODAL";
+
+export const actionsClearFoodSearch = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_SEARCH_MODAL,
+    payload: null
+  });
+};
 
 export const actionsClearFoodNutrients = () => async dispatch => {
   return dispatch({

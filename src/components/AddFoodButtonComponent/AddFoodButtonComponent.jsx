@@ -42,6 +42,7 @@ class AddFoodButtonComponent extends Component {
   handleAddClick = () => {
     let apiFood = this.compileFoodData();
     this.props.dispatchAddFood(apiFood);
+    this.props.handleFoodPopUp();
   };
 
   render() {

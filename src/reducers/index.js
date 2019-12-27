@@ -28,7 +28,8 @@ import {
   REGISTER,
   GET_SMOKE,
   VIDEO_UPLOAD,
-  CLEAR_FOOD_NUTRIENTS
+  CLEAR_FOOD_NUTRIENTS,
+  CLEAR_FOOD_SEARCH_MODAL
 } from "../actions";
 
 import moment from "moment";
@@ -62,6 +63,13 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case CLEAR_FOOD_SEARCH_MODAL:
+      return Object.assign({}, store, {
+        fat_secret_nutrients: [],
+        fat_secret_foods: [],
+        food_labels: []
+      });
+
     case CLEAR_FOOD_NUTRIENTS:
       return Object.assign({}, store, { fat_secret_nutrients: action.payload });
 

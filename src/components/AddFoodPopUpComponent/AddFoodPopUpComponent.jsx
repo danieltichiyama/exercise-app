@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import styles from "./AddFoodPopUpComponent.module.scss";
 import FatSecretSearchComponent from "../FatSecretSearchComponent";
 import exitButton from "../../imgs/exitButton.png";
+import { actionsClearFoodSearch } from "../../actions";
 
 class AddFoodPopUpComponent extends Component {
   constructor(props) {
@@ -14,17 +15,12 @@ class AddFoodPopUpComponent extends Component {
   }
 
   componentDidMount = () => {
+    this.props.dispatchClearFoodSearch();
     let { meal_type_id } = this.props;
 
     let currentMeal = this.state.meals[parseInt(meal_type_id) - 1];
 
     return this.setState({ meal: currentMeal });
-  };
-
-  handleFoodPopUp = e => {
-    this.setState({
-      showPopUp: !this.state.showPopUp
-    });
   };
 
   render() {
@@ -41,7 +37,10 @@ class AddFoodPopUpComponent extends Component {
             </button>
           </div>
 
-          <FatSecretSearchComponent meal_type_id={this.props.meal_type_id} />
+          <FatSecretSearchComponent
+            meal_type_id={this.props.meal_type_id}
+            handleFoodPopUp={this.props.handleFoodPopUp}
+          />
         </div>
       </div>
     );
@@ -53,7 +52,11 @@ const mapStateToProps = store => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    dispatchClearFoodSearch: () => {
+      return dispatch(actionsClearFoodSearch());
+    }
+  };
 };
 
 AddFoodPopUpComponent = connect(

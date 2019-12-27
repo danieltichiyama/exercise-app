@@ -217,7 +217,10 @@ class FatSecretSearchComponent extends Component {
                 }
               )}
             </select>
-            <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
+            <AddFoodButtonComponent
+              meal_type_id={this.props.meal_type_id}
+              handleFoodPopUp={this.props.handleFoodPopUp}
+            />
           </div>
         ) : null}
 

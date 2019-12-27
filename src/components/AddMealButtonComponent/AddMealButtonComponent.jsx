@@ -17,16 +17,18 @@ class AddMealButtonComponent extends Component {
   }
 
   handleFoodPopUp = e => {
-    // console.log("e.target: ", e.target);
-    let { id } = e.target;
-
-    // console.log("id: ", id);
-    // let { meal_type } = e.target.dataset;
-
-    this.setState({
-      meal_type_id: id,
-      showPopUp: !this.state.showPopUp
-    });
+    //if statement added to allow closing of modal when a food is submitted, to remove, remove conditional and else block code and the handleFoodPopUp call in AddFoodButtonComponent.jsx
+    if (e) {
+      let { id } = e.target;
+      this.setState({
+        meal_type_id: id,
+        showPopUp: !this.state.showPopUp
+      });
+    } else {
+      this.setState({
+        showPopUp: !this.state.showPopUp
+      });
+    }
   };
 
   render() {
