@@ -6,8 +6,19 @@ import { actionsAddFood } from "../../actions";
 class AddFoodButtonComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+      meal: ""
+    };
   }
+
+  componentDidMount = () => {
+    let currentMeal = this.state.meals[parseInt(this.props.meal_type_id) - 1];
+
+    return this.setState({
+      meal: currentMeal
+    });
+  };
 
   compileFoodData = () => {
     let id = localStorage.getItem("session");
@@ -29,7 +40,6 @@ class AddFoodButtonComponent extends Component {
   };
 
   handleAddClick = () => {
-    console.log("handleAddClick works");
     let apiFood = this.compileFoodData();
     this.props.dispatchAddFood(apiFood);
   };
@@ -37,7 +47,7 @@ class AddFoodButtonComponent extends Component {
   render() {
     return (
       <button className={styles.addFoodButton} onClick={this.handleAddClick}>
-        <span>+ </span> Add to Workout
+        <span>+ </span> Add to {this.state.meal}
       </button>
     );
   }
