@@ -58,12 +58,6 @@ class FatSecretSearchComponent extends Component {
     return (
       <>
         <div className={styles.searchDiv}>
-          {this.state.showVisionPopUp ? (
-            <FoodVisionComponent
-              handleFoodVisionPopUp={this.handleFoodVisionPopUp}
-            />
-          ) : null}
-
           <form autoComplete="off" onSubmit={this.handleClick}>
             <input
               autoComplete="off"
@@ -86,10 +80,17 @@ class FatSecretSearchComponent extends Component {
               src={cameraIcon}
               className={styles.cameraIcon}
               alt="foodVision button"
-              // onClick={this.props.handleFoodVisionPopUp}
               onClick={this.handleFoodVisionPopUp}
             />
           </button>
+        </div>
+
+        <div className={styles.foodVisionDiv}>
+          {this.state.showVisionPopUp ? (
+            <FoodVisionComponent
+              handleFoodVisionPopUp={this.handleFoodVisionPopUp}
+            />
+          ) : null}
         </div>
 
         {this.props.imgData.length !== 0
