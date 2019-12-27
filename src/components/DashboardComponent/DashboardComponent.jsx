@@ -65,7 +65,7 @@ class DashboardComponent extends Component {
           style: { width: "100%", backgroundColor: `orange` }
         });
       } else {
-        let percent = ((food + exercise) / goal) * 100;
+        let percent = ((food - exercise) / goal) * 100;
 
         this.setState({ overAte: false, style: { width: `${percent}%` } });
       }
@@ -139,7 +139,7 @@ class DashboardComponent extends Component {
 
           <div className={styles.caloriesConsumedText}>
             <p>Calories consumed: </p>
-            <p className={styles.remainingP}>{food + exercise}</p>
+            <p className={styles.remainingP}>{food - exercise}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>
