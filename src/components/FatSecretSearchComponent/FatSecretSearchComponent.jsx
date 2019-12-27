@@ -48,21 +48,23 @@ class FatSecretSearchComponent extends Component {
   render() {
     return (
       <>
-        <form autoComplete="off" onSubmit={this.handleClick}>
-          <input
-            autoComplete="off"
-            onChange={this.handleChange}
-            placeholder="Fat Secret Search"
-            className={styles.foodInput}
-          />
-          <button className={styles.searchButton}>
-            <img
-              src={searchIcon}
-              className={styles.searchIcon}
-              alt="search button"
+        <div className={styles.searchDiv}>
+          <form autoComplete="off" onSubmit={this.handleClick}>
+            <input
+              autoComplete="off"
+              onChange={this.handleChange}
+              placeholder="Fat Secret Search"
+              className={styles.foodInput}
             />
-          </button>
-        </form>
+            <button className={styles.searchButton}>
+              <img
+                src={searchIcon}
+                className={styles.searchIcon}
+                alt="search button"
+              />
+            </button>
+          </form>
+        </div>
         {this.props.imgData.length !== 0
           ? this.props.imgData.map(imgData => {
               return (
