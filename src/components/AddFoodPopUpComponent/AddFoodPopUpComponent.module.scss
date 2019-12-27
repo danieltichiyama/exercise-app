@@ -19,11 +19,13 @@
   margin: auto;
   background: white;
   overflow: scroll;
+  padding: 20px 10px;
 
   .exitButton {
     float: right;
     border: none;
     margin: 5px;
+    background: none;
   }
 
   img {

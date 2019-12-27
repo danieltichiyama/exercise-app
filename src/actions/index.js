@@ -33,6 +33,14 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const UPDATE_TODAY = "UPDATE_TODAY";
+
+export const actionsUpdateToday = today => async dispatch => {
+  return dispatch({
+    type: UPDATE_TODAY,
+    payload: today
+  });
+};
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -261,10 +269,8 @@ export const actionLoadUser = id => async dispatch => {
 
 export const actionsGetDiaryData = date => async dispatch => {
   let session = JSON.parse(localStorage.getItem("session"));
-  console.log("action running, quering server", date);
   await Axios.post("/api/foods_meals_users", { date, session })
     .then(response => {
-      console.log("response", response.data);
       return dispatch({
         type: GET_DIARY_DATA,
         payload: response.data

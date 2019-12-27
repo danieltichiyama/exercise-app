@@ -27,7 +27,8 @@ import {
   LOAD_USER,
   REGISTER,
   GET_SMOKE,
-  VIDEO_UPLOAD
+  VIDEO_UPLOAD,
+  UPDATE_TODAY
 } from "../actions";
 
 import moment from "moment";
@@ -61,6 +62,9 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case UPDATE_TODAY:
+      return Object.assign({}, store, { diaryDate: action.payload });
+
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
     case GET_SMOKE:

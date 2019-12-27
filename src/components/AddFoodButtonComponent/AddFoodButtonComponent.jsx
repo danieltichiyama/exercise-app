@@ -36,33 +36,41 @@ class AddFoodButtonComponent extends Component {
 
   render() {
     return (
-      <div>
-        <button className={styles.addFoodButton} onClick={this.handleAddClick}>
-          <p className={styles.description}>ADD TO DIARY</p>
-          <img
-            className="addFoodButton"
-            src="https://image.flaticon.com/icons/svg/1237/1237946.svg"
-            alt="add button"
-          />
-        </button>
-      </div>
+      <button className={styles.addFoodButton} onClick={this.handleAddClick}>
+        <span>+ </span> Add to Workout
+      </button>
     );
   }
 }
 
 const mapStateToProps = store => {
-  return {
-    addFood: store.addFood,
-    api_id: store.fat_secret_nutrients.food_id,
-    calories: store.fat_secret_nutrients.servings.serving[0].calories,
-    serving_size:
-      store.fat_secret_nutrients.servings.serving[0].serving_description,
-    description: store.fat_secret_nutrients.food_name,
-    fat: store.fat_secret_nutrients.servings.serving[0].fat,
-    carbs: store.fat_secret_nutrients.servings.serving[0].carbohydrate,
-    protein: store.fat_secret_nutrients.servings.serving[0].protein,
-    date: store.diaryDate
-  };
+  if (Array.isArray(store.fat_secret_nutrients.servings.serving)) {
+    return {
+      addFood: store.addFood,
+      api_id: store.fat_secret_nutrients.food_id,
+      calories: store.fat_secret_nutrients.servings.serving[0].calories,
+      serving_size:
+        store.fat_secret_nutrients.servings.serving[0].serving_description,
+      description: store.fat_secret_nutrients.food_name,
+      fat: store.fat_secret_nutrients.servings.serving[0].fat,
+      carbs: store.fat_secret_nutrients.servings.serving[0].carbohydrate,
+      protein: store.fat_secret_nutrients.servings.serving[0].protein,
+      date: store.diaryDate
+    };
+  } else if (!Array.isArray(store.fat_secret_nutrients.servings.serving)) {
+    return {
+      addFood: store.addFood,
+      api_id: store.fat_secret_nutrients.food_id,
+      calories: store.fat_secret_nutrients.servings.serving.calories,
+      serving_size:
+        store.fat_secret_nutrients.servings.serving.serving_description,
+      description: store.fat_secret_nutrients.food_name,
+      fat: store.fat_secret_nutrients.servings.serving.fat,
+      carbs: store.fat_secret_nutrients.servings.serving.carbohydrate,
+      protein: store.fat_secret_nutrients.servings.serving.protein,
+      date: store.diaryDate
+    };
+  }
 };
 
 const mapDispatchToProps = dispatch => {

@@ -4,8 +4,10 @@ import { actionsFatSecretFoodSearch } from "../../actions";
 import FatSecretFoodComponent from "../FatSecretFoodComponent";
 import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
 import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
+import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
+import cameraIcon from "../../imgs/camera.png";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -45,26 +47,49 @@ class FatSecretSearchComponent extends Component {
     });
   };
 
+  handleLeftArrowClick = () => {
+    let count = this.state.servingMultiplier;
+    if (count > 1) {
+      count--;
+      return this.setState({ servingMultiplier: count });
+    } else {
+      return;
+    }
+  };
+
+  handleRightArrowClick = () => {
+    let count = this.state.servingMultiplier;
+    count++;
+    return this.setState({ servingMultiplier: count });
+  };
+
   render() {
     return (
-      <>
-        <form autoComplete="off" onSubmit={this.handleClick}>
-          <input
-            autoComplete="off"
-            onChange={this.handleChange}
-            placeholder="Fat Secret Search"
-            className={styles.foodInput}
-          />
-          <button className={styles.searchButton}>
-            <img
-              src={searchIcon}
-              className={styles.searchIcon}
-              alt="search button"
+      <div className={styles.fatSecretSearch}>
+        <div className={styles.searchDiv}>
+          <form autoComplete="off" onSubmit={this.handleClick}>
+            <input
+              autoComplete="off"
+              onChange={this.handleChange}
+              placeholder="Search for a food..."
+              className={styles.foodInput}
             />
-          </button>
-        </form>
-
-        {/* labels display for google vision api results */}
+            <button className={styles.searchButton}>
+              <img
+                src={searchIcon}
+                className={styles.searchIcon}
+                alt="search button"
+              />
+            </button>
+            <button>
+              <img
+                src={cameraIcon}
+                className={styles.cameraIcon}
+                alt="camera button"
+              />
+            </button>
+          </form>
+        </div>
         {this.props.imgData.length !== 0
           ? this.props.imgData.map(imgData => {
               return (
@@ -145,9 +170,31 @@ class FatSecretSearchComponent extends Component {
 
         {this.props.foodNutrients.servings &&
         Array.isArray(this.props.foodNutrients.servings.serving) ? (
-          <div>
-            Serving Size:
-            <select onChange={this.handleSelectChange}>
+          <div className={styles.servingsAndAddButton}>
+            <div className={styles.servings}>
+              Servings:{" "}
+              <div
+                className={styles.leftArrow}
+                onClick={this.handleLeftArrowClick}
+              ></div>
+              <input
+                type="number"
+                name="multiplier"
+                min="1"
+                max="99"
+                value={this.state.servingMultiplier}
+                className={styles.servingMultiplier}
+                onChange={this.handleMultiplier}
+              />
+              <div
+                className={styles.rightArrow}
+                onClick={this.handleRightArrowClick}
+              ></div>
+            </div>
+            <select
+              onChange={this.handleSelectChange}
+              className={styles.servingSize}
+            >
               {this.props.foodNutrients.servings.serving.map(
                 (serving, index) => {
                   return (
@@ -158,40 +205,14 @@ class FatSecretSearchComponent extends Component {
                 }
               )}
             </select>
-            Servings:
-            <input
-              type="number"
-              name="multiplier"
-              min="1"
-              max="99"
-              value={this.state.servingMultiplier}
-              onChange={this.handleMultiplier}
-            />
+
+            {/* <div className={styles.servingSizeContainer}>
+              Serving Size: */}
+
+            {/* </div> */}
+            <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
           </div>
-        ) : // <div>
-        //   Serving Size:
-        //   <select onChange={this.handleSelectChange}>
-        //     {this.props.foodNutrients.servings.serving.map(
-        //       (serving, index) => {
-        //         return (
-        //           <option key={index} value={index}>
-        //             {serving.serving_description}
-        //           </option>
-        //         );
-        //       }
-        //     )}
-        //   </select>
-        //   Servings:
-        //   <input
-        //     type="number"
-        //     name="multiplier"
-        //     min="1"
-        //     max="99"
-        //     value={this.state.servingMultiplier}
-        //     onChange={this.handleMultiplier}
-        //   />
-        // </div>
-        null}
+        ) : null}
 
         {/* food details, if multiple end */}
 
@@ -229,23 +250,38 @@ class FatSecretSearchComponent extends Component {
                   100
               ) / 100}g`}
             />
-            <div>
-              Serving Size:{" "}
-              {`${this.props.foodNutrients.servings.serving.serving_description}  `}
-              Servings:
-              <input
-                type="number"
-                min="1"
-                max="99"
-                value={this.state.servingMultiplier}
-                onChange={this.handleMultiplier}
-              />
+            <div className={styles.servingsAndAddButton}>
+              <div className={styles.servings}>
+                Servings:{" "}
+                <div
+                  className={styles.leftArrow}
+                  onClick={this.handleLeftArrowClick}
+                ></div>
+                <input
+                  type="number"
+                  name="multiplier"
+                  min="1"
+                  max="99"
+                  value={this.state.servingMultiplier}
+                  className={styles.servingMultiplier}
+                  onChange={this.handleMultiplier}
+                />
+                <div
+                  className={styles.rightArrow}
+                  onClick={this.handleRightArrowClick}
+                ></div>
+              </div>
+              <div className={styles.servingSize}>
+                {/* Serving Size: */}
+                {`${this.props.foodNutrients.servings.serving.serving_description}  `}
+              </div>
+              <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
             </div>
           </>
         ) : null}
 
         {/* food details, if only one found end */}
-      </>
+      </div>
     );
   }
 }

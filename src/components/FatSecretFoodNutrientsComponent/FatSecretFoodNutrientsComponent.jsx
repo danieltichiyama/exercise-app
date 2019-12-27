@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import styles from "./FatSecretFoodNutrientsComponent.module.scss";
 
 class FatSecretFoodNutrientsComponent extends Component {
@@ -12,8 +11,8 @@ class FatSecretFoodNutrientsComponent extends Component {
     return (
       <div className={styles.FatSecretFoodNutrients}>
         <div className={styles.header}>
-          <h3>{this.props.name}</h3>
-          <h3 className={styles.calories}>{this.props.calories}</h3>
+          <h1>{this.props.name}</h1>
+          <h1 className={styles.calories}>{this.props.calories}</h1>
         </div>
         <div className={styles.nutritionalInfo}>
           <div>
@@ -28,14 +27,6 @@ class FatSecretFoodNutrientsComponent extends Component {
             <h1>{this.props.protein}</h1>
             <h3 className={styles.protein}>Protein</h3>
           </div>
-        </div>
-        <div className={styles.servingsAndAddButton}>
-          <div className={styles.servings}>
-            Servings: <div className={styles.leftArrow}></div>
-            <div clasName={styles.servingMultiplier}>3</div>
-            <div className={styles.rightArrow}></div>
-          </div>
-          <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
         </div>
       </div>
     );
