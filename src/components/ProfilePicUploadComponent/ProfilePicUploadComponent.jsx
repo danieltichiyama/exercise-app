@@ -18,6 +18,7 @@ class ProfilePicUploadComponent extends PureComponent {
 
   onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
+      // this.props.openModal();
       this.setState({ imageName: e.target.files[0].name });
       const reader = new FileReader();
       reader.addEventListener("load", () =>

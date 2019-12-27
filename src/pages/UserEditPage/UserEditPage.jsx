@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { actionLoadUser, actionsEditUser } from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent"
 
 class UserEditPage extends Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class UserEditPage extends Component {
       goal_id: 1,
       selectedWeight: "kgs",
       selectedHeight: "cm",
-      editSuccessful: false
+      editSuccessful: false,
+      show: false
     };
   }
 
@@ -145,6 +147,14 @@ class UserEditPage extends Component {
     }
   };
 
+  handleOpenModal = () => {
+    this.setState({ show: true });
+  }
+
+  handleCloseModal = () => {
+    this.setState({ show: false });
+  }
+
   render() {
     if (this.state.editSuccessful === true) {
       return <Redirect to="/user" />;
@@ -154,6 +164,11 @@ class UserEditPage extends Component {
       <>
         <div>
           <h1>Edit User</h1>
+        </div>
+        <div>
+          <h3>Profile Picture:</h3>
+          <ProfilePicUploadComponent
+          />
         </div>
         <form onSubmit={this.handleSubmit}>
           <div>
