@@ -1,3 +1,32 @@
-.header{
-    text-align: center;
+.ExercisePage {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  .exerciseMenu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+    background: white;
+    height: 80px;
+
+    .exerciseSearchPH {
+      height: 50px;
+      width: 70%;
+      margin: 20px 0px 20px 20px;
+      border: 2px solid lightgray;
+      border-radius: 2px;
+      padding: 0 10px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .menuButton {
+      height: 25px;
+      width: 25px;
+    }
+  }
 }

@@ -51,7 +51,7 @@ app.use("/api/nutrition", api.nutrition);
 app.use("/api/vision", api.vision);
 app.use("/api/fat_secret", api.fat_secret);
 app.use("/api/video_upload", api.video_upload);
-app.use("/api/image_upload", api.image_upload)
+app.use("/api/image_upload", api.image_upload);
 //routers-end
 
 app.get("/smoke", (req, res) => {

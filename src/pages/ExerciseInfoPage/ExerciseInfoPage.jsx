@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from "react";
 import ExerciseInfoComponent from "../../components/ExerciseInfoComponent";
+import styles from "./ExerciseInfoPage.module.scss";
 
-class ExerciseInfoPage extends Component {
-    render() {
-        return (
-            <ExerciseInfoComponent />
-        );
-    }
-}
+let ExerciseInfoPage = props => {
+  return (
+    <div className={styles.ExercisePage}>
+      <ExerciseInfoComponent />
+    </div>
+  );
+};
 
 export default ExerciseInfoPage;

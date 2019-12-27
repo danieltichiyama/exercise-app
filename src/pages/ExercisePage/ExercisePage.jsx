@@ -1,25 +1,77 @@
 import React, { Component } from "react";
-import styles from "./ExercisePage.module.scss"
+import styles from "./ExercisePage.module.scss";
 import BodyPartComponent from "../../components/BodyPartComponent/BodyPartComponent";
 import ExerciseListComponent from "../../components/ExerciseListComponent/ExerciseListComponent";
 import { Link } from "react-router-dom";
+import MenuButton from "../../imgs/menuButton.png";
+import LogButton from "../../imgs/log.png";
 
 class ExercisePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      openMenu: false,
+      searchTerm: "",
+      bodypartID: ""
+    };
   }
+
+  handleMenuClick = () => {
+    this.setState({ openMenu: !this.state.openMenu });
+  };
+
+  handleSearchInput = e => {
+    return this.setState({ searchTerm: e.target.value });
+  };
+
+  filterByBodypart = id => {
+    return this.setState({ bodypartID: id });
+  };
+
   render() {
     return (
-      <div>
-        <h1 className={styles.header}>EXERCISE LIST</h1>
-        <Link to="/workout" style={{ textDecoration: 'none' }}>
-          <h2>Workout Log</h2>
-        </Link>
-        <BodyPartComponent />
-        <ExerciseListComponent />
+      <div className={styles.ExercisePage}>
+        <div className={styles.exerciseMenu}>
+          <input
+            className={styles.exerciseSearchPH}
+            type="text"
+            placeholder="Search for an exercise..."
+            value={this.state.searchTerm}
+            onChange={this.handleSearchInput}
+          />
+          {this.state.openMenu ? null : (
+            <img
+              src={MenuButton}
+              alt="menu"
+              className={styles.menuButton}
+              onClick={this.handleMenuClick}
+            />
+          )}
+          <Link
+            to="/workout"
+            style={{ textDecoration: "none" }}
+            className={styles.menuButton}
+          >
+            <img
+              src={LogButton}
+              alt="workout log"
+              className={styles.menuButton}
+            />
+          </Link>
+        </div>
+        {this.state.openMenu ? (
+          <BodyPartComponent
+            menuClick={this.handleMenuClick}
+            filterByBodypart={this.filterByBodypart}
+          />
+        ) : null}
+
+        <ExerciseListComponent
+          searchTerm={this.state.searchTerm}
+          bodypartID={this.state.bodypartID}
+        />
       </div>
-    )
+    );
   }
 }
 
