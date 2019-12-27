@@ -6,6 +6,7 @@ import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent"
 import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
 import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
+import FoodVisionComponent from "../FoodVisionComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
 import cameraIcon from "../../imgs/camera.png";
 
@@ -15,7 +16,8 @@ class FatSecretSearchComponent extends Component {
     this.state = {
       fatSearchData: "",
       servingIndex: 0,
-      servingMultiplier: 1
+      servingMultiplier: 1,
+      showVisionPopUp: false
     };
   }
 
@@ -61,6 +63,12 @@ class FatSecretSearchComponent extends Component {
     let count = this.state.servingMultiplier;
     count++;
     return this.setState({ servingMultiplier: count });
+  }
+  
+  handleFoodVisionPopUp = e => {
+    this.setState({
+      showVisionPopUp: !this.state.showVisionPopUp
+    });
   };
 
   render() {
@@ -74,6 +82,7 @@ class FatSecretSearchComponent extends Component {
               placeholder="Search for a food..."
               className={styles.foodInput}
             />
+
             <button className={styles.searchButton}>
               <img
                 src={searchIcon}
@@ -81,15 +90,26 @@ class FatSecretSearchComponent extends Component {
                 alt="search button"
               />
             </button>
-            <button>
-              <img
-                src={cameraIcon}
-                className={styles.cameraIcon}
-                alt="camera button"
-              />
-            </button>
           </form>
+
+          <button>
+            <img
+              src={cameraIcon}
+              className={styles.cameraIcon}
+              alt="foodVision button"
+              onClick={this.handleFoodVisionPopUp}
+            />
+          </button>
         </div>
+
+        <div className={styles.foodVisionDiv}>
+          {this.state.showVisionPopUp ? (
+            <FoodVisionComponent
+              handleFoodVisionPopUp={this.handleFoodVisionPopUp}
+            />
+          ) : null}
+        </div>
+
         {this.props.imgData.length !== 0
           ? this.props.imgData.map(imgData => {
               return (
@@ -99,12 +119,13 @@ class FatSecretSearchComponent extends Component {
                 />
               );
             })
+<<<<<<< HEAD
           : null}
         {/* labels display end */}
 
         {/* list results for fat_secret api */}
 
-        {this.props.foods.length > 0 && !this.props.foodNutrients.servings
+        {this.props.food && this.props.foods.length > 0 && !this.props.foodNutrients.servings
           ? this.props.foods.map(food => {
               return (
                 <FatSecretFoodComponent
@@ -122,6 +143,28 @@ class FatSecretSearchComponent extends Component {
         {/* list results end */}
 
         {/* food details, if multiple servings are present */}
+=======
+          : ""}
+
+        <div className={styles.foodDiv}>
+          {this.props.food &&
+          this.props.foods.length > 0 &&
+          !this.props.foodNutrients.servings
+            ? this.props.foods.map(food => {
+                return (
+                  <FatSecretFoodComponent
+                    key={food.food_id}
+                    foodID={food.food_id}
+                    name={food.food_name}
+                    food_description={food.food_description}
+                    resetServingMultiplier={this.resetServingMultiplier}
+                    meal_type_id={this.props.meal_type_id}
+                  />
+                );
+              })
+            : ""}
+        </div>
+>>>>>>> a07f6bb8557ab1f5eb6990f8ddced91fa9d30be1
 
         {this.props.foodNutrients.servings &&
         Array.isArray(this.props.foodNutrients.servings.serving) ? (

@@ -19,7 +19,6 @@ class AddFoodPopUpComponent extends Component {
   render() {
     return (
       <div className={styles.foodPopUp}>
-        {/* onClick={this.props.handleFoodPopUp}> SAVE FOR LATER */}
         <div className={styles.foodPopUpInner}>
           <button
             className={styles.exitButton}
