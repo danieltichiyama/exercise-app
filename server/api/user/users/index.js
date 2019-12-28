@@ -1,6 +1,8 @@
 const express = require("express");
 const usersRouter = express.Router();
-
+//calculatorModule
+const calculator = require("../../../util/calculators");
+const User = require("../../../database/models/User");
 usersRouter
   .route("/:id")
   .get((req, res) => {
@@ -24,14 +26,44 @@ usersRouter
   .put((req, res) => {
     return req.db.User.where({ id: req.params.id })
       .save(req.body, { method: "update", patch: true })
-      .then(results => {
-        return res.json(results);
+      .then(user => {
+        return user.toJSON();
       })
-      .catch(err => {
-        console.log("Error:", err);
+      .then(results => {
+        return new User()
+          .where({ id: results.id })
+          .fetch({
+            withRelated: ["gender_id", "activity_level_id", "goal_id"]
+          })
+          .then(user => {
+            return user.toJSON();
+          })
+          .then(results => {
+            let recommended_calories = calculator.recommendedCalories(results);
+            return new User()
+              .where({ id: results.id })
+              .save({ recommended_calories }, { method: "update", patch: true })
+              .then(user => {
+                return req.db.User
+                  .where({ id: req.params.id })
+                  .fetch({
+                    withRelated: ["gender_id", "activity_level_id", "goal_id"]
+                  })
+                  .then(user => {
+                    return res.json(user);
+                  })
+                  .catch(err => {
+                    console.log(err);
+                    return res
+                      .status(500) //"Conflict error code"
+                      .json({
+                        message: "Cannot edit user info."
+                      });
+                  });
+              });
+          });
       });
   });
-
 usersRouter.route("/emails").post((req, res) => {
   return req.db.User.where({ email: req.body.email })
     .fetch({
@@ -44,7 +76,6 @@ usersRouter.route("/emails").post((req, res) => {
       return res.send("");
     });
 });
-
 //not sure if we need this route, but i'll leave it for now.
 usersRouter.route("/").get((req, res) => {
   return req.db.User.fetchAll({
@@ -53,5 +84,4 @@ usersRouter.route("/").get((req, res) => {
     return res.json(response);
   });
 });
-
 module.exports = usersRouter;
