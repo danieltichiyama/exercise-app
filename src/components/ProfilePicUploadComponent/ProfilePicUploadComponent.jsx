@@ -123,7 +123,9 @@ class ProfilePicUploadComponent extends PureComponent {
     return (
       <div className={styles.ProfilePicUploadComponent}>
         <label htmlFor="srcImg">
-          <img className={styles.placeHolder} src={this.props.hasProfilePic ? (placeHolder) : (this.props.profilePic)} alt=""/>
+          {/* <img className={styles.placeHolder} src={this.props.hasProfilePic ? (placeHolder) : (this.props.profilePic.url)} alt=""/> */}
+          <img src="https://fitworks-images.s3.us-west-2.amazonaws.com/burger-1576491976667-1577523344982.jpg" alt=""/>
+
         </label>
           <input className={styles.srcImg} id="srcImg" name="srcImg" type="file" accept="image/*" onChange={this.onSelectFile} />
         <div className={styles.Modal} style={{display: this.props.show ? "block" : "none"}}>

@@ -214,6 +214,7 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { hasProfilePic: false });
 
     case PROFILE_PIC:
+      console.log(action.payload)
       return Object.assign({}, store, { 
         hasProfilePic: true,
         profilePic: action.payload
