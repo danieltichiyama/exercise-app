@@ -6,7 +6,7 @@ const Wave = () => (
     viewBox="0 0 1440 320"
     preserveAspectRatio="none"
     width="100%"
-    height="350"
+    height="550"
     style={{ position: "absolute", zIndex: -1 }}
   >
     <path

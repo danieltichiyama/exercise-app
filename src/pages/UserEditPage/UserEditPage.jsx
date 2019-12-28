@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import style from "./UserEditPage.module.scss";
 import {
   actionLoadUser,
   actionsEditUser,
@@ -156,8 +155,13 @@ class UserEditPage extends Component {
       );
     }
 
-    await this.props.dispatchImageUpload(this.state.profilePic);
-    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id);
+    if (this.state.profilePic) {
+      await this.props.dispatchImageUpload(this.state.profilePic);
+      this.props.dispatchUploadProfilePic(
+        this.props.imgData,
+        this.state.user_id
+      );
+    }
   };
 
   handleOpenModal = () => {
@@ -185,9 +189,10 @@ class UserEditPage extends Component {
       <>
         <div className={styles.UserEditPage}>
           <Wave />
+
           <div className={styles.header}>
             <h1>Edit Profile</h1>
-            <div>
+            <div className={styles.profilePic}>
               <h3>Profile Picture:</h3>
               <ProfilePicUploadComponent
                 openModal={this.handleOpenModal}
@@ -234,7 +239,7 @@ class UserEditPage extends Component {
               </div>
 
               <div className={styles.rows}>
-                <h3>Height:</h3>
+                <h3>HEIGHT:</h3>
                 <input
                   type="number"
                   name="height"
@@ -256,7 +261,7 @@ class UserEditPage extends Component {
               </div>
 
               <div className={styles.rows}>
-                <h3>Gender:</h3>
+                <h3>GENDER:</h3>
                 <select
                   value={this.state.gender_id}
                   name="gender"
@@ -269,7 +274,7 @@ class UserEditPage extends Component {
               </div>
 
               <div className={styles.rows}>
-                <h3>Activity Level:</h3>
+                <h3>ACTIVITY LEVEL:</h3>
                 <select
                   value={this.state.activity_level_id}
                   name="activity_level"
@@ -283,7 +288,7 @@ class UserEditPage extends Component {
               </div>
 
               <div className={styles.rows}>
-                <h3>Goals:</h3>
+                <h3>GOALS:</h3>
                 <select
                   value={this.state.goal_id}
                   name="goal"
@@ -298,18 +303,18 @@ class UserEditPage extends Component {
                 </select>
               </div>
 
-              <div className={styles.rows}>
-                <input type="submit" value="Submit" />
-              </div>
-              <div>
-                <button>
-                  <Link to="/user">Cancel</Link>
-                </button>
+              <div className={styles.buttonRow}>
+                <div>
+                  <button>
+                    <Link to="/user">Cancel</Link>
+                  </button>
+                </div>
+                <input type="submit" value="Submit" className={styles.submit} />
               </div>
             </form>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
