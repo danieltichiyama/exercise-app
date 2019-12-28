@@ -34,6 +34,7 @@ export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
 export const CLEAR_FOOD_SEARCH_MODAL = "CLEAR_FOOD_SEARCH_MODAL";
+export const LOGIN_ERROR = "LOGIN_ERROR";
 
 export const actionsClearFoodSearch = () => async dispatch => {
   return dispatch({
@@ -148,13 +149,17 @@ export const actionsLoadActivity = () => async dispatch => {
 export const actionsLoginSubmit = data => async dispatch => {
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      return dispatch({
+      dispatch({
         type: LOGIN,
         payload: response.data
       });
+      return true;
     })
     .catch(err => {
-      console.log("Error in actionsLoginsubmit: ", err);
+      dispatch({
+        type: LOGIN_ERROR
+      });
+      return false;
     });
 };
 

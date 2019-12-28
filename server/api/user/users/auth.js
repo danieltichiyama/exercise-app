@@ -78,7 +78,11 @@ passport.deserializeUser(function(user, done) {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  return res.json({ session: req.user, message: `Welcome ${req.user.name}` });
+  console.log(req.user);
+  return res.json({ 
+    session: req.user, 
+    message: `Welcome ${req.user.name}` 
+  });
 });
 
 router.post("/register", (req, res) => {

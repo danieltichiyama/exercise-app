@@ -10,6 +10,4 @@ const MainBodyPage = () => {
   );
 };
 
-// const MainBodyPage = routes => <Route path={Route.path} />;
-
 export default MainBodyPage;
