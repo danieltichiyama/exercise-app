@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { actionLoadUser, actionsLogout } from "../../actions";
 import styles from "./UserPage.module.scss";
 import moment from "moment";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class UserPage extends Component {
   constructor(props) {
