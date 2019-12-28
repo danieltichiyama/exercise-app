@@ -127,10 +127,8 @@ export const actionsFilterBodyParts = data => async dispatch => {
 };
 
 export const actionsEditUser = (id, data) => async dispatch => {
-  console.log("actions edit user data:::", data);
   await Axios.put(`/api/users/${id}`, data)
     .then(response => {
-      console.log("response in edit", response);
       return dispatch({
         type: EDIT_USER,
         payload: response.data
@@ -400,7 +398,6 @@ export const actionsFatSecretFoodNutrientSearch = data => async dispatch => {
   );
 };
 export const actionsDeleteFood = data => async dispatch => {
-  console.log("data: ", data);
   await Axios.delete("api/foods_meals_users", { data: { data } })
     .then(response => {
       return dispatch({

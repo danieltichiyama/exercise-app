@@ -1,18 +1,18 @@
 
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex('genders').del()
     .then(function () {
       // Inserts seed entries
       return knex('genders').insert([
         {
-          gender: 'male',
+          gender: 'Male',
         },
         {
-          gender: 'female',
+          gender: 'Female',
         },
         {
-          gender: 'other',
+          gender: 'Other',
         }
       ]);
     });
