@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { actionsLoadWorkouts } from "../../actions";
 import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
 import * as moment from "moment";
