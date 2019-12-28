@@ -59,7 +59,7 @@ const mapStateToProps = store => {
     return {
       addFood: store.addFood,
       api_id: store.fat_secret_nutrients.food_id,
-      calories: store.fat_secret_nutrients.servings.serving[0].calories,
+      // calories: store.fat_secret_nutrients.servings.serving[0].calories,
       serving_size:
         store.fat_secret_nutrients.servings.serving[0].serving_description,
       description: store.fat_secret_nutrients.food_name,
@@ -72,7 +72,7 @@ const mapStateToProps = store => {
     return {
       addFood: store.addFood,
       api_id: store.fat_secret_nutrients.food_id,
-      calories: store.fat_secret_nutrients.servings.serving.calories,
+      // calories: store.fat_secret_nutrients.servings.serving.calories,
       serving_size:
         store.fat_secret_nutrients.servings.serving.serving_description,
       description: store.fat_secret_nutrients.food_name,

@@ -11,7 +11,6 @@ import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
 import FoodVisionComponent from "../FoodVisionComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
-import ReactLoading from "react-loading";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -20,17 +19,25 @@ class FatSecretSearchComponent extends Component {
       fatSearchData: "",
       servingIndex: 0,
       servingMultiplier: 1,
-      isLoading: false
+      calories: 0,
+      fats: 0,
+      carbohydrates: 0,
+      proteins: 0
     };
   }
 
-  componentDidMount = () => {
-    return this.handleLoading();
-  };
+  adjustNumbers = () => {
+    console.log(this.props.foodNutrients);
+    if (this.props.foodNutrients.length !== 0) {
+      let cal = `${Math.round(
+        (this.props.foodNutrients.servings.serving[this.state.servingIndex]
+          .calories *
+          this.state.servingMultiplier +
+          Number.EPSILON) *
+          100
+      ) / 100}kcal`;
 
-  componentDidUpdate = prevProps => {
-    if (this.props.imgData !== prevProps.imgData) {
-      return this.handleLoading();
+      return this.setState({ calories: cal });
     }
   };
 
@@ -56,10 +63,15 @@ class FatSecretSearchComponent extends Component {
   };
 
   resetServingMultiplier = e => {
-    this.setState({
-      servingMultiplier: 1,
-      servingIndex: 1
-    });
+    this.setState(
+      {
+        servingMultiplier: 1,
+        servingIndex: 1
+      },
+      () => {
+        return this.adjustNumbers();
+      }
+    );
   };
 
   handleLeftArrowClick = () => {
@@ -82,14 +94,7 @@ class FatSecretSearchComponent extends Component {
     return this.props.dispatchClearFoodNutrients();
   };
 
-  handleLoading = () => {
-    let bool = this.state.isLoading;
-    return this.setState({ isLoading: !bool });
-  };
-
   render() {
-    const loading = this.state.isLoading;
-
     return (
       <div className={styles.fatSecretSearch}>
         <div className={styles.searchDiv}>
@@ -114,16 +119,10 @@ class FatSecretSearchComponent extends Component {
             </button>
           </form>
 
-          <FoodVisionComponent handleLoading={this.handleLoading} />
+          <FoodVisionComponent />
         </div>
 
         <div className={styles.LabelContainer}>
-          {loading ? (
-            <div className={styles.loader}>
-              <ReactLoading type={"spin"} color={"#04c9b5"} />
-            </div>
-          ) : null}
-
           {this.props.imgData.length !== 0
             ? this.props.imgData.map(imgData => {
                 return (
@@ -244,6 +243,16 @@ class FatSecretSearchComponent extends Component {
             <AddFoodButtonComponent
               meal_type_id={this.props.meal_type_id}
               handleFoodPopUp={this.props.handleFoodPopUp}
+              calories={
+                Math.round(
+                  (this.props.foodNutrients.servings.serving[
+                    this.state.servingIndex
+                  ].calories *
+                    this.state.servingMultiplier +
+                    Number.EPSILON) *
+                    100
+                ) / 100
+              }
             />
           </div>
         ) : null}
@@ -311,6 +320,14 @@ class FatSecretSearchComponent extends Component {
               <AddFoodButtonComponent
                 meal_type_id={this.props.meal_type_id}
                 handleFoodPopUp={this.props.handleFoodPopUp}
+                calories={
+                  Math.round(
+                    (this.props.foodNutrients.servings.serving.calories *
+                      this.state.servingMultiplier +
+                      Number.EPSILON) *
+                      100
+                  ) / 100
+                }
               />
             </div>
           </>
