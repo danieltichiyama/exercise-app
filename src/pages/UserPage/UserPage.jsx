@@ -103,17 +103,24 @@ class UserPage extends Component {
               <h3>GOAL</h3>
               <p>{this.props.users.goal_id && this.props.users.goal_id.goal}</p>
             </div>
-
-            <button className={styles.button}>
-              <Link
-                to={location => ({
-                  ...location,
-                  pathname: `/user/${this.state.id.id}/edit`
-                })}
+            <div className={styles.options}>
+              <button className={styles.button}>
+                <Link
+                  to={location => ({
+                    ...location,
+                    pathname: `/user/${this.state.id.id}/edit`
+                  })}
+                >
+                  Edit
+                </Link>
+              </button>
+              <button
+                onClick={this.handleLogoutClick}
+                className={styles.button}
               >
-                Edit
-              </Link>
-            </button>
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
