@@ -38,6 +38,7 @@ class LoginComponent extends Component {
           alert("Email and password combination to not match.");
           return false;
         }
+        this.props.history.push("/home");        
       })
     }
   }

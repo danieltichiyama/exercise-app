@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { actionsLoadWorkouts } from "../../actions";
 import WorkoutCardComponent from "../../components/WorkoutCardComponent/WorkoutCardComponent";
 import * as moment from "moment";
+import styles from "./WorkoutLogComponent.module.scss";
 
 class WorkoutLogComponent extends Component {
   constructor(props) {
@@ -15,6 +16,10 @@ class WorkoutLogComponent extends Component {
     this.props.dispatchLoadWorkouts(userID);
   }
 
+  handleBackClick = () => {
+    this.props.history.push("/exercise");
+  };
+
   render() {
     const workoutObj = this.props.workouts.reduce((acc, workout) => {
       let newTime = moment(workout.created_at).format("MM-DD-YYYY");
@@ -22,7 +27,8 @@ class WorkoutLogComponent extends Component {
     }, {});
 
     return (
-      <div>
+      <div className={styles.WorkoutLog}>
+        <h1>Workouts</h1>
         {Object.keys(workoutObj).map(key => {
           return (
             <WorkoutCardComponent
@@ -32,6 +38,9 @@ class WorkoutLogComponent extends Component {
             />
           );
         })}
+        <button className={styles.backButton} onClick={this.handleBackClick}>
+          Back to Exercises
+        </button>
       </div>
     );
   }

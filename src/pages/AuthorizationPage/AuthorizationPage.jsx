@@ -31,7 +31,10 @@ class AuthorizationPage extends Component {
             isRegistered={this.isRegistered}
           ></RegisterComponent>
         ) : (
-          <LoginComponent isRegistered={this.isRegistered}></LoginComponent>
+          <LoginComponent
+            isRegistered={this.isRegistered}
+            history={this.props.history}
+          ></LoginComponent>
         )}
       </div>
     );
