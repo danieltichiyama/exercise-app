@@ -11,19 +11,18 @@ class FoodSearchComponent extends Component {
     this.state = {};
   }
 
-  searchDataOnClick = (e) => {
+  searchDataOnClick = e => {
     e.preventDefault();
     this.props.dispatchFoodSearch(this.state);
-  }
+  };
 
-  searchKeyword = async (e) => {
+  searchKeyword = async e => {
     await this.setState({ data: e.target.value });
     // UNCOMMENT FOR LIVE SEARCHBAR
     // this.props.dispatchFoodSearch(this.state);
-  }
+  };
 
   mapFoods = data => {
-    console.log('DATA: ', data);
     if (data[0]) {
       return data.map(food => {
         return (
@@ -35,7 +34,7 @@ class FoodSearchComponent extends Component {
         );
       });
     } else if (data.foodNutrients) {
-      if (data.dataType === "Survey (FNDDS)"){
+      if (data.dataType === "Survey (FNDDS)") {
         return (
           <FoodNutrientComponent
             key={data.description}
@@ -53,18 +52,22 @@ class FoodSearchComponent extends Component {
       } else if (data.dataType === "SR Legacy") {
         return (
           <FoodNutrientComponent
-          key={data.description}
-          description={data.description}
-          calories={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
-          protien={`${data.foodNutrients[4].amount} ${data.foodNutrients[4].nutrient.unitName}`}
-          carbohydrates={`${data.foodNutrients[7].amount} ${data.foodNutrients[7].nutrient.unitName}`}
-          sugars={`${data.foodNutrients[10].amount + data.foodNutrients[11].amount + data.foodNutrients[12].amount} ${data.foodNutrients[8].nutrient.unitName}`}
-          fats={`${data.foodNutrients[5].amount} ${data.foodNutrients[5].nutrient.unitName}`}
-          calcium={`${data.foodNutrients[17].amount} ${data.foodNutrients[17].nutrient.unitName}`}
-          iron={`${data.foodNutrients[18].amount} ${data.foodNutrients[18].nutrient.unitName}`}
-          sodium={`${data.foodNutrients[22].amount} ${data.foodNutrients[22].nutrient.unitName}`}
+            key={data.description}
+            description={data.description}
+            calories={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
+            protien={`${data.foodNutrients[4].amount} ${data.foodNutrients[4].nutrient.unitName}`}
+            carbohydrates={`${data.foodNutrients[7].amount} ${data.foodNutrients[7].nutrient.unitName}`}
+            sugars={`${data.foodNutrients[10].amount +
+              data.foodNutrients[11].amount +
+              data.foodNutrients[12].amount} ${
+              data.foodNutrients[8].nutrient.unitName
+            }`}
+            fats={`${data.foodNutrients[5].amount} ${data.foodNutrients[5].nutrient.unitName}`}
+            calcium={`${data.foodNutrients[17].amount} ${data.foodNutrients[17].nutrient.unitName}`}
+            iron={`${data.foodNutrients[18].amount} ${data.foodNutrients[18].nutrient.unitName}`}
+            sodium={`${data.foodNutrients[22].amount} ${data.foodNutrients[22].nutrient.unitName}`}
           />
-        )
+        );
       } else if (data.dataType === "Branded") {
         return (
           <FoodNutrientComponent
@@ -79,7 +82,7 @@ class FoodSearchComponent extends Component {
             iron={`${data.foodNutrients[2].amount} ${data.foodNutrients[2].nutrient.unitName}`}
             sodium={`${data.foodNutrients[10].amount} ${data.foodNutrients[10].nutrient.unitName}`}
           />
-        )
+        );
       }
     }
   };

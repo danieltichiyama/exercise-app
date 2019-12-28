@@ -11,6 +11,7 @@ import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
 import FoodVisionComponent from "../FoodVisionComponent";
 import searchIcon from "../../imgs/magnifying_glass.png";
+import ReactLoading from "react-loading";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -18,10 +19,20 @@ class FatSecretSearchComponent extends Component {
     this.state = {
       fatSearchData: "",
       servingIndex: 0,
-      servingMultiplier: 1
-      // showVisionPopUp: false
+      servingMultiplier: 1,
+      isLoading: false
     };
   }
+
+  componentDidMount = () => {
+    return this.handleLoading();
+  };
+
+  componentDidUpdate = prevProps => {
+    if (this.props.imgData !== prevProps.imgData) {
+      return this.handleLoading();
+    }
+  };
 
   handleChange = e => {
     this.setState({ fatSearchData: e.target.value });
@@ -71,7 +82,14 @@ class FatSecretSearchComponent extends Component {
     return this.props.dispatchClearFoodNutrients();
   };
 
+  handleLoading = () => {
+    let bool = this.state.isLoading;
+    return this.setState({ isLoading: !bool });
+  };
+
   render() {
+    const loading = this.state.isLoading;
+
     return (
       <div className={styles.fatSecretSearch}>
         <div className={styles.searchDiv}>
@@ -96,10 +114,16 @@ class FatSecretSearchComponent extends Component {
             </button>
           </form>
 
-          <FoodVisionComponent />
+          <FoodVisionComponent handleLoading={this.handleLoading} />
         </div>
 
         <div className={styles.LabelContainer}>
+          {loading ? (
+            <div className={styles.loader}>
+              <ReactLoading type={"spin"} color={"#04c9b5"} />
+            </div>
+          ) : null}
+
           {this.props.imgData.length !== 0
             ? this.props.imgData.map(imgData => {
                 return (

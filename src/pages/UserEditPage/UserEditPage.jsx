@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styles from "./UserEditPage.module.scss";
 import Wave from "./wave";
-import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent";
+import defaultPicture from "../../imgs/default-profile-icon.png";
 
 class UserEditPage extends Component {
   constructor(props) {
@@ -173,7 +173,6 @@ class UserEditPage extends Component {
   };
 
   handleImgData = (data, id) => {
-    console.log(id);
     this.setState({
       profilePic: data,
       userID: id
@@ -193,13 +192,7 @@ class UserEditPage extends Component {
           <div className={styles.header}>
             <h1>Edit Profile</h1>
             <div className={styles.profilePic}>
-              <h3>Profile Picture:</h3>
-              <ProfilePicUploadComponent
-                openModal={this.handleOpenModal}
-                closeModal={this.handleCloseModal}
-                show={this.state.show}
-                getImg={this.handleImgData}
-              />
+              <img src={defaultPicture} alt="" />
             </div>
           </div>
 

@@ -14,6 +14,7 @@ class FoodVisionComponent extends Component {
     const formData = new FormData();
     formData.append("foodImage", e.target.files[0]);
     this.props.dispatchFoodVision(formData);
+    this.props.handleLoading();
   };
 
   render() {
