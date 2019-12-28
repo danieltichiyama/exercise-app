@@ -33,7 +33,8 @@ class LoginComponent extends Component {
     } else if (!email.includes("@")) {
       return this.setState({ error: true });
     } else {
-      return this.props.dispatchLoginSubmit(this.state);
+      this.props.dispatchLoginSubmit(this.state);
+      this.props.history.push("/home");
     }
   };
 
