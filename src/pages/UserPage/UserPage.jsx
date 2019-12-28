@@ -105,7 +105,6 @@ class UserPage extends Component {
             </div>
             <div className={styles.options}>
               <button
-                className={styles.logout}
                 onClick={this.handleLogoutClick}
                 className={styles.button}
               >
