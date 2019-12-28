@@ -37,7 +37,6 @@ class DurationPopUpComponent extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <div className={styles.popup}>
                 <div className={styles.popup_inner}>
