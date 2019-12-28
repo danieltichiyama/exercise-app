@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionLoadUser } from "../../actions";
-import { actionsGetDiaryData } from "../../actions";
+import {
+  actionLoadUser,
+  actionsGetDiaryData,
+  actionsLoadWorkouts
+} from "../../actions";
 import styles from "./DashboardComponent.module.scss";
+import moment from "moment";
 
 class DashboardComponent extends Component {
   constructor(props) {
@@ -19,29 +23,49 @@ class DashboardComponent extends Component {
       style: { width: "0" }
     };
   }
+
   componentDidMount() {
     if (this.state.id) {
       //wrapped in a conditional for PWA
       this.props.dispatchLoadUser(this.state.id.id);
       this.props.dispatchGetDiaryData(this.state.date);
+      this.props.dispatchLoadWorkouts(this.state.id.id);
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.diaryData !== prevProps.diaryData) {
+    if (
+      this.props.diaryData !== prevProps.diaryData ||
+      this.props.workouts !== prevProps.workouts
+    ) {
       let goal = this.props.users && this.props.users.recommended_calories;
+
       let food =
         this.props.diaryData &&
         this.props.diaryData.reduce((total, data) => {
           return total + data.calories;
         }, 0);
-      if (Math.sign(goal - food) === -1) {
+
+      //gets calories burned by today's date
+      let exercise =
+        this.props.workouts &&
+        this.props.workouts
+          .filter(data => {
+            let todaysDate = moment(this.state.date).format("YYYY-MM-DD");
+            let getCreatedDate = moment(data.created_at).format("YYYY-MM-DD");
+            return todaysDate === getCreatedDate;
+          })
+          .reduce((total, data) => {
+            return total + data.calories_burned;
+          }, 0);
+
+      if (Math.sign(goal - food + exercise) === -1) {
         this.setState({
           overAte: true,
           style: { width: "100%", backgroundColor: `orange` }
         });
       } else {
-        let percent = (food / goal) * 100;
+        let percent = ((food - exercise) / goal) * 100;
 
         this.setState({ overAte: false, style: { width: `${percent}%` } });
       }
@@ -50,12 +74,27 @@ class DashboardComponent extends Component {
 
   render() {
     let goal = this.props.users && this.props.users.recommended_calories;
+
     let food =
       this.props.diaryData &&
       this.props.diaryData.reduce((total, data) => {
         return total + data.calories;
       }, 0);
-    let remaining = JSON.stringify(goal - food);
+
+    //gets calories burned by today's date
+    let exercise =
+      this.props.workouts &&
+      this.props.workouts
+        .filter(data => {
+          let todaysDate = moment(this.state.date).format("YYYY-MM-DD");
+          let getCreatedDate = moment(data.created_at).format("YYYY-MM-DD");
+          return todaysDate === getCreatedDate;
+        })
+        .reduce((total, data) => {
+          return total + data.calories_burned;
+        }, 0);
+
+    let remaining = JSON.stringify(goal - food + exercise);
 
     return (
       <>
@@ -80,7 +119,7 @@ class DashboardComponent extends Component {
               <p>+</p>
             </div>
             <div className={styles.column}>
-              <h2>0</h2>
+              <h2>{exercise}</h2>
               <p>Exercise</p>
             </div>
 
@@ -100,7 +139,7 @@ class DashboardComponent extends Component {
 
           <div className={styles.caloriesConsumedText}>
             <p>Calories consumed: </p>
-            <p className={styles.remainingP}>{food}</p>
+            <p className={styles.remainingP}>{food - exercise}</p>
             <p>/{goal} kcal</p>
           </div>
         </div>
@@ -112,7 +151,8 @@ class DashboardComponent extends Component {
 const mapStateToProps = store => {
   return {
     users: store.users,
-    diaryData: store.diaryData
+    diaryData: store.diaryData,
+    workouts: store.workouts
   };
 };
 
@@ -123,6 +163,9 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchGetDiaryData: date => {
       return dispatch(actionsGetDiaryData(date));
+    },
+    dispatchLoadWorkouts: data => {
+      return dispatch(actionsLoadWorkouts(data));
     }
   };
 };

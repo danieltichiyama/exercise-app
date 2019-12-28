@@ -13,7 +13,6 @@ exports.up = function (knex) {
       .references("id")
       .inTable("community_posts")
       .notNullable();
-
     table.timestamps(true, true);
   });
 };
