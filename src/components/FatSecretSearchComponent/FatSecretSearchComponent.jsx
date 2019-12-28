@@ -284,7 +284,10 @@ class FatSecretSearchComponent extends Component {
               <div className={styles.servingSize}>
                 {`${this.props.foodNutrients.servings.serving.serving_description}`}
               </div>
-              <AddFoodButtonComponent meal_type_id={this.props.meal_type_id} />
+              <AddFoodButtonComponent
+                meal_type_id={this.props.meal_type_id}
+                handleFoodPopUp={this.props.handleFoodPopUp}
+              />
             </div>
           </>
         ) : null}
