@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import styles from "./AuthorizationPage.module.scss";
 import LoginComponent from "../../components/LoginComponent";
 import RegisterComponent from "../../components/RegisterComponent";
-import RegisterSurveyComponent from "../../components/RegisterSurveyComponent";
 
 class AuthorizationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isRegistered: true,
-      takingSurvey: false,
       obj: {}
     };
   }
@@ -29,19 +27,14 @@ class AuthorizationPage extends Component {
     return (
       <div className={styles.AuthorizationPage}>
         {!this.state.isRegistered ? (
-          !this.state.takingSurvey ? (
-            <RegisterComponent
-              isRegistered={this.isRegistered}
-              takingSurvey={this.takingSurvey}
-            ></RegisterComponent>
-          ) : (
-            <RegisterSurveyComponent
-              obj={this.state.obj}
-              isRegistered={this.isRegistered}
-            ></RegisterSurveyComponent>
-          )
+          <RegisterComponent
+            isRegistered={this.isRegistered}
+          ></RegisterComponent>
         ) : (
-          <LoginComponent isRegistered={this.isRegistered}></LoginComponent>
+          <LoginComponent
+            isRegistered={this.isRegistered}
+            history={this.props.history}
+          ></LoginComponent>
         )}
       </div>
     );

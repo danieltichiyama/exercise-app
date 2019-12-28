@@ -34,6 +34,31 @@ export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 export const PROFILE_PIC = "PROFILE_PIC";
 export const NO_PROFILE_PIC = "NO_PROFILE_PIC";
+export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
+export const CLEAR_FOOD_SEARCH_MODAL = "CLEAR_FOOD_SEARCH_MODAL";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const RESET_DATE = "RESET_DATE";
+
+export const actionsResetDate = () => async dispatch => {
+  return dispatch({
+    type: RESET_DATE,
+    payload: null
+  });
+};
+
+export const actionsClearFoodSearch = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_SEARCH_MODAL,
+    payload: null
+  });
+};
+
+export const actionsClearFoodNutrients = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_NUTRIENTS,
+    payload: []
+  });
+};
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -132,13 +157,17 @@ export const actionsLoadActivity = () => async dispatch => {
 export const actionsLoginSubmit = data => async dispatch => {
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      return dispatch({
+      dispatch({
         type: LOGIN,
         payload: response.data
       });
+      return true;
     })
     .catch(err => {
-      console.log("Error in actionsLoginsubmit: ", err);
+      dispatch({
+        type: LOGIN_ERROR
+      });
+      return false;
     });
 };
 
@@ -158,6 +187,7 @@ export const actionsRegister = data => async dispatch => {
 export const actionsLogout = () => async dispatch => {
   await Axios.get("/api/auth/logout")
     .then(response => {
+      alert(`${response.data.message}`);
       return dispatch({
         type: LOGOUT,
         payload: response.data
@@ -299,6 +329,10 @@ export const actionsFilterEmails = data => async dispatch => {
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
     .then(response => {
+      let { data } = response;
+      alert(
+        `${data.description} added to your diary! That was ${data.calories} calories.`
+      );
       return dispatch({
         type: ADD_FOOD,
         payload: response.data
@@ -345,7 +379,6 @@ export const actionsLoadExerciseList = () => async dispatch => {
 export const actionsFatSecretFoodSearch = data => async dispatch => {
   await Axios.post("/api/fat_secret", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: FAT_SECRET_FOOD_SEARCH,
         payload: response.data.foods.food
@@ -382,7 +415,6 @@ export const actionsDeleteFood = data => async dispatch => {
 export const actionVideoUpload = data => async dispatch => {
   await Axios.post("/api/video_upload", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: VIDEO_UPLOAD,
         payload: response.data
@@ -396,16 +428,16 @@ export const actionVideoUpload = data => async dispatch => {
 export const actionImageUpload = data => async dispatch => {
   console.log('DATA', data);
   await Axios.post("/api/image_upload", data)
-  .then(response => {
-    return dispatch({
-      type: IMAGE_UPLOAD,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: IMAGE_UPLOAD,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
     });
-  })
-  .catch(err => {
-    console.log("Error in actionsImageUpload: ", err);
-  })
-}
+};
 
 export const actionUploadProfilePic = (id, data) => async () => {
   await Axios.post(`/api/image_upload/${id}`, data)

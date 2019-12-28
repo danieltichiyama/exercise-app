@@ -23,13 +23,17 @@ import {
   LOAD_SINGLE_EXERCISE,
   LOAD_WORKOUTS,
   LOGIN,
+  LOGIN_ERROR,
   LOGOUT,
   LOAD_USER,
   NO_PROFILE_PIC,
   PROFILE_PIC,
   REGISTER,
   GET_SMOKE,
-  VIDEO_UPLOAD
+  VIDEO_UPLOAD,
+  CLEAR_FOOD_NUTRIENTS,
+  CLEAR_FOOD_SEARCH_MODAL,
+  RESET_DATE
 } from "../actions";
 
 import moment from "moment";
@@ -42,7 +46,7 @@ const initialStore = {
   diaryData: [],
   diaryDate: moment()
     .utc()
-    .format("YYYY-MM-D"),
+    .format(),
   display: "meal",
   emails: [],
   exerciseInfo: [],
@@ -56,6 +60,8 @@ const initialStore = {
   images: ['idk'],
   isLoggedIn: false,
   profilePic: "",
+  isRegistered: true,
+  loginError: false,
   smoke: "",
   users: [],
   videos: [],
@@ -65,6 +71,23 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case RESET_DATE:
+      return Object.assign({}, store, {
+        diaryDate: moment()
+          .utc()
+          .format()
+      });
+
+    case CLEAR_FOOD_SEARCH_MODAL:
+      return Object.assign({}, store, {
+        fat_secret_nutrients: [],
+        fat_secret_foods: [],
+        food_labels: []
+      });
+
+    case CLEAR_FOOD_NUTRIENTS:
+      return Object.assign({}, store, { fat_secret_nutrients: action.payload });
+
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
 
@@ -79,7 +102,8 @@ let reducer = (store = initialStore, action) => {
 
     case REGISTER:
       return Object.assign({}, store, {
-        registeredUserEmail: action.payload.formInfo.email
+        registeredUserEmail: action.payload.formInfo.email,
+        isRegistered: true
       });
 
     case LOGIN:
@@ -89,7 +113,13 @@ let reducer = (store = initialStore, action) => {
         { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
-      return Object.assign({}, store, { isLoggedIn: true });
+      return Object.assign({}, store, {
+        isLoggedIn: true,
+        loginError: false
+      });
+
+    case LOGIN_ERROR:
+      return Object.assign({}, store, { loginError: true });
 
     case LOGOUT:
       localStorage.removeItem("session");
@@ -121,9 +151,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case CHANGE_DATE:
-      let newMoment = moment.utc(action.payload);
+      let newMoment = moment.utc(action.payload).format();
       return Object.assign({}, store, {
-        diaryDate: newMoment.format("YYYY-MM-D")
+        diaryDate: newMoment
       });
 
     case LOAD_BODY_PARTS:

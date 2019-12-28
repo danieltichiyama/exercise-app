@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionLoadUser } from "../../actions";
+import { actionLoadUser, actionsLogout } from "../../actions";
 import styles from "./UserPage.module.scss";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -21,6 +21,11 @@ class UserPage extends Component {
   componentDidMount() {
     this.props.dispatchLoadUser(this.state.id.id);
   }
+
+  handleLogoutClick = () => {
+    this.props.dispatchLogout();
+    this.props.history.push("/authorization");
+  };
 
   render() {
     //change date format
@@ -98,17 +103,24 @@ class UserPage extends Component {
               <h3>GOAL</h3>
               <p>{this.props.users.goal_id && this.props.users.goal_id.goal}</p>
             </div>
-
-            <button className={styles.button}>
-              <Link
-                to={location => ({
-                  ...location,
-                  pathname: `/user/${this.state.id.id}/edit`
-                })}
+            <div className={styles.options}>
+              <button
+                onClick={this.handleLogoutClick}
+                className={styles.button}
               >
-                Edit
-              </Link>
-            </button>
+                Logout
+              </button>
+              <button className={styles.button}>
+                <Link
+                  to={location => ({
+                    ...location,
+                    pathname: `/user/${this.state.id.id}/edit`
+                  })}
+                >
+                  Edit
+                </Link>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -126,6 +138,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchLoadUser: id => {
       return dispatch(actionLoadUser(id));
+    },
+    dispatchLogout: () => {
+      return dispatch(actionsLogout());
     }
   };
 };
