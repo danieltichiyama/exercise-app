@@ -68,19 +68,30 @@
         }
       }
 
-      .button {
-        text-align: center;
-        display: block;
-        margin: auto;
-        background-color: #fc4a1a;
-        border-radius: 15%;
-        padding: 8px 20px;
+      .options {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
 
-        a {
+        .button {
+          text-align: center;
+          display: block;
+          margin: auto;
+          background-color: #fc4a1a;
+          border-radius: 15px;
+          padding: 8px 20px;
           color: white;
-          text-decoration: none;
           font-size: 15px;
           font-weight: 600;
+          line-height: 15px;
+
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+          }
         }
       }
     }

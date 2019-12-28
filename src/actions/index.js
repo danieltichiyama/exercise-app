@@ -32,6 +32,7 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const LOGIN_ERROR = "LOGIN_ERROR";
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -132,13 +133,17 @@ export const actionsLoadActivity = () => async dispatch => {
 export const actionsLoginSubmit = data => async dispatch => {
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      return dispatch({
+      dispatch({
         type: LOGIN,
         payload: response.data
       });
+      return true;
     })
     .catch(err => {
-      console.log("Error in actionsLoginsubmit: ", err);
+      dispatch({
+        type: LOGIN_ERROR
+      });
+      return false;
     });
 };
 
@@ -158,6 +163,7 @@ export const actionsRegister = data => async dispatch => {
 export const actionsLogout = () => async dispatch => {
   await Axios.get("/api/auth/logout")
     .then(response => {
+      alert(`${response.data.message}`);
       return dispatch({
         type: LOGOUT,
         payload: response.data
@@ -382,7 +388,6 @@ export const actionsDeleteFood = data => async dispatch => {
 export const actionVideoUpload = data => async dispatch => {
   await Axios.post("/api/video_upload", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: VIDEO_UPLOAD,
         payload: response.data
@@ -395,24 +400,25 @@ export const actionVideoUpload = data => async dispatch => {
 
 export const actionImageUpload = data => async dispatch => {
   await Axios.post("/api/image_upload", data)
-  .then(response => {
-    return dispatch({
-      type: IMAGE_UPLOAD,
-      payload: response.data
+    .then(response => {
+      return dispatch({
+        type: IMAGE_UPLOAD,
+        payload: response.data
+      });
+    })
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
     });
-  })
-  .catch(err => {
-    console.log("Error in actionsImageUpload: ", err);
-  })
-}
+};
 
 export const actionUploadProfilePic = (id, data) => async () => {
-  await Axios.post(`/api/image_upload/${id}`, data)
-  console.log(data)
-  .then(response => {
-    console.log(response);
-  })
-  .catch(err => {
-    console.log("Error in actionsImageUpload: ", err);
-  })
-}
+  await Axios.post(`/api/image_upload/${id}`, data);
+  console
+    .log(data)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
+    });
+};

@@ -1,33 +1,47 @@
+$turquoise: #04c9b5;
+$red: #fc4a1a;
+
 .RegisterComponent {
+  height: 20%;
+  color: white;
   height: auto;
-  width: 400px;
+  width: 375px;
   text-align: center;
-  padding-top: 70px;
-  background-color: white;
-  box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.4);
+  font-size: 16px;
+  
+
+  h1 {
+    color: white;
+    padding-bottom: 0;
+  }
+  
+  h2 {
+    margin: 0;
+  }
 
   .form_li {
     display: flex;
     flex-direction: row;
     margin-left: 20px;
+    color: white;
   }
 
   .form_input {
     height: 30px;
     outline: 0;
     border: 0;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid white;
     width: 85%;
     margin-bottom: 25px;
     padding: 5px;
     font-size: 16px;
     font-weight: 500;
     background: none;
-    color: rgba(0, 0, 0, 0.8);
+    color: white;
   }
 
   .form_input::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+    color: white;
   }
 
   .error {
@@ -43,7 +57,7 @@
     font-size: 18px;
     font-weight: bolder;
     color: white;
-    background: rgb(248, 163, 51);
+    background: #fc4a1a;
     border: none;
     border-radius: 3px;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
@@ -55,9 +69,9 @@
   }
 
   .login_icon_img {
-    opacity: 0.3;
     height: 20px;
     width: auto;
+    filter: invert(94%) sepia(94%) saturate(24%) hue-rotate(73deg) brightness(106%) contrast(106%);
   }
 
   .imgContainer {
@@ -73,17 +87,18 @@
   }
 
   .notAMember {
-    color: rgba(0, 0, 0, 0.8);
+    color: white;
     padding-left: 10px;
   }
 
   .options_span {
-    color: rgb(0, 194, 120);
+    color: #fc4a1a;
   }
 
   .options_span:hover {
     cursor: pointer;
     text-decoration: underline;
+    color: rgb(250, 143, 2);
   }
 
   .loginImg {
@@ -97,5 +112,178 @@
 
   .additionalOptions {
     text-align: left;
+    color: white;
+  }
+
+  .RegisterSurveyComponent {
+    
+    .birthdaySelector {
+      outline: 0;
+      background: none;
+      border: 0;
+      width: 20%;
+      font-size: 12px;
+      color:white;
+      border-bottom: 2px solid white;
+      height: 32px;
+      font-family: Ubuntu;
+    
+      option {
+        background-color: #04c9b5
+      }
+    }
+
+    .form_bday {
+      margin-right: 60px;
+      padding-right: 35px;
+
+      width: 100%;
+    }
+
+    .form_input {
+      height: 30px;
+      outline: 0;
+      border: 0;
+      border-bottom: 2px solid white;
+      width: 55%;
+      margin-bottom: 25px;
+      padding: 5px;
+      font-size: 16px;
+      font-weight: 500;
+      background: none;
+      color: white;
+    }
+    
+    .heightWeightSelector {
+      outline: 0;
+      background: none;
+      border: 0;
+      font-size: 16px;
+      color:white;
+      border-bottom: 2px solid white;
+      height: 30px;
+      font-family: Ubuntu;
+
+      option {
+        background-color: #04c9b5;
+        border-radius: 25%;
+      }
+    }
+
+    .radioContainer{
+      text-align: center;
+      width: 75%;
+      display: inline-block;
+
+      li {
+        position: relative;
+
+        justify-content: center;
+        flex-direction: row;
+        // width: 75%;
+        border-radius: 5.5px;
+        background-color: #fff;
+        display: block;
+        margin: 10px 0;
+        position: relative;
+        overflow: hidden;
+        
+        input {
+          float: left;
+        }
+
+        label {
+          padding: 12px 30px;
+          font-size: 14px;
+          width: 100%;
+          display: block;
+          text-align: left;
+          color: #3C454C;
+          cursor: pointer;
+          position: relative;
+          z-index: 2;
+          transition: color 200ms ease-in;
+          overflow: hidden;
+
+          &:before {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            content: '';
+            background-color: $red;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale3d(1, 1, 1);
+            transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+            opacity: 0;
+            z-index: -1;
+          }
+
+          &:after {
+            width: 32px;
+            height: 32px;
+            content: '';
+            border: 2px solid #D1D7DC;
+            background-color: #fff;
+            background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+            background-repeat: no-repeat;
+            background-position: 2px 3px;
+            border-radius: 50%;
+            z-index: 2;
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            transition: all 200ms ease-in;
+          }
+        }
+
+        input:checked ~ label {
+          color: #fff;
+    
+          &:before {
+            transform: translate(-50%, -50%) scale3d(56, 56, 1);
+            opacity: 1;
+          }
+    
+          &:after {
+            background-color: $turquoise;
+            border-color: $turquoise;
+          }
+        }
+
+        input {
+          width: 32px;
+          height: 32px;
+          order: 1;
+          z-index: 2;
+          position: absolute;
+          right: 30px;
+          top: 50%;
+          transform: translateY(-50%);
+          cursor: pointer;
+          visibility: hidden;
+        }
+      }
+    }
+
+    .registerButton {
+      height: 50px;
+      width: 150px;
+      font-size: 18px;
+      font-weight: bolder;
+      color: white;
+      background: #fc4a1a;
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+      margin-top: 5px;
+    }
+
+    .registerButton:hover {
+      background-color: rgb(250, 143, 2);
+    }
   }
 }

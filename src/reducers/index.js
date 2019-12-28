@@ -23,6 +23,7 @@ import {
   LOAD_SINGLE_EXERCISE,
   LOAD_WORKOUTS,
   LOGIN,
+  LOGIN_ERROR,
   LOGOUT,
   LOAD_USER,
   REGISTER,
@@ -52,6 +53,8 @@ const initialStore = {
   foods_meals_users: [],
   images: [],
   isLoggedIn: false,
+  isRegistered: true,
+  loginError: false,
   smoke: "",
   users: [],
   videos: [],
@@ -75,7 +78,8 @@ let reducer = (store = initialStore, action) => {
 
     case REGISTER:
       return Object.assign({}, store, {
-        registeredUserEmail: action.payload.formInfo.email
+        registeredUserEmail: action.payload.formInfo.email,
+        isRegistered: true
       });
 
     case LOGIN:
@@ -85,7 +89,13 @@ let reducer = (store = initialStore, action) => {
         { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
-      return Object.assign({}, store, { isLoggedIn: true });
+      return Object.assign({}, store, { 
+        isLoggedIn: true,
+        loginError: false 
+      });
+
+    case LOGIN_ERROR:
+      return Object.assign({}, store, { loginError: true })
 
     case LOGOUT:
       localStorage.removeItem("session");
@@ -174,7 +184,7 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { videos: action.payload });
 
     case IMAGE_UPLOAD:
-      return Object.assign({}, store, { images: action.payload });
+      return Object.assign({}, store, { images: action.payload }); 
 
     default:
       return store;

@@ -21,9 +21,8 @@ class LoginComponent extends Component {
     this.setState(state);
   };
 
-  handleLoginSubmit = e => {
+  handleLoginSubmit = async e => {
     e.preventDefault();
-
     let { email } = this.state;
 
     if (!email) {
@@ -33,9 +32,16 @@ class LoginComponent extends Component {
     } else if (!email.includes("@")) {
       return this.setState({ error: true });
     } else {
-      return this.props.dispatchLoginSubmit(this.state);
+      await this.props.dispatchLoginSubmit(this.state);
+      return this.setState({ error: false }, () => {
+        if(this.props.loginError){
+          alert("Email and password combination to not match.");
+          return false;
+        }
+        this.props.history.push("/home");        
+      })
     }
-  };
+  }
 
   handleRegisterClick = () => {
     return this.props.isRegistered();
@@ -53,6 +59,7 @@ class LoginComponent extends Component {
     }
     return (
       <div className={styles.LoginComponent}>
+        <h1>login</h1>
         <form>
           <ul>
             <li className={styles.form_li}>
@@ -136,7 +143,8 @@ class LoginComponent extends Component {
 const mapStateToProps = store => {
   return {
     registeredUserEmail: store.registeredUserEmail,
-    isLoggedIn: store.isLoggedIn
+    isLoggedIn: store.isLoggedIn,
+    loginError: store.loginError
   };
 };
 

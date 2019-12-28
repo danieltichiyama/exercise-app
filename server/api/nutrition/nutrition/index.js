@@ -68,7 +68,7 @@ nutritionRouter.route("/:id")
     return res.json(response.data);
   })
   .catch(err => {
-    console.log('calvin is doodooboy', err); 
+    console.log(err); 
   });
 });
 
