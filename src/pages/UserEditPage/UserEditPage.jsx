@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { actionLoadUser, actionsEditUser } from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import styles from "./UserEditPage.module.scss";
+import Wave from "./wave";
 
 class UserEditPage extends Component {
   constructor(props) {
@@ -152,117 +154,123 @@ class UserEditPage extends Component {
 
     return (
       <>
-        <div>
-          <h1>Edit User</h1>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <h3>Name:</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder={this.props.user.name}
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+        <div className={styles.UserEditPage}>
+          <Wave />
+
+          <div className={styles.header}>
+            <h1>Edit Profile</h1>
           </div>
 
-          <div>
-            <h3>Weight:</h3>
-            <input
-              type="number"
-              name="weight"
-              placeholder="Change Weight"
-              onChange={this.handleChange}
-            />
-            <select
-              name="selectedWeight"
-              value={this.state.selectedWeight}
-              onChange={this.handleChange}
-            >
-              <option name="lbs" value="lbs">
-                lbs
-              </option>
-              <option name="kgs" value="kgs">
-                kgs
-              </option>
-            </select>
-          </div>
+          <div className={styles.form}>
+            <form onSubmit={this.handleSubmit}>
+              <div className={styles.rows}>
+                <h3>NAME:</h3>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={this.props.user.name}
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </div>
 
-          <div>
-            <h3>Height:</h3>
-            <input
-              type="number"
-              name="height"
-              placeholder="Change height"
-              onChange={this.handleChange}
-            />
-            <select
-              name="selectedHeight"
-              value={this.state.selectedHeight}
-              onChange={this.handleChange}
-            >
-              <option name="in" value="in">
-                in
-              </option>
-              <option name="cm" value="cm">
-                cm
-              </option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>WEIGHT:</h3>
+                <input
+                  type="number"
+                  name="weight"
+                  placeholder="Change Weight"
+                  onChange={this.handleChange}
+                />
+                <select
+                  name="selectedWeight"
+                  value={this.state.selectedWeight}
+                  onChange={this.handleChange}
+                >
+                  <option name="lbs" value="lbs">
+                    lbs
+                  </option>
+                  <option name="kgs" value="kgs">
+                    kgs
+                  </option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Gender:</h3>
-            <select
-              value={this.state.gender_id}
-              name="gender"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Male</option>
-              <option value={2}>Female</option>
-              <option value={3}>Other</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>Height:</h3>
+                <input
+                  type="number"
+                  name="height"
+                  placeholder="Change height"
+                  onChange={this.handleChange}
+                />
+                <select
+                  name="selectedHeight"
+                  value={this.state.selectedHeight}
+                  onChange={this.handleChange}
+                >
+                  <option name="in" value="in">
+                    in
+                  </option>
+                  <option name="cm" value="cm">
+                    cm
+                  </option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Activity Level:</h3>
-            <select
-              value={this.state.activity_level_id}
-              name="activity_level"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Sedentary</option>
-              <option value={2}>Light</option>
-              <option value={3}>Active</option>
-              <option value={4}>Very Active</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>Gender:</h3>
+                <select
+                  value={this.state.gender_id}
+                  name="gender"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Male</option>
+                  <option value={2}>Female</option>
+                  <option value={3}>Other</option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Goals:</h3>
-            <select
-              value={this.state.goal_id}
-              name="goal"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Lose Weight Mild</option>
-              <option value={2}>Lose Weight Moderate</option>
-              <option value={3}>Lose Weight Extreme</option>
-              <option value={4}>Maintain Weight</option>
-              <option value={5}>Gain Muscle</option>
-              <option value={6}>No Goal</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>Activity Level:</h3>
+                <select
+                  value={this.state.activity_level_id}
+                  name="activity_level"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Sedentary</option>
+                  <option value={2}>Light</option>
+                  <option value={3}>Active</option>
+                  <option value={4}>Very Active</option>
+                </select>
+              </div>
 
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
+              <div className={styles.rows}>
+                <h3>Goals:</h3>
+                <select
+                  value={this.state.goal_id}
+                  name="goal"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Lose Weight Mild</option>
+                  <option value={2}>Lose Weight Moderate</option>
+                  <option value={3}>Lose Weight Extreme</option>
+                  <option value={4}>Maintain Weight</option>
+                  <option value={5}>Gain Muscle</option>
+                  <option value={6}>No Goal</option>
+                </select>
+              </div>
 
-        <div>
-          <button>
-            <Link to="/user">Cancel</Link>
-          </button>
+              <div className={styles.rows}>
+                <input type="submit" value="Submit" />
+              </div>
+              <div>
+                <button>
+                  <Link to="/user">Cancel</Link>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </>
     );
