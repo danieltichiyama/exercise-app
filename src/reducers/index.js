@@ -28,7 +28,10 @@ import {
   LOAD_USER,
   REGISTER,
   GET_SMOKE,
-  VIDEO_UPLOAD
+  VIDEO_UPLOAD,
+  CLEAR_FOOD_NUTRIENTS,
+  CLEAR_FOOD_SEARCH_MODAL,
+  RESET_DATE
 } from "../actions";
 
 import moment from "moment";
@@ -41,7 +44,7 @@ const initialStore = {
   diaryData: [],
   diaryDate: moment()
     .utc()
-    .format("YYYY-MM-D"),
+    .format(),
   display: "meal",
   emails: [],
   exerciseInfo: [],
@@ -64,6 +67,23 @@ const initialStore = {
 
 let reducer = (store = initialStore, action) => {
   switch (action.type) {
+    case RESET_DATE:
+      return Object.assign({}, store, {
+        diaryDate: moment()
+          .utc()
+          .format()
+      });
+
+    case CLEAR_FOOD_SEARCH_MODAL:
+      return Object.assign({}, store, {
+        fat_secret_nutrients: [],
+        fat_secret_foods: [],
+        food_labels: []
+      });
+
+    case CLEAR_FOOD_NUTRIENTS:
+      return Object.assign({}, store, { fat_secret_nutrients: action.payload });
+
     case EDIT_USER:
       return Object.assign({}, store, { users: action.payload });
 
@@ -89,13 +109,13 @@ let reducer = (store = initialStore, action) => {
         { id: id, user_status_id: user_status_id }
       );
       localStorage.setItem("session", JSON.stringify(session));
-      return Object.assign({}, store, { 
+      return Object.assign({}, store, {
         isLoggedIn: true,
-        loginError: false 
+        loginError: false
       });
 
     case LOGIN_ERROR:
-      return Object.assign({}, store, { loginError: true })
+      return Object.assign({}, store, { loginError: true });
 
     case LOGOUT:
       localStorage.removeItem("session");
@@ -127,9 +147,9 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { foods: action.payload });
 
     case CHANGE_DATE:
-      let newMoment = moment.utc(action.payload);
+      let newMoment = moment.utc(action.payload).format();
       return Object.assign({}, store, {
-        diaryDate: newMoment.format("YYYY-MM-D")
+        diaryDate: newMoment
       });
 
     case LOAD_BODY_PARTS:
@@ -184,7 +204,7 @@ let reducer = (store = initialStore, action) => {
       return Object.assign({}, store, { videos: action.payload });
 
     case IMAGE_UPLOAD:
-      return Object.assign({}, store, { images: action.payload }); 
+      return Object.assign({}, store, { images: action.payload });
 
     default:
       return store;

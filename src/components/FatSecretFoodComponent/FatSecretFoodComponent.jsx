@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFatSecretFoodNutrientSearch } from "../../actions";
+import styles from "./FatSecretFoodComponent.module.scss";
 
 class FatSecretFoodComponent extends Component {
   constructor(props) {
@@ -14,10 +15,21 @@ class FatSecretFoodComponent extends Component {
   };
 
   render() {
+    let arr = this.props.food_description.split(" | ");
+
+    let subArr = arr[0].split(" - ");
+
+    let subArr2 = subArr[1].split("Calories: ");
+
+    let calories = subArr2[1];
+
     return (
-      <button onClick={this.handleClick}>
+      <button className={styles.fatSecretFood} onClick={this.handleClick}>
         <h3>{this.props.name}</h3>
-        <p>{this.props.food_description}</p>
+        <div className={styles.fatSecretFoodDetails}>
+          <p className={styles.fatSecretFoodCal}>{calories}</p>
+          <p className={styles.fatSecretFoodServing}>{subArr[0]}</p>
+        </div>
       </button>
     );
   }
