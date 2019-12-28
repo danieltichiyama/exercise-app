@@ -146,10 +146,8 @@ export const actionsLoadActivity = () => async dispatch => {
 };
 
 export const actionsLoginSubmit = data => async dispatch => {
-  console.log(data);
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: LOGIN,
         payload: response.data
@@ -176,6 +174,7 @@ export const actionsRegister = data => async dispatch => {
 export const actionsLogout = () => async dispatch => {
   await Axios.get("/api/auth/logout")
     .then(response => {
+      alert(`${response.data.message}`);
       return dispatch({
         type: LOGOUT,
         payload: response.data
@@ -404,7 +403,6 @@ export const actionsDeleteFood = data => async dispatch => {
 export const actionVideoUpload = data => async dispatch => {
   await Axios.post("/api/video_upload", data)
     .then(response => {
-      console.log(response);
       return dispatch({
         type: VIDEO_UPLOAD,
         payload: response.data

@@ -41,7 +41,10 @@ class AuthorizationPage extends Component {
             ></RegisterSurveyComponent>
           )
         ) : (
-          <LoginComponent isRegistered={this.isRegistered}></LoginComponent>
+          <LoginComponent
+            isRegistered={this.isRegistered}
+            history={this.props.history}
+          ></LoginComponent>
         )}
       </div>
     );
