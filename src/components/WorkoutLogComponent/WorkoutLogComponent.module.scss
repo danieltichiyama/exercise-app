@@ -1,0 +1,22 @@
+.WorkoutLog {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    text-align: center;
+    color: #fc4a1a;
+  }
+
+  .backButton {
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: #fc4a1a;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}

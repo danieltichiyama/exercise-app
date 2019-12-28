@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { actionLoadUser, actionsEditUser } from "../../actions";
+import style from "./UserEditPage.module.scss";
+import {
+  actionLoadUser,
+  actionsEditUser,
+  actionUploadProfilePic,
+  actionImageUpload
+} from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import styles from "./UserEditPage.module.scss";
 import Wave from "./wave";
+import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent";
 
 class UserEditPage extends Component {
   constructor(props) {
@@ -20,7 +27,10 @@ class UserEditPage extends Component {
       goal_id: 1,
       selectedWeight: "kgs",
       selectedHeight: "cm",
-      editSuccessful: false
+      editSuccessful: false,
+      show: false,
+      userID: 0,
+      profilePic: ""
     };
   }
 
@@ -75,7 +85,7 @@ class UserEditPage extends Component {
     }
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     let { dispatchEditUser, match } = this.props;
@@ -145,6 +155,25 @@ class UserEditPage extends Component {
         }
       );
     }
+
+    await this.props.dispatchImageUpload(this.state.profilePic);
+    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id);
+  };
+
+  handleOpenModal = () => {
+    this.setState({ show: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ show: false });
+  };
+
+  handleImgData = (data, id) => {
+    console.log(id);
+    this.setState({
+      profilePic: data,
+      userID: id
+    });
   };
 
   render() {
@@ -156,9 +185,17 @@ class UserEditPage extends Component {
       <>
         <div className={styles.UserEditPage}>
           <Wave />
-
           <div className={styles.header}>
             <h1>Edit Profile</h1>
+            <div>
+              <h3>Profile Picture:</h3>
+              <ProfilePicUploadComponent
+                openModal={this.handleOpenModal}
+                closeModal={this.handleCloseModal}
+                show={this.state.show}
+                getImg={this.handleImgData}
+              />
+            </div>
           </div>
 
           <div className={styles.form}>
@@ -272,14 +309,15 @@ class UserEditPage extends Component {
             </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }
 
 const mapStateToProps = store => {
   return {
-    user: store.users
+    user: store.users,
+    imgData: store.images
   };
 };
 
@@ -290,6 +328,12 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchEditUser: (id, data) => {
       return dispatch(actionsEditUser(id, data));
+    },
+    dispatchImageUpload: data => {
+      return dispatch(actionImageUpload(data));
+    },
+    dispatchUploadProfilePic: (id, data) => {
+      return dispatch(actionUploadProfilePic(id, data));
     }
   };
 };
