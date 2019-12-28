@@ -1,18 +1,86 @@
-.body {
-  width: 100%;
-  h1 {
-    display: flex;
-    justify-content: center;
+.UserPage {
+  padding-bottom: 85px;
+
+  * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
   }
-  .rows {
-    margin: 0px 50px 0px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-  .button {
-    text-align: center;
-    display: block;
-    margin: auto;
+  .body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    .topProfile {
+      color: white;
+
+      h1 {
+        display: flex;
+        justify-content: center;
+        padding: 10px 0px 10px 0px;
+      }
+      h3 {
+        font-size: 17px;
+      }
+      .profilePic {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: space-around;
+        margin: 0 auto;
+      }
+
+      .name {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0px 10px 0px;
+        // color: #444444;
+      }
+
+      .userTier {
+        display: flex;
+        justify-content: space-evenly;
+      }
+    }
+
+    .bottomProfile {
+      padding-top: 70px;
+      h3 {
+        font-size: 17px;
+      }
+      .rows {
+        margin: 30px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-bottom: rgba($color: #444444, $alpha: 0.3) solid;
+        h3 {
+          color: #fc4a1a;
+        }
+      }
+
+      .button {
+        text-align: center;
+        display: block;
+        margin: auto;
+        background-color: #fc4a1a;
+        border-radius: 15%;
+        padding: 8px 20px;
+        a {
+          color: white;
+          text-decoration: none;
+          font-size: 15px;
+          font-weight: 600;
+        }
+      }
+    }
   }
 }

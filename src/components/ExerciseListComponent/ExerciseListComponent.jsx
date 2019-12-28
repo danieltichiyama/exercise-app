@@ -60,28 +60,25 @@ class ExerciseListComponent extends Component {
           }
 
           return (
-            <>
-              <Link
-                style={{ textDecoration: "none" }}
-                className={styles.exercise}
-                key={exercise.id}
-                to={location => ({
-                  ...location,
-                  pathname: `/exercise/${exercise.id}`
-                })}
-              >
-                <div className={styles.info}>
-                  <p>{exercise.name}</p>
-                  <p className={styles.difficulty} style={difficultyStyle}>
-                    {exercise_difficulty}
-                  </p>
-                </div>
-                <div>
-                  <h3>></h3>
-                </div>
-              </Link>
-              <hr />
-            </>
+            <Link
+              style={{ textDecoration: "none" }}
+              className={styles.exercise}
+              key={exercise.id}
+              to={location => ({
+                ...location,
+                pathname: `/exercise/${exercise.id}`
+              })}
+            >
+              <div className={styles.info}>
+                <p>{exercise.name}</p>
+                <p className={styles.difficulty} style={difficultyStyle}>
+                  {exercise_difficulty}
+                </p>
+              </div>
+              <div>
+                <h3>></h3>
+              </div>
+            </Link>
           );
         })}
       </div>

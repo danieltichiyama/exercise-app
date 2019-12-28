@@ -1,17 +1,27 @@
 .AddComment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 15px auto;
   .inputBar {
     border: 1px solid #4abdac;
     border-radius: 5px;
     margin: 5px;
-  }
-
-  input {
     padding-left: 5px;
-  }
-
-  button {
+    height: 30px;
+    width: 80%;
+}
+button {
+    height: 30px;
+    width: 30px;
+    font-size: 18px;
+    text-align: center;
+    line-height: 18px;
+    font-weight: 700;
     color: #ffffff;
     background-color: #4abdac;
+    border: none;
 
     &:hover {
       background-color: #fc4a1a;

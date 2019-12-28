@@ -19,27 +19,21 @@ class AddCommentComponent extends Component {
 
   handleSubmitComment = e => {
     e.preventDefault();
-    //form validation as long as the comment is not an empty string it is successful
     if (this.state.comment_field !== "") {
-      //add comment needs user authentication so only a logged in user can post a comment
-      //right now user with an id of 1 is posting all comments
-
       let user_id = JSON.parse(localStorage.getItem("session")).id;
-
-      console.log("AddCommentComponent, user_id", user_id);
       this.props.dispatchAddComment({
         comment_body: this.state.comment_field,
         user_id: user_id,
         community_post_id: this.props.id
       });
-      this.props.dispatchLoadPosts();
-      this.setState({ comment_field: "" });
     }
+    this.props.dispatchLoadPosts();
+    this.setState({ comment_field: "" });
   };
 
   render() {
     return (
-      <form className={styles.AddComment} action="">
+      <form className={styles.AddComment} onSubmit={this.handleSubmitComment}>
         <input
           className={styles.inputBar}
           type="text"
@@ -47,7 +41,7 @@ class AddCommentComponent extends Component {
           value={this.state.comment_field}
           onChange={this.handleCommentInput}
         />
-        <button onClick={this.handleSubmitComment}>Submit</button>
+        <button style={{ borderRadius: "50%" }}>+</button>
       </form>
     );
   }
