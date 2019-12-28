@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import style from "./UserEditPage.module.scss"
 import { actionLoadUser, actionsEditUser, actionUploadProfilePic, actionImageUpload } from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -174,7 +175,7 @@ class UserEditPage extends Component {
     }
 
     return (
-      <>
+      <div className={style.UserEditPage}>
         <div>
           <h1>Edit User</h1>
         </div>
@@ -296,7 +297,7 @@ class UserEditPage extends Component {
             <Link to="/user">Cancel</Link>
           </button>
         </div>
-      </>
+      </div>
     );
   }
 }
