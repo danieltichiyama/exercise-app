@@ -25,6 +25,8 @@ import {
   LOGIN,
   LOGOUT,
   LOAD_USER,
+  NO_PROFILE_PIC,
+  PROFILE_PIC,
   REGISTER,
   GET_SMOKE,
   VIDEO_UPLOAD
@@ -50,8 +52,10 @@ const initialStore = {
   foods: [],
   food_labels: [],
   foods_meals_users: [],
-  images: [],
+  hasProfilePic: false,
+  images: ['idk'],
   isLoggedIn: false,
+  profilePic: "",
   smoke: "",
   users: [],
   videos: [],
@@ -175,6 +179,15 @@ let reducer = (store = initialStore, action) => {
 
     case IMAGE_UPLOAD:
       return Object.assign({}, store, { images: action.payload });
+
+    case NO_PROFILE_PIC:
+      return Object.assign({}, store, { hasProfilePic: false });
+
+    case PROFILE_PIC:
+      return Object.assign({}, store, { 
+        hasProfilePic: true,
+        profilePic: action.payload
+      });
 
     default:
       return store;

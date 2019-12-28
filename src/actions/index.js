@@ -32,6 +32,8 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const PROFILE_PIC = "PROFILE_PIC";
+export const NO_PROFILE_PIC = "NO_PROFILE_PIC";
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -102,10 +104,8 @@ export const actionsFilterBodyParts = data => async dispatch => {
 };
 
 export const actionsEditUser = (id, data) => async dispatch => {
-  console.log("actions edit user data:::", data);
   await Axios.put(`/api/users/${id}`, data)
     .then(response => {
-      console.log("response in edit", response);
       return dispatch({
         type: EDIT_USER,
         payload: response.data
@@ -394,6 +394,7 @@ export const actionVideoUpload = data => async dispatch => {
 };
 
 export const actionImageUpload = data => async dispatch => {
+  console.log('DATA', data);
   await Axios.post("/api/image_upload", data)
   .then(response => {
     return dispatch({
@@ -408,11 +409,25 @@ export const actionImageUpload = data => async dispatch => {
 
 export const actionUploadProfilePic = (id, data) => async () => {
   await Axios.post(`/api/image_upload/${id}`, data)
-  console.log(data)
   .then(response => {
-    console.log(response);
+    console.log("RESPONSE: ", response);
   })
   .catch(err => {
     console.log("Error in actionsImageUpload: ", err);
+  })
+}
+
+export const actionCheckProfilePic = (id) => async dispatch => {
+  await Axios.post(`/api/image_upload/check/${id}`)
+  .then(response => {
+    return dispatch({
+      type: PROFILE_PIC,
+      payload: response.data
+    })
+  })
+  .catch(err => {
+    return dispatch({
+      type: NO_PROFILE_PIC
+    })
   })
 }

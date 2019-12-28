@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import style from "./UserEditPage.module.scss"
-import { actionLoadUser, actionsEditUser, actionUploadProfilePic, actionImageUpload } from "../../actions";
+import { actionLoadUser, actionsEditUser, actionUploadProfilePic } from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent"
@@ -23,7 +23,7 @@ class UserEditPage extends Component {
       editSuccessful: false,
       show: false,
       userID: 0,
-      profilePic: ""
+      profilePic: "",
     };
   }
 
@@ -80,7 +80,6 @@ class UserEditPage extends Component {
 
   handleSubmit = async event => {
     event.preventDefault();
-  
     let { dispatchEditUser, match } = this.props;
 
     this.setState({ editSuccessful: true });
@@ -148,9 +147,7 @@ class UserEditPage extends Component {
         }
       );
     }
-
-    await this.props.dispatchImageUpload(this.state.profilePic);
-    this.props.dispatchUploadProfilePic(this.props.imgData, this.state.user_id)
+    this.props.dispatchUploadProfilePic(this.state.userID, this.props.imgData)
   };
 
   handleOpenModal = () => {
@@ -161,11 +158,10 @@ class UserEditPage extends Component {
     this.setState({ show: false });
   }
 
-  handleImgData = (data, id) => {
-    console.log(id);
+  handleImgData = (data) => {
     this.setState({ 
       profilePic: data,
-      userID: id
+      userID: (JSON.parse(localStorage.getItem("session")).id)
     });
   }
 
@@ -316,9 +312,6 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchEditUser: (id, data) => {
       return dispatch(actionsEditUser(id, data));
-    },
-    dispatchImageUpload: (data) => {
-      return dispatch(actionImageUpload(data))
     },
     dispatchUploadProfilePic: (id, data) => {
       return dispatch(actionUploadProfilePic(id, data))

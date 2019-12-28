@@ -2,6 +2,15 @@ $turquoise: #04c9b5;
 $red: #fc4a1a;
 
 .ProfilePicUploadComponent {
+  .placeHolder {
+    height: 100px;
+    width: 100px;
+  }
+
+  .srcImg {
+    display: none;
+  }
+
   .Modal{
     // display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -13,8 +22,11 @@ $red: #fc4a1a;
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  
+    
+    
+
     .srcImg {
+      display: none;
       max-height: 400px;
       max-width: 400px;
       display: flex;

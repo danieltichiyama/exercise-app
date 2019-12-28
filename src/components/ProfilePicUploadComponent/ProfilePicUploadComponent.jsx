@@ -1,7 +1,10 @@
 import React, { PureComponent } from "react";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import styles from "./ProfilePicUploadComponent.module.scss"
+import { connect } from "react-redux";
+import { actionCheckProfilePic, actionImageUpload } from "../../actions";
+import styles from "./ProfilePicUploadComponent.module.scss";
+import placeHolder from "../../imgs/placeholder.png";
 
 class ProfilePicUploadComponent extends PureComponent {
   state = {
@@ -13,6 +16,10 @@ class ProfilePicUploadComponent extends PureComponent {
     },
     imageName: ''
   };
+
+  componentDidMount = () => {
+    this.props.dispatchCheckProfilePic(JSON.parse(localStorage.getItem("session")).id);
+  }
 
   onSelectFile = e => {
     if (e.target.files && e.target.files.length > 0) {
@@ -99,14 +106,14 @@ class ProfilePicUploadComponent extends PureComponent {
     });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const file = new File([this.fileUrl], this.state.imageName, {type: "image/jpeg"});
     const formData = new FormData();
-    formData.append('imageUpload', file);
+    await formData.append('imageUpload', file);
     this.props.closeModal();
-    console.log(JSON.parse(localStorage.getItem("session")).id);
-    this.props.getImg(formData, JSON.parse(localStorage.getItem("session")).id);
+    this.props.getImg(formData);
+    this.props.dispatchImageUpload(formData);
   }
 
   render() {
@@ -115,9 +122,10 @@ class ProfilePicUploadComponent extends PureComponent {
 
     return (
       <div className={styles.ProfilePicUploadComponent}>
-        <div>
-          <input id="srcImg" type="file" accept="image/*" onChange={this.onSelectFile} />
-        </div>
+        <label htmlFor="srcImg">
+          <img className={styles.placeHolder} src={this.props.hasProfilePic ? (placeHolder) : (this.props.profilePic)} alt=""/>
+        </label>
+          <input className={styles.srcImg} id="srcImg" name="srcImg" type="file" accept="image/*" onChange={this.onSelectFile} />
         <div className={styles.Modal} style={{display: this.props.show ? "block" : "none"}}>
         {this.props.show ? (
             croppedImageUrl && (
@@ -146,4 +154,22 @@ class ProfilePicUploadComponent extends PureComponent {
   }
 }
 
-export default ProfilePicUploadComponent;
+const mapStateToProps = store => {
+  return {
+    profilePic: store.profilePic,
+    hasProfilePic: store.hasProfilePic
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchCheckProfilePic: (id) => {
+      return dispatch(actionCheckProfilePic(id))
+    },
+    dispatchImageUpload: (data) => {
+      return dispatch(actionImageUpload(data))
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePicUploadComponent);
