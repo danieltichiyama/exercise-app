@@ -30,6 +30,7 @@ function setToken() {
       return token;
     },
     getToken: function getToken() {
+      console.log('CLOSURE: ', token)
       return token;
     }
   };
@@ -38,7 +39,7 @@ function setToken() {
 let tokenClosure = setToken();
 
 let fatSecretApi = () => {
-  new FatSecret().fetchAll().then(async response => {
+  new FatSecret().fetchAll().then(response => {
     //check if oauth token data table is empty
     if (response.length === 0) {
       //if oauth token data table is empty get new token

@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { actionLoadUser, actionsEditUser } from "../../actions";
+import {
+  actionLoadUser,
+  actionsEditUser,
+  actionUploadProfilePic,
+  actionImageUpload
+} from "../../actions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import styles from "./UserEditPage.module.scss";
+import Wave from "./wave";
+import ProfilePicUploadComponent from "../../components/ProfilePicUploadComponent";
 
 class UserEditPage extends Component {
   constructor(props) {
@@ -18,7 +26,10 @@ class UserEditPage extends Component {
       goal_id: 1,
       selectedWeight: "kgs",
       selectedHeight: "cm",
-      editSuccessful: false
+      editSuccessful: false,
+      show: false,
+      userID: 0,
+      profilePic: ""
     };
   }
 
@@ -73,7 +84,7 @@ class UserEditPage extends Component {
     }
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     let { dispatchEditUser, match } = this.props;
@@ -143,6 +154,30 @@ class UserEditPage extends Component {
         }
       );
     }
+
+    if (this.state.profilePic) {
+      await this.props.dispatchImageUpload(this.state.profilePic);
+      this.props.dispatchUploadProfilePic(
+        this.props.imgData,
+        this.state.user_id
+      );
+    }
+  };
+
+  handleOpenModal = () => {
+    this.setState({ show: true });
+  };
+
+  handleCloseModal = () => {
+    this.setState({ show: false });
+  };
+
+  handleImgData = (data, id) => {
+    console.log(id);
+    this.setState({
+      profilePic: data,
+      userID: id
+    });
   };
 
   render() {
@@ -152,117 +187,133 @@ class UserEditPage extends Component {
 
     return (
       <>
-        <div>
-          <h1>Edit User</h1>
-        </div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <h3>Name:</h3>
-            <input
-              type="text"
-              name="name"
-              placeholder={this.props.user.name}
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+        <div className={styles.UserEditPage}>
+          <Wave />
+
+          <div className={styles.header}>
+            <h1>Edit Profile</h1>
+            <div className={styles.profilePic}>
+              <h3>Profile Picture:</h3>
+              <ProfilePicUploadComponent
+                openModal={this.handleOpenModal}
+                closeModal={this.handleCloseModal}
+                show={this.state.show}
+                getImg={this.handleImgData}
+              />
+            </div>
           </div>
 
-          <div>
-            <h3>Weight:</h3>
-            <input
-              type="number"
-              name="weight"
-              placeholder="Change Weight"
-              onChange={this.handleChange}
-            />
-            <select
-              name="selectedWeight"
-              value={this.state.selectedWeight}
-              onChange={this.handleChange}
-            >
-              <option name="lbs" value="lbs">
-                lbs
-              </option>
-              <option name="kgs" value="kgs">
-                kgs
-              </option>
-            </select>
-          </div>
+          <div className={styles.form}>
+            <form onSubmit={this.handleSubmit}>
+              <div className={styles.rows}>
+                <h3>NAME:</h3>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={this.props.user.name}
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+                <div> </div>
+              </div>
 
-          <div>
-            <h3>Height:</h3>
-            <input
-              type="number"
-              name="height"
-              placeholder="Change height"
-              onChange={this.handleChange}
-            />
-            <select
-              name="selectedHeight"
-              value={this.state.selectedHeight}
-              onChange={this.handleChange}
-            >
-              <option name="in" value="in">
-                in
-              </option>
-              <option name="cm" value="cm">
-                cm
-              </option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>WEIGHT:</h3>
+                <input
+                  type="number"
+                  name="weight"
+                  placeholder="Change Weight"
+                  onChange={this.handleChange}
+                />
+                <select
+                  name="selectedWeight"
+                  value={this.state.selectedWeight}
+                  onChange={this.handleChange}
+                >
+                  <option name="lbs" value="lbs">
+                    lbs
+                  </option>
+                  <option name="kgs" value="kgs">
+                    kgs
+                  </option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Gender:</h3>
-            <select
-              value={this.state.gender_id}
-              name="gender"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Male</option>
-              <option value={2}>Female</option>
-              <option value={3}>Other</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>HEIGHT:</h3>
+                <input
+                  type="number"
+                  name="height"
+                  placeholder="Change Height"
+                  onChange={this.handleChange}
+                />
+                <select
+                  name="selectedHeight"
+                  value={this.state.selectedHeight}
+                  onChange={this.handleChange}
+                >
+                  <option name="in" value="in">
+                    in
+                  </option>
+                  <option name="cm" value="cm">
+                    cm
+                  </option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Activity Level:</h3>
-            <select
-              value={this.state.activity_level_id}
-              name="activity_level"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Sedentary</option>
-              <option value={2}>Light</option>
-              <option value={3}>Active</option>
-              <option value={4}>Very Active</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>GENDER:</h3>
+                <select
+                  value={this.state.gender_id}
+                  name="gender"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Male</option>
+                  <option value={2}>Female</option>
+                  <option value={3}>Other</option>
+                </select>
+              </div>
 
-          <div>
-            <h3>Goals:</h3>
-            <select
-              value={this.state.goal_id}
-              name="goal"
-              onChange={this.handleChange}
-            >
-              <option value={1}>Lose Weight Mild</option>
-              <option value={2}>Lose Weight Moderate</option>
-              <option value={3}>Lose Weight Extreme</option>
-              <option value={4}>Maintain Weight</option>
-              <option value={5}>Gain Muscle</option>
-              <option value={6}>No Goal</option>
-            </select>
-          </div>
+              <div className={styles.rows}>
+                <h3>ACTIVITY LEVEL:</h3>
+                <select
+                  value={this.state.activity_level_id}
+                  name="activity_level"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Sedentary</option>
+                  <option value={2}>Light</option>
+                  <option value={3}>Active</option>
+                  <option value={4}>Very Active</option>
+                </select>
+              </div>
 
-          <div>
-            <input type="submit" value="Submit" />
-          </div>
-        </form>
+              <div className={styles.rows}>
+                <h3>GOALS:</h3>
+                <select
+                  value={this.state.goal_id}
+                  name="goal"
+                  onChange={this.handleChange}
+                >
+                  <option value={1}>Lose Weight Mild</option>
+                  <option value={2}>Lose Weight Moderate</option>
+                  <option value={3}>Lose Weight Extreme</option>
+                  <option value={4}>Maintain Weight</option>
+                  <option value={5}>Gain Muscle</option>
+                  <option value={6}>No Goal</option>
+                </select>
+              </div>
 
-        <div>
-          <button>
-            <Link to="/user">Cancel</Link>
-          </button>
+              <div className={styles.buttonRow}>
+                <div>
+                  <button>
+                    <Link to="/user">Cancel</Link>
+                  </button>
+                </div>
+                <input type="submit" value="Submit" className={styles.submit} />
+              </div>
+            </form>
+          </div>
         </div>
       </>
     );
@@ -271,7 +322,8 @@ class UserEditPage extends Component {
 
 const mapStateToProps = store => {
   return {
-    user: store.users
+    user: store.users,
+    imgData: store.images
   };
 };
 
@@ -282,6 +334,12 @@ const mapDispatchToProps = dispatch => {
     },
     dispatchEditUser: (id, data) => {
       return dispatch(actionsEditUser(id, data));
+    },
+    dispatchImageUpload: data => {
+      return dispatch(actionImageUpload(data));
+    },
+    dispatchUploadProfilePic: (id, data) => {
+      return dispatch(actionUploadProfilePic(id, data));
     }
   };
 };

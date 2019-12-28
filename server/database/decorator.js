@@ -21,8 +21,7 @@ const Workout = require("./models/Workout");
 // const WorkoutExercise = require("./models/WorkoutExercise");
 const FatSecret = require("./models/FatSecret");
 const ExerciseUserWorkout = require("./models/ExerciseUserWorkout");
-
-
+const UserPicture = require("./models/UserPicture");
 
 module.exports = function (req, res, next) {
   req.db = {
@@ -44,6 +43,7 @@ module.exports = function (req, res, next) {
     TutorialVideo,
     User,
     UserTier,
+    UserPicture,
     UserVideo,
     Workout,
     // WorkoutExercise,

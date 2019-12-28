@@ -437,3 +437,15 @@ export const actionImageUpload = data => async dispatch => {
       console.log("Error in actionsImageUpload: ", err);
     });
 };
+
+export const actionUploadProfilePic = (id, data) => async () => {
+  await Axios.post(`/api/image_upload/${id}`, data);
+  console
+    .log(data)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log("Error in actionsImageUpload: ", err);
+    });
+};
