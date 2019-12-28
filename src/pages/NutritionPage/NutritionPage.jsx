@@ -8,15 +8,27 @@ import styles from "./NutritionPage.module.scss";
 class NutritionPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      style: { overflow: "auto" }
+    };
   }
+
+  handleModalOpen = () => {
+    let { overflow } = this.state.style;
+
+    if (overflow === "hidden") {
+      return this.setState({ style: { overflow: "auto" } });
+    } else if (overflow === "auto") {
+      return this.setState({ style: { overflow: "hidden" } });
+    }
+  };
 
   render() {
     return (
-      <div className={styles.NutritionPage}>
+      <div className={styles.NutritionPage} style={this.state.style}>
         <DateComponent></DateComponent>
         <DashboardComponent></DashboardComponent>
-        <AddMealButtonComponent />
+        <AddMealButtonComponent handleModalOpen={this.handleModalOpen} />
         <DiaryComponent></DiaryComponent>
       </div>
     );

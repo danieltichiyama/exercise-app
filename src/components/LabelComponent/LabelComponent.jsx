@@ -1,20 +1,21 @@
-import React, { Component } from "react"; 
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { actionsFatSecretFoodSearch } from "../../actions";
+import styles from "./LabelComponent.module.scss";
 
 class LabelComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {};
   }
 
-  handleClick = (e) => {
+  handleClick = e => {
     this.props.dispatchFatSecretFoodSearch({ data: this.props.label });
-  }
+  };
 
-  render() { 
-    return ( 
-      <button name="label" onClick={this.handleClick}>
+  render() {
+    return (
+      <button name="label" className={styles.Label} onClick={this.handleClick}>
         <h3>{this.props.label}</h3>
       </button>
     );
@@ -24,10 +25,10 @@ class LabelComponent extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     dispatchFatSecretFoodSearch: data => {
-      return dispatch(actionsFatSecretFoodSearch(data))
+      return dispatch(actionsFatSecretFoodSearch(data));
     }
-  }
-}
+  };
+};
 
 LabelComponent = connect(null, mapDispatchToProps)(LabelComponent);
 
