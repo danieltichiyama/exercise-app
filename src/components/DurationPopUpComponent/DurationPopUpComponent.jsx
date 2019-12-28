@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from "./DurationPopUpComponent.module.scss";
 import { connect } from "react-redux";
-import { actionsAddWorkout } from "../../actions"
+import { actionsAddWorkout } from "../../actions";
+import exitButton from "../../imgs/exitButton.png"
 
 class DurationPopUpComponent extends Component {
     constructor(props) {
@@ -36,23 +37,26 @@ class DurationPopUpComponent extends Component {
     }
 
     render() {
-        return (<div className={styles.popup}>
-            <div className={styles.popup_inner}>
-                <h2>{this.props.exerciseName}</h2>
-                <h3>Duration:</h3>
-                <input
-                    type="number"
-                    placeholder="minutes"
-                    onChange={this.changeDuration}
-                />
-                <button
-                    onClick={this.handleCalorieCount}
-                >
-                    Submit
+        return (
+            <div className={styles.popup}>
+                <div className={styles.popup_inner}>
+                    <button className={styles.cancelButton} onClick={this.props.handlePopup}>
+                        <img src={exitButton} alt="cancel" /></button>
+                    <div className={styles.exerciseTitle}>
+                        <h4>{this.props.exercise_name}</h4>
+                    </div>
+                    <div className={styles.inputContainer}>
+                        <input className={styles.durationBar}
+                            type="number"
+                            placeholder="minutes"
+                            onChange={this.changeDuration}
+                        />
+                        <button className={styles.addToWorkout} onClick={this.handleCalorieCount}>
+                            + Add to Workout
                     </button>
-                <br /><button onClick={this.props.handlePopup}>Close</button>
-            </div>
-        </div >);
+                    </div>
+                </div>
+            </div >);
     }
 }
 

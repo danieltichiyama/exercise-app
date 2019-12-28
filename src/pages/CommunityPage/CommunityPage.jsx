@@ -4,7 +4,7 @@ import NewsFeedComponent from "../../components/NewsFeedComponent/NewsFeedCompon
 class CommunityPage extends Component {
   render() {
     return (
-      <div>Community Page
+      <div>
         <NewsFeedComponent />
       </div>
     )
