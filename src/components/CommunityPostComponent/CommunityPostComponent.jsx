@@ -4,6 +4,8 @@ import AddCommentComponent from "../AddCommentComponent/AddCommentComponent";
 import styles from "./CommunityPostComponent.module.scss";
 import moment from "moment";
 
+import defaultPicture from "../../imgs/default-profile-icon.png";
+
 class CommunityPostComponent extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,7 @@ class CommunityPostComponent extends Component {
           <div className={styles.profilePic}>
             <img
               className={styles.profilePicImage}
-              src="https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png"
+              src={defaultPicture}
               alt="profile"
             />
           </div>

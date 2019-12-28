@@ -30,7 +30,6 @@ function setToken() {
       return token;
     },
     getToken: function getToken() {
-      console.log('CLOSURE: ', token)
       return token;
     }
   };
@@ -63,7 +62,7 @@ let fatSecretApi = () => {
       });
     } else {
       //if oauthtoken table not empty delete it
-      new FatSecret({ expires_in: 86400})
+      new FatSecret({ expires_in: 86400 })
         .where({
           expires_in: 86400
         })

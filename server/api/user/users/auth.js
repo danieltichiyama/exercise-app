@@ -42,7 +42,6 @@ passport.use(
         .fetch({ require: false })
         .then(user => {
           if (user === null) {
-            console.log("user not found");
             return done(null, false, { message: "bad username or password" });
           } else {
             user = user.toJSON();
@@ -50,7 +49,6 @@ passport.use(
               if (res) {
                 return done(null, user); // this is the user that goes to serializeUser()
               } else {
-                console.log("bad password");
                 return done(null, false, {
                   message: "bad username or password"
                 });
@@ -67,21 +65,17 @@ passport.use(
 );
 
 passport.serializeUser(function(user, done) {
-  console.log("serializing, user: ", user);
   return done(null, { id: user.id, email: user.email, name: user.name });
 });
 
 passport.deserializeUser(function(user, done) {
-  console.log("deserializing, user: ");
-  console.log(user);
   return done(null, user);
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  console.log(req.user);
-  return res.json({ 
-    session: req.user, 
-    message: `Welcome ${req.user.name}` 
+  return res.json({
+    session: req.user,
+    message: `Welcome ${req.user.name}`
   });
 });
 
@@ -112,8 +106,6 @@ router.post("/register", (req, res) => {
               let recommended_calories = calculator.recommendedCalories(
                 results
               );
-              console.log("recommended_calories", recommended_calories);
-
               return new User()
                 .where({ id: results.id })
                 .save(
