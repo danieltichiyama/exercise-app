@@ -1,9 +1,14 @@
+const moment = require("moment");
+
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex("foods_meals_users")
     .del()
     .then(function() {
       // Inserts seed entries
+
+      let date = moment().utc();
+
       return knex("foods_meals_users").insert([
         {
           api_id: 340635,
@@ -15,7 +20,8 @@ exports.seed = function(knex) {
           protein: 6,
           fat: 2,
           carbs: 22,
-          serving_size: "58g"
+          serving_size: "58g",
+          date: date
 
           //cereal
         },
@@ -29,7 +35,9 @@ exports.seed = function(knex) {
           protein: 2,
           fat: 5,
           carbs: 6,
-          serving_size: "100ml"
+          serving_size: "100ml",
+          date: date
+
           //milk
         },
         {
@@ -42,7 +50,9 @@ exports.seed = function(knex) {
           protein: 0,
           fat: 0,
           carbs: 25,
-          serving_size: "80fl oz"
+          serving_size: "80fl oz",
+          date: date
+
           //orange juice
         },
         {
@@ -55,7 +65,8 @@ exports.seed = function(knex) {
           protein: 14,
           fat: 8,
           carbs: 40,
-          serving_size: "1 sandwich"
+          serving_size: "1 sandwich",
+          date: date
           //Burger King Broiled Chicken Sandwich
         },
         {
@@ -68,7 +79,8 @@ exports.seed = function(knex) {
           protein: 0,
           fat: 6,
           carbs: 22,
-          serving_size: "1 small"
+          serving_size: "1 small",
+          date: date
 
           //Burger King French Fries
         },
@@ -82,7 +94,8 @@ exports.seed = function(knex) {
           protein: 0,
           fat: 0,
           carbs: 30,
-          serving_size: "24 fl oz"
+          serving_size: "24 fl oz",
+          date: date
 
           //rum and coke
         },
@@ -96,7 +109,8 @@ exports.seed = function(knex) {
           protein: 18,
           fat: 6,
           carbs: 2,
-          serving_size: "8oz"
+          serving_size: "8oz",
+          date: date
 
           //steak
         }

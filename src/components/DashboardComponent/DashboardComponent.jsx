@@ -12,13 +12,8 @@ class DashboardComponent extends Component {
   constructor(props) {
     super(props);
 
-    const getId = localStorage.getItem("session");
-    const id = JSON.parse(getId);
-    let date = new Date();
-
     this.state = {
-      id,
-      date,
+      id: JSON.parse(localStorage.getItem("session")).id,
       overAte: false,
       style: { width: "0" }
     };
@@ -27,16 +22,17 @@ class DashboardComponent extends Component {
   componentDidMount() {
     if (this.state.id) {
       //wrapped in a conditional for PWA
-      this.props.dispatchLoadUser(this.state.id.id);
-      this.props.dispatchGetDiaryData(this.state.date);
-      this.props.dispatchLoadWorkouts(this.state.id.id);
+      this.props.dispatchLoadUser(this.state.id);
+      this.props.dispatchGetDiaryData(this.props.diaryDate);
+      this.props.dispatchLoadWorkouts(this.state.id);
     }
   }
 
   componentDidUpdate(prevProps) {
     if (
       this.props.diaryData !== prevProps.diaryData ||
-      this.props.workouts !== prevProps.workouts
+      this.props.workouts !== prevProps.workouts ||
+      this.props.diaryDate !== prevProps.diaryDate
     ) {
       let goal = this.props.users && this.props.users.recommended_calories;
 
@@ -51,7 +47,7 @@ class DashboardComponent extends Component {
         this.props.workouts &&
         this.props.workouts
           .filter(data => {
-            let todaysDate = moment(this.state.date).format("YYYY-MM-DD");
+            let todaysDate = moment(this.props.diaryDate).format("YYYY-MM-DD");
             let getCreatedDate = moment(data.created_at).format("YYYY-MM-DD");
             return todaysDate === getCreatedDate;
           })
@@ -60,13 +56,13 @@ class DashboardComponent extends Component {
           }, 0);
 
       if (Math.sign(goal - food + exercise) === -1) {
+        //if the total is a negative number
         this.setState({
           overAte: true,
           style: { width: "100%", backgroundColor: `orange` }
         });
       } else {
         let percent = ((food - exercise) / goal) * 100;
-
         this.setState({ overAte: false, style: { width: `${percent}%` } });
       }
     }
@@ -86,7 +82,7 @@ class DashboardComponent extends Component {
       this.props.workouts &&
       this.props.workouts
         .filter(data => {
-          let todaysDate = moment(this.state.date).format("YYYY-MM-DD");
+          let todaysDate = moment(this.props.diaryDate).format("YYYY-MM-DD");
           let getCreatedDate = moment(data.created_at).format("YYYY-MM-DD");
           return todaysDate === getCreatedDate;
         })
@@ -152,7 +148,8 @@ const mapStateToProps = store => {
   return {
     users: store.users,
     diaryData: store.diaryData,
-    workouts: store.workouts
+    workouts: store.workouts,
+    diaryDate: store.diaryDate
   };
 };
 

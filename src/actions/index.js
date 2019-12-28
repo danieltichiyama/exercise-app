@@ -32,7 +32,31 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
+export const CLEAR_FOOD_SEARCH_MODAL = "CLEAR_FOOD_SEARCH_MODAL";
 export const LOGIN_ERROR = "LOGIN_ERROR";
+export const RESET_DATE = "RESET_DATE";
+
+export const actionsResetDate = () => async dispatch => {
+  return dispatch({
+    type: RESET_DATE,
+    payload: null
+  });
+};
+
+export const actionsClearFoodSearch = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_SEARCH_MODAL,
+    payload: null
+  });
+};
+
+export const actionsClearFoodNutrients = () => async dispatch => {
+  return dispatch({
+    type: CLEAR_FOOD_NUTRIENTS,
+    payload: []
+  });
+};
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -137,13 +161,13 @@ export const actionsLoginSubmit = data => async dispatch => {
         type: LOGIN,
         payload: response.data
       });
-      return true
+      return true;
     })
     .catch(err => {
       dispatch({
         type: LOGIN_ERROR
       });
-      return false
+      return false;
     });
 };
 
@@ -305,6 +329,10 @@ export const actionsFilterEmails = data => async dispatch => {
 export const actionsAddFood = data => async dispatch => {
   await Axios.post("/api/foods_meals_users/new", data)
     .then(response => {
+      let { data } = response;
+      alert(
+        `${data.description} added to your diary! That was ${data.calories} calories.`
+      );
       return dispatch({
         type: ADD_FOOD,
         payload: response.data

@@ -1,9 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { actionsFatSecretFoodSearch } from "../../actions";
+import {
+  actionsFatSecretFoodSearch,
+  actionsClearFoodNutrients
+} from "../../actions";
 import FatSecretFoodComponent from "../FatSecretFoodComponent";
 import FatSecretFoodNutrientsComponent from "../FatSecretFoodNutrientsComponent";
+import styles from "../FatSecretSearchComponent/FatSecretSearchComponent.module.scss";
+import AddFoodButtonComponent from "../../components/AddFoodButtonComponent";
 import LabelComponent from "../LabelComponent";
+import FoodVisionComponent from "../FoodVisionComponent";
+import searchIcon from "../../imgs/magnifying_glass.png";
 
 class FatSecretSearchComponent extends Component {
   constructor(props) {
@@ -12,6 +19,7 @@ class FatSecretSearchComponent extends Component {
       fatSearchData: "",
       servingIndex: 0,
       servingMultiplier: 1
+      // showVisionPopUp: false
     };
   }
 
@@ -43,29 +51,72 @@ class FatSecretSearchComponent extends Component {
     });
   };
 
+  handleLeftArrowClick = () => {
+    let count = this.state.servingMultiplier;
+    if (count > 1) {
+      count--;
+      return this.setState({ servingMultiplier: count });
+    } else {
+      return;
+    }
+  };
+
+  handleRightArrowClick = () => {
+    let count = this.state.servingMultiplier;
+    count++;
+    return this.setState({ servingMultiplier: count });
+  };
+
+  handleBackButtonClick = () => {
+    return this.props.dispatchClearFoodNutrients();
+  };
+
   render() {
     return (
-      <>
-        <form autoComplete="off" onSubmit={this.handleClick}>
-          <input
-            autoComplete="off"
-            onChange={this.handleChange}
-            placeholder="Fat Secret Search"
-          />
-          <button>Submit</button>
-        </form>
-        {this.props.imgData.length !== 0
-          ? this.props.imgData.map(imgData => {
-              return (
-                <LabelComponent
-                  key={imgData.description}
-                  label={imgData.description}
-                />
-              );
-            })
-          : ""}
+      <div className={styles.fatSecretSearch}>
+        <div className={styles.searchDiv}>
+          <div
+            className={styles.backButton}
+            onClick={this.handleBackButtonClick}
+          ></div>
+          <form autoComplete="off" onSubmit={this.handleClick}>
+            <input
+              autoComplete="off"
+              onChange={this.handleChange}
+              placeholder="Search for a food..."
+              className={styles.foodInput}
+            />
 
-        {this.props.foods.length > 0 && !this.props.foodNutrients.servings
+            <button className={styles.searchButton}>
+              <img
+                src={searchIcon}
+                className={styles.searchIcon}
+                alt="search button"
+              />
+            </button>
+          </form>
+
+          <FoodVisionComponent />
+        </div>
+
+        <div className={styles.LabelContainer}>
+          {this.props.imgData.length !== 0
+            ? this.props.imgData.map(imgData => {
+                return (
+                  <LabelComponent
+                    key={imgData.description}
+                    label={imgData.description}
+                  />
+                );
+              })
+            : null}
+        </div>
+
+        {/* list results for fat_secret api */}
+
+        {this.props.foods &&
+        this.props.foods.length > 0 &&
+        !this.props.foodNutrients.servings
           ? this.props.foods.map(food => {
               return (
                 <FatSecretFoodComponent
@@ -74,94 +125,22 @@ class FatSecretSearchComponent extends Component {
                   name={food.food_name}
                   food_description={food.food_description}
                   resetServingMultiplier={this.resetServingMultiplier}
+                  meal_type_id={this.props.meal_type_id}
                 />
               );
             })
-          : ""}
+          : null}
 
-        {this.props.foodNutrients.servings &&
-        Array.isArray(this.props.foodNutrients.servings.serving) ? (
-          <div>
-            Serving Size:
-            <select onChange={this.handleSelectChange}>
-              {this.props.foodNutrients.servings.serving.map(
-                (serving, index) => {
-                  return (
-                    <option key={index} value={index}>
-                      {serving.serving_description}
-                    </option>
-                  );
-                }
-              )}
-            </select>
-            Servings:
-            <input
-              type="number"
-              name="multiplier"
-              min="1"
-              max="99"
-              value={this.state.servingMultiplier}
-              onChange={this.handleMultiplier}
-            />
-          </div>
-        ) : (
-          ""
-        )}
+        {/* list results end */}
 
-        {this.props.foodNutrients.servings &&
-        !Array.isArray(this.props.foodNutrients.servings.serving) &&
-        typeof this.props.foodNutrients.servings.serving === "object" ? (
-          <>
-            <div>
-              Serving Size:{" "}
-              {`${this.props.foodNutrients.servings.serving.serving_description}  `}
-              Servings:
-              <input
-                type="number"
-                min="1"
-                max="99"
-                value={this.state.servingMultiplier}
-                onChange={this.handleMultiplier}
-              />
-            </div>
-            <FatSecretFoodNutrientsComponent
-              key={this.props.foodNutrients.food_name}
-              name={this.props.foodNutrients.food_name}
-              calories={`${Math.round(
-                (this.props.foodNutrients.servings.serving.calories *
-                  this.state.servingMultiplier +
-                  Number.EPSILON) *
-                  100
-              ) / 100}kcal`}
-              fat={`${Math.round(
-                (this.props.foodNutrients.servings.serving.fat *
-                  this.state.servingMultiplier +
-                  Number.EPSILON) *
-                  100
-              ) / 100}g`}
-              carbohydrate={`${Math.round(
-                (this.props.foodNutrients.servings.serving.carbohydrate *
-                  this.state.servingMultiplier +
-                  Number.EPSILON) *
-                  100
-              ) / 100}g`}
-              protein={`${Math.round(
-                (this.props.foodNutrients.servings.serving.protein *
-                  this.state.servingMultiplier +
-                  Number.EPSILON) *
-                  100
-              ) / 100}g`}
-            />
-          </>
-        ) : (
-          ""
-        )}
+        {/* food details, if multiple servings are present */}
 
         {this.props.foodNutrients.servings &&
         Array.isArray(this.props.foodNutrients.servings.serving) ? (
           <FatSecretFoodNutrientsComponent
             key={this.state.servingIndex}
             name={this.props.foodNutrients.food_name}
+            meal_type_id={this.props.meal_type_id}
             servingSize={`${
               this.props.foodNutrients.servings.serving[this.state.servingIndex]
                 .serving_description
@@ -199,10 +178,122 @@ class FatSecretSearchComponent extends Component {
                 100
             ) / 100}g`}
           />
-        ) : (
-          ""
-        )}
-      </>
+        ) : null}
+
+        {this.props.foodNutrients.servings &&
+        Array.isArray(this.props.foodNutrients.servings.serving) ? (
+          <div className={styles.servingsAndAddButton}>
+            <div className={styles.servings}>
+              Servings:{" "}
+              <div
+                className={styles.leftArrow}
+                onClick={this.handleLeftArrowClick}
+              ></div>
+              <input
+                type="number"
+                name="multiplier"
+                min="1"
+                max="99"
+                value={this.state.servingMultiplier}
+                className={styles.servingMultiplier}
+                onChange={this.handleMultiplier}
+              />
+              <div
+                className={styles.rightArrow}
+                onClick={this.handleRightArrowClick}
+              ></div>
+            </div>
+            <select
+              onChange={this.handleSelectChange}
+              className={styles.servingSize}
+            >
+              {this.props.foodNutrients.servings.serving.map(
+                (serving, index) => {
+                  return (
+                    <option key={index} value={index}>
+                      {serving.serving_description}
+                    </option>
+                  );
+                }
+              )}
+            </select>
+            <AddFoodButtonComponent
+              meal_type_id={this.props.meal_type_id}
+              handleFoodPopUp={this.props.handleFoodPopUp}
+            />
+          </div>
+        ) : null}
+
+        {/* food details, if multiple end */}
+
+        {/* food details, if only one serving size is found */}
+        {this.props.foodNutrients.servings &&
+        !Array.isArray(this.props.foodNutrients.servings.serving) &&
+        typeof this.props.foodNutrients.servings.serving === "object" ? (
+          <>
+            <FatSecretFoodNutrientsComponent
+              key={this.props.foodNutrients.food_name}
+              name={this.props.foodNutrients.food_name}
+              meal_type_id={this.props.meal_type_id}
+              calories={`${Math.round(
+                (this.props.foodNutrients.servings.serving.calories *
+                  this.state.servingMultiplier +
+                  Number.EPSILON) *
+                  100
+              ) / 100}kcal`}
+              fat={`${Math.round(
+                (this.props.foodNutrients.servings.serving.fat *
+                  this.state.servingMultiplier +
+                  Number.EPSILON) *
+                  100
+              ) / 100}g`}
+              carbohydrate={`${Math.round(
+                (this.props.foodNutrients.servings.serving.carbohydrate *
+                  this.state.servingMultiplier +
+                  Number.EPSILON) *
+                  100
+              ) / 100}g`}
+              protein={`${Math.round(
+                (this.props.foodNutrients.servings.serving.protein *
+                  this.state.servingMultiplier +
+                  Number.EPSILON) *
+                  100
+              ) / 100}g`}
+            />
+            <div className={styles.servingsAndAddButton}>
+              <div className={styles.servings}>
+                Servings:{" "}
+                <div
+                  className={styles.leftArrow}
+                  onClick={this.handleLeftArrowClick}
+                ></div>
+                <input
+                  type="number"
+                  name="multiplier"
+                  min="1"
+                  max="99"
+                  value={this.state.servingMultiplier}
+                  className={styles.servingMultiplier}
+                  onChange={this.handleMultiplier}
+                />
+                <div
+                  className={styles.rightArrow}
+                  onClick={this.handleRightArrowClick}
+                ></div>
+              </div>
+              <div className={styles.servingSize}>
+                {`${this.props.foodNutrients.servings.serving.serving_description}`}
+              </div>
+              <AddFoodButtonComponent
+                meal_type_id={this.props.meal_type_id}
+                handleFoodPopUp={this.props.handleFoodPopUp}
+              />
+            </div>
+          </>
+        ) : null}
+
+        {/* food details, if only one found end */}
+      </div>
     );
   }
 }
@@ -219,6 +310,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchFatSecretFoodSearch: data => {
       return dispatch(actionsFatSecretFoodSearch(data));
+    },
+    dispatchClearFoodNutrients: () => {
+      return dispatch(actionsClearFoodNutrients());
     }
   };
 };
