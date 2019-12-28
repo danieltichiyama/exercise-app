@@ -104,6 +104,13 @@ class UserPage extends Component {
               <p>{this.props.users.goal_id && this.props.users.goal_id.goal}</p>
             </div>
             <div className={styles.options}>
+              <button
+                className={styles.logout}
+                onClick={this.handleLogoutClick}
+                className={styles.button}
+              >
+                Logout
+              </button>
               <button className={styles.button}>
                 <Link
                   to={location => ({
@@ -113,12 +120,6 @@ class UserPage extends Component {
                 >
                   Edit
                 </Link>
-              </button>
-              <button
-                onClick={this.handleLogoutClick}
-                className={styles.button}
-              >
-                Logout
               </button>
             </div>
           </div>

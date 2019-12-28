@@ -214,6 +214,7 @@ class UserEditPage extends Component {
                   value={this.state.name}
                   onChange={this.handleChange}
                 />
+                <div> </div>
               </div>
 
               <div className={styles.rows}>
@@ -243,7 +244,7 @@ class UserEditPage extends Component {
                 <input
                   type="number"
                   name="height"
-                  placeholder="Change height"
+                  placeholder="Change Height"
                   onChange={this.handleChange}
                 />
                 <select
