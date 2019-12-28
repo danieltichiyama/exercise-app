@@ -35,6 +35,14 @@ export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
 export const CLEAR_FOOD_NUTRIENTS = "CLEAR_FOOD_NUTRIENTS";
 export const CLEAR_FOOD_SEARCH_MODAL = "CLEAR_FOOD_SEARCH_MODAL";
 export const LOGIN_ERROR = "LOGIN_ERROR";
+export const RESET_DATE = "RESET_DATE";
+
+export const actionsResetDate = () => async dispatch => {
+  return dispatch({
+    type: RESET_DATE,
+    payload: null
+  });
+};
 
 export const actionsClearFoodSearch = () => async dispatch => {
   return dispatch({

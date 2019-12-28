@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./DateComponent.module.scss";
 import { connect } from "react-redux";
-import { actionsChangeDate } from "../../actions";
+import { actionsChangeDate, actionsResetDate } from "../../actions";
 import moment from "moment";
 
 class DateComponent extends Component {
@@ -10,9 +10,8 @@ class DateComponent extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
-    console.log("moment", moment);
-    console.log(this.props.diaryDate);
+  componentWillUnmount = () => {
+    return this.props.dispatchResetDate();
   };
 
   getPreviousDate = () => {
@@ -43,9 +42,7 @@ class DateComponent extends Component {
 
 const mapStateToProps = store => {
   return {
-    diaryDate: moment(store.diaryDate)
-      .utc()
-      .format()
+    diaryDate: store.diaryDate
   };
 };
 
@@ -53,6 +50,9 @@ const mapDispatchToProps = dispatch => {
   return {
     dispatchChangeDate: date => {
       return dispatch(actionsChangeDate(date));
+    },
+    dispatchResetDate: () => {
+      return dispatch(actionsResetDate());
     }
   };
 };
