@@ -32,6 +32,7 @@ export const FAT_SECRET_FOOD_NUTRIENT_SEARCH =
   "FAT_SECRET_FOOD_NUTRIENT_SEARCH";
 export const DELETE_FOOD = "DELETE_FOOD";
 export const IMAGE_UPLOAD = "IMAGE_UPLOAD";
+export const LOGIN_ERROR = "LOGIN_ERROR";
 
 export const actionsLoadWorkouts = data => async dispatch => {
   await Axios.get(`/api/exercises_users_workouts/${data}`, data)
@@ -132,13 +133,17 @@ export const actionsLoadActivity = () => async dispatch => {
 export const actionsLoginSubmit = data => async dispatch => {
   await Axios.post("/api/auth/login", data)
     .then(response => {
-      return dispatch({
+      dispatch({
         type: LOGIN,
         payload: response.data
       });
+      return true
     })
     .catch(err => {
-      console.log("Error in actionsLoginsubmit: ", err);
+      dispatch({
+        type: LOGIN_ERROR
+      });
+      return false
     });
 };
 

@@ -22,7 +22,7 @@ const enhancer = composeEnhancers(applyMiddleware(ReduxThunk)); //applyMiddlewar
 const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={store}z>
     <Router>
       <App />
     </Router>
