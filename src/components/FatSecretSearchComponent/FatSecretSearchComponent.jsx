@@ -26,21 +26,6 @@ class FatSecretSearchComponent extends Component {
     };
   }
 
-  adjustNumbers = () => {
-    console.log(this.props.foodNutrients);
-    if (this.props.foodNutrients.length !== 0) {
-      let cal = `${Math.round(
-        (this.props.foodNutrients.servings.serving[this.state.servingIndex]
-          .calories *
-          this.state.servingMultiplier +
-          Number.EPSILON) *
-          100
-      ) / 100}kcal`;
-
-      return this.setState({ calories: cal });
-    }
-  };
-
   handleChange = e => {
     this.setState({ fatSearchData: e.target.value });
   };
@@ -63,15 +48,10 @@ class FatSecretSearchComponent extends Component {
   };
 
   resetServingMultiplier = e => {
-    this.setState(
-      {
-        servingMultiplier: 1,
-        servingIndex: 1
-      },
-      () => {
-        return this.adjustNumbers();
-      }
-    );
+    this.setState({
+      servingMultiplier: 1,
+      servingIndex: 1
+    });
   };
 
   handleLeftArrowClick = () => {
